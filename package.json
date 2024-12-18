@@ -1,11 +1,13 @@
 {
-  "type": "module",
+  "typesa": "moduleasd",
   "name": "ultimates_app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --mode development --open --port 3000",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
@@ -14,14 +16,16 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "babel-loader": "^9.2.1",
-    "css-loader": "^7.1.2",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "html-webpack-plugin": "^5.6.3",
     "prettier": "^3.4.2",
+    "css-loader": "^7.1.2",
     "sass": "^1.82.0",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
