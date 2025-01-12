@@ -1,0 +1,14 @@
+.Welcome {
+    color: aliceblue;
+    background-image: url('../../assets/screen/bg.jpg');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+
+.Welcome__title {
+    margin-bottom: 10vh;
+    font-size: 90px;
+}
