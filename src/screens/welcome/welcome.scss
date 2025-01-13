@@ -1,6 +1,8 @@
+@use '../../variables.scss' as vars;
+
 .Welcome {
-    color: aliceblue;
-    background-image: url('../../assets/screen/bg.jpg');
+    color: vars.$primary;
+    background-image: url('../../assets/screen/welcome.jpg');
     display: flex;
     flex-direction: column;
     justify-content: center;
