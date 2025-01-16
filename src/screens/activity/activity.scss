@@ -11,7 +11,7 @@
 
   background:rgba(98, 98, 98, 0.6);
   backdrop-filter: blur(5px);
-  z-index: 0;
+  z-index: 10;
 }
 
 .overlay__workspace {
@@ -58,6 +58,7 @@
   background: #079b0b;
   text-transform: uppercase;
   font-size: 20px;
+  cursor: pointer;
 }
 
 
@@ -82,14 +83,11 @@
 
   color: vars.$primary;
   font-size: 2.5rem;
-
-  border: 1px solid red;
 }
 
 .Activity__grid {
   padding: 1rem;
   grid-area: 3 / 2 / 9 / 8;
-  border: 1px solid red;
 
   display: grid;
 
@@ -99,7 +97,44 @@
 }
 
 .Activity__grid > div {
-  border: 1px solid red;
+  position: relative;
+  border: 1px dashed white;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &.filled {
+    background-image: url('../../assets/other/aegis.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: none;
+  }
+
+  &.add {
+
+      
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      background: vars.$control;
+      border-radius: 5px;
+    }
+
+    &::before {
+      width: 10px;
+      height: 66%;
+      left: calc(50% - 5px);
+      top: 17%;
+    }
+  
+    &::after {
+      width: 66%;
+      height: 10px;
+      top: calc(50% - 5px);
+      left: 17%;
+    }
+  }
 }
 
 
@@ -117,7 +152,7 @@ $sidebar-footer-height: 230px;
 
 
 .layout {
-  z-index: 1;
+  z-index: 20;
   position: absolute;
   width: 400px;
   height: 100vh;
@@ -146,6 +181,7 @@ $sidebar-footer-height: 230px;
 
 .sidebar {
   height: 100%;
+  z-index: 20;
   color: $text-color;
   overflow-x: hidden !important;
   position: relative;

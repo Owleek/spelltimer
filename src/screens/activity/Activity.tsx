@@ -2,75 +2,35 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
+import { useState } from 'react';
 import './activity.scss';
+import Constructor from './Constructor';
+import Supplier from './Supplier';
 
-const Activity = () => <div className="Activity innerContainer">
+const Activity = () => {
+  const [isEdit, setIsEdit] = useState(false);
+
+  const addAbility = () => {
+    setIsEdit(true);
+  }
+
+  const applyChanges = () => {
+    setIsEdit(false);
+  }
+
+
+  return <div className="Activity innerContainer">
     
-    <div className="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" className="sidebar break-point-sm has-bg-image">
-        <div className="sidebar-layout">
+    { isEdit && <Constructor onChange={applyChanges}/> }
 
-          <div className="sidebar-content">
-            <nav className="menu open-current-submenu">
-              <ul>
-                <li className="Menu__item">
-                  <div className="Menu__tile img-abilities">
-                    <span>ABILITIES</span>
-                  </div>
-                </li>
-                <li className="Menu__item">
-                  <div className="Menu__tile img-items">
-                    <span>ITEMS</span>
-                  </div>
-                </li>
-                <li className="Menu__item">
-                  <div className="Menu__tile img-other">
-                    <span>OTHER</span>
-                  </div>
-                </li>
-              </ul>
-            </nav>
-            <div className="dotaButton">Сохранить</div>
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <div className="overlay">
-      <div className="overlay__workspace">
-        <input type='text' className="searh" />
-        <div className="tileGrid">
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-          <i className="tileGrid__item"></i>
-        </div>
-      </div>
-    </div>
-
+  
     <div className="Activity__container">
       <div className="Activity__time">
         00:00
       </div>
       <div className="Activity__grid">
-        <div></div>
-        <div></div>
+        <div className="filled"></div>
+        <Supplier handleClick={addAbility}/>
         <div></div>
         <div></div>
         <div></div>
@@ -78,5 +38,7 @@ const Activity = () => <div className="Activity innerContainer">
       </div>
     </div>
 </div>
+
+}
 
 export default Activity;
