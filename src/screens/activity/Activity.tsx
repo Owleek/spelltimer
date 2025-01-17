@@ -2,26 +2,39 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './activity.scss';
 import Constructor from './Constructor';
 import Supplier from './Supplier';
 
 const Activity = () => {
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [isConstructorMode, setIsConstructorMode] = useState(false);
+
+  useEffect(() => {
+    document.body.addEventListener('keyup', (keyboardEvent) => {
+      
+      if (keyboardEvent.code === 'Escape') {
+        const asdas = isConstructorMode;
+        setIsConstructorMode(false);
+      }
+
+    });
+  }, []);
+  
 
   const addAbility = () => {
-    setIsEdit(true);
+    setIsConstructorMode(true);
   }
 
   const applyChanges = () => {
-    setIsEdit(false);
+    setIsConstructorMode(false);
   }
 
 
   return <div className="Activity innerContainer">
     
-    { isEdit && <Constructor onChange={applyChanges}/> }
+    { isConstructorMode && <Constructor onChange={applyChanges}/> }
 
   
     <div className="Activity__container">
@@ -30,11 +43,7 @@ const Activity = () => {
       </div>
       <div className="Activity__grid">
         <div className="filled"></div>
-        <Supplier handleClick={addAbility}/>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        {[1, 2, 3, 4, 5].map(num => <div onClick={addAbility}></div>)}
       </div>
     </div>
 </div>
