@@ -3,28 +3,26 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import { useEffect, useState } from 'react';
+import { Outlet, useNavigate, useMatch } from 'react-router-dom';
 import './activity.scss';
-import Constructor from './Constructor';
-import Supplier from './Supplier';
 
 const Activity = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isConstructorMode, setIsConstructorMode] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.body.addEventListener('keyup', (keyboardEvent) => {
       
       if (keyboardEvent.code === 'Escape') {
-        const asdas = isConstructorMode;
         setIsConstructorMode(false);
       }
-
     });
   }, []);
   
 
   const addAbility = () => {
-    setIsConstructorMode(true);
+    navigate('constructor');
   }
 
   const applyChanges = () => {
@@ -34,9 +32,8 @@ const Activity = () => {
 
   return <div className="Activity innerContainer">
     
-    { isConstructorMode && <Constructor onChange={applyChanges}/> }
+    <Outlet />
 
-  
     <div className="Activity__container">
       <div className="Activity__time">
         00:00
