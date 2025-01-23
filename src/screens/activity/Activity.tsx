@@ -3,7 +3,8 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import { useEffect, useState } from 'react';
-import { Outlet, useNavigate, useMatch } from 'react-router-dom';
+import { Routes, Route, Outlet, useNavigate, useMatch } from 'react-router-dom';
+import Constructor from './Constructor';
 import './activity.scss';
 
 const Activity = () => {
@@ -32,7 +33,9 @@ const Activity = () => {
 
   return <div className="Activity innerContainer">
     
-    <Outlet />
+    <Routes>
+      <Route path='constructor/*' element={<Constructor onChange={() => console.log('.')} />} />
+    </Routes>
 
     <div className="Activity__container">
       <div className="Activity__time">
