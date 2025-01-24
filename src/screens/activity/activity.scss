@@ -751,7 +751,7 @@ a {
   width: 100%;
   padding: 10px 25px;
   font-size: 32px;
-  color: vars.$primary;
+  color: #839c80;
 }
 
 .Menu__tile {
@@ -772,6 +772,17 @@ a {
   background:rgba(51, 51, 51, 0.8);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
+}
+
+.Menu__item.active {
+  color: vars.$primary;
+  color: #3af823;
+}
+
+.Menu__item.active .Menu__tile > span {
+  background:rgba(51, 51, 51, 0.6);
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0px);
 }
 
 

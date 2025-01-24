@@ -2,37 +2,76 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React from 'react';
-import { Routes, Route, NavLink, useLocation, useNavigate} from 'react-router-dom';
+import React, { JSX, useState } from 'react';
+import cn from 'classnames';
 import './activity.scss';
+
+const translate = (key: string): string => {
+  return key;
+}
 
 interface IProps {
   onChange: () => any;
 }
 
-const resolvePath = (url: string, arr: Array<string>): string => {
-  let segments = url.split('/');
+type ItabKeys = 'all' | 'spels' | 'items' | 'other';
+type ItabItem = { key: ItabKeys, title: string };
+type ITabs = ItabItem[];
 
-  while (!segments[segments.length - 1]) {
-    segments.pop();
+const tabs: ITabs = [
+  {
+    key: 'all',
+    title: translate('all')
+  },
+  {
+    key: 'spels',
+    title: translate('spels')
+  },
+  {
+    key: 'items',
+    title: translate('items')
+  },
+  {
+    key: 'other',
+    title: translate('other')
   }
-  
-  while (arr.includes(segments[segments.length - 1])) {
-    segments.pop();
-  }
-
-  return segments.join('/');
-}
+];
 
 const Constructor = (props: IProps) => {
-  const url = useLocation().pathname;
-  const navigate = useNavigate();
-  const tabs: string[] = ['spels', 'items', 'other'];
+  const [activeTab, setActiveTab] = useState<ItabKeys>(tabs[0].key);
 
-  const handleClick = (path: string) => {
-    const resolvedPath = resolvePath(url, tabs);
-    const finalPath = `${resolvedPath}/${path}`;
-    navigate(finalPath);
+  const renderSpels = (): JSX.Element | null => {
+    const items = ['Blackhole', 'Choronosphere', 'Ravage', 'Supernova', 'metamorphosis'];
+    return <React.Fragment><i/><i/><i/></React.Fragment>;
+  }
+
+  const renderItems = (): JSX.Element | null => {
+    const items = ['aeondisk', 'blackkingbar', 'refresher'];
+    return <React.Fragment><i/><i/></React.Fragment>;
+  }
+
+  const renderOther = (): JSX.Element | null => {
+    const items = ['buyback', 'glyphoffortification', 'tormentor'];
+    return <i/>;
+  }
+
+  const renderAbilities = (): JSX.Element | null => {
+    return <React.Fragment><i/><i/><i/><i/><i/><i/></React.Fragment>;
+  }
+
+
+  const renderContent = () => {
+
+    switch(activeTab) {
+      case 'spels': 
+        return renderSpels()
+      case 'items': 
+        return renderItems()
+      case 'other': 
+        return renderOther()
+      default:
+        return renderAbilities()
+    }
   }
 
   return (
@@ -44,10 +83,9 @@ const Constructor = (props: IProps) => {
                 <nav className="menu open-current-submenu">
                   <ul>
                     {
-                      tabs.map(el => <li className="Menu__item">
-                        <div className="Menu__tile img-abilities" onClick={() => handleClick(el)}>
-                          <span>{el}</span>
-                        </div>
+                      tabs.map(el => 
+                      <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab})} onClick={() => setActiveTab(el.key)}>
+                        <div className="Menu__tile img-abilities"><span>{el.title}</span></div>
                       </li>)
                     }
                   </ul>
@@ -61,12 +99,7 @@ const Constructor = (props: IProps) => {
           <div className="overlay__workspace">
             <input type='text' className="searh" />
             <div className="tileGrid">
-              <Routes>
-                <Route index element={<React.Fragment><i/><i/><i/><i/><i/><i/></React.Fragment>} />
-                <Route path='spels' element={<React.Fragment><i/><i/><i/></React.Fragment>} />
-                <Route path='items' element={<React.Fragment><i/><i/></React.Fragment>} />
-                <Route path='other' element={<React.Fragment><i/></React.Fragment>} />
-              </Routes>
+              { renderContent() }
             </div>
           </div>
         </div>
