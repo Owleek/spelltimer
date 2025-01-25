@@ -14,65 +14,21 @@ interface IProps {
   onChange: () => any;
 }
 
-type ItabKeys = 'all' | 'spels' | 'items' | 'other';
-type ItabItem = { key: ItabKeys, title: string };
-type ITabs = ItabItem[];
+enum TabKey {
+  all = 'all',
+  spells = 'spells',
+  items = 'items',
+  other = 'other'
+};
 
-const tabs: ITabs = [
-  {
-    key: 'all',
-    title: translate('all')
-  },
-  {
-    key: 'spels',
-    title: translate('spels')
-  },
-  {
-    key: 'items',
-    title: translate('items')
-  },
-  {
-    key: 'other',
-    title: translate('other')
-  }
-];
+type TabItem = { key: TabKey, label: string };
+type TabList = Array<TabItem>;
+const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
 const Constructor = (props: IProps) => {
-  const [activeTab, setActiveTab] = useState<ItabKeys>(tabs[0].key);
-
-  const renderSpels = (): JSX.Element | null => {
-    const items = ['Blackhole', 'Choronosphere', 'Ravage', 'Supernova', 'metamorphosis'];
-    return <React.Fragment><i/><i/><i/></React.Fragment>;
-  }
-
-  const renderItems = (): JSX.Element | null => {
-    const items = ['aeondisk', 'blackkingbar', 'refresher'];
-    return <React.Fragment><i/><i/></React.Fragment>;
-  }
-
-  const renderOther = (): JSX.Element | null => {
-    const items = ['buyback', 'glyphoffortification', 'tormentor'];
-    return <i/>;
-  }
-
-  const renderAbilities = (): JSX.Element | null => {
-    return <React.Fragment><i/><i/><i/><i/><i/><i/></React.Fragment>;
-  }
-
-
-  const renderContent = () => {
-
-    switch(activeTab) {
-      case 'spels': 
-        return renderSpels()
-      case 'items': 
-        return renderItems()
-      case 'other': 
-        return renderOther()
-      default:
-        return renderAbilities()
-    }
-  }
+  const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
+  const contentObj: Partial<Record<TabKey, string>> = {};
+  Object.keys(TabKey).forEach(key => contentObj[key as TabKey] = key);
 
   return (
     <React.Fragment>
@@ -83,9 +39,9 @@ const Constructor = (props: IProps) => {
                 <nav className="menu open-current-submenu">
                   <ul>
                     {
-                      tabs.map(el => 
+                      tabList.map(el => 
                       <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab})} onClick={() => setActiveTab(el.key)}>
-                        <div className="Menu__tile img-abilities"><span>{el.title}</span></div>
+                        <div className="Menu__tile img-abilities"><span>{el.label}</span></div>
                       </li>)
                     }
                   </ul>
@@ -99,7 +55,9 @@ const Constructor = (props: IProps) => {
           <div className="overlay__workspace">
             <input type='text' className="searh" />
             <div className="tileGrid">
-              { renderContent() }
+              <div style={{color: 'white', fontSize: '50px'}}>
+                {contentObj[activeTab]}
+              </div>
             </div>
           </div>
         </div>
