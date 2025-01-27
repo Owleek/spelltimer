@@ -2,9 +2,10 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { JSX, useState } from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 import './activity.scss';
+import Search from '../../components/Search/search';
 
 const translate = (key: string): string => {
   return key;
@@ -23,12 +24,20 @@ enum TabKey {
 
 type TabItem = { key: TabKey, label: string };
 type TabList = Array<TabItem>;
+type TabContent = Array<{label: string, img: any}>;
 const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
 const Constructor = (props: IProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
+  const [tabContent, setTabContent] = useState<TabContent>([{label: 'First Element', img: 'sds'}]);
+
   const contentObj: Partial<Record<TabKey, string>> = {};
   Object.keys(TabKey).forEach(key => contentObj[key as TabKey] = key);
+
+  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value;
+    
+  }
 
   return (
     <React.Fragment>
@@ -53,7 +62,7 @@ const Constructor = (props: IProps) => {
         </div>
         <div className="overlay">
           <div className="overlay__workspace">
-            <input type='text' className="searh" />
+            <Search onChange={onSearch}/>
             <div className="tileGrid">
               <div style={{color: 'white', fontSize: '50px'}}>
                 {contentObj[activeTab]}

@@ -1,0 +1,1 @@
+import jsonData from './data.json';

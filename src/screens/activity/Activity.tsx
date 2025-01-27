@@ -3,14 +3,16 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import { useEffect, useState } from 'react';
-import { Routes, Route, Outlet, useNavigate, useMatch } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Constructor from './Constructor';
+import useTestHook from '../../utils/testHook';
 import './activity.scss';
 
 const Activity = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isConstructorMode, setIsConstructorMode] = useState(false);
   const navigate = useNavigate();
+  const message = useTestHook();
 
   useEffect(() => {
     document.body.addEventListener('keyup', (keyboardEvent) => {
@@ -39,7 +41,7 @@ const Activity = () => {
 
     <div className="Activity__container">
       <div className="Activity__time">
-        00:00
+        {message}
       </div>
       <div className="Activity__grid">
         <div className="filled"></div>

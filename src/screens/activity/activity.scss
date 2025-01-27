@@ -24,13 +24,6 @@
   grid-template-rows: repeat(15, 1fr);
 }
 
-.searh {
-  border-radius: 5px;
-  grid-area: 1 / 4 / 2 / 13;
-  margin-top: 1rem;
-  border: 1px solid white;
-}
-
 .tileGrid {
   grid-area: 3 / 2 / 15 / 15;
   display: grid;
