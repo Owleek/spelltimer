@@ -52,7 +52,8 @@
     ],
     "other": [
         {
-            "name": "Roshan",
+            "owner": "Roshan",
+            "name": "Aegis",
             "respawn": { "min": 480, "max": 660 }
         },
         {

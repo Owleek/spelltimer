@@ -1,5 +1,6 @@
 const path = require('path'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: './src/index.tsx',
@@ -25,11 +26,20 @@ module.exports = {
             {
                 test: /\.css/i,
                 use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                type: "asset/resource",
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './src/index.html'})
+        new HtmlWebpackPlugin({template: './src/index.html'}),
+        new CopyWebpackPlugin({
+            patterns: [
+              { from: "public", to: "public" }
+            ]
+          })
     ],
     devServer: {
         historyApiFallback: true,

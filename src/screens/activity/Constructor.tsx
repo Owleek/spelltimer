@@ -5,7 +5,8 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import './activity.scss';
-import Search from '../../components/Search/search';
+import Search from '../../components/Search/Search';
+import ImageGrid from '../../components/ImageGrid/ImageGrid';
 
 const translate = (key: string): string => {
   return key;
@@ -64,9 +65,7 @@ const Constructor = (props: IProps) => {
           <div className="overlay__workspace">
             <Search onChange={onSearch}/>
             <div className="tileGrid">
-              <div style={{color: 'white', fontSize: '50px'}}>
-                {contentObj[activeTab]}
-              </div>
+              <ImageGrid />
             </div>
           </div>
         </div>
