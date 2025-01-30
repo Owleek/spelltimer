@@ -3,16 +3,14 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import React, { useState } from 'react';
-import getData from '../../data/fillData';
+import { IAbility } from '../../data/fillData';
 import './ImageGrid.scss';
 
 
-const ImageGrid = () => {
-    const {fullData, plainData} = getData();
-
+const ImageGrid = ({abilities}: {abilities: Array<IAbility>}) => {
     return (
         <div className='AbilityGrid'>
-            { plainData.map(ability => <span className='AbilityItem'>
+            { abilities.map(ability => <span className='AbilityItem'>
                     <img key={ability.id} src={ability.image} />
                 </span>) 
             }

@@ -1,72 +1,80 @@
-{
-    "spells": [
-        {
-            "owner": "Enigma",
-            "name": "Black Hole",
-            "cooldown": [180, 170, 160]
-        },
-        {
-            "owner": "Earthshaker",
-            "name": "Echo Slam",
-            "cooldown": [130, 120, 110]
-        },
-        {
-            "owner": "Faceles Void",
-            "name": "Chronosphere",
-            "cooldown": [160, 150, 140]
-        },
-        {
-            "owner": "Faceles Void",
-            "name": "Time Zone",
-            "cooldown": [130, 120, 110]
-        },
-        {
-            "owner": "Phoenix",
-            "name": "Supernova",
-            "cooldown": [120]
-        },
-        {
-            "owner": "Tidehunter",
-            "name": "Ravage",
-            "cooldown": [150]
-        },
-        {
-            "owner": "Terrorblade",
-            "name": "Metamorphosis",
-            "cooldown": [150]
-        }
-    ],
-    "items": [
-        {
-            "name": "Black King Bar",
-            "cooldown": [90]
-        },
-        {
-            "name": "Refresher Orb",
-            "cooldown": [180]
-        },
-        {
-            "name": "Aeon Disk",
-            "cooldown": [105, 125, 145, 165]
-        }
-    ],
-    "other": [
-        {
-            "owner": "Roshan",
-            "name": "Aegis",
-            "respawn": { "min": 480, "max": 660 }
-        },
-        {
-            "name": "Buyback",
-            "cooldown": [480]
-        },
-        {
-            "name": "Glyph_of_fortification",
-            "cooldown": [300]
-        },
-        {
-            "name": "Tormentor",
-            "cooldown": [600]
-        }
-    ] 
-}
+[
+    {   
+        "type": "spells",
+        "owner": "Enigma",
+        "name": "Black Hole",
+        "cooldown": [180, 170, 160]
+    },
+    {   
+        "type": "spells",
+        "owner": "Earthshaker",
+        "name": "Echo Slam",
+        "cooldown": [130, 120, 110]
+    },
+    {   
+        "type": "spells",
+        "owner": "Faceles Void",
+        "name": "Chronosphere",
+        "cooldown": [160, 150, 140]
+    },
+    {   
+        "type": "spells",
+        "owner": "Faceles Void",
+        "name": "Time Zone",
+        "cooldown": [130, 120, 110]
+    },
+    {   
+        "type": "spells",
+        "owner": "Phoenix",
+        "name": "Supernova",
+        "cooldown": [120]
+    },
+    {   
+        "type": "spells",
+        "owner": "Tidehunter",
+        "name": "Ravage",
+        "cooldown": [150]
+    },
+    {   
+        "type": "spells",
+        "owner": "Terrorblade",
+        "name": "Metamorphosis",
+        "cooldown": [150]
+    },
+    {   
+        "type": "items",
+        "name": "Black King Bar",
+        "cooldown": [90]
+    },
+    {   
+        "type": "items",
+        "name": "Refresher Orb",
+        "cooldown": [180]
+    },
+    {   
+        "type": "items",
+        "name": "Aeon Disk",
+        "cooldown": [105, 125, 145, 165]
+    },
+    {   
+        "type": "other",
+        "owner": "Roshan",
+        "name": "Aegis",
+        "respawn": { "min": 480, "max": 660 }
+    },
+    {   
+        "type": "other",
+        "name": "Buyback",
+        "cooldown": [480]
+    },
+    {   
+        "type": "other",
+        "name": "Glyph_of_fortification",
+        "cooldown": [300]
+    },
+    {   
+        "type": "other",
+        "name": "Tormentor",
+        "cooldown": [600]
+    }
+]

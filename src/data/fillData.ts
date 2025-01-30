@@ -4,6 +4,7 @@ import { makeSnakeCase } from '../utils/utils';
 
 
 export interface IAbility {
+    type: 'spells' | 'items' | 'other',
     id: string,
     owner?: string,
     name: string,
@@ -12,32 +13,17 @@ export interface IAbility {
     cooldown: Array<number> | { min: number, max: number }
 }
 
-export interface IData {
-    spells: Array<IAbility>,
-    items: Array<IAbility>,
-    other: Array<IAbility>
-}
+export default function(): Array<IAbility> {
+    let data: Array<IAbility> = cloneDeep(jsonData) as Array<IAbility>;
 
-export default function(): {fullData: IData, plainData: Array<IAbility>} {
-
-    const fullData: IData = cloneDeep(jsonData) as IData;
-
-    (Object.keys(jsonData) as Array<keyof IData>).forEach((key, idx) => {
-        fullData[key] = fullData[key].map((ability, abilityIdx) => (
-            {
-                ...ability,
-                id: `${key}-${idx}-${abilityIdx}-${ability.name}`,
-                icon: `/assets/${key}/${makeSnakeCase(ability.name)}.png`,
-                image: `/assets/${key}/${makeSnakeCase(ability.name)}.png`,
-            }
-        ))
-    });
+    data = data.map((ability, idx) => (
+        {
+            ...ability,
+            id: `${idx}-${ability.type}-${ability.name}`,
+            icon: `/assets/${ability.type}/${makeSnakeCase(ability.name)}.png`,
+            image: `/assets/${ability.type}/${makeSnakeCase(ability.name)}.png`,
+        }
+    ));
     
-    const plainData: Array<IAbility> = [];
-    
-    (Object.keys(fullData) as Array<keyof IData>).forEach(key => {
-        plainData.push(...fullData[key].slice());
-    });
-    
-    return {fullData, plainData}
+    return data;
 }

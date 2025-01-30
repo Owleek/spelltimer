@@ -2,15 +2,14 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import './activity.scss';
 import Search from '../../components/Search/Search';
 import ImageGrid from '../../components/ImageGrid/ImageGrid';
-
-const translate = (key: string): string => {
-  return key;
-}
+import getData from '../../data/fillData';
+import {IAbility} from '../../data/fillData';
+import { translate } from '../../utils/utils';
 
 interface IProps {
   onChange: () => any;
@@ -29,15 +28,35 @@ type TabContent = Array<{label: string, img: any}>;
 const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
 const Constructor = (props: IProps) => {
+  const data: Array<IAbility> = getData();
+
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
-  const [tabContent, setTabContent] = useState<TabContent>([{label: 'First Element', img: 'sds'}]);
+  const [tabContent, setTabContent] = useState<IAbility[]>(data);
+  const [searchValue, setSearchValue] = useState<string>('');
 
-  const contentObj: Partial<Record<TabKey, string>> = {};
-  Object.keys(TabKey).forEach(key => contentObj[key as TabKey] = key);
+  const spells = data.filter(ability => ability.type === "spells");
+  const items = data.filter(ability => ability.type === "items");
+  const other = data.filter(ability => ability.type === "other");
 
-  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value;
-    
+  const tabContentStructure = {all: data, spells, items, other};
+
+  useEffect(() => {
+    setTabContent(tabContentStructure[activeTab]);
+  }, [activeTab]);
+
+  const filterTabContent = (str: string): Array<IAbility> => {
+    return tabContentStructure[activeTab].filter(ability => ability.name.toLowerCase().startsWith(str));
+  }
+
+  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
+    const value = event.target.value;
+    setSearchValue(value);
+    setTabContent(value ? filterTabContent(value) : tabContentStructure[activeTab]);
+  }
+
+  const onBlurSearch = (event: React.FocusEvent<HTMLInputElement>) => {
+    setSearchValue('');
+    setTabContent(tabContentStructure[activeTab]);
   }
 
   return (
@@ -63,9 +82,9 @@ const Constructor = (props: IProps) => {
         </div>
         <div className="overlay">
           <div className="overlay__workspace">
-            <Search onChange={onSearch}/>
+            <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch}/>
             <div className="tileGrid">
-              <ImageGrid />
+              <ImageGrid abilities={tabContent}/>
             </div>
           </div>
         </div>
