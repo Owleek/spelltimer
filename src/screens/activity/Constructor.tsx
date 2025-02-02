@@ -75,7 +75,7 @@ const Constructor = (props: IProps) => {
                     }
                   </ul>
                 </nav>
-                <div className="dotaButton" onClick={props.onChange}>Сохранить</div>
+                <div className="dotaButton" onClick={props.onChange}>{translate('add')}</div>
               </div>
             </div>
           </aside>
