@@ -3,7 +3,7 @@ import slotsSlice from './slotsSlice';
 
 const store = configureStore({
     reducer: {
-        slots: slotsSlice
+        slots: slotsSlice,
     }
 });
 

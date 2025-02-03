@@ -2,33 +2,40 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ISlot {
     position: number,
-    ability: { name: string, owner?: string } | null
+    ability: { name: string, owner?: string } | null,
+    isEdit: boolean
   }
   
 export const defaultSlots: Array<ISlot> = [
     { 
+        position: 0,
+        ability: null,
+        isEdit: false
+    },
+    { 
         position: 1,
-        ability: null
+        ability: null,
+        isEdit: false
     },
     { 
         position: 2,
-        ability: null
+        ability: null,
+        isEdit: false
     },
     { 
         position: 3,
-        ability: null
+        ability: null,
+        isEdit: false
     },
     { 
         position: 4,
-        ability: null
+        ability: null,
+        isEdit: false
     },
     { 
         position: 5,
-        ability: null
-    },
-    { 
-        position: 6,
-        ability: null
+        ability: null,
+        isEdit: false
     }
 ];
 
@@ -37,18 +44,19 @@ export const slotsSlice = createSlice({
     name: 'slots',
     initialState: defaultSlots,
     reducers: {
-        addActivity(slots: Array<ISlot>, action: PayloadAction<ISlot>) {
+        setAbility(slots: Array<ISlot>, action: PayloadAction<ISlot>) {
             const idx = slots.findIndex(slot => slot.position === action.payload.position);
-            slots[idx] = action.payload
-            debugger;
+            if (idx === -1) return slots;
+            slots[idx] = action.payload;
         },
-
-        removeActivity(slots: Array<ISlot>, action: PayloadAction<ISlot>) {
-            slots = slots.map(slot => slot.position === action.payload.position ? {position: slot.position, ability: null} : slot);
+        unsetAbility(slots: Array<ISlot>, action: PayloadAction<ISlot>) {
+            const idx = slots.findIndex(slot => slot.position === action.payload.position);
+            if (idx === -1) return slots;
+            slots[idx].ability = null;
         }
     }
 });
 
-export const { addActivity, removeActivity } = slotsSlice.actions;
+export const { setAbility, unsetAbility } = slotsSlice.actions;
 
 export default slotsSlice.reducer;
