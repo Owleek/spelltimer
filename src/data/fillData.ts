@@ -2,7 +2,6 @@ import jsonData from './data.json';
 import cloneDeep from 'lodash/cloneDeep';
 import { makeSnakeCase } from '../utils/utils';
 
-
 export interface IAbility {
     type: 'spells' | 'items' | 'other',
     id: string,

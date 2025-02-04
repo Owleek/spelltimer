@@ -91,36 +91,40 @@
   gap: 1rem;
 }
 
-.Activity__grid > div {
+.Activity__slot {
   position: relative;
+}
+
+.Activity__ability,
+.Activity__emptyContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.Activity__ability {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  &:hover {
+
+  }
+}
+
+.Activity__emptyContainer {
   border: 1px dashed rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   cursor: pointer;
 
-  &.filled {
-    background-image: url('../../assets/other/aegis.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    border: none;
-
-    &::after,
-    &::before {
-      display: none;
-    }
-  }
-
-
   &:hover {
     border: 1px dashed rgba(255, 255, 255, 0.9);
-
 
     &::after,
     &::before {
       border: 1px dashed rgba(255, 255, 255, 0.9);
     }
   }
-
 
   &::after,
   &::before {
@@ -144,7 +148,38 @@
   }
 }
 
+.Activity__ability:hover .Activity__remove {
+  display: block;
+}
 
+.Activity__remove {
+  display: none;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    background:goldenrod;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
 
 $text-color: #7d84ab;
 $secondary-text-color: #dee2ec;

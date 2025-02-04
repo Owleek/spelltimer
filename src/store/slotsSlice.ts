@@ -1,62 +1,50 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IAbility } from '../data/fillData';
 
 export interface ISlot {
-    position: number,
-    ability: { name: string, owner?: string } | null,
-    isEdit: boolean
-  }
+    position: number
+    ability?: IAbility
+}
   
-export const defaultSlots: Array<ISlot> = [
+export const defaultSlotList: Array<ISlot> = [
     { 
-        position: 0,
-        ability: null,
-        isEdit: false
+        position: 0
     },
     { 
-        position: 1,
-        ability: null,
-        isEdit: false
+        position: 1
     },
     { 
-        position: 2,
-        ability: null,
-        isEdit: false
+        position: 2
     },
     { 
-        position: 3,
-        ability: null,
-        isEdit: false
+        position: 3
     },
     { 
-        position: 4,
-        ability: null,
-        isEdit: false
+        position: 4
     },
     { 
-        position: 5,
-        ability: null,
-        isEdit: false
+        position: 5
     }
 ];
 
 
-export const slotsSlice = createSlice({
-    name: 'slots',
-    initialState: defaultSlots,
+export const slotListSlice = createSlice({
+    name: 'slotList',
+    initialState: defaultSlotList,
     reducers: {
-        setAbility(slots: Array<ISlot>, action: PayloadAction<ISlot>) {
-            const idx = slots.findIndex(slot => slot.position === action.payload.position);
-            if (idx === -1) return slots;
-            slots[idx] = action.payload;
+        mapAbilityToSlot(state: Array<ISlot>, action: PayloadAction<ISlot>) {
+            const idx = state.findIndex(slot => slot.position === action.payload.position);
+            if (idx === -1) return state;
+            state[idx] = action.payload;
         },
-        unsetAbility(slots: Array<ISlot>, action: PayloadAction<ISlot>) {
-            const idx = slots.findIndex(slot => slot.position === action.payload.position);
-            if (idx === -1) return slots;
-            slots[idx].ability = null;
+        removeAbilityFromSlot(state: Array<ISlot>, action: PayloadAction<ISlot>) {
+            const idx = state.findIndex(slot => slot.position === action.payload.position);
+            if (idx === -1) return state;
+            delete state[idx].ability;
         }
     }
 });
 
-export const { setAbility, unsetAbility } = slotsSlice.actions;
+export const { mapAbilityToSlot, removeAbilityFromSlot } = slotListSlice.actions;
 
-export default slotsSlice.reducer;
+export default slotListSlice.reducer;

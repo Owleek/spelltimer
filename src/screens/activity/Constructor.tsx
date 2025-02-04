@@ -10,10 +10,6 @@ import ImageGrid from '../../components/ImageGrid/ImageGrid';
 import getData from '../../data/fillData';
 import {IAbility} from '../../data/fillData';
 import { translate } from '../../utils/utils';
-import { useSelector } from 'react-redux';
-import { TStoreState } from '../../store/store';
-import { setAbility } from '../../store/slotsSlice';
-import { useDispatch } from 'react-redux';
 
 enum TabKey {
   all = 'all',
@@ -27,15 +23,17 @@ type TabList = Array<TabItem>;
 type TabContent = Array<{label: string, img: any}>;
 const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
-const Constructor = () => {
+interface IProps {
+  onSelectAbility: (ability: IAbility) => void
+  onCancel: () => void
+}
+
+const Constructor = ({onSelectAbility, onCancel}: IProps) => {
   const data: Array<IAbility> = getData();
-  const dispatch = useDispatch();
 
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
   const [tabContent, setTabContent] = useState<IAbility[]>(data);
   const [searchValue, setSearchValue] = useState<string>('');
-  const editableSlot = useSelector((state: TStoreState) => state.slots.find(slot => slot.isEdit === true));
-  const [selectedAbility, setSelectedAbility] = useState<IAbility | null>(null);
 
   const spells = data.filter(ability => ability.type === "spells");
   const items = data.filter(ability => ability.type === "items");
@@ -58,27 +56,7 @@ const Constructor = () => {
   }
 
   const onBlurSearch = (event: React.FocusEvent<HTMLInputElement>) => {
-    setSearchValue('');
-    setTabContent(tabContentStructure[activeTab]);
-  }
 
-  const onSave = () => {
-    if (!selectedAbility || !editableSlot) return null;
-
-    const currentSlotState = {
-      position: editableSlot.position,
-      ability: { name: selectedAbility.name, owner: selectedAbility.owner },
-      isEdit: false
-    }
-
-    dispatch(setAbility(currentSlotState))
-  }
-
-  const handleClickSlot = (ability: IAbility) => setSelectedAbility(ability);
-
-  const handleDoubleClickSlot = (ability: IAbility) => {
-    setSelectedAbility(ability);
-    onSave();
   }
 
   return (
@@ -97,7 +75,7 @@ const Constructor = () => {
                     }
                   </ul>
                 </nav>
-                <div className="dotaButton" onClick={onSave}>{translate('add')}</div>
+                <div className="dotaButton" onClick={onCancel}>{translate('cancel')}</div>
               </div>
             </div>
           </aside>
@@ -106,7 +84,7 @@ const Constructor = () => {
           <div className="overlay__workspace">
             <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch}/>
             <div className="tileGrid">
-              <ImageGrid abilities={tabContent} onClick={handleClickSlot} onDoubleClick={handleDoubleClickSlot}/>
+              <ImageGrid abilities={tabContent} onClick={onSelectAbility}/>
             </div>
           </div>
         </div>
