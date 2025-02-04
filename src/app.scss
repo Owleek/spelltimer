@@ -32,13 +32,13 @@ body {
 }
 
 
-button {
+.button {
     position: relative;
     padding: 30px 60px;
     color: #1670f0;
     text-transform:uppercase;
-    text-decoration:none;
     letter-spacing: 5px;
+    text-decoration:none;
     font-size: 20px;
     box-shadow: 0 20px 50px rgba(0,0,0,.5);
     overflow:hidden;
@@ -48,7 +48,7 @@ button {
     cursor: pointer;
 }
   
-button::before {
+.button::before {
   content:"";
   position:absolute;
   top:2px;
@@ -59,7 +59,7 @@ button::before {
   
 }
 
-button span:nth-child(1) {
+.button span:nth-child(1) {
     position:absolute;
     top:0;
     left:0;
@@ -79,7 +79,7 @@ button span:nth-child(1) {
   }
 }
 
-button span:nth-child(2) {
+.button span:nth-child(2) {
     position:absolute;
     top:0;
     right:0;
@@ -100,7 +100,7 @@ button span:nth-child(2) {
   }
 }
 
-button span:nth-child(3) {
+.button span:nth-child(3) {
     position:absolute;
     bottom:0;
     left:0;
