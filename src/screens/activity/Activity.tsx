@@ -10,13 +10,23 @@ import { TStoreState } from '../../store/store';
 import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slotsSlice';
 import { IAbility } from '../../data/fillData';
 import './activity.scss';
+import Timer from '../../components/Timer/Timer';
 
 const Activity = () => {
   const dispatch = useDispatch();
   const slots = useSelector((state: TStoreState) => state.slots);
   const [editableSlot, setEditableSlot] = useState<ISlot | null>(null);
-  const [editMode, setEditMode] = useState<Boolean>(true);
-  const [isGeneralRuns, setIsGeneralRuns] = useState<Boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(true);
+  const [isGeneralRuns, setIsGeneralRuns] = useState<boolean>(false);
+
+  const [tick, setTick] = useState<number>(1);
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      tick === 1 ? setTick(0) : setTick(1);
+    }, 1000);
+  }, [tick]);
   
   const onSelectAbility = (ability: IAbility) => {
     if (!editableSlot) return;
@@ -53,7 +63,9 @@ const Activity = () => {
 
   const renderTimerSLots = (slots: Array<ISlot>) => {
     return slots.map(slot => {
-      return <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}></div>
+      return <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
+        
+      </div>
     })
   }
 
@@ -75,12 +87,12 @@ const Activity = () => {
       </div>
       <div className="Activity__time">
         {
-          editMode ? 
+           editMode ? 
                     'Set the required abilities to these slots' 
                     : 
-                     <div className="Controller" onClick={() => setIsGeneralRuns(!isGeneralRuns)}>
+                     <div className="Controller">
                         <div className="Controller__time">
-                          00:23
+                          <Timer isTriggeredByMainControl={isGeneralRuns} tick={tick}/>
                         </div>
                         <div className="Controller__tool">
                           {
