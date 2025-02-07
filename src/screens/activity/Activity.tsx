@@ -23,10 +23,8 @@ const Activity = () => {
 
 
   useEffect(() => {
-    setTimeout(() => {
-      tick === 1 ? setTick(0) : setTick(1);
-    }, 1000);
-  }, [tick]);
+
+  }, []);
   
   const onSelectAbility = (ability: IAbility) => {
     if (!editableSlot) return;

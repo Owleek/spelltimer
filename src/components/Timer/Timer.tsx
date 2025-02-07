@@ -16,8 +16,6 @@ const Timer = ({isTriggeredByMainControl, tick}: IProps): JSX.Element => {
     const [iterationTime, setIterationTime] = useState<number | null>(null);
     const [countDown, setCountDown] = useState<number | null>(cooldown);
 
-
-    // TODO - сделать синглтон с одним таймером и подписаться на него всем компонентам
     const calcTime = (iterationTime: number) => {
         if (!iterationTime) return null;
 
