@@ -11,6 +11,7 @@ import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slot
 import { IAbility } from '../../data/fillData';
 import './activity.scss';
 import Timer from '../../components/Timer/Timer';
+import TickNotifier from '../../utils/TickNotifier';
 
 const Activity = () => {
   const dispatch = useDispatch();
@@ -18,13 +19,30 @@ const Activity = () => {
   const [editableSlot, setEditableSlot] = useState<ISlot | null>(null);
   const [editMode, setEditMode] = useState<boolean>(true);
   const [isGeneralRuns, setIsGeneralRuns] = useState<boolean>(false);
-
-  const [tick, setTick] = useState<number>(1);
-
+  const [isRun, setIsRun] = useState<boolean>(true);
+  let countOfNotife = 0;
+  const [counter, setCounter] = useState<number>(120);  
 
   useEffect(() => {
+    const instance = TickNotifier.getInstance();
+    instance.subscribeUpdatesAndNotife(onTickNotifierUpdate);
 
+    return () => {
+      instance.unsubscribe(onTickNotifierUpdate);
+    }
   }, []);
+
+  const onTickNotifierUpdate = () => {
+    if (countOfNotife < 40) {
+      return countOfNotife++;
+    }
+
+    debugger;
+
+    countOfNotife = 0;
+    if (counter === 0 || !isRun) return;
+    setCounter(counter - 1);
+  }
   
   const onSelectAbility = (ability: IAbility) => {
     if (!editableSlot) return;
@@ -43,6 +61,12 @@ const Activity = () => {
   const onCancel = () => setEditableSlot(null);
   const handleEditMode = () => setEditMode(!editMode);
   const canSave = slots.some(slot => !!slot.ability?.name);
+
+  const handleClickControl = () => {
+    const sa = isRun;
+    debugger;
+    setIsRun(!isRun);
+  }
 
   const renderEditSlots = (slots: Array<ISlot>) => {
 
@@ -90,9 +114,9 @@ const Activity = () => {
                     : 
                      <div className="Controller">
                         <div className="Controller__time">
-                          <Timer isTriggeredByMainControl={isGeneralRuns} tick={tick}/>
+                          <Timer isTriggeredByMainControl={isGeneralRuns} tick={counter}/>
                         </div>
-                        <div className="Controller__tool">
+                        <div className="Controller__tool" onClick={handleClickControl}>
                           {
                             isGeneralRuns ? 
                                             <div className="pause">
