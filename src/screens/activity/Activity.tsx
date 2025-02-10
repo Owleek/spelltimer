@@ -2,7 +2,7 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import Constructor from './Constructor';
@@ -28,19 +28,28 @@ const Activity = () => {
   const instance = TickNotifier.getInstance();
 
   useEffect(() => {
-    instance.subscribeUpdatesAndNotife(onTickNotifierUpdate);
-    return () => instance.unsubscribe(onTickNotifierUpdate);
-  }, []);
+    const instance = TickNotifier.getInstance();
+    instance.subscribe(simpleFunction1);
+
+    return () => {
+      instance.unsubscribe(simpleFunction1);
+    }
+  }, [])
+
+
+  const simpleFunction1 = useCallback(() => console.log(), []);
+
+  // function onTickNotifierUpdate(): void { 
+  //   setBlinking((currentState) => !currentState) 
+  // };
 
   useEffect(() => {
-    if (!isRun || cooldown <= 0) return;
-    if (countMS < 20) return setCountMS(countMS + 1);
+    // if (!isRun || cooldown <= 0) return;
+    // if (countMS < 20) return setCountMS(countMS + 1);
 
-    setCountMS(0);
-    setCooldown(cooldown - 1);
+    // setCountMS(0);
+    // setCooldown(cooldown - 1);
   }, [blinking]);
-
-  const onTickNotifierUpdate = () => setBlinking((currentState) => !currentState);
 
   const onSelectAbility = (ability: IAbility) => {
     if (!editableSlot) return;
@@ -60,7 +69,11 @@ const Activity = () => {
   const handleEditMode = () => setEditMode(!editMode);
   const canSave = slots.some(slot => !!slot.ability?.name);
 
-  const handleClickControl = () => setIsRun(!isRun);
+  // const handleClickControl = () => setIsRun(!isRun);
+  
+  const handleClickControl = () => {
+    instance.unsubscribe(simpleFunction1);
+  };
 
   const renderEditSlots = (slots: Array<ISlot>) => {
 

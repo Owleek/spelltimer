@@ -1,5 +1,4 @@
 class TickNotifier {
-    static ownkey = 'check ownKey of TickNotifier';
     static _instance: TickNotifier | null = null;
     private _subscribers: Array<() => void> = [];
     private _timeOutID: any = null;
@@ -7,29 +6,25 @@ class TickNotifier {
     private constructor() {}
 
     static getInstance() {
-        if (!this._instance) {
-            this._instance = new this();
+        if (!TickNotifier._instance) {
+            TickNotifier._instance = new TickNotifier();
         }
 
-        return this._instance;
+        return TickNotifier._instance;
     }
 
-    private _nofify() {
-        if (!this._subscribers.length) return;
-        this._subscribers.forEach(fn => fn());
-        this._timeOutID = setTimeout(() => this._nofify(), 50);
+    private _notify() {
+        // if (!this._subscribers.length) return;
+        // this._subscribers.forEach(fn => fn());
+        // this._timeOutID = setTimeout(() => this._notify(), 2000);
     }
 
-    subscribeUpdatesAndNotife(subscriber: () => void) {
+    subscribe(subscriber: () => void) {
         this._subscribers.push(subscriber);
-        if (!this._subscribers.length) return;
-        this._nofify();
     }
 
     unsubscribe(subscriber: () => void) {
-        const foundIndex = this._subscribers.findIndex(fn => fn === subscriber);
-        if (foundIndex === -1) return;
-        this._subscribers.splice(foundIndex, 1);
+        this._subscribers = this._subscribers.filter(fn => fn !== subscriber);
     }
 
     getSubscribers(): typeof this._subscribers {
