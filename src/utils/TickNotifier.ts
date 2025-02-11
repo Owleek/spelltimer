@@ -14,13 +14,14 @@ class TickNotifier {
     }
 
     private _notify() {
-        // if (!this._subscribers.length) return;
-        // this._subscribers.forEach(fn => fn());
-        // this._timeOutID = setTimeout(() => this._notify(), 2000);
+        if (!this._subscribers.length) return;
+        this._subscribers.forEach(fn => fn());
+        this._timeOutID = setTimeout(() => this._notify(), 50);
     }
 
     subscribe(subscriber: () => void) {
         this._subscribers.push(subscriber);
+        this._notify();
     }
 
     unsubscribe(subscriber: () => void) {

@@ -20,36 +20,28 @@ const Activity = () => {
   const [editMode, setEditMode] = useState<boolean>(true);
 
   const [isRun, setIsRun] = useState<boolean>(false);
-  const [cooldown, setCooldown] = useState<number>(20);
+  const [tick, setTick] = useState<number>(20);
 
-  const [countMS, setCountMS] = useState(0);
+  const [countMS, setCountMS] = useState<number>(0);
   const [blinking, setBlinking] = useState<boolean>(false);
-
-  const instance = TickNotifier.getInstance();
 
   useEffect(() => {
     const instance = TickNotifier.getInstance();
-    instance.subscribe(simpleFunction1);
-
-    return () => {
-      instance.unsubscribe(simpleFunction1);
-    }
-  }, [])
-
-
-  const simpleFunction1 = useCallback(() => console.log(), []);
-
-  // function onTickNotifierUpdate(): void { 
-  //   setBlinking((currentState) => !currentState) 
-  // };
+    instance.subscribe(onTickNotifierUpdate);
+    return () => instance.unsubscribe(onTickNotifierUpdate);
+  }, []);
 
   useEffect(() => {
-    // if (!isRun || cooldown <= 0) return;
-    // if (countMS < 20) return setCountMS(countMS + 1);
+    if (!isRun || tick <= 0) return;
+    if (countMS < 20) return setCountMS(countMS + 1);
 
-    // setCountMS(0);
-    // setCooldown(cooldown - 1);
+    setCountMS(0);
+    setTick(tick - 1);
   }, [blinking]);
+
+  const onTickNotifierUpdate = (): void => { 
+    setBlinking((currentState) => !currentState) ;
+  };
 
   const onSelectAbility = (ability: IAbility) => {
     if (!editableSlot) return;
@@ -68,12 +60,7 @@ const Activity = () => {
   const onCancel = () => setEditableSlot(null);
   const handleEditMode = () => setEditMode(!editMode);
   const canSave = slots.some(slot => !!slot.ability?.name);
-
-  // const handleClickControl = () => setIsRun(!isRun);
-  
-  const handleClickControl = () => {
-    instance.unsubscribe(simpleFunction1);
-  };
+  const handleClickControl = () => setIsRun(!isRun);
 
   const renderEditSlots = (slots: Array<ISlot>) => {
 
@@ -93,7 +80,6 @@ const Activity = () => {
   const renderTimerSLots = (slots: Array<ISlot>) => {
     return slots.map(slot => {
       return <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
-        
       </div>
     })
   }
@@ -121,7 +107,7 @@ const Activity = () => {
                     :
                      <div className="Controller">
                         <div className="Controller__time">
-                          <Timer isTriggeredByMainControl={isRun} tick={cooldown}/>
+                          <Timer isTriggeredByMainControl={isRun} tick={tick}/>
                         </div>
                         <div className="Controller__tool" onClick={handleClickControl}>
                           {
