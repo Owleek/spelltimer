@@ -15,7 +15,7 @@ interface IProps {
 const ImageGrid = ({abilities, onClick}: IProps): JSX.Element => {
     return (
         <div className='AbilityGrid'>
-            { abilities.map(ability => <span className="AbilityItem" onClick={() => onClick(ability)}>
+            { abilities.map(ability => <span key={ability.id} className="AbilityItem" onClick={() => onClick(ability)}>
                     <img key={ability.id} src={ability.image} />
                 </span>) 
             }
