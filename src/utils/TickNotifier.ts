@@ -1,3 +1,8 @@
+const SECOND: number = 1000; // ms
+const DELAY: number = 50;   // ms
+
+export const COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND: number = SECOND / DELAY;
+
 class TickNotifier {
     static _instance: TickNotifier | null = null;
     private _subscribers: Array<() => void> = [];
@@ -16,7 +21,7 @@ class TickNotifier {
     private _notify() {
         if (!this._subscribers.length) return;
         this._subscribers.forEach(fn => fn());
-        this._timeOutID = setTimeout(() => this._notify(), 50);
+        this._timeOutID = setTimeout(() => this._notify(), DELAY);
     }
 
     subscribe(subscriber: () => void) {

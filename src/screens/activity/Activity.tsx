@@ -10,12 +10,13 @@ import { TStoreState } from '../../store/store';
 import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slotsSlice';
 import { IAbility } from '../../data/fillData';
 import './activity.scss';
-import Timer from '../../components/Timer/Timer';
-import TickNotifier from '../../utils/TickNotifier';
+import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
+import SmartTimer from '../../components/Timer/SmartTimer';
 
 const Activity = () => {
   const dispatch = useDispatch();
   const slots = useSelector((state: TStoreState) => state.slots);
+  
   const [editableSlot, setEditableSlot] = useState<ISlot | null>(null);
   const [editMode, setEditMode] = useState<boolean>(true);
 
@@ -33,7 +34,7 @@ const Activity = () => {
 
   useEffect(() => {
     if (!isRun || tick <= 0) return;
-    if (countMS < 20) return setCountMS(countMS + 1);
+    if (countMS < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) return setCountMS(countMS + 1);
 
     setCountMS(0);
     setTick(tick - 1);
@@ -79,7 +80,8 @@ const Activity = () => {
 
   const renderTimerSLots = (slots: Array<ISlot>) => {
     return slots.map(slot => {
-      return <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
+      return <div key={slot.position} className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
+        <SmartTimer ability={slot.ability}/>
       </div>
     })
   }
@@ -107,7 +109,7 @@ const Activity = () => {
                     :
                      <div className="Controller">
                         <div className="Controller__time">
-                          <Timer isTriggeredByMainControl={isRun} tick={tick}/>
+                          <div>{tick}</div>
                         </div>
                         <div className="Controller__tool" onClick={handleClickControl}>
                           {

@@ -9,7 +9,7 @@ export interface IAbility {
     name: string,
     icon: string,
     image: string,
-    cooldown: Array<number> | { min: number, max: number }
+    cooldown: Array<number> /*| { min: number, max: number }*/
 }
 
 export default function(): Array<IAbility> {
