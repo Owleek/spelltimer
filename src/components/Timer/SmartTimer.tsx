@@ -3,7 +3,7 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 
-import React, { JSX, useEffect, useState } from 'react';
+import React, { JSX, useEffect, useRef, useState } from 'react';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import { IAbility } from '../../data/fillData';
 import './Timer.scss';
@@ -19,32 +19,37 @@ enum ETimeStatus {
 }
 
 const SmartTimer = ({ability}: IProps): JSX.Element => {
-    if (!ability) return <div>пусто</div>;
+    if (!ability) return <div></div>;
 
     const [cooldown, setCooldown] = useState<number>(ability.cooldown[0]);
-    const [countOfBlinks, setCountOfBlinks] = useState<number>(0);
-    const [blinks, setBlinks] = useState<boolean>(false);
-    const [timeStatus, setTimeStatus] = useState<ETimeStatus>(ETimeStatus.ready);
+
+    const countMSRef = useRef<number>(0);
+    const cooldownRef = useRef<number>(ability.cooldown[0]);
+    const timerStatusRef = useRef<ETimeStatus>(ETimeStatus.ready);
 
     useEffect(() => {
         const instance = TickNotifier.getInstance();
-        instance.subscribe(onTickNotifierUpdate);
-        return () => instance.unsubscribe(onTickNotifierUpdate);
+        instance.subscribe(onTickNotify);
+        return () => instance.unsubscribe(onTickNotify);
     }, []);
 
-    useEffect(() => {
-        if (timeStatus !== ETimeStatus.running) return;
-        if (countOfBlinks < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) return setCountOfBlinks(countOfBlinks + 1);
+    const onTickNotify = () => {
+        if (cooldownRef.current === 0 || timerStatusRef.current !== ETimeStatus.running) return;
+        if (countMSRef.current < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
+            countMSRef.current += 1;
+            return;
+        }
 
-        setCountOfBlinks(0);
-        setCooldown(cooldown - 1);
-    }, [blinks]);
+        countMSRef.current = 0;
+        cooldownRef.current -= 1;
+        setCooldown(cooldownRef.current);
+    }
 
-    const onTickNotifierUpdate = (): void => { 
-        setBlinks((currentState) => !currentState);
-    };
+    const setTimerStatusMain = () => {
+        timerStatusRef.current = timerStatusRef.current !== ETimeStatus.running ? ETimeStatus.running : ETimeStatus.paused;
+    }
     
-    const handleClickTimer = () => timeStatus !== ETimeStatus.running ? setTimeStatus(ETimeStatus.running) : setTimeStatus(ETimeStatus.paused);
+    const handleClickTimer = () => setTimerStatusMain();
 
     return <div className="SmartTimer" onClick={handleClickTimer}>{cooldown}</div>
 

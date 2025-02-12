@@ -2,7 +2,7 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import Constructor from './Constructor';
@@ -21,28 +21,46 @@ const Activity = () => {
   const [editMode, setEditMode] = useState<boolean>(true);
 
   const [isRun, setIsRun] = useState<boolean>(false);
-  const [tick, setTick] = useState<number>(20);
+  const [minutes, setMinutes] = useState<string>('00');
+  const [secons, setSeconds] = useState<string>('00');
 
-  const [countMS, setCountMS] = useState<number>(0);
-  const [blinking, setBlinking] = useState<boolean>(false);
+  const countMSRef = useRef<number>(0);
+  const isRunRef = useRef<boolean>(false);
+  const secondsRef = useRef<number>(0);
 
   useEffect(() => {
     const instance = TickNotifier.getInstance();
-    instance.subscribe(onTickNotifierUpdate);
-    return () => instance.unsubscribe(onTickNotifierUpdate);
+    instance.subscribe(onTickNotify);
+    return () => instance.unsubscribe(onTickNotify);
   }, []);
 
-  useEffect(() => {
-    if (!isRun || tick <= 0) return;
-    if (countMS < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) return setCountMS(countMS + 1);
+  const onTickNotify = (): void => { 
+    if (!isRunRef.current) return;
+    if (countMSRef.current < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
+      countMSRef.current += 1;
+      return;
+    }
 
-    setCountMS(0);
-    setTick(tick - 1);
-  }, [blinking]);
-
-  const onTickNotifierUpdate = (): void => { 
-    setBlinking((currentState) => !currentState) ;
+    countMSRef.current = 0;
+    secondsRef.current += 1;
+    setTime(secondsRef.current);
   };
+
+  const setTime = (seconds: number) => {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds - (min * 60);
+
+    const stringMin = min < 10 ? '0' + min : min + '';
+    const stringSec = sec < 10 ? '0' + sec : sec + '';
+
+    setMinutes(stringMin);
+    setSeconds(stringSec);
+  }
+
+  const setIsRunMain = ():void => {
+    isRunRef.current = !isRunRef.current;
+    setIsRun(isRunRef.current);
+  }
 
   const onSelectAbility = (ability: IAbility) => {
     if (!editableSlot) return;
@@ -61,7 +79,7 @@ const Activity = () => {
   const onCancel = () => setEditableSlot(null);
   const handleEditMode = () => setEditMode(!editMode);
   const canSave = slots.some(slot => !!slot.ability?.name);
-  const handleClickControl = () => setIsRun(!isRun);
+  const handleClickControl = () => setIsRunMain();
 
   const renderEditSlots = (slots: Array<ISlot>) => {
 
@@ -109,7 +127,7 @@ const Activity = () => {
                     :
                      <div className="Controller">
                         <div className="Controller__time">
-                          <div>{tick}</div>
+                          <div><span>{minutes}</span> : <span>{secons}</span></div>
                         </div>
                         <div className="Controller__tool" onClick={handleClickControl}>
                           {
