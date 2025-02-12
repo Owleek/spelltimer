@@ -11,7 +11,7 @@ import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slot
 import { IAbility } from '../../data/fillData';
 import './activity.scss';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
-import SmartTimer from '../../components/Timer/SmartTimer';
+import DumbTimer from '../../components/Timer/DumbTimer';
 
 const Activity = () => {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ const Activity = () => {
   const [editableSlot, setEditableSlot] = useState<ISlot | null>(null);
   const [editMode, setEditMode] = useState<boolean>(true);
 
-  const [isRun, setIsRun] = useState<boolean>(false);
+  const [isRuns, setIsRuns] = useState<boolean>(false);
   const [minutes, setMinutes] = useState<string>('00');
   const [secons, setSeconds] = useState<string>('00');
 
   const countMSRef = useRef<number>(0);
-  const isRunRef = useRef<boolean>(false);
+  const isRunsRef = useRef<boolean>(false);
   const secondsRef = useRef<number>(0);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Activity = () => {
   }, []);
 
   const onTickNotify = (): void => { 
-    if (!isRunRef.current) return;
+    if (!isRunsRef.current) return;
     if (countMSRef.current < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
       countMSRef.current += 1;
       return;
@@ -58,8 +58,8 @@ const Activity = () => {
   }
 
   const setIsRunMain = ():void => {
-    isRunRef.current = !isRunRef.current;
-    setIsRun(isRunRef.current);
+    isRunsRef.current = !isRunsRef.current;
+    setIsRuns(isRunsRef.current);
   }
 
   const onSelectAbility = (ability: IAbility) => {
@@ -79,6 +79,7 @@ const Activity = () => {
   const onCancel = () => setEditableSlot(null);
   const handleEditMode = () => setEditMode(!editMode);
   const canSave = slots.some(slot => !!slot.ability?.name);
+
   const handleClickControl = () => setIsRunMain();
 
   const renderEditSlots = (slots: Array<ISlot>) => {
@@ -99,7 +100,7 @@ const Activity = () => {
   const renderTimerSLots = (slots: Array<ISlot>) => {
     return slots.map(slot => {
       return <div key={slot.position} className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
-        <SmartTimer ability={slot.ability}/>
+        <DumbTimer ability={slot.ability} isTimeRuns={isRuns}/>
       </div>
     })
   }
@@ -131,7 +132,7 @@ const Activity = () => {
                         </div>
                         <div className="Controller__tool" onClick={handleClickControl}>
                           {
-                            isRun ? 
+                            isRuns ? 
                                     <div className="pause">
                                       <span className="pause__stick"></span>
                                       <span className="pause__stick"></span>
