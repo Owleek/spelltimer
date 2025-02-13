@@ -8,3 +8,13 @@
     font-size: 26px;
     cursor: pointer;
 }
+
+.Timer__circle {
+    fill: "none";
+    stroke: grey;
+}
+
+.timer_svg {
+    border: 1px solid red;
+    transform: rotateY(180deg);
+}
