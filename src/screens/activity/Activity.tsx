@@ -99,7 +99,7 @@ const Activity = () => {
 
   const renderTimerSLots = (slots: Array<ISlot>) => {
     return slots.map(slot => {
-      return <div key={slot.position} className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
+      return <div key={slot.position} className="Activity__ability">
         <DumbTimer ability={slot.ability} isTimeRuns={isRuns}/>
       </div>
     })

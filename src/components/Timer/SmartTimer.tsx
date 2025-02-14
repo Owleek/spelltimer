@@ -12,7 +12,7 @@ interface IProps {
     ability: IAbility | undefined
 }
 
-enum ETimeStatus {
+enum ETimerStatus {
     ready = 'ready',
     running = 'running',
     paused = 'paused'
@@ -25,7 +25,7 @@ const SmartTimer = ({ability}: IProps): JSX.Element => {
 
     const countMSRef = useRef<number>(0);
     const cooldownRef = useRef<number>(ability.cooldown[0]);
-    const timerStatusRef = useRef<ETimeStatus>(ETimeStatus.ready);
+    const timerStatusRef = useRef<ETimerStatus>(ETimerStatus.ready);
 
     useEffect(() => {
         const instance = TickNotifier.getInstance();
@@ -34,7 +34,7 @@ const SmartTimer = ({ability}: IProps): JSX.Element => {
     }, []);
 
     const onTickNotify = () => {
-        if (cooldownRef.current === 0 || timerStatusRef.current !== ETimeStatus.running) return;
+        if (cooldownRef.current === 0 || timerStatusRef.current !== ETimerStatus.running) return;
         if (countMSRef.current < COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
             countMSRef.current += 1;
             return;
@@ -46,7 +46,7 @@ const SmartTimer = ({ability}: IProps): JSX.Element => {
     }
 
     const setTimerStatusMain = () => {
-        timerStatusRef.current = timerStatusRef.current !== ETimeStatus.running ? ETimeStatus.running : ETimeStatus.paused;
+        timerStatusRef.current = timerStatusRef.current !== ETimerStatus.running ? ETimerStatus.running : ETimerStatus.paused;
     }
     
     const handleClickTimer = () => setTimerStatusMain();

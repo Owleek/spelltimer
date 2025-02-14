@@ -39,7 +39,7 @@
         "type": "spells",
         "owner": "Terrorblade",
         "name": "Metamorphosis",
-        "cooldown": [10]
+        "cooldown": [20]
     },
     {   
         "type": "items",

@@ -4,6 +4,7 @@
 // 4. Стили и ассеты.
 
 import React, { JSX, useEffect, useRef, useState } from 'react';
+import cn from 'classnames';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import { IAbility } from '../../data/fillData';
 import './Timer.scss';
@@ -13,7 +14,7 @@ interface IProps {
     isTimeRuns: boolean
 }
 
-enum ETimeStatus {
+enum ETimerStatus {
     ready = 'ready',
     running = 'running',
     paused = 'paused'
@@ -23,17 +24,18 @@ const DumbTimer = ({ability, isTimeRuns}: IProps): JSX.Element => {
     if (!ability) return <div></div>;
 
     const [cooldown, setCooldown] = useState<number>(ability.cooldown[0]);
+    const [timerStatus, setTimerStatus] = useState<ETimerStatus>(ETimerStatus.ready);
 
     const countMSRef = useRef<number>(0);
     const cooldownRef = useRef<number>(ability.cooldown[0]);
-    const timerStatusRef = useRef<ETimeStatus>(ETimeStatus.ready);
-    const strokeDashoffsetRef = useRef<number>(0);
+    const timerStatusRef = useRef<ETimerStatus>(ETimerStatus.ready);
+
+    const circleRef = useRef<SVGCircleElement | null>(null);
 
     const radius = 30;
     const length = 2 * Math.PI * radius;
+    const strokeDashoffsetRef = useRef<number>(0);
     const step = length / (COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * ability.cooldown[0]);
-
-    const circleRef = useRef<SVGCircleElement | null>(null);
 
     useEffect(() => {
         const instance = TickNotifier.getInstance();
@@ -42,13 +44,15 @@ const DumbTimer = ({ability, isTimeRuns}: IProps): JSX.Element => {
     }, []);
 
     useEffect(() => {
-        if (!isTimeRuns && timerStatusRef.current === ETimeStatus.running) {
-            timerStatusRef.current = ETimeStatus.paused;
+
+        if (!isTimeRuns && timerStatusRef.current === ETimerStatus.running) {
+            timerStatusRef.current = ETimerStatus.paused;
         }
 
-        if (isTimeRuns && timerStatusRef.current === ETimeStatus.paused) {
-            timerStatusRef.current = ETimeStatus.running;
+        if (isTimeRuns && timerStatusRef.current === ETimerStatus.paused) {
+            timerStatusRef.current = ETimerStatus.running;
         }
+
     }, [isTimeRuns]);
 
     const onTickNotify = () => {
@@ -58,12 +62,12 @@ const DumbTimer = ({ability, isTimeRuns}: IProps): JSX.Element => {
         const _circle = circleRef.current;
         const _strokeDashoffset = strokeDashoffsetRef.current;
 
-        if (_cooldown === 0 || _timerStatus !== ETimeStatus.running || !_circle) return;
+        if (_cooldown === 0 || _timerStatus !== ETimerStatus.running || !_circle) return;
 
         if (_countMS === COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
             countMSRef.current = 0;
             cooldownRef.current -= 1;
-            return setCooldown(cooldownRef.current);
+            return cooldownRef.current === 0 ? refreshTimer() : setCooldown(cooldownRef.current);
         }
 
         countMSRef.current += 1;
@@ -71,30 +75,64 @@ const DumbTimer = ({ability, isTimeRuns}: IProps): JSX.Element => {
         _circle.setAttribute('stroke-dashoffset', `${strokeDashoffsetRef.current}`);
     }
     
+    const refreshTimer = () => {
+        if (!circleRef.current) return;
+
+        timerStatusRef.current = ETimerStatus.ready;
+        cooldownRef.current = ability.cooldown[0];
+        setCooldown(cooldownRef.current);
+        setTimerStatus(timerStatusRef.current);
+
+        const timeOutId = setTimeout(() => {
+            setCircleToInitial();
+            clearTimeout(timeOutId);
+        }, 10);
+    }
+
     const handleClickTimer = () => {
-        if (!isTimeRuns || timerStatusRef.current === ETimeStatus.running) {
+        if (!isTimeRuns || timerStatusRef.current === ETimerStatus.running) {
             // showSpellToolbar
             return;
         }
 
-        timerStatusRef.current = ETimeStatus.running
+        if ((timerStatusRef.current === ETimerStatus.ready) && circleRef.current) {
+            circleRef.current.style.display = 'block';
+        }
+
+        timerStatusRef.current = ETimerStatus.running;
+        setTimerStatus(timerStatusRef.current);
+    }
+
+    const setCircleToInitial = () => {
+        if (!circleRef.current) return;
+
+        circleRef.current.style.display = 'none';
+        strokeDashoffsetRef.current = 0;
+        circleRef.current.setAttribute('stroke-dashoffset', `${strokeDashoffsetRef.current}`);
     }
 
     return <div className="DumbTimer" onClick={handleClickTimer}>
-            <svg className="timer_svg" width="120" height="120" viewBox="0 0 120 120">
-                    <circle ref={circleRef} className="Timer__circle"
-                        cx="60"
-                        cy="60"
-                        strokeWidth="60"
-                        r={radius}
-                        fill="transparent"
-                        strokeDasharray={length}
-                        strokeDashoffset="0"
-                        transform="rotate(-90 60 60)"
-                        style={{ transition: `stroke-dashoffset 0.05s linear` }}
-                    />
-            </svg>
-            {cooldown}
+            <div className='DumbTimer__padding'>
+                <div className={cn('DumbTimer__innerContainer', {ready: timerStatus === ETimerStatus.ready})} style={{backgroundImage: `url('${ability.image}')`}}>
+
+                    <svg className="TimerSVG" viewBox="0 0 120 120">
+                        <circle
+                            ref={circleRef}
+                            className={cn('TimerSVG__circle')}
+                            cx="60"
+                            cy="60"
+                            strokeWidth="60"
+                            r={radius}
+                            fill="transparent"
+                            strokeDasharray={length}
+                            strokeDashoffset={strokeDashoffsetRef.current}
+                            transform="rotate(-90 60 60)"/>
+                        </svg>
+
+                    {cooldown}
+
+                </div>
+            </div>
     </div>
 }
 
