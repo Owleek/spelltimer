@@ -49,5 +49,8 @@
     display: none;
     stroke: black;
     opacity: 0.7;
+}
+
+.TimerSVG__circle.transition {
     transition: stroke-dashoffset 0.05s linear;
 }

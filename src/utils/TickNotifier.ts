@@ -5,8 +5,8 @@ export const COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND: number = SECOND / DELAY;
 
 class TickNotifier {
     static _instance: TickNotifier | null = null;
+    static _worker: Worker | null = null;
     private _subscribers: Array<() => void> = [];
-    private _intervalID: any = null;
 
     private constructor() {
         this._notify();
@@ -21,10 +21,13 @@ class TickNotifier {
     }
 
     private _notify() {
-        this._intervalID = setInterval(() => {
+        TickNotifier._worker = new Worker(new URL('./worker.js', import.meta.url));
+        TickNotifier._worker.postMessage(DELAY);
+
+        TickNotifier._worker.onmessage = () => {
             if (!this._subscribers.length) return;
             this._subscribers.forEach(fn => fn());
-        }, DELAY);
+        }
     }
 
     subscribe(subscriber: () => void) {
@@ -40,7 +43,7 @@ class TickNotifier {
     }
 
     destroy() {
-        clearInterval(this._intervalID);
+        TickNotifier._worker?.terminate();
         TickNotifier._instance = null;
     }
 }
