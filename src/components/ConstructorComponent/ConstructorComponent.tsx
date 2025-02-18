@@ -4,9 +4,8 @@
 // 4. Стили и ассеты.
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
-import './activity.scss';
-import Search from '../../components/Search/Search';
-import ImageGrid from '../../components/ImageGrid/ImageGrid';
+import Search from '../Search/Search';
+import ImageGrid from '../ImageGrid/ImageGrid';
 import mixedData, {IDataItem, TMixedData} from '../../data/data';
 import { translate } from '../../utils/utils';
 

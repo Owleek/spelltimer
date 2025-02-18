@@ -2,16 +2,17 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import Constructor from './Constructor';
+import DumbTimer from '../Timer/DumbTimer';
+import ConstructorComponent from '../ConstructorComponent/ConstructorComponent';
 import { TStoreState } from '../../store/store';
 import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slotsSlice';
 import { IDataItem } from '../../data/data';
-import './activity.scss';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
-import DumbTimer from '../../components/Timer/DumbTimer';
+import cachekeys from '../../user_cache/keys';
+import './activity.scss';
 
 const Activity = () => {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ const Activity = () => {
   const secondsRef = useRef<number>(0);
 
   useEffect(() => {
-    const isUserDetected = localStorage.getItem('isUserDetected');
-    if (!isUserDetected) localStorage.setItem('isUserDetected', 'true');
+    const alreadyUsed = localStorage.getItem(`${cachekeys.alreadyUsed}`);
+    if (!alreadyUsed) localStorage.setItem(`${cachekeys.alreadyUsed}`, 'true');
 
     const instance = TickNotifier.getInstance();
     instance.subscribe(onTickNotify);
@@ -81,35 +82,35 @@ const Activity = () => {
   const handleClickSlot = (slot: ISlot) => setEditableSlot(slot);
   const onCancel = () => setEditableSlot(null);
   const handleEditMode = () => setEditMode(!editMode);
-  const canSave = slots.some(slot => !!slot.ability?.name);
+  // const canSave = slots.some(slot => !!slot.ability?.name);
 
   const handleClickControl = () => setIsRunMain();
 
-  const renderEditSlots = (slots: Array<ISlot>) => {
+  // const renderEditSlots = (slots: Array<ISlot>) => {
 
-    return slots.map(slot => 
-        <div className="Activity__slot" key={slot.position}>
-          {
-            slot.ability ? 
-                          <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.img}')`}}>
-                            <span className="Activity__remove" onClick={() => removeAbility(slot)}></span>
-                          </div>
-                         : 
-                          <div className="Activity__emptyContainer" onClick={() => handleClickSlot(slot)}></div>
-          }
-        </div>)
-  }
+  //   return slots.map(slot => 
+  //       <div className="Activity__slot" key={slot.position}>
+  //         {
+  //           slot.ability ? 
+  //                         <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.img}')`}}>
+  //                           <span className="Activity__remove" onClick={() => removeAbility(slot)}></span>
+  //                         </div>
+  //                        : 
+  //                         <div className="Activity__emptyContainer" onClick={() => handleClickSlot(slot)}></div>
+  //         }
+  //       </div>)
+  // }
 
-  const renderTimerSLots = (slots: Array<ISlot>) => {
-    return slots.map(slot => {
-      return <div key={slot.position} className="Activity__ability">
-        <DumbTimer ability={slot.ability} isTimeRuns={isRuns}/>
-      </div>
-    })
-  }
+  // const renderTimerSLots = (slots: Array<ISlot>) => {
+  //   return slots.map(slot => {
+  //     return <div key={slot.position} className="Activity__ability">
+  //       <DumbTimer ability={slot.ability} isTimeRuns={isRuns}/>
+  //     </div>
+  //   })
+  // }
 
   return <div className="Activity innerContainer">
-    {editableSlot && <Constructor onSelectAbility={onSelectAbility} onCancel={onCancel}/>}
+    {editableSlot && <ConstructorComponent onSelectAbility={onSelectAbility} onCancel={onCancel}/>}
 
     <div className="Activity__container">
       <div className={cn('ToolBox', {success: editMode})}>
@@ -151,7 +152,7 @@ const Activity = () => {
       </div>
       <div className="Activity__grid">
         {
-          editMode ? renderEditSlots(slots) : renderTimerSLots(slots)
+          // editMode ? renderEditSlots(slots) : renderTimerSLots(slots)
         }
       </div>
     </div>
