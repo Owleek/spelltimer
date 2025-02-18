@@ -6,11 +6,11 @@
 import React, { JSX, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
-import { IAbility } from '../../data/fillData';
+import { IDataItem, ISpells, IFeatures, IArtifacts, TMixedDataItem } from '../../data/data';
 import './Timer.scss';
 
 interface IProps {
-    ability: IAbility | undefined
+    ability: TMixedDataItem | undefined
     isTimeRuns: boolean
 }
 
@@ -128,7 +128,7 @@ const DumbTimer = ({ability, isTimeRuns = true}: IProps): JSX.Element => {
 
     return <div className="DumbTimer" onClick={handleClickTimer}>
             <div className='DumbTimer__padding'>
-                <div className={cn('DumbTimer__innerContainer', {ready: timerStatus === ETimerStatus.ready})} style={{backgroundImage: `url('${ability.image}')`}}>
+                <div className={cn('DumbTimer__innerContainer', {ready: timerStatus === ETimerStatus.ready})} style={{backgroundImage: `url('${ability.img}')`}}>
 
                     <svg className="TimerSVG" viewBox="0 0 120 120">
                         <circle

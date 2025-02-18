@@ -1,0 +1,23 @@
+[
+    {   
+        "type": "features",
+        "name": "Aegis",
+        "roshanRespawn": { "min": 480, "max": 660 }
+    },
+    {   
+        "type": "features",
+        "name": "Buyback",
+        "cooldown": [480],
+        "owner": "not set"
+    },
+    {   
+        "type": "features",
+        "name": "Glyph_of_fortification",
+        "cooldown": [300]
+    },
+    {   
+        "type": "features",
+        "name": "Tormentor",
+        "cooldown": [600]
+    }
+]

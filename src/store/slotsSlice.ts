@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAbility } from '../data/fillData';
+import { IDataItem, TMixedDataItem } from '../data/data';
 
 export interface ISlot {
     position: number
-    ability?: IAbility
+    slotData?: TMixedDataItem
 }
   
 export const defaultSlotList: Array<ISlot> = [

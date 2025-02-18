@@ -8,7 +8,7 @@ import cn from 'classnames';
 import Constructor from './Constructor';
 import { TStoreState } from '../../store/store';
 import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slotsSlice';
-import { IAbility } from '../../data/fillData';
+import { IDataItem } from '../../data/data';
 import './activity.scss';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import DumbTimer from '../../components/Timer/DumbTimer';
@@ -29,6 +29,9 @@ const Activity = () => {
   const secondsRef = useRef<number>(0);
 
   useEffect(() => {
+    const isUserDetected = localStorage.getItem('isUserDetected');
+    if (!isUserDetected) localStorage.setItem('isUserDetected', 'true');
+
     const instance = TickNotifier.getInstance();
     instance.subscribe(onTickNotify);
     return () => instance.unsubscribe(onTickNotify);
@@ -62,7 +65,7 @@ const Activity = () => {
     setIsRuns(isRunsRef.current);
   }
 
-  const onSelectAbility = (ability: IAbility) => {
+  const onSelectAbility = (ability: IDataItem) => {
     if (!editableSlot) return;
     
     const data = {
@@ -88,7 +91,7 @@ const Activity = () => {
         <div className="Activity__slot" key={slot.position}>
           {
             slot.ability ? 
-                          <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.image}')`}}>
+                          <div className="Activity__ability" style={{backgroundImage: `url('${slot.ability?.img}')`}}>
                             <span className="Activity__remove" onClick={() => removeAbility(slot)}></span>
                           </div>
                          : 

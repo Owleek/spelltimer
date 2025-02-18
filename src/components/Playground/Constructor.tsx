@@ -7,8 +7,7 @@ import cn from 'classnames';
 import './activity.scss';
 import Search from '../../components/Search/Search';
 import ImageGrid from '../../components/ImageGrid/ImageGrid';
-import getData from '../../data/fillData';
-import {IAbility} from '../../data/fillData';
+import mixedData, {IDataItem, TMixedData} from '../../data/data';
 import { translate } from '../../utils/utils';
 
 enum TabKey {
@@ -24,20 +23,20 @@ type TabContent = Array<{label: string, img: any}>;
 const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
 interface IProps {
-  onSelectAbility: (ability: IAbility) => void
+  onSelectAbility: (ability: IDataItem) => void
   onCancel: () => void
 }
 
 const Constructor = ({onSelectAbility, onCancel}: IProps) => {
-  const data: Array<IAbility> = getData();
+  const data: Array<IDataItem> = mixedData;
 
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
-  const [tabContent, setTabContent] = useState<IAbility[]>(data);
+  const [tabContent, setTabContent] = useState<IDataItem[]>(data);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const spells = data.filter(ability => ability.type === "spells");
-  const items = data.filter(ability => ability.type === "items");
-  const other = data.filter(ability => ability.type === "other");
+  const items = data.filter(ability => ability.type === "artifacts");
+  const other = data.filter(ability => ability.type === "features");
 
   const tabContentStructure = {all: data, spells, items, other};
 
@@ -45,7 +44,7 @@ const Constructor = ({onSelectAbility, onCancel}: IProps) => {
     setTabContent(tabContentStructure[activeTab]);
   }, [activeTab]);
 
-  const filterTabContent = (str: string): Array<IAbility> => {
+  const filterTabContent = (str: string): Array<IDataItem> => {
     return tabContentStructure[activeTab].filter(ability => ability.name.toLowerCase().startsWith(str));
   }
 

@@ -1,0 +1,20 @@
+[
+    {   
+        "type": "artifacts",
+        "owner": "not set",
+        "name": "Black King Bar",
+        "cooldown": [90]
+    },
+    {   
+        "type": "artifacts",
+        "owner": "not set",
+        "name": "Refresher Orb",
+        "cooldown": [180]
+    },
+    {   
+        "type": "artifacts",
+        "owner": "not set",
+        "name": "Aeon Disk",
+        "cooldown": [105, 125, 145, 165]
+    }
+]
