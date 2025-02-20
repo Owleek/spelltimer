@@ -4,5 +4,6 @@ import React from 'react';
 export enum ETimerStatus {
     ready = 'ready',
     running = 'running',
-    paused = 'paused'
+    paused = 'paused',
+    disabled = 'disabled'
 }
