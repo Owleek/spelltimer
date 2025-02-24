@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import DumbTimer from '../Timer/DumbTimer';
 import ConstructorComponent from '../ConstructorComponent/ConstructorComponent';
+import TimerController from '../Timer/TimerController';
 import { TStoreState } from '../../store/store';
 import { ISlot, mapAbilityToSlot, removeAbilityFromSlot } from '../../store/slotsSlice';
 import { IDataItem } from '../../data/data';
@@ -110,7 +111,7 @@ const Activity = () => {
   // }
 
   return <div className="Activity innerContainer">
-    {editableSlot && <ConstructorComponent onSelectAbility={onSelectAbility} onCancel={onCancel}/>}
+    {/* {editableSlot && <ConstructorComponent onSelectAbility={onSelectAbility} onCancel={onCancel}/>} */}
 
     <div className="Activity__container">
       <div className={cn('ToolBox', {success: editMode})}>
@@ -152,6 +153,7 @@ const Activity = () => {
       </div>
       <div className="Activity__grid">
         {
+          <TimerController />
           // editMode ? renderEditSlots(slots) : renderTimerSLots(slots)
         }
       </div>
