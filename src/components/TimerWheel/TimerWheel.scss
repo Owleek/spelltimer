@@ -1,0 +1,35 @@
+.TimerWheel {
+    width: 40px;
+    height: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.TimerWheel__up,
+.TimerWheel__down {
+    width: 100%;
+    height: 40px;
+}
+
+.TimerWheel__down {
+    transform: rotateX(180deg);
+}
+
+
+.TimerWheel__up svg,
+.TimerWheel__down svg {
+    width: 100%;
+    height: 100%;
+}
+
+.TimerWheel__current {
+    margin: 15px 0;
+    font-size: 30px;
+    color: black;
+}

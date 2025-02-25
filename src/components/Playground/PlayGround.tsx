@@ -129,7 +129,7 @@ const Activity = () => {
       <div className="Activity__time">
         {
            editMode ? 
-                    'Set the required abilities to these slots' 
+                     ''// 'Set the required abilities to these slots' 
                     :
                      <div className="Controller">
                         <div className="Controller__time">
