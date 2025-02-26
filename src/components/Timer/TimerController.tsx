@@ -1,12 +1,28 @@
 import React, { useRef } from 'react';
 import Timer from './Timer';
-import './TimerController.scss';
 import TimerWheel from '../TimerWheel/TimerWheel';
+import { translate } from '../../utils/utils';
+import './TimerController.scss';
+
+const reducers = [
+    {
+        id: 1,
+        key: 'octarine_core',
+        name: translate('octarine_core'),
+        img: '/assets/data_img/artifacts/octarine_core.png'
+    },
+    {
+        id: 2,
+        key: 'feverish',
+        name: translate('feverish'),
+        img: '/assets/data_img/artifacts/feverish.png'
+    }
+];
 
 export enum ETimerStatus {
     ready = 'ready',
     running = 'running',
-    stopped = 'stopped',
+    stopped = 'stopped'
 }
 
 export interface ITimerHandle {
@@ -15,11 +31,9 @@ export interface ITimerHandle {
     reset: () => void
 }
 
-
 const TimerController = () => {
 
     const timerMethodsRef = useRef<ITimerHandle | null>(null);
-
 
     const handleClick = () => {
         if (!timerMethodsRef.current) throw new Error('handleClick TimerController ref is not defined');
@@ -33,6 +47,14 @@ const TimerController = () => {
 
     return (
         <div className="TimerController" onClick={handleClick} onDoubleClick={handleDoubleClick}>
+            <ul className="ReducerList">
+                {
+                    reducers.map(reducer => <li className="ReducerItem" 
+                                                title={reducer.name}>
+                                                    <img alt={reducer.name} src={reducer.img}/>
+                                            </li>)
+                }
+            </ul>
             <Timer cooldown={120} ref={timerMethodsRef}/>
             <span className="TimerController__control reset">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="reload">

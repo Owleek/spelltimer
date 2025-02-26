@@ -83,3 +83,22 @@
 .TimerController__indicator.active {
     background: green;
 }
+
+
+.ReducerList {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 80px;
+    display: flex;
+    transform: translateX(-50%);
+    list-style: none;
+}
+
+.ReducerItem {
+    width: 80px;
+    height: 100%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 0 10px;
+}
