@@ -1,5 +1,5 @@
 .TimerWheel {
-    width: 40px;
+    width: 50px;
     height: auto;
     position: absolute;
     right: 10px;
@@ -28,8 +28,37 @@
     height: 100%;
 }
 
-.TimerWheel__current {
-    margin: 15px 0;
+.TimerWheel__frame {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TimerWheel__track {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.TimerWheel__digit {
+    position: relative;
+    left: 0;
     font-size: 30px;
     color: black;
+}
+
+.TimerWheel__digit.previous,
+.TimerWheel__digit.next {
+    font-size: 26px;
+    color: grey;
 }

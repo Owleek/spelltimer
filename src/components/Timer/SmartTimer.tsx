@@ -5,11 +5,11 @@
 
 import React, { JSX, useEffect, useRef, useState } from 'react';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
-import { IDataItem, IFeatures, ISpells } from '../../data/data';
+import { IDataItem, ISpells } from '../../data/data';
 import './Timer.scss';
 
 interface IProps {
-    ability: ISpells | IFeatures | IDataItem;
+    ability: ISpells | IDataItem;
 }
 
 enum ETimerStatus {

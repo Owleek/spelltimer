@@ -89,16 +89,62 @@
     position: absolute;
     left: 50%;
     top: 0;
-    height: 80px;
+    height: 55px;
     display: flex;
     transform: translateX(-50%);
     list-style: none;
 }
 
 .ReducerItem {
-    width: 80px;
-    height: 100%;
+    position: relative;
+    width: 50px;
+    height: 55px;
     border: 1px solid grey;
     border-radius: 5px;
-    margin: 0 10px;
+    margin: 0 5px;
+    padding-bottom: 5px;
+}
+
+.ReducerItem__text {
+    display: inline-block;
+    padding: 0 2px;
+    border-radius: 2px;
+    background: grey;
+    position: absolute;
+    font-size: 12px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.ReducerItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.ReducerItem::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: grey;
+    opacity: 0.5;
+}
+
+.ReducerItem.active {
+    background: green;
+}
+
+.ReducerItem.active::after {
+    opacity: 0;
+}
+
+.ReducerItem.active .ReducerItem__text {
+    background: green;
 }

@@ -10,10 +10,10 @@ export interface IDataItem {
     name: string
     img: string
     type: 'spells' | 'artifacts' | 'features' | 'heroes'
+    cooldown: Array<number>
 }
 
 export interface ISpells extends IDataItem {
-    cooldown: Array<number>
     __owner__: string
 }
 
@@ -21,12 +21,8 @@ export interface IArtifacts extends IDataItem {
     owner: string | 'not set'
 }
 
-export interface IFeatures extends IDataItem {
-    roshanRespawn?: { min: number, max: number }
-}
-
-export type TMixedDataItem = ISpells | IArtifacts | IFeatures
-export type TMixedData = Array<ISpells | IArtifacts | IFeatures>
+export type TMixedDataItem = ISpells | IArtifacts
+export type TMixedData = Array<ISpells | IArtifacts | IDataItem>
 
 const fillData = <T extends IDataItem>(arr: any): Array<T> => {
 
@@ -39,7 +35,7 @@ const fillData = <T extends IDataItem>(arr: any): Array<T> => {
 
 const _spellsData: Array<ISpells> = fillData(spells);
 const _artifactsData: Array<IArtifacts> = fillData(artifacts);
-const _featuresData: Array<IFeatures> = fillData(features);
+const _featuresData: Array<IDataItem> = fillData(features);
 const _heroesData: Array<IDataItem> = fillData(heroes);
 
 const mixedData: TMixedData = [..._spellsData, ..._artifactsData, ..._featuresData, ..._heroesData];

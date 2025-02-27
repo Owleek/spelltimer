@@ -40,7 +40,7 @@ export const slotListSlice = createSlice({
         removeAbilityFromSlot(state: Array<ISlot>, action: PayloadAction<ISlot>) {
             const idx = state.findIndex(slot => slot.position === action.payload.position);
             if (idx === -1) return state;
-            delete state[idx].ability;
+            // delete state[idx].ability;
         }
     }
 });

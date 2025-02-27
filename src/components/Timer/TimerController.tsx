@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Timer from './Timer';
 import TimerWheel from '../TimerWheel/TimerWheel';
-import { translate } from '../../utils/utils';
+import { translate, createArrayFromNumber } from '../../utils/utils';
 import './TimerController.scss';
 
 const reducers = [
@@ -9,13 +9,13 @@ const reducers = [
         id: 1,
         key: 'octarine_core',
         name: translate('octarine_core'),
-        img: '/assets/data_img/artifacts/octarine_core.png'
+        img: '/assets/items/octarine_core.png'
     },
     {
         id: 2,
         key: 'feverish',
         name: translate('feverish'),
-        img: '/assets/data_img/artifacts/feverish.png'
+        img: '/assets/items/feverish.png'
     }
 ];
 
@@ -36,24 +36,24 @@ const TimerController = () => {
     const timerMethodsRef = useRef<ITimerHandle | null>(null);
 
     const handleClick = () => {
-        if (!timerMethodsRef.current) throw new Error('handleClick TimerController ref is not defined');
-        timerMethodsRef.current.start();
+        // if (!timerMethodsRef.current) throw new Error('handleClick TimerController ref is not defined');
+        // timerMethodsRef.current.start();
     }
 
     const handleDoubleClick = () => {
-        if (!timerMethodsRef.current) throw new Error('handleDoubleClick TimerController ref is not defined');
-        timerMethodsRef.current.stop();
+        // if (!timerMethodsRef.current) throw new Error('handleDoubleClick TimerController ref is not defined');
+        // timerMethodsRef.current.stop();
     }
 
     return (
         <div className="TimerController" onClick={handleClick} onDoubleClick={handleDoubleClick}>
             <ul className="ReducerList">
-                {
-                    reducers.map(reducer => <li className="ReducerItem" 
-                                                title={reducer.name}>
-                                                    <img alt={reducer.name} src={reducer.img}/>
-                                            </li>)
-                }
+                <li className="ReducerItem" onClick={() => null} title={reducers[0].name}>
+                    <span className="ReducerItem__text">-25%</span>
+                    <img alt={reducers[0].name} src={reducers[0].img}/></li>
+                <li className="ReducerItem active" onClick={() => null} title={reducers[1].name}>
+                    <span className="ReducerItem__text">-15%</span>
+                    <img alt={reducers[1].name} src={reducers[1].img}/></li>
             </ul>
             <Timer cooldown={120} ref={timerMethodsRef}/>
             <span className="TimerController__control reset">
@@ -78,7 +78,7 @@ const TimerController = () => {
                 </div>
                 <span className="TimerController__levelControl">+</span>
             </div>
-            <TimerWheel maxValue={140} currentValue={90} onChange={(value) => console.log(value)}/>
+            <TimerWheel numbers={createArrayFromNumber(120)} currentValue={90} onChange={(value) => console.log(value)}/>
         </div>
     );
 }
