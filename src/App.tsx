@@ -5,7 +5,7 @@
 import React, { JSX, useState } from 'react';
 import { Provider } from 'react-redux';
 import Welcome from './components/Welcome/Welcome';
-import Playground from './components/Playground/PlayGround';
+import Playground from './components/Playground/Playgroundd';
 import Overview from './components/Overview/Overview';
 import PageContext, {EPage} from './store/PageContext';
 import LoadingComponent from './components/LoadingComponent/LoadingComponent';
