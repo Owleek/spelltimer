@@ -1,42 +1,35 @@
 [
     {   
-        "type": "spells",
         "owner": "Enigma",
         "name": "Black Hole",
         "cooldown": [180, 170, 160]
     },
     {   
-        "type": "spells",
         "owner": "Earthshaker",
         "name": "Echo Slam",
         "cooldown": [130, 120, 110]
     },
     {   
-        "type": "spells",
         "owner": "Faceles Void",
         "name": "Chronosphere",
         "cooldown": [160, 150, 140]
     },
     {   
-        "type": "spells",
         "owner": "Faceles Void",
         "name": "Time Zone",
         "cooldown": [130, 120, 110]
     },
     {   
-        "type": "spells",
         "owner": "Phoenix",
         "name": "Supernova",
         "cooldown": [120]
     },
     {   
-        "type": "spells",
         "owner": "Tidehunter",
         "name": "Ravage",
         "cooldown": [150]
     },
     {   
-        "type": "spells",
         "owner": "Terrorblade",
         "name": "Metamorphosis",
         "cooldown": [20]

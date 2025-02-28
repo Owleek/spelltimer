@@ -2,10 +2,10 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { JSX, useState } from 'react';
+import { JSX, useState } from 'react';
 import { Provider } from 'react-redux';
 import Welcome from './components/Welcome/Welcome';
-import Playground from './components/Playground/Playgroundd';
+import Playground from './components/Playground/Playground';
 import Overview from './components/Overview/Overview';
 import PageContext, {EPage} from './store/PageContext';
 import LoadingComponent from './components/LoadingComponent/LoadingComponent';

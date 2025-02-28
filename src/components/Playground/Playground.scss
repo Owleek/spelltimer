@@ -162,12 +162,12 @@
 }
 
 
-.Activity {
-    // background-image: url('../../assets/screens/activity2.jpg');
+.Playground {
+    background-image: url('../../../public/assets/other/playground.jpg');
 }
 
 
-.Activity__container {
+.Playground__container {
   position: relative;
   width: 100%;
   height: 100%;
@@ -177,7 +177,7 @@
   overflow: hidden;
 }
 
-.Activity__time {
+.Playground__time {
   display: flex;
   grid-area: 1 / 3 / 2 / 7;
   justify-content: center;
@@ -188,7 +188,7 @@
   user-select: none;
 }
 
-.Activity__grid {
+.Playground__grid {
   padding: 1rem;
   grid-area: 3 / 2 / 9 / 8;
 
@@ -199,18 +199,18 @@
   gap: 1rem;
 }
 
-.Activity__slot {
+.Playground__slot {
   position: relative;
 }
 
-.Activity__ability,
-.Activity__emptyContainer {
+.Playground__ability,
+.Playground__emptyContainer {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.Activity__ability {
+.Playground__ability {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -220,7 +220,7 @@
   }
 }
 
-.Activity__emptyContainer {
+.Playground__emptyContainer {
   border: 1px dashed rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   cursor: pointer;
@@ -256,11 +256,11 @@
   }
 }
 
-.Activity__ability:hover .Activity__remove {
+.Playground__ability:hover .Playground__remove {
   display: block;
 }
 
-.Activity__remove {
+.Playground__remove {
   display: none;
   position: absolute;
   width: 30px;

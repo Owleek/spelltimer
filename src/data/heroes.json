@@ -1,26 +1,20 @@
 [
     {
-        "type": "heroes",
         "name": "Enigma"
     },
     {
-        "type": "heroes",
         "name": "Earthshaker"
     },
     {
-        "type": "heroes",
         "name": "Faceles Void"
     },
     {
-        "type": "heroes",
         "name": "Phoenix"
     },
     {
-        "type": "heroes",
         "name": "Tidehunter"
     },
     {
-        "type": "heroes",
         "name": "Terrorblade"
     }
 ]

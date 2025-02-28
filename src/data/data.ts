@@ -1,43 +1,90 @@
-import { makeSnakeCase } from '../utils/utils';
+import { makeSnakeCase, translate } from '../utils/utils';
 
 import spells from './spells.json';
 import artifacts from './artifacts.json';
 import features from './features.json';
+import reducers from './reducers.json';
 import heroes from './heroes.json';
 
-export interface IDataItem {
+type TType = 'spells' | 'artifacts' | 'features' | 'reducers' | 'heroes';
+
+export interface IBaseFields {
     id: string
+    key: string
     name: string
     img: string
-    type: 'spells' | 'artifacts' | 'features' | 'heroes'
+    type: TType
+}
+
+export interface IRequiredFields extends IBaseFields {
     cooldown: Array<number>
+    cooldownIndex: number
+    customCooldown: number | null
+    position: number
 }
 
-export interface ISpells extends IDataItem {
-    __owner__: string
+export interface IReducer extends IBaseFields {
+    percent: number
 }
 
-export interface IArtifacts extends IDataItem {
-    owner: string | 'not set'
+export interface IHeroes extends IBaseFields {}
+
+export interface ISpell extends IRequiredFields {
+    reducers: Array<string>
 }
 
-export type TMixedDataItem = ISpells | IArtifacts
-export type TMixedData = Array<ISpells | IArtifacts | IDataItem>
-
-const fillData = <T extends IDataItem>(arr: any): Array<T> => {
-
-    return arr.map((item: { type: string; name: string; }, idx: number) => ({
-        ...item,
-        id: `${idx}-${item.type}-${item.name}`,
-        img: `/assets/data_img/${item.type}/${makeSnakeCase(item.name)}.png`,
-    }));
+export interface IArtifact extends IRequiredFields {
+    reducers: Array<string>
+    owner: string | null
 }
 
-const _spellsData: Array<ISpells> = fillData(spells);
-const _artifactsData: Array<IArtifacts> = fillData(artifacts);
-const _featuresData: Array<IDataItem> = fillData(features);
-const _heroesData: Array<IDataItem> = fillData(heroes);
+export interface IFeature extends IRequiredFields {
+    owner?: string | null
+}
 
-const mixedData: TMixedData = [..._spellsData, ..._artifactsData, ..._featuresData, ..._heroesData];
+export interface ITimerData extends IRequiredFields {
+    reducers?: Array<IReducer>
+    owner?: string | null
+}
 
-export default mixedData;
+const setBaseFields = <T>(arr: any, type: TType): Array<IBaseFields> => {
+    return arr.map((item: IBaseFields, idx: number) => {
+        const key = makeSnakeCase(item.name);
+        const name = translate(key);
+
+        return {
+            ...item,
+            id: `${idx}-${type}-${key}`,
+            key: key,
+            name: name,
+            img: `/assets/data_img/${type}/${key}.png`,
+            type: type
+        }
+    })
+}
+
+const setRequredFields = <T>(arr: any): Array<IRequiredFields> => {
+    return arr.map( (item: IRequiredFields) => {        
+        return {
+            ...item,
+            cooldownIndex: 0,
+            customCooldown: null,
+            position: 0
+        }
+    })
+}
+
+const heroesData: Array<IBaseFields> = setBaseFields(heroes, 'heroes');
+const reducersData: Array<IReducer> = setBaseFields(reducers, 'reducers') as Array<IReducer>;
+
+const spellsData: Array<ITimerData> = setRequredFields(setBaseFields(spells, 'spells')).map(item => ({...item, reducers: []}));
+const artifactsData: Array<ITimerData> = setRequredFields(setBaseFields(artifacts, 'artifacts')).map(item => ({...item, reducers: [], owner: null}));
+const featuresData: Array<ITimerData> = setRequredFields(setBaseFields(features, 'features'));
+
+export default { 
+    heroes: heroesData,
+    reducers: reducersData, 
+    spells: spellsData,
+    artifacts: artifactsData,
+    features: featuresData
+}
