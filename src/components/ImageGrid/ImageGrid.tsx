@@ -3,14 +3,13 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import React, { JSX } from 'react';
-import { IDataItem, TMixedData } from '../../data/data';
+import { ITimerData } from '../../data/data';
 import './ImageGrid.scss';
 
 interface IProps {
-    abilities: TMixedData
-    onClick: (ability: IDataItem) => void
+    abilities: Array<ITimerData>
+    onClick: (ability: ITimerData) => void
 }
-
 
 const ImageGrid = ({abilities, onClick}: IProps): JSX.Element => {
     return (

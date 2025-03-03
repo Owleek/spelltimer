@@ -57,7 +57,7 @@ const setBaseFields = <T>(arr: any, type: TType): Array<IBaseFields> => {
             id: `${idx}-${type}-${key}`,
             key: key,
             name: name,
-            img: `/assets/data_img/${type}/${key}.png`,
+            img: `/assets/${type}/${key}.png`,
             type: type
         }
     })

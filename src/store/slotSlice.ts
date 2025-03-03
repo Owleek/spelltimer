@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import data, {ITimerData} from '../data/data';
 
-export type ISlot = { position: number } | ITimerData;
+export interface IEmptySlot {
+    position: number
+}
+
+export type ISlot = ITimerData | IEmptySlot;
 const initialSlotList: Array<ISlot> = Array.from({length: 6}, (_, idx) => ({position: idx}));
 
 export const slotSlice = createSlice({

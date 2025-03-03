@@ -6,11 +6,12 @@
 import React, { JSX, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
-import { IDataItem, ISpells, IArtifacts, TMixedDataItem } from '../../data/data';
+// import { IDataItem, ISpells, IArtifacts, TMixedDataItem } from '../../data/data';
+import { ITimerData } from '../../data/data';
 import './Timer.scss';
 
 interface IProps {
-    ability: TMixedDataItem | undefined
+    ability: ITimerData | undefined
     isTimeRuns: boolean
 }
 

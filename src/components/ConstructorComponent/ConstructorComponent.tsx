@@ -6,8 +6,9 @@ import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import Search from '../Search/Search';
 import ImageGrid from '../ImageGrid/ImageGrid';
-import mixedData, {IDataItem, TMixedData} from '../../data/data';
+import fetchData, { IRequiredFields, ITimerData } from '../../data/data';
 import { translate } from '../../utils/utils';
+import { ISlot } from '../../store/slotSlice';
 
 enum TabKey {
   all = 'all',
@@ -18,32 +19,29 @@ enum TabKey {
 
 type TabItem = { key: TabKey, label: string };
 type TabList = Array<TabItem>;
-type TabContent = Array<{label: string, img: any}>;
 const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
 interface IProps {
-  onSelectAbility: (ability: IDataItem) => void
+  onSelectAbility: (ability: ITimerData) => void
   onCancel: () => void
+  currentSlot: ISlot
 }
 
-const Constructor = ({onSelectAbility, onCancel}: IProps) => {
-  const data: Array<IDataItem> = mixedData;
+const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
+  const { spells, artifacts, features } = fetchData;
+  const unionData: Array<ITimerData> = [...spells, ...artifacts, ...features];
 
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
-  const [tabContent, setTabContent] = useState<IDataItem[]>(data);
+  const [tabContent, setTabContent] = useState<ITimerData[]>(unionData);
   const [searchValue, setSearchValue] = useState<string>('');
 
-  const spells = data.filter(ability => ability.type === "spells");
-  const items = data.filter(ability => ability.type === "artifacts");
-  const other = data.filter(ability => ability.type === "features");
-
-  const tabContentStructure = {all: data, spells, items, other};
+  const tabContentStructure = {all: unionData, spells: spells, items: artifacts, other: features};
 
   useEffect(() => {
     setTabContent(tabContentStructure[activeTab]);
   }, [activeTab]);
 
-  const filterTabContent = (str: string): Array<IDataItem> => {
+  const filterTabContent = (str: string): Array<ITimerData> => {
     return tabContentStructure[activeTab].filter(ability => ability.name.toLowerCase().startsWith(str));
   }
 
