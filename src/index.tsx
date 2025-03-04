@@ -4,7 +4,6 @@
 // 4. Стили и ассеты.
 import ReactDom from 'react-dom/client';
 import {StrictMode} from 'react';
-import { BrowserRouter as AppRouter } from 'react-router-dom';
 import App from './App';
 import './app.scss';
 
@@ -15,4 +14,4 @@ if (!rootElement) {
 }
 
 const root = ReactDom.createRoot(rootElement);
-root.render(<StrictMode><AppRouter><App/></AppRouter></StrictMode>);
+root.render(<StrictMode><App/></StrictMode>);

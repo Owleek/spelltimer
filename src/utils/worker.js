@@ -1,5 +1,5 @@
 self.onmessage = event => {
     setInterval(() => {
-        self.postMessage(`nofify after`);
+        self.postMessage('...');
     }, event.data);
 };

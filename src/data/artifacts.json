@@ -1,0 +1,14 @@
+[
+    {   
+        "name": "Black King Bar",
+        "cooldown": [90]
+    },
+    {   
+        "name": "Refresher Orb",
+        "cooldown": [180]
+    },
+    {   
+        "name": "Aeon Disk",
+        "cooldown": [105, 125, 145, 165]
+    }
+]

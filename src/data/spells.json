@@ -1,0 +1,37 @@
+[
+    {   
+        "owner": "Enigma",
+        "name": "Black Hole",
+        "cooldown": [180, 170, 160]
+    },
+    {   
+        "owner": "Earthshaker",
+        "name": "Echo Slam",
+        "cooldown": [130, 120, 110]
+    },
+    {   
+        "owner": "Faceles Void",
+        "name": "Chronosphere",
+        "cooldown": [160, 150, 140]
+    },
+    {   
+        "owner": "Faceles Void",
+        "name": "Time Zone",
+        "cooldown": [130, 120, 110]
+    },
+    {   
+        "owner": "Phoenix",
+        "name": "Supernova",
+        "cooldown": [120]
+    },
+    {   
+        "owner": "Tidehunter",
+        "name": "Ravage",
+        "cooldown": [150]
+    },
+    {   
+        "owner": "Terrorblade",
+        "name": "Metamorphosis",
+        "cooldown": [20]
+    }
+]

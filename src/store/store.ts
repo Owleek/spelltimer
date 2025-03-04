@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import slotsSlice from './slotsSlice';
+import slotSlice from './slotSlice';
 
 const store = configureStore({
     reducer: {
-        slots: slotsSlice,
+        slotList: slotSlice,
     }
 });
 
