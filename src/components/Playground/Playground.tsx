@@ -9,6 +9,7 @@ import TimerSlot from '../TimerSlot/TimerSlot';
 
 import DumbTimer from '../Timer/DumbTimer';
 import ConstructorComponent from '../ConstructorComponent/ConstructorComponent';
+import MainTime from '../MainTime/MainTime';
 import TimerController from '../Timer/TimerController';
 
 import cn from 'classnames';
@@ -56,27 +57,9 @@ const Playground = () => {
   return (
     <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('Playground')}.jpg")`}}>
       {currentSlot && <ConstructorComponent currentSlot={currentSlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
+
       <div className="Playground__time">
-          <div className="Controller">
-              {
-                /* <div className="Controller__time">
-                  <div><span>{minutes}</span> : <span>{secons}</span></div>
-                </div>
-                <div className="Controller__tool" onClick={handleClickControl}>
-                  {
-                    isRuns ? 
-                            <div className="pause">
-                              <span className="pause__stick"></span>
-                              <span className="pause__stick"></span>
-                            </div>
-                          : 
-                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http:www.w3.org/2000/svg">
-                              <path fillRule="evenodd" clipRule="evenodd" d="M4 4.11493C4 1.61163 6.88508 0.209383 8.85346 1.75597L18.8535 9.61312C19.5773 10.1819 20 11.0515 20 11.9721V12.0279C20 12.9485 19.5773 13.8181 18.8535 14.3869L8.85346 22.244C6.88507 23.7906 4 22.3884 4 19.8851V4.11493ZM7.61782 3.32861C6.96169 2.81308 6 3.2805 6 4.11493V19.8851C6 20.7195 6.96169 21.1869 7.61782 20.6714L17.6178 12.8142C17.8591 12.6247 18 12.3348 18 12.0279V11.9721C18 11.6652 17.8591 11.3753 17.6178 11.1858L7.61782 3.32861Z"/>
-                            </svg>
-                  }
-                </div> */
-              }
-          </div>
+          <MainTime isRun={false} minutes={'00'} seconds={'00'} onClickSettings={() => null} onClickTrigger={() => null}/>
       </div>
       <div className="Playground__grid">
         { slotList.map(renderSlot) }
