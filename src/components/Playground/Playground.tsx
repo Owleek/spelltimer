@@ -27,6 +27,8 @@ const Playground = () => {
   const slotList = useSelector((state: TStoreState) => state.slotList);
   const [currentSlot, setCurrnetSlot] = useState<ISlot | null>(null);
 
+  const isEntitySet: boolean = slotList.some(el => 'name' in el);
+
   const handleClickEmptySlot = (slot: ISlot) => { setCurrnetSlot(slot) }
 
   const onSelectAbility = (ability: ITimerData) => {
@@ -53,13 +55,36 @@ const Playground = () => {
     return <TimerSlot key={slot.id} data={slot} handleRemove={removeAbility}/>
   }
 
+  const renderInfo = () => {
+    return (
+      <React.Fragment>
+        <div className="Playground__keyInfo">
+          <code>F9 - press to play/stop time</code>
+          <code>Q - press to start coundown slot #1 </code>
+          <code>W - press to start coundown slot #2 </code>
+          <code>E - press to start coundown slot #3 </code>
+          <code>A - press to start coundown slot #4 </code>
+          <code>S - press to start coundown slot #5 </code>
+          <code>D - press to start coundown slot #6 </code>
+        </div>
+        <div className="Playground__HeadlineText">
+          Установите в ячеки (способности, предметы, функции) игры который хотите отслеживать
+        </div>
+      </React.Fragment>
+    )
+  }
+
 
   return (
     <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('Playground')}.jpg")`}}>
       {currentSlot && <ConstructorComponent currentSlot={currentSlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
 
-      <div className="Playground__time">
-          <MainTime isRun={false} minutes={'00'} seconds={'00'} onClickSettings={() => null} onClickTrigger={() => null}/>
+      <div className="Playground__header">
+        {
+          isEntitySet 
+            ? <MainTime isRun={false} minutes={'00'} seconds={'00'} onClickSettings={() => null} onClickTrigger={() => null}/> 
+            : renderInfo()
+        }
       </div>
       <div className="Playground__grid">
         { slotList.map(renderSlot) }
