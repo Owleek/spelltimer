@@ -14,7 +14,7 @@ import TimerController from '../Timer/TimerController';
 
 import cn from 'classnames';
 import { TStoreState } from '../../store/store';
-import { IEmptySlot,  ISlot,  mapTimerToSlot, removeTimerFromSlot } from '../../store/slotSlice';
+import { IEmptySlot,  ISlot,  mapTimerToSlot, removeTimerFromSlot, updateManyHotkeys, updateHotKey } from '../../store/slotSlice';
 import { ITimerData } from '../../data/data';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import cachekeys from '../../user_cache/keys';
@@ -29,6 +29,19 @@ const Playground = () => {
 
   const isEntitySet: boolean = slotList.some(el => 'name' in el);
 
+  useEffect(() => {
+    const keys = slotList.map((slot) => {
+      const storageKey = localStorage.getItem(`pos_${slot.position}`);
+      if (storageKey) return {position: slot.position, boundKey: storageKey};
+
+      localStorage.setItem(`pos_${slot.position}`, `${slot.boundKey}`);
+      return {position: slot.position, boundKey: slot.boundKey};
+    });
+
+    dispatch(updateManyHotkeys(keys))
+  }, []);
+
+
   const handleClickEmptySlot = (slot: ISlot) => { setCurrnetSlot(slot) }
 
   const onSelectAbility = (ability: ITimerData) => {
@@ -36,8 +49,8 @@ const Playground = () => {
 
     const updData = {
       ...ability,
-      position: currentSlot.position
-    
+      position: currentSlot.position,
+      boundKey: currentSlot.boundKey
     }
 
     setCurrnetSlot(null);
@@ -47,9 +60,15 @@ const Playground = () => {
   const onConstructorCancel = () => { setCurrnetSlot(null) }
   const removeAbility = (slot: ITimerData) => dispatch(removeTimerFromSlot(slot));
 
+  const handleBoundKey = (position: number, boundKey: string) => {
+    localStorage.setItem(`pos_${position}`, `${boundKey}`);
+    dispatch(updateHotKey({position, boundKey}));
+  }
+
+
   const renderSlot = (slot: ISlot) => {
     if (!('name' in slot)) {
-      return <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot}/>
+      return <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} handleBoundKey={handleBoundKey}/>
     }
 
     return <TimerSlot key={slot.id} data={slot} handleRemove={removeAbility}/>
@@ -58,17 +77,11 @@ const Playground = () => {
   const renderInfo = () => {
     return (
       <React.Fragment>
-        <div className="Playground__keyInfo">
-          <code>F9 - press to play/stop time</code>
-          <code>Q - press to start coundown slot #1 </code>
-          <code>W - press to start coundown slot #2 </code>
-          <code>E - press to start coundown slot #3 </code>
-          <code>A - press to start coundown slot #4 </code>
-          <code>S - press to start coundown slot #5 </code>
-          <code>D - press to start coundown slot #6 </code>
-        </div>
         <div className="Playground__HeadlineText">
-          Установите в ячеки (способности, предметы, функции) игры который хотите отслеживать
+          Установите в ячеки (способности, предметы, функции) игры который хотите отслеживать <br /><br />
+          <small>
+            Так же вы можете изменить горячие клавиши для запуска таймера способности
+          </small>
         </div>
       </React.Fragment>
     )
@@ -82,7 +95,12 @@ const Playground = () => {
       <div className="Playground__header">
         {
           isEntitySet 
-            ? <MainTime isRun={false} minutes={'00'} seconds={'00'} onClickSettings={() => null} onClickTrigger={() => null}/> 
+            // ? <MainTime isRun={false} minutes={'00'} seconds={'00'} onClickSettings={() => null} onClickTrigger={() => null}/> 
+            ? <div className="Playground__runButton">
+                  <svg viewBox="0 0 24 24">
+                      <path fillRule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z" clipRule="evenodd"/>
+                  </svg>
+            </div>
             : renderInfo()
         }
       </div>

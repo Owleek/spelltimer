@@ -21,6 +21,7 @@ export interface IRequiredFields extends IBaseFields {
     cooldownIndex: number
     customCooldown: number | null
     position: number
+    boundKey: string | null
 }
 
 export interface IReducer extends IBaseFields {
@@ -69,7 +70,8 @@ const setRequredFields = <T>(arr: any): Array<IRequiredFields> => {
             ...item,
             cooldownIndex: 0,
             customCooldown: null,
-            position: 0
+            position: 0,
+            boundKey: null
         }
     })
 }
