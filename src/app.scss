@@ -14,7 +14,7 @@ body {
 }
 
 #root {
-
+  position: relative;
 }
 
 .appContainer {
@@ -108,4 +108,17 @@ body {
     100% {
       transform:translateX(-100%);
     }
+}
+
+
+.GeneralOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 100;
+  background: black;
+  opacity: 0.6;
 }
