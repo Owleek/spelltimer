@@ -55,10 +55,22 @@ export const slotSlice = createSlice({
                 state[idx] = {...state[idx], ...item}
             });
         },
-        updateHotKey(state: Array<ISlot>, action: PayloadAction<{position: number, boundKey: string}>) {
-            const idx = state.findIndex(slot => slot.position === action.payload.position);
-            if (idx === -1) return;
-            state[idx] = {...state[idx], ...action.payload}
+        updateHotKey(state: Array<ISlot>, action: PayloadAction<{position: number, boundKey: string}[]>) {
+            if (action.payload.length === 1) {
+
+                const idx = state.findIndex(slot => slot.position === action.payload[0].position);
+                if (idx === -1) return;
+                state[idx] = {...state[idx], ...action.payload[0]}
+                return;
+            }
+
+            const addToIndex = state.findIndex(slot => slot.position === action.payload[0].position);
+            const removeFromIndex = state.findIndex(slot => slot.position === action.payload[1].position);
+
+            if (addToIndex === -1 || removeFromIndex === -1) return;
+
+            state[addToIndex] = {...state[addToIndex], ...action.payload[0]}
+            state[removeFromIndex] = {...state[removeFromIndex], ...action.payload[1]}
         }
     }
 });

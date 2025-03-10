@@ -2,25 +2,25 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 import ReactDOM from 'react-dom';
 import { IEmptySlot, ISlot } from '../../store/slotSlice';
-import './TimerSlot.scss';
+import './GridSlot.scss';
 import { translate } from '../../utils/utils';
 
 interface IProps {
   data: IEmptySlot
   onClick: (slot: ISlot) => void
-  handleBoundKey: (position: number, boundKey: string) => void
+  bindKey: (position: number, boundKey: string) => void
 }
 
-const EmptySlot = ({data, onClick, handleBoundKey}: IProps) => {
+const EmptySlot = ({data, onClick, bindKey}: IProps) => {
   const [infoVisible, setInfoVisible] = useState<boolean>(false);
 
   const getKey = useCallback((event: KeyboardEvent) => {
     const keyIs = event.key.toUpperCase();
     setInfoVisible(false);
     document.removeEventListener('keydown', getKey);
-    handleBoundKey(data.position, keyIs);
+    bindKey(data.position, keyIs);
   }, []);
-
+  
   const handleClickBoundKey = () => {
     setInfoVisible(true);
     document.addEventListener('keydown', getKey);

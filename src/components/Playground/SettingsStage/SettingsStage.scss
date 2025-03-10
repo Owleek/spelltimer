@@ -1,0 +1,42 @@
+.SettingsStage {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    position: relative;
+}
+
+.SettingsStage__header {
+    padding-top: 1rem;
+    grid-area: 1 / 2 / 3 / 8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SettingsStage__grid {
+    padding: 1rem;
+    grid-area: 3 / 2 / 9 / 8;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    border-radius: 20px;
+}
+
+.SettingsStage__info {
+    color: rgb(214, 214, 214);
+    text-align: center;
+}
+
+.SettingsStage__infoMain {
+    font-size: 16px;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.SettingsStage__infoSecondary {
+    font-size: 14px;
+    display: block;
+}

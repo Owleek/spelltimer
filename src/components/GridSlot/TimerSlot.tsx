@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './TimerSlot.scss';
+import './GridSlot.scss';
 import { ITimerData } from '../../data/data';
 
 interface IProps {
