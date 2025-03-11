@@ -100,6 +100,29 @@
     object-fit: cover;
   }
 
+  .TunedSlot__ownerBox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 150px;
+    z-index: 10;
+
+    // &::after {
+    //   content: '';
+    //   width: 100%;
+    //   height: 100%;
+
+    // }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      object-position: 50% 50%;
+    }
+  }
+
   .TunedSlot:hover {
     & .TunedSlot__RemoveButton {
       display: block;

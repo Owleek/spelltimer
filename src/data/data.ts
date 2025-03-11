@@ -6,14 +6,21 @@ import features from './features.json';
 import reducers from './reducers.json';
 import heroes from './heroes.json';
 
-type TType = 'spells' | 'artifacts' | 'features' | 'reducers' | 'heroes';
+export enum EAbility {
+    SPELLS = 'spells',
+    ARTIFACTS = 'artifacts',
+    FEATURES = 'features',
+    REDUCERS = 'reducers',
+    HEROES = 'heroes'
+}
+
 
 export interface IBaseFields {
     id: string
     key: string
     name: string
     img: string
-    type: TType
+    type: EAbility
 }
 
 export interface IRequiredFields extends IBaseFields {
@@ -48,7 +55,7 @@ export interface ITimerData extends IRequiredFields {
     owner?: string | null
 }
 
-const setBaseFields = <T>(arr: any, type: TType): Array<IBaseFields> => {
+const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {
     return arr.map((item: IBaseFields, idx: number) => {
         const key = makeSnakeCase(item.name);
         const name = translate(key);
@@ -76,12 +83,12 @@ const setRequredFields = <T>(arr: any): Array<IRequiredFields> => {
     })
 }
 
-const heroesData: Array<IBaseFields> = setBaseFields(heroes, 'heroes');
-const reducersData: Array<IReducer> = setBaseFields(reducers, 'reducers') as Array<IReducer>;
+const heroesData: Array<IBaseFields> = setBaseFields(heroes, EAbility.HEROES);
+const reducersData: Array<IReducer> = setBaseFields(reducers, EAbility.REDUCERS) as Array<IReducer>;
 
-const spellsData: Array<ITimerData> = setRequredFields(setBaseFields(spells, 'spells')).map(item => ({...item, reducers: []}));
-const artifactsData: Array<ITimerData> = setRequredFields(setBaseFields(artifacts, 'artifacts')).map(item => ({...item, reducers: [], owner: null}));
-const featuresData: Array<ITimerData> = setRequredFields(setBaseFields(features, 'features'));
+const spellsData: Array<ITimerData> = setRequredFields(setBaseFields(spells, EAbility.SPELLS)).map(item => ({...item, reducers: []}));
+const artifactsData: Array<ITimerData> = setRequredFields(setBaseFields(artifacts, EAbility.ARTIFACTS)).map(item => ({...item, reducers: [], owner: null}));
+const featuresData: Array<ITimerData> = setRequredFields(setBaseFields(features, EAbility.FEATURES));
 
 export default { 
     heroes: heroesData,

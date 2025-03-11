@@ -1,8 +1,22 @@
 .Search {
+    width: 900px;
+    height: 50px;
     border-radius: 5px;
-    grid-area: 1 / 4 / 2 / 13;
-    margin-top: 1rem;
     border: 1px solid white;
+    position: relative;
+
+
+    &.disabled::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(128, 128, 128, 0.6);
+        z-index: 10;
+        pointer-events: none;
+    }
 }
 
 .Search input {
