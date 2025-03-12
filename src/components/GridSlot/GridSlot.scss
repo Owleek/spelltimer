@@ -98,29 +98,43 @@
     background-position: center;
     background-size: cover;
     object-fit: cover;
+    overflow: hidden;
   }
 
   .TunedSlot__ownerBox {
     position: absolute;
     left: 0;
     top: 0;
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     z-index: 10;
+    border: 2px solid red;
+    overflow: hidden;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
 
-    // &::after {
-    //   content: '';
-    //   width: 100%;
-    //   height: 100%;
+  .TunedSlot__ownerImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    position: relative;
+    border: 1px solid greenyellow;
+    transform: rotate(-45deg) translate(25%, 25%);
+  }
 
-    // }
-
-    img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-      object-position: 50% 50%;
-    }
+  .TunedSlot__ownerName {
+    position: absolute;
+    font-size: 16px;
+    left: 100%;
+    bottom: 0;
+    width: 100%;
+    background: rgba(161, 161, 161, 0.5);
+    color: #d9d9d9;
+    padding: 5px;
+    text-align: center;
+    transform: rotate(-90deg);
+    transform-origin: 0 100%;
   }
 
   .TunedSlot:hover {
