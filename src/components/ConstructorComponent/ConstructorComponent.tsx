@@ -66,7 +66,7 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const handleClickHero = (hero: IBaseFields) => {
     if (!artifact) return;
-    const modifiedArtifact = {...artifact, owner: hero.name};
+    const modifiedArtifact = {...artifact, id: artifact.id + hero.name, owner: hero.name};
     onSelectAbility(modifiedArtifact);
   }
 

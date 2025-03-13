@@ -90,7 +90,7 @@ const SettingsStage = (): JSX.Element => {
                 {
                     slotList.map(slot => {
                         return 'name' in slot 
-                        ? <TunedSlot key={slot.id} data={slot} handleRemove={removeAbility}/>
+                        ? <TunedSlot key={slot.position} data={slot} handleRemove={removeAbility}/>
                         : <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} bindKey={bindKey}/> 
                     })
                 }
