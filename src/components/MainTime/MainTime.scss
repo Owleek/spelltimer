@@ -1,6 +1,22 @@
+@use 'sass:color';
+@use '../../variables.scss' as vars;
+
 .MainTime {
     display: flex;
     justify-content: center;
+}
+
+.MainTime.empty {
+ 
+    & .MainTime__container { 
+        border-style: dashed;
+        border-color: vars.$secondary;
+    }
+
+    & .MainTime__digitBox {
+        color: vars.$secondary;
+        margin-left: 2rem;
+    }
 }
 
 .MainTime__container {
@@ -47,7 +63,51 @@
 .MainTime__digitBox {
     font-size: 30px;
     color: white;
+    user-select: none;
 }
+
+.MainTime__hotkey {
+    width: 40%;
+    height: calc(100% + 2px);
+    position: relative;
+    top: -1px;
+    right: -1px;
+    border: 1px dashed vars.$secondary;
+    border-radius: 30px;
+    color: vars.$secondary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        background: rgb(164, 164, 164);
+        border: 1px solid white;
+        color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
+    }
+}
+
+.MainTime__hotkey.onTopOfTheSky {
+    position: absolute;
+    background: rgb(164, 164, 164);
+    border: 1px solid white;
+    color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
+    z-index: 101;
+}
+
+.MainTime__hotkeyMain {
+    font-size: 18px;
+}
+
+.MainTime__hotKeySecondary {
+    font-size: 14px;
+    padding: 0 8px;
+    text-align: center;
+} 
 
 .pause {
     width: 100%;

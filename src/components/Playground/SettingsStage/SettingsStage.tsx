@@ -3,17 +3,24 @@ import { useSelector, useDispatch } from 'react-redux';
 import {TStoreState} from '../../../store/store';
 import EmptySlot from '../../GridSlot/EmptySlot';
 import TunedSlot from '../../GridSlot/TunedSlot';
+import MainTime from '../../MainTime/MainTime';
 import PlayButton from '../../PlayButton/PlayButton';
 import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
 import {ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapTimerToSlot, updateHotKey, updateManyHotkeys, ISlot} from '../../../store/slotSlice';
 import './SettingsStage.scss';
+import EmptyMainTime from '../../MainTime/EmptyMainTime';
+
+enum EState {
+    INITIAL = 'initial',
+    SETTINGS = 'settings'
+}
 
 const InfoText = () => {
     return (
         <div className="SettingsStage__info">
-            <span className="SettingsStage__infoMain">Установите в ячеки (способности, предметы, функции) игры который хотите отслеживать</span>
-            <span className="SettingsStage__infoSecondary">Так же вы можете изменить горячие клавиши для запуска таймера способности</span>
+            <span className="SettingsStage__infoMain">Добавьте в ячеки способности или предметы которые хотите отслеживать</span>
+            <span className="SettingsStage__infoSecondary">Измените горячие клавиши по желанию для запуска таймеров или времени</span>
         </div>
     )
 }
@@ -22,6 +29,9 @@ const SettingsStage = (): JSX.Element => {
     // TODO - нужно сделать нормальную функцию сравнения или по другому использовать стейт
     const slotList = useSelector((state: TStoreState) => state.slotList, (prev, next) => JSON.stringify(prev) === JSON.stringify(next));
     const isReadyToStart: boolean = slotList.some(el => 'name' in el);
+
+    const [state, setState] = useState<EState>(EState.INITIAL);
+
     const [currentSlot, setCurrnetSlot] = useState<ISlot | null>(null);
     const dispatch = useDispatch();
     const slotListRef = useRef<ISlot[]>(slotList);
@@ -75,17 +85,28 @@ const SettingsStage = (): JSX.Element => {
         return dispatch(updateHotKey([{position, boundKey}, {position: matchedSlot.position, boundKey: ''}]));
     }, []); //TODO - проверить почему не получается без useRef с зависимостью [slotList] 
 
-    return (
+    if (state === EState.INITIAL) return (
         <div className="SettingsStage">
-            {currentSlot && <ConstructorComponent currentSlot={currentSlot as ISlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
-
             <div className="SettingsStage__header">
+                <InfoText />
+                <EmptyMainTime />
+            </div>
+            <div className="SettingsStage__grid">
                 {
-                    isReadyToStart 
-                        ? <PlayButton onClick={() => null}/>
-                        : <InfoText />
+                    slotList.map(slot => <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} bindKey={bindKey}/>)
                 }
             </div>
+        </div>
+    );
+
+    return (
+        <div className="SettingsStage">
+            { currentSlot && <ConstructorComponent currentSlot={currentSlot as ISlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
+
+            <div className="SettingsStage__header">
+                <MainTime isRun={false} seconds="00" minutes="00" onClickSettings={() => null} onClickTrigger={() => null}/>                
+            </div>
+
             <div className="SettingsStage__grid">
                 {
                     slotList.map(slot => {

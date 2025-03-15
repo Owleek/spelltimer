@@ -12,30 +12,30 @@ interface IProps {
 }
 
 const EmptySlot = ({data, onClick, bindKey}: IProps) => {
-  const [infoVisible, setInfoVisible] = useState<boolean>(false);
+  const [isBinding, setIsBinding] = useState<boolean>(false);
 
   const getKey = useCallback((event: KeyboardEvent) => {
     const keyIs = event.key.toUpperCase();
-    setInfoVisible(false);
+    setIsBinding(false);
     document.removeEventListener('keydown', getKey);
     bindKey(data.position, keyIs);
   }, []);
   
   const handleClickBoundKey = () => {
-    setInfoVisible(true);
+    setIsBinding(true);
     document.addEventListener('keydown', getKey);
   }
 
   return (
-    <div className={cn('EmptySlot', {fixHoverStyles: infoVisible})}>
+    <div className={cn('EmptySlot', {fixHoverStyles: isBinding})}>
       {
-        infoVisible && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement)
+        isBinding && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement)
       }
 
       <div className="EmptySlot__inner" onClick={() => onClick(data)}></div>
-      <div className={cn('EmptySlot__boundKey', {onTopOfTheSky: infoVisible})} onClick={handleClickBoundKey}>
+      <div className={cn('EmptySlot__boundKey', {onTopOfTheSky: isBinding})} onClick={!isBinding ? handleClickBoundKey : () => null}>
         {
-          infoVisible ? <span className='EmptySlot__boundKeyInfo'>{translate('Press any key to bind')}</span> :
+          isBinding ? <span className='EmptySlot__boundKeyInfo'>{translate('Press any key to bind')}</span> :
                         <span className='EmptySlot__boundKeyText'>{data.boundKey}</span>
         }
         

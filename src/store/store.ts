@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import slotSlice from './slotSlice';
+import timeSlice from './hotkeysSlice';
 
 const store = configureStore({
     reducer: {
         slotList: slotSlice,
+        timeSlice: timeSlice
     }
 });
 
