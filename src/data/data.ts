@@ -28,7 +28,7 @@ export interface IRequiredFields extends IBaseFields {
     cooldownIndex: number
     customCooldown: number | null
     position: number
-    boundKey: string | null
+    boundKey: string
 }
 
 export interface IReducer extends IBaseFields {

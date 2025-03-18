@@ -3,10 +3,13 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
-import './welcome.scss';
+import { TStoreState } from '../../store/store';
+import {setDefaultHotkeys} from '../../user_cache/keys';
 import { translate } from '../../utils/utils';
+import './welcome.scss';
 
 
 const text = {
@@ -20,13 +23,13 @@ const Welcome = () => {
     if (!context) return <ErrorComponent message={String(context)}/>
     
     const handleClick = () => {
+        setDefaultHotkeys();
         context.navigate(EPage.PLAYGROUND);
     }
 
     return (
         <div className="Welcome innerContainer">
             <h1 className="Welcome__title">{text.title}</h1>
-
             <button className="button" onClick={handleClick}>
                 <span></span>
                 <span></span>

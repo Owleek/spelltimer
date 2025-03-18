@@ -2,23 +2,25 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 import ReactDOM from 'react-dom';
 import { IEmptySlot, ISlot } from '../../store/slotSlice';
+import {setHotkey} from '../../store/hotkeySlice';
 import './GridSlot.scss';
 import { translate } from '../../utils/utils';
+import { useDispatch } from 'react-redux';
 
 interface IProps {
   data: IEmptySlot
   onClick: (slot: ISlot) => void
-  bindKey: (position: number, boundKey: string) => void
 }
 
-const EmptySlot = ({data, onClick, bindKey}: IProps) => {
+const EmptySlot = ({data, onClick}: IProps) => {
   const [isBinding, setIsBinding] = useState<boolean>(false);
+  const dispatch = useDispatch();
 
   const getKey = useCallback((event: KeyboardEvent) => {
     const keyIs = event.key.toUpperCase();
     setIsBinding(false);
     document.removeEventListener('keydown', getKey);
-    bindKey(data.position, keyIs);
+    dispatch(setHotkey({key: keyIs, id: data.position, type: 'slot'}));
   }, []);
   
   const handleClickBoundKey = () => {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
 import { useDispatch } from 'react-redux';
-import { setHotkey } from '../../store/hotkeysSlice';
+import { setHotkey } from '../../store/hotkeySlice';
 import cn from 'classnames';
 import {TStoreState} from '../../store/store';
 import './MainTime.scss';
@@ -17,12 +17,11 @@ const EmptyMainTime = (props: IProps): JSX.Element => {
     const bindKey = useSelector((state: TStoreState) => state.timeSlice.key);
     const [isBinding, setIsBinding] = useState<boolean>(false);
 
-
     const getKey = useCallback((event: KeyboardEvent) => {
         const keyIs = event.key.toUpperCase();
         setIsBinding(false);
         document.removeEventListener('keydown', getKey);
-        dispatch(setHotkey(keyIs));
+        dispatch(setHotkey({key: keyIs, type: 'time'}));
     }, []);
 
     const onBindHotKey = () => {

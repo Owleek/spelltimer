@@ -9,4 +9,3 @@ export function translate(key: string): string {
 export function createArrayFromNumber(number: number): Array<number> {
     return Array.from({length: number}, (_, index) => index + 1);
 }
-  
