@@ -1,19 +1,8 @@
-export const TIMEHOTKEY = 'timeHotkey';
-
-interface ITimeHotkey {
-    [TIMEHOTKEY]: string
-}
-
 interface ISlotsHotkeys {
     [key: `position_${number}`]: string
 }
 
-interface IHotkeys extends ITimeHotkey, ISlotsHotkeys {}
-
-export const defaultTimeHotkey = {
-    timeHotkey: 'F9'
-}
-
+export const defaultTimeHotkey = 'F9';
 export const defaultSlotHotkeys: ISlotsHotkeys = {
     position_1: 'Q',
     position_2: 'W',
@@ -23,33 +12,41 @@ export const defaultSlotHotkeys: ISlotsHotkeys = {
     position_6: 'R'
 };
 
-export const defaultHotkeys: IHotkeys = {
-    ...defaultTimeHotkey,
-    ...defaultSlotHotkeys
-}
-
-export function hotkeysIsEmpty(): boolean {
-    return !!Object.keys(defaultHotkeys).every(key => !localStorage.getItem(key));
-}
-
-export function setDefaultHotkeys(): void {
-    Object.entries(defaultHotkeys).forEach(([key, value]) => localStorage.setItem(`${key}`, value));
+export function setTimeHotkey(string: string): void {
+    localStorage.setItem(`timeHotkey`, string);
 }
 
 export function getTimeHotkey(): string {
-    return localStorage.getItem(`${TIMEHOTKEY}`) || '';
-}
+    const gotHotkey = localStorage.getItem(`timeHotkey`);
 
-export function setTimeHotkey(string: string): void {
-    localStorage.setItem(`${TIMEHOTKEY}`, string);
-}
+    if (gotHotkey !== null) {
+        return gotHotkey; 
+    }
 
-export function getPositionHotkey(number: number): string {
-    return localStorage.getItem(`position_${number}`) || ''; 
+    setTimeHotkey(defaultTimeHotkey);
+    return defaultTimeHotkey;
 }
 
 export function setPositionHotkey(number: number, string: string): void {
     localStorage.setItem(`position_${number}`, string); 
 }
 
-export default defaultHotkeys;
+export function getPositionHotkey(number: number): string {
+    const gotItem = localStorage.getItem(`position_${number}`);
+    
+    if (gotItem !== null) {
+        return gotItem;
+    }
+
+    const hotkey = defaultSlotHotkeys[`position_${number}`];
+    setPositionHotkey(number, hotkey)
+    return hotkey;
+}
+
+export function isUserPlayed(): boolean {
+    return !!localStorage.getItem(`userPlayed`);
+}
+
+export function setUserPlayed(): void {
+    localStorage.setItem(`userPlayed`, 'true');
+}

@@ -3,11 +3,9 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import { useContext } from 'react';
-import { useSelector } from 'react-redux';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
-import { TStoreState } from '../../store/store';
-import {setDefaultHotkeys} from '../../user_cache/keys';
+import {setUserPlayed} from '../../user_cache/keys';
 import { translate } from '../../utils/utils';
 import './welcome.scss';
 
@@ -23,7 +21,7 @@ const Welcome = () => {
     if (!context) return <ErrorComponent message={String(context)}/>
     
     const handleClick = () => {
-        setDefaultHotkeys();
+        setUserPlayed();
         context.navigate(EPage.PLAYGROUND);
     }
 

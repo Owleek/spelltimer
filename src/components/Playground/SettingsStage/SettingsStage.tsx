@@ -9,9 +9,6 @@ import PlayButton from '../../PlayButton/PlayButton';
 import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
 import {ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapTimerToSlot, ISlot} from '../../../store/slotSlice';
-import { setHotkey } from '../../../store/hotkeySlice';
-// import { getParsedHotKeys } from '../../../utils/utils';
-import cacheKeys from '../../../user_cache/keys';
 import EmptyMainTime from '../../MainTime/EmptyMainTime';
 import './SettingsStage.scss';
 

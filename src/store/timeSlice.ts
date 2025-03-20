@@ -19,16 +19,15 @@ export const hotkeysSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(setHotkeySlice, (state, action) => {
             const matched = action.payload.key === state.key;
-            let value: string = '';
 
-            if (action.payload.type === 'slot' && matched) {
-                state.key = value;
-                setTimeHotkey(value)
+            if (action.payload.type === 'slot') {
+                if (action.payload.key !== state.key) return;
+                state.key = '';
+                return setTimeHotkey('');
             }
 
-            value = action.payload.key;
-            state.key = value;
-            setTimeHotkey(value)
+            state.key = action.payload.key;
+            setTimeHotkey(action.payload.key)
         });
     }
 });
