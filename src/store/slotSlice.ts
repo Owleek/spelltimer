@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Action, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import data, {ITimerData} from '../data/data';
 import { setHotkey } from './hotkeySlice';
 import { getPositionHotkey, setPositionHotkey } from '../user_cache/keys';
@@ -25,6 +25,9 @@ export const slotSlice = createSlice({
             const idx = state.findIndex(slot => slot.position === action.payload.position);
             if (idx === -1) return state;
             state[idx] = { position: action.payload.position, boundKey: action.payload.boundKey };
+        },
+        resetState(state: Array<ISlot>, action: PayloadAction<null>) {
+            return initialSlotList;
         }
     },
     extraReducers: (builder) => {
@@ -47,6 +50,6 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { mapTimerToSlot, removeTimerFromSlot } = slotSlice.actions;
+export const { mapTimerToSlot, removeTimerFromSlot, resetState } = slotSlice.actions;
 
 export default slotSlice.reducer;
