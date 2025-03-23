@@ -29,12 +29,12 @@ const EmptySlot = ({data, onClick}: IProps) => {
   }
 
   return (
-    <div className={cn('EmptySlot', {fixHoverStyles: isBinding})}>
+    <div className={cn('EmptySlot', {fixHoverStyles: isBinding})} onClick={() => onClick(data)}>
       {
         isBinding && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement)
       }
 
-      <div className="EmptySlot__inner" onClick={() => onClick(data)}></div>
+      <div className="EmptySlot__inner"></div>
       <div className={cn('EmptySlot__boundKey', {onTopOfTheSky: isBinding})} onClick={!isBinding ? handleClickBoundKey : () => null}>
         {
           isBinding ? <span className='EmptySlot__boundKeyInfo'>{translate('Press any key to bind')}</span> :

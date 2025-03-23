@@ -32,7 +32,8 @@
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    border-radius: 20px;
+    border-radius: 6px;
+    background: rgb(55, 58, 61);
 }
 
 .SettingsStage__info {
