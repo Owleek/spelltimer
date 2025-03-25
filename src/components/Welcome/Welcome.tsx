@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
 import {setUserPlayed} from '../../user_cache/keys';
-import { translate } from '../../utils/utils';
+import { translate, makeSnakeCase } from '../../utils/utils';
 import './welcome.scss';
 
 
@@ -26,7 +26,7 @@ const Welcome = () => {
     }
 
     return (
-        <div className="Welcome innerContainer">
+        <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('welcome4')}.png")`}}>
             <h1 className="Welcome__title">{text.title}</h1>
             <button className="button" onClick={handleClick}>
                 <span></span>
