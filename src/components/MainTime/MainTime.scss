@@ -4,15 +4,9 @@
 .MainTime {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 .MainTime.empty {
- 
-    & .MainTime__container { 
-        border-style: dashed;
-        border-color: vars.$secondary;
-    }
 
     & .MainTime__digitBox {
         color: vars.$secondary;
@@ -23,12 +17,29 @@
 .MainTime__container {
     width: 250px;
     height: 60px;
-    border: 1px solid white;
+    padding: 5px;
     border-radius: 30px;    
-    position: relative;
+    box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.3) inset;
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    background: rgb(28, 31, 32);
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        width: calc(100% - 10px);
+        height: calc(100% - 10px);
+        border-radius: 30px;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        z-index: 20;
+        box-shadow: 0 0 10px 0px vars.$boxShadow inset;
+        box-sizing: border-box;
+    }
 }
 
 .MainTime__button {
@@ -69,25 +80,26 @@
 
 .MainTime__hotkey {
     width: 40%;
-    height: calc(100% + 2px);
+    height: 100%;
     position: relative;
-    top: -1px;
-    right: -1px;
-    border: 1px dashed vars.$secondary;
-    border-radius: 30px;
     color: vars.$secondary;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
     user-select: none;
+    cursor: pointer;
 
-    &:hover {
-        background: rgb(164, 164, 164);
-        border: 1px solid white;
-        color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 5px;
+        background: rgb(28, 31, 32);
+        height: 100%;
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.9);
+        z-index: 21;
     }
 }
 
