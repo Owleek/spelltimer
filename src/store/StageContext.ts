@@ -1,10 +1,10 @@
 import { createContext } from 'react';
 
 export enum EStages {
-  SETTINGS = 'settings',
-  TIMERS = 'timers'
+  EDIT = 'edit',
+  PLAY = 'play'
 }
 
-const StageContext = createContext<{changeStage: (stage: EStages) => void} | null>(null);
+const StageContext = createContext<{changeStage: (stage: EStages) => void, currentStage: EStages}>({currentStage: EStages.EDIT, changeStage: () => null});
 
 export default StageContext;

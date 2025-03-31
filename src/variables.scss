@@ -1,6 +1,19 @@
 $primary: aliceblue;
+$secondary: #a0a0a0;
 $control: #d2d4d5;
-$secondary: rgba(255, 255, 255, 0.5);
+
+
+
+
 $lowerBackground: rgb(28, 31, 32);
 $uppperBackground: rgb(55, 58, 61);
-$boxShadow: rgba(0, 0, 0, 0.9);
+$innerBoxShadow: rgba(0, 0, 0, 0.3);
+$slotPadding: 5px;
+
+$innerSlotBoxShadowBlur: 10px;
+$innerSlotBoxShadowColor: rgba(0, 0, 0, 0.9);
+
+$innerSlotBoxShadow: 0 0 $innerSlotBoxShadowBlur 0px $innerSlotBoxShadowColor inset;
+$slotBorderColor: rgb(21, 23, 24);
+
+$keyColor: #ffdfa2;

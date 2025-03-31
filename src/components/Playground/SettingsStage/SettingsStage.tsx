@@ -1,37 +1,25 @@
 import React, { JSX, useState, useCallback, useEffect, useRef, useContext } from 'react';
+import ReactDOM from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import {TStoreState} from '../../../store/store';
 import EmptySlot from '../../GridSlot/EmptySlot';
 import TunedSlot from '../../GridSlot/TunedSlot';
-import MainTime from '../../MainTime/MainTime';
-import PlayButton from '../../PlayButton/PlayButton';
 import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
 import {ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapTimerToSlot, resetState, ISlot} from '../../../store/slotSlice';
-import EmptyMainTime from '../../MainTime/EmptyMainTime';
+import {setHotkey} from '../../../store/hotkeySlice';
 import StageContext, {EStages} from '../../../store/StageContext';
+import { translate } from '../../../utils/utils';
 import './SettingsStage.scss';
-
-
-enum EState {
-    INITIAL = 'initial',
-    SETTINGS = 'settings'
-}
-
-const InfoText = () => {
-    return (
-        <div className="SettingsStage__info">
-            <span className="SettingsStage__infoMain">Добавьте в ячеки способности или предметы которые хотите отслеживать</span>
-            <span className="SettingsStage__infoSecondary">Измените горячие клавиши по желанию для запуска таймеров или времени</span>
-        </div>
-    )
-}
 
 const SettingsStage = (): JSX.Element => {
     // TODO - нужно сделать нормальную функцию сравнения или по другому использовать стейт
     const slotList = useSelector((state: TStoreState) => state.slotList, (prev, next) => JSON.stringify(prev) === JSON.stringify(next));
     const [currentSlot, setCurrnetSlot] = useState<ISlot | null>(null);
+    const {currentStage, changeStage} = useContext(StageContext);
+    const [isBinding, setIsBinding] = useState<boolean>(false);
+
     const [isEdit, setIsEdit] = useState<boolean>(slotList.some(slot => 'name' in slot));
 
     const [buttonActive, setButtonActive] = useState<boolean>(false);
@@ -39,6 +27,7 @@ const SettingsStage = (): JSX.Element => {
     const dispatch = useDispatch();
     const context = useContext(StageContext);
     const slotListRef = useRef<ISlot[]>(slotList);
+    const editingSlot = useRef<ISlot | null>(null);
     const isTimeRuns = false;
 
     useEffect(() => { 
@@ -63,59 +52,75 @@ const SettingsStage = (): JSX.Element => {
         dispatch(mapTimerToSlot(updData));
     };
 
-    const onConstructorCancel = () => { setCurrnetSlot(null) };
-
+    const onConstructorCancel = () => setCurrnetSlot(null);
     const reset = () => dispatch(resetState(null));
 
     const runApp = () => {
         if (!context) throw new Error('change stages context is not found');
-        context.changeStage(EStages.TIMERS);
+        context.changeStage(EStages.PLAY);
+    }
+
+    const getKey = useCallback((event: KeyboardEvent) => {
+        if (!editingSlot.current) return;
+
+        const keyIs = event.key.toUpperCase();
+        setIsBinding(false);
+        document.removeEventListener('keydown', getKey);
+        dispatch(setHotkey({key: keyIs, id: editingSlot.current.position, type: 'slot'}));
+        editingSlot.current = null;
+    }, []);
+
+    const handleBindKey = (slot: ISlot) => {
+        setIsBinding(true);
+        editingSlot.current = slot;
+        document.addEventListener('keydown', getKey);
     }
 
     return (
         <div className="Playground__inner">
             { currentSlot && <ConstructorComponent currentSlot={currentSlot as ISlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
+            { isBinding && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement) }
 
             <div className="Playground__box">
                 <div className="Playground__boxHeader">
-
-                    {/* refresh */}
-                    <div className={cn('Playground__button', {active: buttonActive})} onMouseDown={() => setButtonActive(true)} onMouseUp={() => setButtonActive(false)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.61 122.88">
-                            <path d="M111.9,61.57a5.36,5.36,0,0,1,10.71,0A61.3,61.3,0,0,1,17.54,104.48v12.35a5.36,5.36,0,0,1-10.72,0V89.31A5.36,5.36,0,0,1,12.18,84H40a5.36,5.36,0,1,1,0,10.71H23a50.6,50.6,0,0,0,88.87-33.1ZM106.6,5.36a5.36,5.36,0,1,1,10.71,0V33.14A5.36,5.36,0,0,1,112,38.49H84.44a5.36,5.36,0,1,1,0-10.71H99A50.6,50.6,0,0,0,10.71,61.57,5.36,5.36,0,1,1,0,61.57,61.31,61.31,0,0,1,91.07,8,61.83,61.83,0,0,1,106.6,20.27V5.36Z"/>
+                    {/* <div className={cn('Playground__button', {disabled: currentStage !== EStages.EDIT})}>
+                        <svg viewBox="0 0 438.529 438.528">
+                            <path d="M433.109,23.694c-3.614-3.612-7.898-5.424-12.848-5.424c-4.948,0-9.226,1.812-12.847,5.424l-37.113,36.835    c-20.365-19.226-43.684-34.123-69.948-44.684C274.091,5.283,247.056,0.003,219.266,0.003c-52.344,0-98.022,15.843-137.042,47.536    C43.203,79.228,17.509,120.574,5.137,171.587v1.997c0,2.474,0.903,4.617,2.712,6.423c1.809,1.809,3.949,2.712,6.423,2.712h56.814    c4.189,0,7.042-2.19,8.566-6.565c7.993-19.032,13.035-30.166,15.131-33.403c13.322-21.698,31.023-38.734,53.103-51.106    c22.082-12.371,45.873-18.559,71.376-18.559c38.261,0,71.473,13.039,99.645,39.115l-39.406,39.397    c-3.607,3.617-5.421,7.902-5.421,12.851c0,4.948,1.813,9.231,5.421,12.847c3.621,3.617,7.905,5.424,12.854,5.424h127.906    c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.42-7.898,5.42-12.847V36.542C438.529,31.593,436.733,27.312,433.109,23.694z"/>
+                            <path d="M422.253,255.813h-54.816c-4.188,0-7.043,2.187-8.562,6.566c-7.99,19.034-13.038,30.163-15.129,33.4    c-13.326,21.693-31.028,38.735-53.102,51.106c-22.083,12.375-45.874,18.556-71.378,18.556c-18.461,0-36.259-3.423-53.387-10.273    c-17.13-6.858-32.454-16.567-45.966-29.13l39.115-39.112c3.615-3.613,5.424-7.901,5.424-12.847c0-4.948-1.809-9.236-5.424-12.847    c-3.617-3.62-7.898-5.431-12.847-5.431H18.274c-4.952,0-9.235,1.811-12.851,5.431C1.807,264.844,0,269.132,0,274.08v127.907    c0,4.945,1.807,9.232,5.424,12.847c3.619,3.61,7.902,5.428,12.851,5.428c4.948,0,9.229-1.817,12.847-5.428l36.829-36.833    c20.367,19.41,43.542,34.355,69.523,44.823c25.981,10.472,52.866,15.701,80.653,15.701c52.155,0,97.643-15.845,136.471-47.534    c38.828-31.688,64.333-73.042,76.52-124.05c0.191-0.38,0.281-1.047,0.281-1.995c0-2.478-0.907-4.612-2.715-6.427    C426.874,256.72,424.731,255.813,422.253,255.813z"/>
                         </svg>
                     </div>
 
-                    <EmptyMainTime />
+                    <div className={cn('Playground__button', {active: false})} onMouseDown={() => setButtonActive(true)} onMouseUp={() => setButtonActive(false)}>
+                        <svg viewBox="0 0 163.861 163.861">
+                            <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275   c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z"/>
+                        </svg>
+                    </div>
 
-                    {/* {
-                        isTimeRuns ? 
-                        <div className={cn('ToolBox', {success: true})}>
-                            <span className="ToolBox__icon" onClick={() => null}>
-                                <span className='ToolBox__save'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 72 72">
-                                        <path d="M57.658,12.643c1.854,1.201,2.384,3.678,1.183,5.532l-25.915,40c-0.682,1.051-1.815,1.723-3.064,1.814	C29.764,59.997,29.665,60,29.568,60c-1.146,0-2.241-0.491-3.003-1.358L13.514,43.807c-1.459-1.659-1.298-4.186,0.36-5.646	c1.662-1.46,4.188-1.296,5.646,0.361l9.563,10.87l23.043-35.567C53.329,11.971,55.806,11.442,57.658,12.643z"></path>
-                                    </svg>
-                                </span>
-                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 72 72">
-                                    <path d="M57.531,30.556C58.96,30.813,60,32.057,60,33.509v4.983c0,1.452-1.04,2.696-2.469,2.953l-2.974,0.535	c-0.325,1.009-0.737,1.977-1.214,2.907l1.73,2.49c0.829,1.192,0.685,2.807-0.342,3.834l-3.523,3.523	c-1.027,1.027-2.642,1.171-3.834,0.342l-2.49-1.731c-0.93,0.477-1.898,0.889-2.906,1.214l-0.535,2.974	C41.187,58.96,39.943,60,38.491,60h-4.983c-1.452,0-2.696-1.04-2.953-2.469l-0.535-2.974c-1.009-0.325-1.977-0.736-2.906-1.214	l-2.49,1.731c-1.192,0.829-2.807,0.685-3.834-0.342l-3.523-3.523c-1.027-1.027-1.171-2.641-0.342-3.834l1.73-2.49	c-0.477-0.93-0.889-1.898-1.214-2.907l-2.974-0.535C13.04,41.187,12,39.943,12,38.491v-4.983c0-1.452,1.04-2.696,2.469-2.953	l2.974-0.535c0.325-1.009,0.737-1.977,1.214-2.907l-1.73-2.49c-0.829-1.192-0.685-2.807,0.342-3.834l3.523-3.523	c1.027-1.027,2.642-1.171,3.834-0.342l2.49,1.731c0.93-0.477,1.898-0.889,2.906-1.214l0.535-2.974C30.813,13.04,32.057,12,33.509,12	h4.983c1.452,0,2.696,1.04,2.953,2.469l0.535,2.974c1.009,0.325,1.977,0.736,2.906,1.214l2.49-1.731	c1.192-0.829,2.807-0.685,3.834,0.342l3.523,3.523c1.027,1.027,1.171,2.641,0.342,3.834l-1.73,2.49	c0.477,0.93,0.889,1.898,1.214,2.907L57.531,30.556z M36,45c4.97,0,9-4.029,9-9c0-4.971-4.03-9-9-9s-9,4.029-9,9	C27,40.971,31.03,45,36,45z"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        : <PlayButton className='SettingsStage__runButton' onClick={runApp}/>
-                    } */}
+                    <div className={cn('Playground__button', {active: currentStage === EStages.EDIT})} onClick={() => changeStage(currentStage ===  EStages.PLAY ? EStages.EDIT : EStages.PLAY)}>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M22.2,14.4L21,13.7c-1.3-0.8-1.3-2.7,0-3.5l1.2-0.7c1-0.6,1.3-1.8,0.7-2.7l-1-1.7c-0.6-1-1.8-1.3-2.7-0.7   L18,5.1c-1.3,0.8-3-0.2-3-1.7V2c0-1.1-0.9-2-2-2h-2C9.9,0,9,0.9,9,2v1.3c0,1.5-1.7,2.5-3,1.7L4.8,4.4c-1-0.6-2.2-0.2-2.7,0.7   l-1,1.7C0.6,7.8,0.9,9,1.8,9.6L3,10.3C4.3,11,4.3,13,3,13.7l-1.2,0.7c-1,0.6-1.3,1.8-0.7,2.7l1,1.7c0.6,1,1.8,1.3,2.7,0.7L6,18.9   c1.3-0.8,3,0.2,3,1.7V22c0,1.1,0.9,2,2,2h2c1.1,0,2-0.9,2-2v-1.3c0-1.5,1.7-2.5,3-1.7l1.2,0.7c1,0.6,2.2,0.2,2.7-0.7l1-1.7   C23.4,16.2,23.1,15,22.2,14.4z M12,16c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,14.2,14.2,16,12,16z"/>
+                        </svg>
+                    </div>
 
+                    <EmptyMainTime /> */}
                 </div>
                 <div className={cn('Playground__boxBody')}>
                     {
                         slotList.map(slot => {
-                        return <div className="Playground__slotBox">
-                            {
-                                'name' in slot 
-                                ? <TunedSlot key={slot.position} data={slot} handleRemove={removeAbility}/>
-                                : <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot}/> 
-                            }
-                            </div>   
+                        return  <div className="Playground__slotBox">
+                                    {
+                                        'name' in slot
+                                        ? <TunedSlot key={slot.position} data={slot} handleRemove={removeAbility} className='Playground__slotHeavyShadow'/>
+                                        : <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
+                                    }
+                                    <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={(event) => handleBindKey(slot)}>
+                                        <div className='Playground__slotHotKeyTextBox'>
+                                            <span className="Playground__slotHotKeyText">
+                                                { editingSlot.current === slot && isBinding ? translate('Press any key to bind') : slot.boundKey}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                         })
                     }
                 </div>

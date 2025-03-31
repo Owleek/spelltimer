@@ -10,9 +10,10 @@ import { useDispatch } from 'react-redux';
 interface IProps {
   data: IEmptySlot
   onClick: (slot: ISlot) => void
+  className: string
 }
 
-const EmptySlot = ({data, onClick}: IProps) => {
+const EmptySlot = ({data, onClick, className}: IProps) => {
   const [isBinding, setIsBinding] = useState<boolean>(false);
   const dispatch = useDispatch();
 
@@ -29,19 +30,17 @@ const EmptySlot = ({data, onClick}: IProps) => {
   }
 
   return (
-    <div className={cn('EmptySlot', {fixHoverStyles: isBinding})} onClick={() => onClick(data)}>
+    <div className={cn('EmptySlot', {fixHoverStyles: isBinding}, className)} onClick={() => onClick(data)}>
       {
         isBinding && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement)
       }
-
-      <div className="EmptySlot__inner"></div>
-      <div className={cn('EmptySlot__boundKey', {onTopOfTheSky: isBinding})} onClick={!isBinding ? handleClickBoundKey : () => null}>
+      {/* <div className={cn('EmptySlot__boundKey', {onTopOfTheSky: isBinding})} onClick={!isBinding ? handleClickBoundKey : () => null}>
         {
           isBinding ? <span className='EmptySlot__boundKeyInfo'>{translate('Press any key to bind')}</span> :
                         <span className='EmptySlot__boundKeyText'>{data.boundKey}</span>
         }
         
-      </div>
+      </div> */}
     </div>
   );
 };

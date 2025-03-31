@@ -5,7 +5,6 @@
 import React, { JSX, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SettingsStage from './SettingsStage/SettingsStage';
-import TimersStage from './TimersStage/TimersStage';
 import StageContext, {EStages} from '../../store/StageContext';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import {makeSnakeCase} from '../../utils/utils';
@@ -13,23 +12,14 @@ import './Playground.scss';
 
 
 const Playground = () => {
-  const [currentStage, setCurrentStage] = useState<EStages>(EStages.SETTINGS);
-
-  const renderStage = (currentStage: EStages) => {
-    switch(currentStage) {
-      case EStages.SETTINGS:
-        return <SettingsStage />
-      case EStages.TIMERS:
-        return <TimersStage />
-    }
-  }
-  
+  const [currentStage, setCurrentStage] = useState<EStages>(EStages.EDIT);
   const changeStage = (stage: EStages) => setCurrentStage(stage);
+  const payload = { currentStage, changeStage };
 
   return (
     <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('Playground')}.jpg")`}}>
-      <StageContext.Provider value={{changeStage}}>
-        { renderStage(currentStage) }
+      <StageContext.Provider value={payload}>
+        <SettingsStage />
       </StageContext.Provider>
     </div>
   );
