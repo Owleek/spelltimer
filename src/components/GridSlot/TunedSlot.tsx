@@ -23,7 +23,6 @@ const TunedSlot = ({data, handleRemove, className}: IProps) => {
                 <span className="TunedSlot__ownerName">{currentHero.name}</span>
             </div> 
         }
-        <div className="TunedSlot__RemoveButton" onClick={() => handleRemove(data)}></div>
     </div>
   );
 };

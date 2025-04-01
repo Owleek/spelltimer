@@ -11,6 +11,7 @@ import {removeTimerFromSlot, mapTimerToSlot, resetState, ISlot} from '../../../s
 import {setHotkey} from '../../../store/hotkeySlice';
 import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
+import { getKeyFromCode } from '../../../data/keyCodeDictionary';
 import './SettingsStage.scss';
 
 const SettingsStage = (): JSX.Element => {
@@ -63,7 +64,7 @@ const SettingsStage = (): JSX.Element => {
     const getKey = useCallback((event: KeyboardEvent) => {
         if (!editingSlot.current) return;
 
-        const keyIs = event.key.toUpperCase();
+        const keyIs = event.code;
         setIsBinding(false);
         document.removeEventListener('keydown', getKey);
         dispatch(setHotkey({key: keyIs, id: editingSlot.current.position, type: 'slot'}));
@@ -113,13 +114,19 @@ const SettingsStage = (): JSX.Element => {
                                         ? <TunedSlot key={slot.position} data={slot} handleRemove={removeAbility} className='Playground__slotHeavyShadow'/>
                                         : <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
                                     }
-                                    <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={(event) => handleBindKey(slot)}>
+                                    <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={() => handleBindKey(slot)}>
                                         <div className='Playground__slotHotKeyTextBox'>
                                             <span className="Playground__slotHotKeyText">
-                                                { editingSlot.current === slot && isBinding ? translate('Press any key to bind') : slot.boundKey}
+                                                { 
+                                                    editingSlot.current === slot && isBinding 
+                                                        ? translate('Press any key to bind') 
+                                                        : getKeyFromCode(slot.boundKey)
+                                                }
                                             </span>
                                         </div>
                                     </div>
+
+                                    { 'name' in slot && <div className="Playground__RemoveButton" onClick={() => removeAbility(slot)}></div> }
                                 </div>
                         })
                     }

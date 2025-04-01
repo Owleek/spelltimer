@@ -4,12 +4,12 @@ interface ISlotsHotkeys {
 
 export const defaultTimeHotkey = 'F9';
 export const defaultSlotHotkeys: ISlotsHotkeys = {
-    position_1: 'Q',
-    position_2: 'W',
-    position_3: 'E',
-    position_4: 'D',
-    position_5: 'F',
-    position_6: 'R'
+    position_1: 'KeyQ',
+    position_2: 'KeyW',
+    position_3: 'KeyE',
+    position_4: 'KeyD',
+    position_5: 'KeyF',
+    position_6: 'KeyR'
 };
 
 export function setTimeHotkey(string: string): void {

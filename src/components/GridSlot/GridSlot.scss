@@ -17,6 +17,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: background-color ease-in-out vars.$transitionTime;
   }
 
   &::before {
@@ -29,175 +30,57 @@
     width: 2px;
   }
 
-  // &:hover {
-  //   &::after,
-  //   &::before {
-  //     background: vars.$secondary;
-  //   }
-  // }
-}
-
-
-
-
-
-
-
-
-
-.EmptySlot__boundKey {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-
-  // &:hover {  
-  //   background: rgb(164, 164, 164);
-  //   border: 1px solid white;
-  //   color: rgba(255, 255, 255, 0.9);
-  //   box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
-  // }
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    background: rgb(55, 58, 61);
-    height: 100%;
-    box-shadow: -5px -5px 10px 0px rgba(0, 0, 0, 0.9);
-  }
-}
-
-  .EmptySlot__boundKey.onTopOfTheSky {
-    z-index: 101;
-    background: rgb(164, 164, 164);
-    border: 1px solid white;
-    color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
-  }
-
-  .EmptySlot__boundKeyText {
-
-  }
-
-  .EmptySlot__boundKeyInfo {
-    display: block;
-    padding: 5px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-  .TunedSlot {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    object-fit: cover;
-    overflow: hidden;
-
-    // &::after {
-    //   // content: "";
-    //   width: calc(100% - 10px);
-    //   height: calc(100% - 10px);
-    //   position: absolute;
-    //   left: 5px;
-    //   top: 5px;
-    //   z-index: 20;
-    //   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.9) inset;
-    //   box-sizing: border-box;
-    // }
-  }
-
-  // .TunedSlot__inner {
-  //   width: 100%;
-  //   height: 100%;
-  //   background-position: center;
-  //   background-size: cover;
-  //   object-fit: cover;
-  //   position: relative;
-  //   overflow: hidden;
-  // }
-
-  .TunedSlot__ownerBox {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 160px;
-    height: 160px;
-    z-index: 10;
-    border: 2px solid red;
-    overflow: hidden;
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  .TunedSlot__ownerImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 50%;
-    position: relative;
-    border: 1px solid greenyellow;
-    transform: rotate(-45deg) translate(25%, 25%);
-  }
-
-  .TunedSlot__ownerName {
-    position: absolute;
-    font-size: 16px;
-    left: 100%;
-    bottom: 0;
-    width: 100%;
-    background: rgba(161, 161, 161, 0.5);
-    color: #d9d9d9;
-    // color: #1e1e1e;
-    padding: 5px;
-    text-align: center;
-    transform: rotate(-90deg);
-    transform-origin: 0 100%;
-  }
-
-  .TunedSlot:hover {
-    & .TunedSlot__RemoveButton {
-      display: block;
-    }
-  }
-
-  .TunedSlot__RemoveButton {
-    display: none;
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    right: 12px;
-    top: 12px;
-    z-index: 101;
-    cursor: pointer;
-  
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      width: 3px;
-      height: 100%;
-      top: 50%;
-      left: 50%;
-      border-radius: 2px;
-      background:rgb(255, 0, 0);
-    }
-  
+  &:hover {
+    &::after,
     &::before {
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-  
-    &::after {
-      transform: translate(-50%, -50%) rotate(45deg);
+      background: vars.$secondary;
     }
   }
+}
+
+.TunedSlot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.TunedSlot__ownerBox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 160px;
+  height: 160px;
+  z-index: 10;
+  border: 2px solid red;
+  overflow: hidden;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.TunedSlot__ownerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  position: relative;
+  border: 1px solid greenyellow;
+  transform: rotate(-45deg) translate(25%, 25%);
+}
+
+.TunedSlot__ownerName {
+  position: absolute;
+  font-size: 16px;
+  left: 100%;
+  bottom: 0;
+  width: 100%;
+  background: rgba(161, 161, 161, 0.5);
+  color: #d9d9d9;
+  // color: #1e1e1e;
+  padding: 5px;
+  text-align: center;
+  transform: rotate(-90deg);
+  transform-origin: 0 100%;
+}
