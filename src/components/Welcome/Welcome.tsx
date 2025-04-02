@@ -11,7 +11,7 @@ import './welcome.scss';
 
 
 const text = {
-    title: translate('one step ahead'),
+    title: translate('One step ahead'),
     button: translate('get started')
 }
 
@@ -26,13 +26,10 @@ const Welcome = () => {
     }
 
     return (
-        <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('welcome4')}.png")`}}>
+        <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('welcome')}.png")`}}>
             <h1 className="Welcome__title">{text.title}</h1>
-            <button className="button" onClick={handleClick}>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+            <button className="Welcome__button" onClick={handleClick}>
+                <span/><span/><span/><span/>
                 {text.button}
             </button>
         </div>

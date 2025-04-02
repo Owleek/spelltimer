@@ -1,7 +1,6 @@
 @use '../../variables.scss' as vars;
 
 .Welcome {
-    color: vars.$primary;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,10 +9,127 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    color: #006cff;
+    overflow: hidden;
 }
 
-
 .Welcome__title {
-    margin-bottom: 10vh;
-    font-size: 90px;
+    margin-bottom: 90px;
+    font-size: 112px;
+    font-weight: bold;
+}
+
+$buttonHeight: 90; // px
+$buttonWidth: 375; // px
+$lineSize: 6px;
+$lineWidth: 2*$buttonHeight + $buttonWidth;
+
+$length: 2*($buttonHeight + $buttonWidth);
+$duration: 12; //ms
+$speed: calc($length / $duration); // px per sec
+
+$secondDelay: calc($buttonHeight / $speed);
+$thirdDelay: calc(($buttonHeight + $buttonWidth) / $speed);
+$fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
+
+.Welcome__button {
+    width: #{$buttonWidth}px;
+    height: #{$buttonHeight}px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #1670f0;
+    text-transform:uppercase;
+    text-decoration:none;
+    letter-spacing: 5px;
+    font-size:20px;
+    overflow: hidden;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    transition: background-color ease-in-out vars.$transitionTime;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}
+
+.Welcome__button span {
+    width: #{$lineWidth}px;
+    height: $lineSize;
+    position:absolute;
+    background:linear-gradient(to right, rgba(244,243,247,0) 0%, rgba(42,107,255,1) 50%);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: #{$duration}s;
+}
+
+.Welcome__button span:nth-child(1) {
+    bottom: 0;
+    left: 0;
+    transform: translateY(#{$lineWidth}px) rotateZ(-90deg);
+    transform-origin: 0% 0%;
+    animation-name: animate1;
+}
+
+.Welcome__button span:nth-child(2) {
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    animation-name: animate2;
+    animation-delay: #{$secondDelay}s;
+}
+
+.Welcome__button span:nth-child(3) {
+    top: 0;
+    right: 0;
+    transform-origin: 100% 0%;
+    transform: rotateZ(90deg);
+    animation-name: animate3;
+    animation-delay: #{$thirdDelay}s;
+}
+
+.Welcome__button span:nth-child(4) {
+    right: 0;
+    bottom: 0;
+    transform-origin: 100% 50%;
+    transform: rotateZ(180deg);
+    animation-name: animate4;
+    animation-delay: #{$fourthDelay}s;
+}
+
+@keyframes animate1 {
+    0% { 
+        bottom: 0;
+    }
+    100% { 
+        bottom: #{$length}px;
+    }
+}
+
+@keyframes animate2 {
+    0% { 
+        left: 0;
+    }
+    100% { 
+        left: #{$length}px;
+    }
+}
+
+@keyframes animate3 {
+    0% { 
+        top: 0;
+    }
+    100% { 
+        top: #{$length}px;
+    }
+}
+
+@keyframes animate4 {
+    0% { 
+        right: 0;
+    }
+    100% { 
+        right: #{$length}px;
+    }
 }
