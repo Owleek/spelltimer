@@ -14,13 +14,13 @@
 }
 
 .Welcome__title {
-    margin-bottom: 90px;
+    margin-bottom: 160px;
     font-size: 112px;
     font-weight: bold;
 }
 
-$buttonHeight: 90; // px
-$buttonWidth: 375; // px
+$buttonHeight: 80; // px
+$buttonWidth: 380; // px
 $lineSize: 6px;
 $lineWidth: 2*$buttonHeight + $buttonWidth;
 
@@ -35,26 +35,36 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
 .Welcome__button {
     width: #{$buttonWidth}px;
     height: #{$buttonHeight}px;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     color: #1670f0;
     text-transform:uppercase;
     text-decoration:none;
     letter-spacing: 5px;
     font-size:20px;
-    overflow: hidden;
     font-weight: bold;
     background: rgba(0, 0, 0, 0.5);
     transition: background-color ease-in-out vars.$transitionTime;
+    position: relative;
+    overflow: hidden;
 
     &:hover {
         background: rgba(0, 0, 0, 0.7);
     }
 }
 
-.Welcome__button span {
+.Welcome__buttonText {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.Welcone__animationArrow {
     width: #{$lineWidth}px;
     height: $lineSize;
     position:absolute;
@@ -64,41 +74,41 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     animation-duration: #{$duration}s;
 }
 
-.Welcome__button span:nth-child(1) {
+.Welcone__animationArrow:nth-of-type(1) {
     bottom: 0;
     left: 0;
     transform: translateY(#{$lineWidth}px) rotateZ(-90deg);
     transform-origin: 0% 0%;
-    animation-name: animate1;
+    animation-name: animationArrow_1;
 }
 
-.Welcome__button span:nth-child(2) {
+.Welcone__animationArrow:nth-of-type(2) {
     top: 0;
     left: 0;
     transform: translateX(-100%);
-    animation-name: animate2;
+    animation-name: animationArrow_2;
     animation-delay: #{$secondDelay}s;
 }
 
-.Welcome__button span:nth-child(3) {
+.Welcone__animationArrow:nth-of-type(3) {
     top: 0;
     right: 0;
     transform-origin: 100% 0%;
     transform: rotateZ(90deg);
-    animation-name: animate3;
+    animation-name: animationArrow_3;
     animation-delay: #{$thirdDelay}s;
 }
 
-.Welcome__button span:nth-child(4) {
+.Welcone__animationArrow:nth-of-type(4) {
     right: 0;
     bottom: 0;
     transform-origin: 100% 50%;
     transform: rotateZ(180deg);
-    animation-name: animate4;
+    animation-name: animationArrow_4;
     animation-delay: #{$fourthDelay}s;
 }
 
-@keyframes animate1 {
+@keyframes animationArrow_1 {
     0% { 
         bottom: 0;
     }
@@ -107,7 +117,7 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     }
 }
 
-@keyframes animate2 {
+@keyframes animationArrow_2 {
     0% { 
         left: 0;
     }
@@ -116,7 +126,7 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     }
 }
 
-@keyframes animate3 {
+@keyframes animationArrow_3 {
     0% { 
         top: 0;
     }
@@ -125,7 +135,7 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     }
 }
 
-@keyframes animate4 {
+@keyframes animationArrow_4 {
     0% { 
         right: 0;
     }

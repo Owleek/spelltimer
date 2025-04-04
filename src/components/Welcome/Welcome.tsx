@@ -29,8 +29,11 @@ const Welcome = () => {
         <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('welcome')}.png")`}}>
             <h1 className="Welcome__title">{text.title}</h1>
             <button className="Welcome__button" onClick={handleClick}>
-                <span/><span/><span/><span/>
-                {text.button}
+                <i className="Welcone__animationArrow"/>
+                <i className="Welcone__animationArrow"/>
+                <i className="Welcone__animationArrow"/>
+                <i className="Welcone__animationArrow"/>
+                <span className="Welcome__buttonText">{text.button}</span>
             </button>
         </div>
     );
