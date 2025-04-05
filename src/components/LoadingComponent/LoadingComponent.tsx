@@ -13,7 +13,7 @@ const LoadingComponent = (): JSX.Element => {
     if (!context) return <ErrorComponent message={String(context)}/>
 
     useEffect(() => {
-        isUserPlayed() ? context.navigate(EPage.PLAYGROUND) : context.navigate(EPage.WELCOME);
+        isUserPlayed() ? context.navigate(EPage.WELCOME) : context.navigate(EPage.WELCOME);
     }, []);
 
     return <div>loading ....</div>

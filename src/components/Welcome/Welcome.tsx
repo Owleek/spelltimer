@@ -26,15 +26,21 @@ const Welcome = () => {
     }
 
     return (
-        <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('welcome')}.png")`}}>
-            <h1 className="Welcome__title">{text.title}</h1>
+        <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('settings11')}.png")`}}>
+            <h1 className="Welcome__title">Control the game by mastering time.</h1>
             <button className="Welcome__button" onClick={handleClick}>
                 <i className="Welcone__animationArrow"/>
                 <i className="Welcone__animationArrow"/>
                 <i className="Welcone__animationArrow"/>
                 <i className="Welcone__animationArrow"/>
-                <span className="Welcome__buttonText">{text.button}</span>
+                <span className="Welcome__buttonText">get started</span>
             </button>
+            <div className="footer">
+                © 2025 spelltimer.com. <br/>
+                 All rights reserved. The spelltimer Logo is a registered trademark of spelltimer, LLC. All Rights Reserved. 
+                 <br/>
+                 spelltimer, and the spelltimer logo are registered trademarks of spelltimer.
+            </div>
         </div>
     );
 } ;

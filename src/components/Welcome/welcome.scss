@@ -9,14 +9,19 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: #006cff;
     overflow: hidden;
 }
 
 .Welcome__title {
+    width: 100%;
+    padding: 3rem;
     margin-bottom: 160px;
-    font-size: 112px;
+    font-size: 44px;
     font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    color: #b1efe0;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 $buttonHeight: 80; // px
@@ -39,11 +44,12 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #1670f0;
+    // color: #1670f0;
+    color: #b1efe0;
     text-transform:uppercase;
     text-decoration:none;
     letter-spacing: 5px;
-    font-size:20px;
+    font-size: 18px;
     font-weight: bold;
     background: rgba(0, 0, 0, 0.5);
     transition: background-color ease-in-out vars.$transitionTime;
@@ -64,11 +70,13 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     text-overflow: ellipsis;
 }
 
+// (42,107,255,1)
+
 .Welcone__animationArrow {
     width: #{$lineWidth}px;
     height: $lineSize;
     position:absolute;
-    background:linear-gradient(to right, rgba(244,243,247,0) 0%, rgba(42,107,255,1) 50%);
+    background:linear-gradient(to right, rgba(244,243,247,0) 0%, #b1efe0 50%);
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: #{$duration}s;
@@ -142,4 +150,16 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     100% { 
         right: #{$length}px;
     }
+}
+
+
+.footer {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    font-size: 12px;
+    text-align: center;
+    padding: 1rem 10rem;
+    color: #d5d5d5;
 }

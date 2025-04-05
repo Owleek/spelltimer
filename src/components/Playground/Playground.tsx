@@ -17,7 +17,7 @@ const Playground = () => {
   const payload = { currentStage, changeStage };
 
   return (
-    <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('Playground')}.jpg")`}}>
+    <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('settings')}.png")`}}>
       <StageContext.Provider value={payload}>
         <SettingsStage />
       </StageContext.Provider>
