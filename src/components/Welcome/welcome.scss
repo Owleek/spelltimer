@@ -1,29 +1,5 @@
 @use '../../variables.scss' as vars;
 
-.Welcome {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-}
-
-.Welcome__title {
-    width: 100%;
-    padding: 3rem;
-    margin-bottom: 160px;
-    font-size: 44px;
-    font-weight: bold;
-    font-style: italic;
-    text-align: center;
-    color: #b1efe0;
-    background: rgba(0, 0, 0, 0.5);
-}
-
 $buttonHeight: 80; // px
 $buttonWidth: 380; // px
 $lineSize: 6px;
@@ -37,6 +13,59 @@ $secondDelay: calc($buttonHeight / $speed);
 $thirdDelay: calc(($buttonHeight + $buttonWidth) / $speed);
 $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
 
+// $welcomeFontColor: darkturquoise;
+// $welcomeFontColor: darkseagreen;
+// $welcomeFontColor: honeydew;
+// $welcomeFontColor: lightblue;
+$welcomeFontColor: #b1efe0;
+
+
+.Welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 140px;
+}
+
+.logo {
+    width: 146px;
+    margin-left: 60px;
+    margin-top: 40px;
+
+    svg {
+        width: 100%;
+        height: 100%;
+
+        path {
+            fill: $welcomeFontColor;
+        }
+    }
+}
+
+.Welcome__title {
+    width: 100%;
+    padding: 60px;
+    margin-bottom: 130px;
+    font-size: 44px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    color: $welcomeFontColor;
+    background: rgba(0, 0, 0, 0.5);
+}
+
 .Welcome__button {
     width: #{$buttonWidth}px;
     height: #{$buttonHeight}px;
@@ -44,8 +73,7 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     display: flex;
     justify-content: center;
     align-items: center;
-    // color: #1670f0;
-    color: #b1efe0;
+    color: $welcomeFontColor;
     text-transform:uppercase;
     text-decoration:none;
     letter-spacing: 5px;
@@ -70,13 +98,11 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     text-overflow: ellipsis;
 }
 
-// (42,107,255,1)
-
 .Welcone__animationArrow {
     width: #{$lineWidth}px;
     height: $lineSize;
     position:absolute;
-    background:linear-gradient(to right, rgba(244,243,247,0) 0%, #b1efe0 50%);
+    background:linear-gradient(to right, rgba(244,243,247,0) 0%, $welcomeFontColor 50%);
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: #{$duration}s;
@@ -152,12 +178,9 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     }
 }
 
-
 .footer {
-    position: absolute;
+    margin-top: auto;
     width: 100%;
-    left: 0;
-    bottom: 0;
     font-size: 12px;
     text-align: center;
     padding: 1rem 10rem;
