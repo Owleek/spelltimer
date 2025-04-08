@@ -1,13 +1,5 @@
 @import url('./assets/fonts/fontStyle.scss');
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-
-}
+@import url('./reset.scss');
 
 body {
     font-family: 'Balsamiq Sans';
@@ -17,100 +9,6 @@ body {
   position: relative;
 }
 
-.appContainer {
-
-}
-
-.button {
-    position: relative;
-    padding: 30px 60px;
-    color: #1670f0;
-    text-transform:uppercase;
-    letter-spacing: 5px;
-    text-decoration:none;
-    font-size: 20px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.5);
-    overflow:hidden;
-    background: transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
-}
-  
-.button::before {
-  content:"";
-  position:absolute;
-  top:2px;
-  left:2px;
-  bottom:2px;
-  width:50%;
-  background:rgba(255,255,255,0.05);
-  
-}
-
-.button span:nth-child(1) {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:2px;
-    background:linear-gradient(to right, #0c002b ,#1779ff);
-    animation: animate1 4s linear infinite;
-    animation-delay:2s;
-    
-}
-@keyframes animate1 {
-  0% {
-      transform:translateX(-100%);
-  }
-  100% {
-    transform:translateX(100%);
-  }
-}
-
-.button span:nth-child(2) {
-    position:absolute;
-    top:0;
-    right:0;
-    width:2px;
-    height:100%;
-    background:linear-gradient(to bottom, #0c002b ,#1779ff);
-    animation: animate2 4s linear infinite;
-    animation-delay:4s;
-}
-  
-@keyframes animate2 {
-  0% {
-      transform:translateY(-100%);
-  }
-
-  100% {
-      transform:translateY(100%);
-  }
-}
-
-.button span:nth-child(3) {
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:2px;
-    background:linear-gradient(to left, #0c002b ,#1779ff);
-     animation: animate3 4s linear infinite;
-    animation-delay:2s;
-    
- }
-  
- @keyframes animate3 {
-    0% {
-      transform:translateX(100%);
-    }
-    100% {
-      transform:translateX(-100%);
-    }
-}
-
-
 .GeneralOverlay {
   position: absolute;
   left: 0;
@@ -118,7 +16,80 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  z-index: 100;
+  z-index: 1001;
   background: black;
   opacity: 0.6;
+}
+
+.ToolBox {
+  position: absolute;
+  top: 40px;
+  right: -40px;
+  width: 100px;
+  height: 60px;
+  background: #7c7f7b;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &.RefreshTool {
+    right: auto;
+    left: -40px;
+
+    & .ToolBox__icon {
+      margin-left: auto;
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.ToolBox.success {
+  background: #63aa5b;
+}
+
+.ToolBox.success .ToolBox__icon svg path {
+  fill: white;
+}
+
+.ToolBox__icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+
+  svg {
+    fill: #393636;
+    max-width: 100%;
+    max-height: 100%;
+
+    path {
+      fill: #393636;
+    }
+  }
+}
+
+.ToolBox.success .ToolBox__save {
+  display: block;
+}
+
+.ToolBox__save {
+  display: none;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 20px;
+  height: 20px;
+
+  svg {
+    fill: white;
+    max-width: 100%;
+    max-height: 100%;
+
+    path {
+      fill: white;
+    }
+  }
 }

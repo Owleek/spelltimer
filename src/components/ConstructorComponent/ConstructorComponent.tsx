@@ -6,9 +6,11 @@ import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import Search from '../Search/Search';
 import ImageGrid from '../ImageGrid/ImageGrid';
-import fetchData, { IRequiredFields, ITimerData } from '../../data/data';
+import fetchData, { IRequiredFields, ITimerData, IBaseFields } from '../../data/data';
+import { EAbility } from '../../data/data';
 import { translate } from '../../utils/utils';
 import { ISlot } from '../../store/slotSlice';
+import './ConstructorComponent.scss';
 
 enum TabKey {
   all = 'all',
@@ -28,12 +30,14 @@ interface IProps {
 }
 
 const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
-  const { spells, artifacts, features } = fetchData;
+  const { spells, artifacts, features, heroes } = fetchData;
   const unionData: Array<ITimerData> = [...spells, ...artifacts, ...features];
 
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
   const [tabContent, setTabContent] = useState<ITimerData[]>(unionData);
   const [searchValue, setSearchValue] = useState<string>('');
+  const [artifact, setArtifact] = useState<ITimerData | null>(null);
+  const [hero, setHero] = useState<IBaseFields | null>(null);
 
   const tabContentStructure = {all: unionData, spells: spells, items: artifacts, other: features};
 
@@ -55,36 +59,54 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   }
 
+  const handleSelectItem = (item: ITimerData) => {
+    if (item.type !== EAbility.ARTIFACTS) return onSelectAbility(item);
+    setArtifact(item);
+  }
+
+  const handleClickHero = (hero: IBaseFields) => {
+    if (!artifact) return;
+    const modifiedArtifact = {...artifact, id: artifact.id + hero.name, owner: hero.name};
+    onSelectAbility(modifiedArtifact);
+  }
+
+  const cancelArtifact = () => setArtifact(null);
+
   return (
-    <React.Fragment>
-        <div className="layout has-sidebar fixed-sidebar fixed-header">
-          <aside id="sidebar" className="sidebar break-point-sm has-bg-image">
-            <div className="sidebar-layout">
-              <div className="sidebar-content">
-                <nav className="menu open-current-submenu">
-                  <ul>
-                    {
-                      tabList.map(el => 
-                      <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab})} onClick={() => setActiveTab(el.key)}>
-                        <div className="Menu__tile img-abilities"><span>{el.label}</span></div>
-                      </li>)
-                    }
-                  </ul>
-                </nav>
-                <div className="dotaButton" onClick={onCancel}>{translate('cancel')}</div>
-              </div>
-            </div>
-          </aside>
+    <div className="Constructor">
+      <div className="Constructor__main">
+        <div className="Constructor__head">
+          <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch} className={artifact ? 'disabled' : ''}/>
         </div>
-        <div className="overlay">
-          <div className="overlay__workspace">
-            <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch}/>
-            <div className="tileGrid">
-              <ImageGrid abilities={tabContent} onClick={onSelectAbility}/>
-            </div>
+        <div className="Constructor__grid">
+          <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={artifact}/>
+        </div>
+      </div>
+      {
+        artifact ? 
+        <div className="Sidebar">
+          <div className="Sidebar__head">
+            <Search searchValue={''} onSearch={() => null} onBlur={() => null}/>
           </div>
+          <div className="Sidebar__grid">
+            { heroes.map(hero => <div key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img}/></div>) }
+          </div>
+          <button className="Sidebar__button" onClick={cancelArtifact}>{translate('cancel')}</button>
         </div>
-    </React.Fragment>
+        :
+        <div className="Sidebar">
+          <ul className="Menu">
+            {
+              tabList.map(el => 
+              <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab})} onClick={() => setActiveTab(el.key)}>
+                <div className="Menu__tile img-abilities"><span>{el.label}</span></div>
+              </li>)
+            }
+          </ul>
+          <button className="Sidebar__button" onClick={onCancel}>{translate('cancel')}</button>
+        </div>
+      }
+    </div>
   )
 }
 

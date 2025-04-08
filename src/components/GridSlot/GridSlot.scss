@@ -1,136 +1,86 @@
+@use 'sass:color';
+@use '../../variables.scss' as vars;
+
 .EmptySlot {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    cursor: pointer;
-  
-    &:hover {
-      box-shadow: 0 0 5px 0px rgb(255, 255, 255);
-      border-style: solid;
-    }
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    transition: all ease-in-out 0.3s;
+    background: vars.$uppperBackground;
+    transition: background-color ease-in-out 0.1s;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background-color ease-in-out vars.$transitionTime;
   }
 
-  .EmptySlot.fixHoverStyles {
-    box-shadow: 0 0 5px 0px rgb(255, 255, 255);
-    border-style: solid;
+  &::before {
+    width: 60%;
+    height: 2px;
   }
 
-  .EmptySlot__inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
+  &::after {
+    height: 60%;
+    width: 2px;
+  }
 
-    &:hover {  
-      &::after,
-      &::before {
-        border: 1px solid rgba(255, 255, 255, 0.9);
-      }
-    }
-
+  &:hover {
     &::after,
     &::before {
-      content: '';
-      position: absolute;
-      border: 1px dashed rgba(255, 255, 255, 0.5);
-    }
-  
-    &::before {
-      width: 0;
-      height: 60%;
-      left: calc(50% - 3px);
-      top: 20%;
-    }
-  
-    &::after {
-      width: 60%;
-      height: 0;
-      top: calc(50% - 3px);
-      left: 20%;
+      background: vars.$secondary;
     }
   }
+}
 
-  .EmptySlot__boundKey {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 80px;
-    height: 80px;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
+.TunedSlot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  object-fit: cover;
+  overflow: hidden;
+}
 
-    &:hover {  
-      background: rgb(164, 164, 164);
-      border: 1px solid white;
-      color: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
-    }
-  }
+.TunedSlot__ownerBox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 160px;
+  height: 160px;
+  z-index: 10;
+  border: 2px solid red;
+  overflow: hidden;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
 
-  .EmptySlot__boundKey.onTopOfTheSky {
-    z-index: 101;
-    background: rgb(164, 164, 164);
-    border: 1px solid white;
-    color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
-  }
+.TunedSlot__ownerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  position: relative;
+  border: 1px solid greenyellow;
+  transform: rotate(-45deg) translate(25%, 25%);
+}
 
-  .EmptySlot__boundKeyText {
-
-  }
-
-  .EmptySlot__boundKeyInfo {
-    display: block;
-    padding: 5px;
-    font-size: 12px;
-    text-align: center;
-  }
-
-  .TunedSlot {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    object-fit: cover;
-  }
-
-  .TunedSlot:hover {
-    & .TunedSlot__RemoveButton {
-      display: block;
-    }
-  }
-
-  .TunedSlot__RemoveButton {
-    display: none;
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    right: 20px;
-    top: 20px;
-    cursor: pointer;
-  
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      width: 3px;
-      height: 100%;
-      top: 50%;
-      left: 50%;
-      background:goldenrod;
-    }
-  
-    &::before {
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-  
-    &::after {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-  }
+.TunedSlot__ownerName {
+  position: absolute;
+  font-size: 16px;
+  left: 100%;
+  bottom: 0;
+  width: 100%;
+  background: rgba(161, 161, 161, 0.5);
+  color: #d9d9d9;
+  // color: #1e1e1e;
+  padding: 5px;
+  text-align: center;
+  transform: rotate(-90deg);
+  transform-origin: 0 100%;
+}
