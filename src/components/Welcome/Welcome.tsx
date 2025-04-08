@@ -43,15 +43,15 @@ const Welcome = () => {
                         <path d="M447.866 7C447.866 4.23858 445.627 2 442.866 2H407.866C405.104 2 402.866 4.23857 402.866 7V14.8307C385.536 22.4821 372.736 38.5151 369.606 57.7918C368.971 61.7011 372.185 65 376.146 65H380.261C383.989 65 386.997 62.0495 387.814 58.4115C391.656 41.3174 406.722 28.4692 424.866 28.0126V67L454.968 92.9632C447.826 100.963 437.434 106 425.866 106C420.757 106 415.866 109.709 415.866 114.818V123.126C419.112 123.7 422.454 124 425.866 124C457.346 124 482.866 98.4802 482.866 67C482.866 43.318 468.423 23.0091 447.866 14.4007V7Z"/>
                     </svg>
                 </div>
-                {/* <div className="menu">
-                    menu
-                </div>
-                <div className="patch">
+                {/* <div className="Welcome__button">
+                    поддержать проект
+                </div> */}
+                {/* <div className="patch">
                     sync with v.7.38c
-                </div>
+                </div> */}
                 <div className="lang">
                     en
-                </div> */}
+                </div>
             </div>
             <h1 className="Welcome__title">Control the game by mastering time.</h1>
             <button className="Welcome__button" onClick={handleClick}>
@@ -62,10 +62,8 @@ const Welcome = () => {
                 <span className="Welcome__buttonText">get started</span>
             </button>
             <div className="footer">
-                © 2025 spelltimer.com. <br/>
-                 All rights reserved. The spelltimer Logo is a registered trademark of spelltimer, LLC. All Rights Reserved. 
-                 <br/>
-                 spelltimer, and the spelltimer logo are registered trademarks of spelltimer.
+                © 2025 spelltimer.com.<br/> All rights reserved.<br/>
+                О проекте / Контакты / Политика <br/>
             </div>
         </div>
     );
