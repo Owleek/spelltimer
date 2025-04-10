@@ -1,0 +1,61 @@
+@use '../../variables.scss' as vars;
+
+.footer {
+    width: 100%;
+    font-size: 14px;
+    margin-top: auto;
+    padding: 1rem 60px;
+    color: #dadada;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.footer__column {
+    padding: 0 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__column:not(:last-of-type) {
+    &::after {
+        content: '';
+        width: 1px;
+        height: 60%;
+        background: #dadada;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+    }
+}
+
+.foote__item:not(:last-of-type) {
+    margin-bottom: 4px;
+}
+
+.footer__button {
+    margin-left: 2rem;
+}
+
+.Welcome__donationButton {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: #dadada;
+    }
+
+    &:hover {
+        svg {
+            fill: rgb(255, 197, 90);
+        }
+    }
+
+}

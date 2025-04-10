@@ -9,6 +9,8 @@ import StageContext, {EStages} from '../../store/StageContext';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import {makeSnakeCase} from '../../utils/utils';
 import './Playground.scss';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 
 const Playground = () => {
@@ -19,7 +21,9 @@ const Playground = () => {
   return (
     <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('settings')}.png")`}}>
       <StageContext.Provider value={payload}>
+        <Header className="Playground__header"/>
         <SettingsStage />
+        <Footer />
       </StageContext.Provider>
     </div>
   );

@@ -53,8 +53,12 @@
     display: block;
 }
 
-.SettingsStage__runButton {
-    top: 30px;
-    right: 10px;
+.Playground__button.runButton {
     position: absolute;
+    top: 0; 
+    left: calc(100% + 1rem);
+}
+
+.Playground__HeaderTimeContainer {
+    position: relative;
 }

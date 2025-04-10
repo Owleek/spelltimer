@@ -25,7 +25,8 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    background: rgb(28, 31, 32);
+    // background: rgb(28, 31, 32);
+    background:rgb(218 221 184);
     overflow: hidden;
 
     &::after {
@@ -37,7 +38,7 @@
         left: 5px;
         top: 5px;
         z-index: 20;
-        box-shadow: 0 0 10px 0px vars.$boxShadow inset;
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.3) inset;
         box-sizing: border-box;
     }
 }
@@ -81,14 +82,16 @@
 .MainTime__hotkey {
     width: 40%;
     height: 100%;
+    padding: 0 14px;
     position: relative;
-    color: vars.$secondary;
+    color: #a0a0a0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     user-select: none;
     cursor: pointer;
+    z-index: 21;
 
     &::after {
         content: "";
@@ -101,15 +104,23 @@
         box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.9);
         z-index: 21;
     }
+
+    &:hover {
+        color: #3e3b3b;
+    }
 }
 
-.MainTime__hotkey.onTopOfTheSky {
+.MainTime__container.onTopOfTheSky {
     position: absolute;
-    background: rgb(164, 164, 164);
-    border: 1px solid white;
-    color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
-    z-index: 101;
+    // background: rgb(164, 164, 164);
+    // border: 1px solid white;
+    // color: rgba(255, 255, 255, 0.9);
+    // box-shadow: 0 0 1px 0px rgba(255, 255, 255, 1);
+    z-index: 1002;
+
+    & .MainTime__hotkey {
+        color: #3e3b3b;
+    }
 }
 
 .MainTime__hotkeyMain {

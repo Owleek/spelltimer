@@ -13,6 +13,7 @@
     position: absolute;
     transition: all ease-in-out 0.3s;
     background: vars.$uppperBackground;
+    background: #797979;;
     transition: background-color ease-in-out 0.1s;
     top: 50%;
     left: 50%;
@@ -33,7 +34,7 @@
   &:hover {
     &::after,
     &::before {
-      background: vars.$secondary;
+      background: vars.$uppperBackground;
     }
   }
 }
@@ -55,7 +56,7 @@
   width: 160px;
   height: 160px;
   z-index: 10;
-  border: 2px solid red;
+  border: 2px solid #92de7f;
   overflow: hidden;
   transform: translate(-50%, -50%) rotate(45deg);
 }
@@ -77,8 +78,7 @@
   bottom: 0;
   width: 100%;
   background: rgba(161, 161, 161, 0.5);
-  color: #d9d9d9;
-  // color: #1e1e1e;
+  color: #92de7f;
   padding: 5px;
   text-align: center;
   transform: rotate(-90deg);

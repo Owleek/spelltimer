@@ -13,13 +13,6 @@ $secondDelay: calc($buttonHeight / $speed);
 $thirdDelay: calc(($buttonHeight + $buttonWidth) / $speed);
 $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
 
-// $welcomeFontColor: darkturquoise;
-// $welcomeFontColor: darkseagreen;
-// $welcomeFontColor: honeydew;
-// $welcomeFontColor: lightblue;
-$welcomeFontColor: #b1efe0;
-
-
 .Welcome {
     display: flex;
     flex-direction: column;
@@ -32,86 +25,6 @@ $welcomeFontColor: #b1efe0;
     position: relative;
 }
 
-.header {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    color: white;
-    padding: 40px 60px;
-    padding-bottom: 120px;
-}
-
-.header__lang {
-    font-size: 20px;
-    cursor: pointer;
-    padding-right: 2rem;
-    font-weight: bold;
-    position: relative;
-
-    &:hover {
-        color: $welcomeFontColor;
-
-        .header__langArrow svg {
-            fill: $welcomeFontColor;
-        }
-    }
-}
-
-.header__langArrow {
-    position: absolute;
-    width: 20px;
-    top: calc(50% - 4px);
-    right: 0;
-    transform: translateY(-50%);
-    
-    svg {
-        fill: white;
-    }
-}
-
-.logo {
-    position: relative;
-    width: 146px;
-
-    svg {
-        width: 100%;
-        height: 100%;
-
-        path {
-            fill: $welcomeFontColor;
-        }
-    }
-}
-
-.patch {
-    position: absolute;
-    left: calc(100% + 5px);
-    top: -18px;
-    white-space: nowrap;
-    // color: #778899;
-    color: #9babbb;
-}
-
-.Welcome__donationButton {
-    width: 80px;
-    height: 80px;
-    cursor: pointer;
-
-    svg {
-        width: 100%;
-        height: 100%;
-        fill: #dadada;
-    }
-
-    &:hover {
-        svg {
-            fill: $welcomeFontColor;
-        }
-    }
-
-}
-
 .Welcome__title {
     width: 100%;
     padding: 60px;
@@ -120,7 +33,7 @@ $welcomeFontColor: #b1efe0;
     font-weight: bold;
     font-style: italic;
     text-align: center;
-    color: $welcomeFontColor;
+    color: vars.$welcomeFontColor;
     background: rgba(0, 0, 0, 0.5);
 }
 
@@ -131,7 +44,7 @@ $welcomeFontColor: #b1efe0;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $welcomeFontColor;
+    color: vars.$welcomeFontColor;
     text-transform:uppercase;
     text-decoration:none;
     letter-spacing: 5px;
@@ -160,7 +73,7 @@ $welcomeFontColor: #b1efe0;
     width: #{$lineWidth}px;
     height: $lineSize;
     position:absolute;
-    background:linear-gradient(to right, rgba(244,243,247,0) 0%, $welcomeFontColor 50%);
+    background:linear-gradient(to right, rgba(244,243,247,0) 0%, vars.$welcomeFontColor 50%);
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: #{$duration}s;
@@ -234,45 +147,4 @@ $welcomeFontColor: #b1efe0;
     100% { 
         right: #{$length}px;
     }
-}
-
-.footer {
-    width: 100%;
-    font-size: 14px;
-    margin-top: auto;
-    padding: 1rem 60px;
-    color: #dadada;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.footer__column {
-    padding: 0 2rem;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer__column:not(:last-of-type) {
-    &::after {
-        content: '';
-        width: 1px;
-        height: 60%;
-        background: #dadada;
-        position: absolute;
-        top: 50%;
-        right: 0;
-        transform: translateY(-50%);
-    }
-}
-
-.foote__item:not(:last-of-type) {
-    margin-bottom: 4px;
-}
-
-.footer__button {
-    margin-left: 2rem;
 }
