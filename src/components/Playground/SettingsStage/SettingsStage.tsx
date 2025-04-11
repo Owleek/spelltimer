@@ -63,11 +63,12 @@ const SettingsStage = (): JSX.Element => {
     }
 
     const getKey = useCallback((event: KeyboardEvent) => {
-        if (!editingSlot.current) return;
-
         const keyIs = event.code;
         setIsBinding(false);
         document.removeEventListener('keydown', getKey);
+
+        if (!editingSlot.current || keyIs === 'Escape') return;
+
         dispatch(setHotkey({key: keyIs, id: editingSlot.current.position, type: 'slot'}));
         editingSlot.current = null;
     }, []);

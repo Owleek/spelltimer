@@ -21,6 +21,9 @@ const EmptyMainTime = (props: IProps): JSX.Element => {
         const keyIs = event.code;
         setIsBinding(false);
         document.removeEventListener('keydown', getKey);
+
+        if (keyIs === 'Escape') return;
+
         dispatch(setHotkey({key: keyIs, type: 'time'}));
     }, []);
 
