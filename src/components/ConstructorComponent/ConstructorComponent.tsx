@@ -76,12 +76,15 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
     <div className="Constructor">
       <div className="Constructor__main">
         <div className="Constructor__head">
-          <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch} className={artifact ? 'disabled' : ''}/>
+          <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch} disabled={!!artifact}/>
         </div>
-        <div className="Constructor__grid">
-          <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={artifact}/>
+        <div className="Constructor__body">
+          <div className="Constructor__bodyFrame">
+            <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={artifact}/>
+          </div>
         </div>
       </div>
+      
       {
         artifact ? 
         <div className="Sidebar">

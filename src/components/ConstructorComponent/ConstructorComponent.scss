@@ -15,25 +15,49 @@
 .Constructor__main {
     width: calc(100% - 400px);
     height: 100%;
-    margin-right: auto;
-    display: grid;
-    grid-template-columns: repeat(15, 1fr);
-    grid-template-rows: repeat(15, 1fr);
+    padding: 1rem;
 }
 
 .Constructor__head {
-    grid-area: 1 / 4 / 2 / 13;
-    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
 }
 
-.Constructor__grid {
-    grid-area: 3 / 2 / 15 / 15;
-    padding: 1rem;
-    gap: 1rem;
-    border: 1px solid rgb(208, 83, 58);
-    border-radius: 10px;
+.Constructor__body {
+    display: flex;
     justify-content: center;
-    align-items: start;
+}
+
+.Constructor__bodyFrame {
+    width: 100%;
+    max-width: 1193px;
+    min-height: 450px;
+    max-height: 500px;
+    padding: 1rem;
+    border: 2px solid rgb(107 63 41);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+    overflow-y: auto;
+
+
+    // &::-webkit-scrollbar {
+    //     width: 20px;
+    //     margin-right: 5px;
+    // }
+      
+    //   &::-webkit-scrollbar-track {
+    //     -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    //     background-color: #f9f9fd;
+    //     border-radius: 10px;
+    //     width: 10px;
+    //   }
+      
+    //   &::-webkit-scrollbar-thumb {
+    //     border-radius: 10px;
+    //     background: linear-gradient(180deg, #00c6fb, #005bea);
+    //   }
 }
 
 .Sidebar {
