@@ -80,7 +80,9 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
         </div>
         <div className="Constructor__body">
           <div className="Constructor__bodyFrame">
-            <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={artifact}/>
+            <div className="Constructor__scrollContainer appscrollY">
+              <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={artifact}/>
+            </div>
           </div>
         </div>
       </div>
