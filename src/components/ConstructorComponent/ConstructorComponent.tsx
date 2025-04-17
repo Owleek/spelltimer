@@ -2,7 +2,7 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import cn from 'classnames';
 import Search from '../Search/Search';
 import ImageGrid from '../ImageGrid/ImageGrid';
@@ -35,9 +35,23 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const [activeTab, setActiveTab] = useState<TabKey>(tabList[0].key);
   const [tabContent, setTabContent] = useState<ITimerData[]>(unionData);
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [artifact, setArtifact] = useState<ITimerData | null>(null);
   const [hero, setHero] = useState<IBaseFields | null>(null);
+  const [mainSearchValue, setMainSearchValue] = useState<string>('');
+  const [sideSearchValue, setSideSearchValue] = useState<string>('');
+  const [artifact, setArtifact] = useState<ITimerData | null>(null);
+
+
+  const handleEscape = useCallback((event: KeyboardEvent) => {
+    if (event.code !== 'Escape') return;
+    if (artifact) return cancelArtifact();
+    onCancel();
+  }, [artifact]);
+
+  useEffect(()=> {
+    document.addEventListener('keyup', handleEscape);
+    return () => document.removeEventListener('keyup', handleEscape);
+  }, [handleEscape]);
+
 
   const tabContentStructure = {all: unionData, spells: spells, items: artifacts, other: features};
 
@@ -49,14 +63,15 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
     return tabContentStructure[activeTab].filter(ability => ability.name.toLowerCase().startsWith(str));
   }
 
-  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
+  const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
     const value = event.target.value;
-    setSearchValue(value);
+    setMainSearchValue(value);
     setTabContent(value ? filterTabContent(value) : tabContentStructure[activeTab]);
   }
 
-  const onBlurSearch = (event: React.FocusEvent<HTMLInputElement>) => {
-
+  const onChangeSideSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
+    const value = event.target.value;
+    setSideSearchValue(value);
   }
 
   const handleSelectItem = (item: ITimerData) => {
@@ -72,11 +87,18 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const cancelArtifact = () => setArtifact(null);
 
+  const clearMainSearch = () => {
+    setMainSearchValue('');
+    setTabContent(tabContentStructure[activeTab]);
+  }
+
+  const clearSideSearch = () => setSideSearchValue('');
+
   return (
     <div className="Constructor">
       <div className="Constructor__main">
         <div className="Constructor__head">
-          <Search searchValue={searchValue} onSearch={onSearch} onBlur={onBlurSearch} disabled={!!artifact}/>
+          <Search searchValue={mainSearchValue} onChange={onChangeSearch} disabled={!!artifact} onClickClear={clearMainSearch}/>
         </div>
         <div className="Constructor__body">
           <div className="Constructor__bodyFrame">
@@ -88,10 +110,10 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
       </div>
       
       {
-        artifact ? 
+        artifact ?
         <div className="Sidebar">
           <div className="Sidebar__head">
-            <Search searchValue={''} onSearch={() => null} onBlur={() => null}/>
+            <Search searchValue={sideSearchValue} onChange={onChangeSideSearch} onClickClear={clearSideSearch}/>
           </div>
           <div className="Sidebar__grid">
             { heroes.map(hero => <div key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img}/></div>) }
