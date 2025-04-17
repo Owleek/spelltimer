@@ -113,7 +113,7 @@ const SettingsStage = (): JSX.Element => {
                         return  <div className="Playground__slotBox">
                                     {
                                         'name' in slot
-                                        ? <TunedSlot key={slot.position} data={slot} handleRemove={removeAbility} className='Playground__slotHeavyShadow'/>
+                                        ? <TunedSlot key={slot.position} data={slot} className='Playground__slotHeavyShadow'/>
                                         : <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
                                     }
                                     <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={() => handleBindKey(slot)}>

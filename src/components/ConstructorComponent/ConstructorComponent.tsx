@@ -38,14 +38,14 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   const [hero, setHero] = useState<IBaseFields | null>(null);
   const [mainSearchValue, setMainSearchValue] = useState<string>('');
   const [sideSearchValue, setSideSearchValue] = useState<string>('');
-  const [artifact, setArtifact] = useState<ITimerData | null>(null);
+  const [itemOwnership, setItemOwnership] = useState<ITimerData | null>(null);
 
 
   const handleEscape = useCallback((event: KeyboardEvent) => {
     if (event.code !== 'Escape') return;
-    if (artifact) return cancelArtifact();
+    if (itemOwnership) return cancelArtifact();
     onCancel();
-  }, [artifact]);
+  }, [itemOwnership]);
 
   useEffect(()=> {
     document.addEventListener('keyup', handleEscape);
@@ -75,17 +75,17 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   }
 
   const handleSelectItem = (item: ITimerData) => {
-    if (item.type !== EAbility.ARTIFACTS) return onSelectAbility(item);
-    setArtifact(item);
+    if ('owner' in item) return setItemOwnership(item);
+    onSelectAbility(item);
   }
 
   const handleClickHero = (hero: IBaseFields) => {
-    if (!artifact) return;
-    const modifiedArtifact = {...artifact, id: artifact.id + hero.name, owner: hero.name};
+    if (!itemOwnership) return;
+    const modifiedArtifact = {...itemOwnership, id: itemOwnership.id + hero.name, owner: hero.name};
     onSelectAbility(modifiedArtifact);
   }
 
-  const cancelArtifact = () => setArtifact(null);
+  const cancelArtifact = () => setItemOwnership(null);
 
   const clearMainSearch = () => {
     setMainSearchValue('');
@@ -98,19 +98,19 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
     <div className="Constructor">
       <div className="Constructor__main">
         <div className="Constructor__head">
-          <Search searchValue={mainSearchValue} onChange={onChangeSearch} disabled={!!artifact} onClickClear={clearMainSearch}/>
+          <Search searchValue={mainSearchValue} onChange={onChangeSearch} disabled={!!itemOwnership} onClickClear={clearMainSearch}/>
         </div>
         <div className="Constructor__body">
           <div className="Constructor__bodyFrame">
             <div className="Constructor__scrollContainer appscrollY">
-              <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={artifact}/>
+              <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership}/>
             </div>
           </div>
         </div>
       </div>
       
       {
-        artifact ?
+        itemOwnership ?
         <div className="Sidebar">
           <div className="Sidebar__head">
             <Search searchValue={sideSearchValue} onChange={onChangeSideSearch} onClickClear={clearSideSearch}/>

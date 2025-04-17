@@ -6,13 +6,12 @@ import fetchData from '../../data/data';
 
 interface IProps {
   data: ITimerData
-  handleRemove: (slot: ITimerData) => void
   className: string
 }
 
-const TunedSlot = ({data, handleRemove, className}: IProps) => {
+const TunedSlot = ({data, className}: IProps) => {
   const{ heroes } = fetchData;
-  const currentHero = data.owner && data.type === EAbility.ARTIFACTS ? heroes.find(hero => hero.name === data.owner) : null;
+  const currentHero = data.owner ? heroes.find(hero => hero.name === data.owner) : null;
   
   return (
     <div className={cn('TunedSlot', className)} style={{backgroundImage: `url("${data.img}")`}}>
