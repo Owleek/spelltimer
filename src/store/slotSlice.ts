@@ -28,6 +28,9 @@ export const slotSlice = createSlice({
         },
         resetState(state: Array<ISlot>, action: PayloadAction<null>) {
             return initialSlotList;
+        },
+        mapSpellToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {
+            
         }
     },
     extraReducers: (builder) => {
@@ -50,6 +53,6 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { mapTimerToSlot, removeTimerFromSlot, resetState } = slotSlice.actions;
+export const { mapTimerToSlot, removeTimerFromSlot, resetState, mapSpellToSlot } = slotSlice.actions;
 
 export default slotSlice.reducer;

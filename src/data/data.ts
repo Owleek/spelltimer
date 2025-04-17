@@ -39,6 +39,7 @@ export interface IHeroes extends IBaseFields {}
 
 export interface ISpell extends IRequiredFields {
     reducers: Array<string>
+    hero: string
 }
 
 export interface IArtifact extends IRequiredFields {
@@ -53,6 +54,7 @@ export interface IFeature extends IRequiredFields {
 export interface ITimerData extends IRequiredFields {
     reducers?: Array<IReducer>
     owner?: string | null
+    hero?: string
 }
 
 const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {
@@ -92,7 +94,7 @@ const featuresData: Array<ITimerData> = setRequredFields(setBaseFields(features,
 
 export default { 
     heroes: heroesData,
-    reducers: reducersData, 
+    reducers: reducersData,
     spells: spellsData,
     artifacts: artifactsData,
     features: featuresData

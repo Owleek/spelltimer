@@ -7,8 +7,8 @@ import EmptySlot from '../../GridSlot/EmptySlot';
 import TunedSlot from '../../GridSlot/TunedSlot';
 import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
 import EmptyMainTime from '../../MainTime/EmptyMainTime';
-import {ITimerData} from '../../../data/data';
-import {removeTimerFromSlot, mapTimerToSlot, resetState, ISlot} from '../../../store/slotSlice';
+import {EAbility, ITimerData} from '../../../data/data';
+import {removeTimerFromSlot, mapTimerToSlot, mapSpellToSlot, resetState, ISlot} from '../../../store/slotSlice';
 import {setHotkey} from '../../../store/hotkeySlice';
 import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
@@ -51,6 +51,7 @@ const SettingsStage = (): JSX.Element => {
         }
 
         setCurrnetSlot(null);
+        // if (ability.type === EAbility.SPELLS) return dispatch(mapSpellToSlot(updData));
         dispatch(mapTimerToSlot(updData));
     };
 
