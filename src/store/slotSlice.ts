@@ -30,7 +30,18 @@ export const slotSlice = createSlice({
             return initialSlotList;
         },
         mapSpellToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {
-            
+            const destinationIndex = state.findIndex(slot => slot.position === action.payload.position);
+            const matchFoundIndex = state.findIndex(slot => {
+                if ('hero' in slot && 'name' in slot) return slot.name === action.payload.name;
+                return false;
+            });
+
+            if (destinationIndex === -1) throw new Error('DestinationIndex not found');
+            if (destinationIndex === matchFoundIndex) return;
+            if (matchFoundIndex !== -1) {
+                state[matchFoundIndex] = { position: state[matchFoundIndex].position, boundKey: state[matchFoundIndex].boundKey };
+            }
+            state[destinationIndex] = action.payload;
         }
     },
     extraReducers: (builder) => {

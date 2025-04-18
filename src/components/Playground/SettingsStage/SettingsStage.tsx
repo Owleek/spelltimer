@@ -51,7 +51,7 @@ const SettingsStage = (): JSX.Element => {
         }
 
         setCurrnetSlot(null);
-        // if (ability.type === EAbility.SPELLS) return dispatch(mapSpellToSlot(updData));
+        if (ability.type === EAbility.SPELLS) return dispatch(mapSpellToSlot(updData));
         dispatch(mapTimerToSlot(updData));
     };
 
