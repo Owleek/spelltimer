@@ -12,36 +12,52 @@ export type ISlot = ITimerData | IEmptySlot;
 
 const initialSlotList: Array<ISlot> = Array.from({length: 6}, (item, idx) => ({position: idx + 1, boundKey: getPositionHotkey(idx + 1)}));
 
+function removeSlot(state: Array<ISlot>, action: PayloadAction<ISlot>, index: number) {
+    state[index] = { position: state[index].position, boundKey: state[index].boundKey };
+}
+
+function mapData(state: Array<ISlot>, action: PayloadAction<ITimerData>, matchFoundIndex: number) {
+    const destinationIndex = state.findIndex(slot => slot.position === action.payload.position);
+    if (destinationIndex === -1) throw new Error('DestinationIndex not found');
+    if (destinationIndex === matchFoundIndex) return;
+    if (matchFoundIndex !== -1) removeSlot(state, action, matchFoundIndex);
+    state[destinationIndex] = action.payload;
+}
+
 export const slotSlice = createSlice({
     name: 'actionSlotSlice',
     initialState: initialSlotList,
     reducers: {
-        mapTimerToSlot(state: Array<ISlot>, action: PayloadAction<ISlot>) {
-            const idx = state.findIndex(slot => slot.position === action.payload.position);
-            if (idx === -1) return state;
-            state[idx] = action.payload;
-        },
         removeTimerFromSlot(state: Array<ISlot>, action: PayloadAction<ISlot>) {
             const idx = state.findIndex(slot => slot.position === action.payload.position);
-            if (idx === -1) return state;
-            state[idx] = { position: action.payload.position, boundKey: action.payload.boundKey };
+            if (idx === -1) throw new Error('Slot index not found');
+            removeSlot(state, action, idx);
         },
         resetState(state: Array<ISlot>, action: PayloadAction<null>) {
             return initialSlotList;
         },
         mapSpellToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {
-            const destinationIndex = state.findIndex(slot => slot.position === action.payload.position);
             const matchFoundIndex = state.findIndex(slot => {
                 if ('hero' in slot && 'name' in slot) return slot.name === action.payload.name;
                 return false;
             });
 
-            if (destinationIndex === -1) throw new Error('DestinationIndex not found');
-            if (destinationIndex === matchFoundIndex) return;
-            if (matchFoundIndex !== -1) {
-                state[matchFoundIndex] = { position: state[matchFoundIndex].position, boundKey: state[matchFoundIndex].boundKey };
-            }
-            state[destinationIndex] = action.payload;
+            mapData(state, action, matchFoundIndex);
+        },
+        mapItemToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {
+            const matchFoundIndex = state.findIndex(slot => {
+                if ('owner' in slot && 'name' in slot) return (slot.name === action.payload.name) && (slot.owner === action.payload.owner);
+                return false;
+            });
+
+            mapData(state, action, matchFoundIndex);
+        },
+        mapFeatureToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {
+            const matchFoundIndex = state.findIndex(slot => {
+                if ('owner' in slot || 'hero' in slot) return false;
+                if ('name' in slot) return slot.name === action.payload.name;
+            });
+            mapData(state, action, matchFoundIndex);
         }
     },
     extraReducers: (builder) => {
@@ -64,6 +80,6 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { mapTimerToSlot, removeTimerFromSlot, resetState, mapSpellToSlot } = slotSlice.actions;
+export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot } = slotSlice.actions;
 
 export default slotSlice.reducer;
