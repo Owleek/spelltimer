@@ -60,7 +60,11 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   }, [activeTab]);
 
   const filterTabContent = (str: string): Array<ITimerData> => {
-    return tabContentStructure[activeTab].filter(ability => ability.name.toLowerCase().startsWith(str));
+    return tabContentStructure[activeTab].filter(ability => {
+      const nameIncludes = ability.name.toLowerCase().includes(str);
+      const heroIncludes = ability.hero?.toLowerCase().includes(str);
+      return nameIncludes || heroIncludes;
+    });
   }
 
   const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
