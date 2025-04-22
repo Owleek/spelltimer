@@ -10,5 +10,33 @@
     {   
         "name": "Aeon Disk",
         "cooldown": [105, 125, 145, 165]
+    },
+    {   
+        "name": "Magic Lamp",
+        "cooldown": [75]
+    },
+    {   
+        "name": "Pipe of Insight",
+        "cooldown": [60]
+    },
+    {   
+        "name": "Guardian Greaves",
+        "cooldown": [45]
+    },
+    {   
+        "name": "Mekansm",
+        "cooldown": [50]
+    },
+    {   
+        "name": "Crimson Guard",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Minotaur Horn",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Satanic",
+        "cooldown": [30]
     }
 ]
