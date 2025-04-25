@@ -10,13 +10,15 @@
         "cooldown": [130, 120, 110]
     },
     {   
-        "hero": "Faceles Void",
+        "hero": "Faceless Void",
         "name": "Chronosphere",
+        "siblings": ["Time Zone"],
         "cooldown": [160, 150, 140]
     },
     {   
-        "hero": "Faceles Void",
+        "hero": "Faceless Void",
         "name": "Time Zone",
+        "siblings": ["Chronosphere"],
         "cooldown": [130, 120, 110]
     },
     {   

@@ -81,6 +81,8 @@
   color: #92de7f;
   padding: 5px;
   text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
   transform: rotate(-90deg);
   transform-origin: 0 100%;
 }

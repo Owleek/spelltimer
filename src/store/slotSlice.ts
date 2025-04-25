@@ -37,11 +37,8 @@ export const slotSlice = createSlice({
             return initialSlotList;
         },
         mapSpellToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {
-            const matchFoundIndex = state.findIndex(slot => {
-                if ('hero' in slot && 'name' in slot) return slot.name === action.payload.name;
-                return false;
-            });
-
+            const {name, siblings} = action.payload;
+            const matchFoundIndex = state.findIndex(slot => ('hero' in slot && 'name' in slot) ? (slot.name === name) || siblings?.some(el => el === slot.name) : false);
             mapData(state, action, matchFoundIndex);
         },
         mapItemToSlot(state: Array<ISlot>, action: PayloadAction<ITimerData>) {

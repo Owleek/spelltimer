@@ -40,6 +40,7 @@ export interface IHeroes extends IBaseFields {}
 export interface ISpell extends IRequiredFields {
     reducers: Array<string>
     hero: string
+    siblings?: Array<string>
 }
 
 export interface IArtifact extends IRequiredFields {
@@ -55,18 +56,18 @@ export interface ITimerData extends IRequiredFields {
     reducers?: Array<IReducer>
     owner?: string | null
     hero?: string
+    siblings?: Array<string>
 }
 
 const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {
     return arr.map((item: IBaseFields, idx: number) => {
         const key = makeSnakeCase(item.name);
-        const name = translate(key);
 
         return {
             ...item,
             id: `${idx}-${type}-${key}`,
             key: key,
-            name: name,
+            name: item.name,
             img: `/assets/${type}/${key}.png`,
             type: type
         }
