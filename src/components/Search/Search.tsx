@@ -11,11 +11,12 @@ interface IProps {
   disabled?: boolean
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   onClickClear: () => void
+  className?: string
 }
 
-const Search = ({searchValue, onChange, disabled, onClickClear}: IProps) => {
+const Search = ({searchValue, onChange, disabled, onClickClear, className}: IProps) => {
   return (
-    <div className={cn('Search', {disabled: !!disabled})} >
+    <div className={cn('Search', {disabled: !!disabled}, className)}>
       <input disabled={!!disabled} autoFocus={true} type='text' onChange={onChange} value={searchValue}/>
       {
         !!searchValue && 

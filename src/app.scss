@@ -21,10 +21,7 @@ body {
   opacity: 0.6;
 }
 
-
-
-.appscrollY {
-  overflow-y: auto;
+.appStyledScroll {
   
   &::-webkit-scrollbar {
       width: 10px;
