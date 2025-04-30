@@ -37,13 +37,10 @@
 
 .Playground__boxHeader {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   padding: 1rem;
   padding-bottom: 0;
-  align-self: stretch;
-  position: relative;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 128px 5fr 128px;
 }
 
 .Playground__boxBody {
@@ -103,33 +100,31 @@
   border-radius: 8px;
   padding: 1rem;
   background: linear-gradient(to right, #3f3e3e, #484747, #3f3e3e);
-
-  // background: linear-gradient(#484747, #3f3e3e, #303030);
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.35) inset, 0 2px 5px 0px rgba(0, 0, 0, 0.5), 0 0px 25px 0px rgba(0, 0, 0, 0.15);
   position: relative;
   cursor: pointer;
-  transition: all ease-in-out 0.05s;
+  transition: all ease-in-out vars.$transitionTime;
   transform: scale(1);
 
   &::before {
     content: '';
     position: absolute;
     inset: 3px 3px;
-    // border-top: 1px solid #ccc;
     filter: blur(2px);
   }
 
+  &:hover {
+    fill: goldenrod;
+  }
+
   &.active {
+    fill: #fdfb00 !important;
     box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.5) inset;
     padding: 17px;
+    pointer-events: none;
 
     &::before {
       border-color: transparent;
-    }
-
-    svg {
-      fill: #00ff08;
-      filter: drop-shadow(0px 0px 10px #00ff08);
     }
   }
 
@@ -137,7 +132,7 @@
     background: #3b3b3b;
     box-shadow: none;
     cursor: default;
-    fill: #4a4a4a;
+    fill: #4a4a4a !important;
     border-color: #333333;
     pointer-events: none;
   }
@@ -146,6 +141,18 @@
     width: 100%;
     height: 100%;
   }
+}
+
+.Playground__editToglers {
+  display: flex;
+
+  & .Playground__button:first-of-type {
+    margin-right: 0.5rem;
+  }
+}
+
+.Playground__button.continue {
+  fill: #00ff08;
 }
 
 .Playground__slotHotkey {

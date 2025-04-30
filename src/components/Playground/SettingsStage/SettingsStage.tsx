@@ -7,6 +7,7 @@ import EmptySlot from '../../GridSlot/EmptySlot';
 import TunedSlot from '../../GridSlot/TunedSlot';
 import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
 import EmptyMainTime from '../../MainTime/EmptyMainTime';
+import PauseController from '../../PauseController/PauseController';
 import {EAbility, ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../store/slotSlice';
 import {setHotkey} from '../../../store/hotkeySlice';
@@ -25,6 +26,9 @@ const SettingsStage = (): JSX.Element => {
     const [isEdit, setIsEdit] = useState<boolean>(slotList.some(slot => 'name' in slot));
 
     const [buttonActive, setButtonActive] = useState<boolean>(false);
+    const resetDisabled = slotList.some(slot => 'name' in slot) ? currentStage !== EStages.EDIT : true;
+    const playDisabled = !slotList.some(slot => 'name' in slot);
+    const continueDisabled = slotList.some(slot => 'name' in slot) ? currentStage === EStages.PLAY : true;
 
     const dispatch = useDispatch();
     const context = useContext(StageContext);
@@ -88,25 +92,39 @@ const SettingsStage = (): JSX.Element => {
 
             <div className="Playground__box">
                 <div className="Playground__boxHeader">
-                    <div className={cn('Playground__button', {disabled: currentStage !== EStages.EDIT})}>
+                    <div className={cn('Playground__button', {disabled: resetDisabled})} onClick={reset}>
                         <svg viewBox="0 0 438.529 438.528">
                             <path d="M433.109,23.694c-3.614-3.612-7.898-5.424-12.848-5.424c-4.948,0-9.226,1.812-12.847,5.424l-37.113,36.835    c-20.365-19.226-43.684-34.123-69.948-44.684C274.091,5.283,247.056,0.003,219.266,0.003c-52.344,0-98.022,15.843-137.042,47.536    C43.203,79.228,17.509,120.574,5.137,171.587v1.997c0,2.474,0.903,4.617,2.712,6.423c1.809,1.809,3.949,2.712,6.423,2.712h56.814    c4.189,0,7.042-2.19,8.566-6.565c7.993-19.032,13.035-30.166,15.131-33.403c13.322-21.698,31.023-38.734,53.103-51.106    c22.082-12.371,45.873-18.559,71.376-18.559c38.261,0,71.473,13.039,99.645,39.115l-39.406,39.397    c-3.607,3.617-5.421,7.902-5.421,12.851c0,4.948,1.813,9.231,5.421,12.847c3.621,3.617,7.905,5.424,12.854,5.424h127.906    c4.949,0,9.233-1.807,12.848-5.424c3.613-3.616,5.42-7.898,5.42-12.847V36.542C438.529,31.593,436.733,27.312,433.109,23.694z"/>
                             <path d="M422.253,255.813h-54.816c-4.188,0-7.043,2.187-8.562,6.566c-7.99,19.034-13.038,30.163-15.129,33.4    c-13.326,21.693-31.028,38.735-53.102,51.106c-22.083,12.375-45.874,18.556-71.378,18.556c-18.461,0-36.259-3.423-53.387-10.273    c-17.13-6.858-32.454-16.567-45.966-29.13l39.115-39.112c3.615-3.613,5.424-7.901,5.424-12.847c0-4.948-1.809-9.236-5.424-12.847    c-3.617-3.62-7.898-5.431-12.847-5.431H18.274c-4.952,0-9.235,1.811-12.851,5.431C1.807,264.844,0,269.132,0,274.08v127.907    c0,4.945,1.807,9.232,5.424,12.847c3.619,3.61,7.902,5.428,12.851,5.428c4.948,0,9.229-1.817,12.847-5.428l36.829-36.833    c20.367,19.41,43.542,34.355,69.523,44.823c25.981,10.472,52.866,15.701,80.653,15.701c52.155,0,97.643-15.845,136.471-47.534    c38.828-31.688,64.333-73.042,76.52-124.05c0.191-0.38,0.281-1.047,0.281-1.995c0-2.478-0.907-4.612-2.715-6.427    C426.874,256.72,424.731,255.813,422.253,255.813z"/>
                         </svg>
                     </div>
 
-                    <div className="Playground__HeaderTimeContainer">
-                        <EmptyMainTime />
-                        <div className={cn('Playground__button runButton', {active: false})} onMouseDown={() => setButtonActive(true)} onMouseUp={() => setButtonActive(false)}>
+                    <PauseController>
+                        <div className={cn('Playground__button', {active: false}, {disabled: playDisabled})} onMouseDown={() => setButtonActive(true)} onMouseUp={() => setButtonActive(false)}>
                             <svg viewBox="0 0 163.861 163.861">
                                 <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275   c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z"/>
                             </svg>
                         </div>
-                    </div>
-                    <div className={cn('Playground__button SettingsStage__setsButton', {active: currentStage === EStages.EDIT})} onClick={() => changeStage(currentStage ===  EStages.PLAY ? EStages.EDIT : EStages.PLAY)}>
-                        <svg viewBox="0 0 24 24">
-                            <path d="M22.2,14.4L21,13.7c-1.3-0.8-1.3-2.7,0-3.5l1.2-0.7c1-0.6,1.3-1.8,0.7-2.7l-1-1.7c-0.6-1-1.8-1.3-2.7-0.7   L18,5.1c-1.3,0.8-3-0.2-3-1.7V2c0-1.1-0.9-2-2-2h-2C9.9,0,9,0.9,9,2v1.3c0,1.5-1.7,2.5-3,1.7L4.8,4.4c-1-0.6-2.2-0.2-2.7,0.7   l-1,1.7C0.6,7.8,0.9,9,1.8,9.6L3,10.3C4.3,11,4.3,13,3,13.7l-1.2,0.7c-1,0.6-1.3,1.8-0.7,2.7l1,1.7c0.6,1,1.8,1.3,2.7,0.7L6,18.9   c1.3-0.8,3,0.2,3,1.7V22c0,1.1,0.9,2,2,2h2c1.1,0,2-0.9,2-2v-1.3c0-1.5,1.7-2.5,3-1.7l1.2,0.7c1,0.6,2.2,0.2,2.7-0.7l1-1.7   C23.4,16.2,23.1,15,22.2,14.4z M12,16c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,14.2,14.2,16,12,16z"/>
-                        </svg>
+                        <div className={cn('Playground__button', {disabled: !isTimeRuns})} onMouseDown={() => setButtonActive(true)} onMouseUp={() => setButtonActive(false)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
+                                <path d="M5 3C5 1.34315 6.34315 0 8 0H14C15.6569 0 17 1.34315 17 3V39C17 40.6569 15.6569 42 14 42H8C6.34315 42 5 40.6569 5 39V3Z" />
+                                <path d="M25 3C25 1.34315 26.3431 0 28 0H34C35.6569 0 37 1.34315 37 3V39C37 40.6569 35.6569 42 34 42H28C26.3431 42 25 40.6569 25 39V3Z" />
+                            </svg>
+                        </div>
+                    </PauseController>
+                    
+                    <div className="Playground__editToglers">
+                        <div className={cn('Playground__button SettingsStage__setsButton', {active: currentStage === EStages.EDIT})} onClick={() => changeStage(currentStage ===  EStages.PLAY ? EStages.EDIT : EStages.PLAY)}>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M22.2,14.4L21,13.7c-1.3-0.8-1.3-2.7,0-3.5l1.2-0.7c1-0.6,1.3-1.8,0.7-2.7l-1-1.7c-0.6-1-1.8-1.3-2.7-0.7   L18,5.1c-1.3,0.8-3-0.2-3-1.7V2c0-1.1-0.9-2-2-2h-2C9.9,0,9,0.9,9,2v1.3c0,1.5-1.7,2.5-3,1.7L4.8,4.4c-1-0.6-2.2-0.2-2.7,0.7   l-1,1.7C0.6,7.8,0.9,9,1.8,9.6L3,10.3C4.3,11,4.3,13,3,13.7l-1.2,0.7c-1,0.6-1.3,1.8-0.7,2.7l1,1.7c0.6,1,1.8,1.3,2.7,0.7L6,18.9   c1.3-0.8,3,0.2,3,1.7V22c0,1.1,0.9,2,2,2h2c1.1,0,2-0.9,2-2v-1.3c0-1.5,1.7-2.5,3-1.7l1.2,0.7c1,0.6,2.2,0.2,2.7-0.7l1-1.7   C23.4,16.2,23.1,15,22.2,14.4z M12,16c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,14.2,14.2,16,12,16z"/>
+                            </svg>
+                        </div>
+                        <div className={cn('Playground__button continue', {active: currentStage === EStages.PLAY, disabled: continueDisabled})} onClick={() => changeStage(currentStage ===  EStages.PLAY ? EStages.EDIT : EStages.PLAY)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 55" >
+                                <path d="M52.001 0C53.1055 2.5638e-05 54.0009 0.895516 54.001 2L54 53C54 54.1046 53.1046 55 52 55H33C31.8954 55 31 54.1046 31 53V49.1426C31.0001 48.0381 31.8955 47.1426 33 47.1426H46L46.001 7.85742H33C31.8955 7.85742 31.0002 6.96186 31 5.85742V2C31 0.895431 31.8954 2.0133e-08 33 0H52.001Z" />
+                                <path d="M15.1904 9.99414C15.1905 8.17693 17.4181 7.30168 18.6553 8.63281L34.9248 26.1387C35.638 26.9062 35.638 28.0938 34.9248 28.8613L18.6553 46.3672C17.4181 47.6983 15.1905 46.8231 15.1904 45.0059V33.5479H1C0.447716 33.5479 1.18768e-07 33.1001 0 32.5479V22.4521C3.88926e-06 21.8999 0.447718 21.4521 1 21.4521H15.1904V9.99414Z" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
                 <div className={cn('Playground__boxBody')}>

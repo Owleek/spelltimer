@@ -50,3 +50,12 @@ export function isUserPlayed(): boolean {
 export function setUserPlayed(): void {
     localStorage.setItem(`userPlayed`, 'true');
 }
+
+export function getNoteRunTrigger(): string {
+    return localStorage.getItem(`noteRunTrigger`) || '';
+}
+
+export function setNoteRunTrigger(): string {
+    localStorage.setItem(`noteRunTrigger`, 'settedUp');
+    return 'settedUp';
+}
