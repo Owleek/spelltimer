@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useContext } from 'react';
 import cn from 'classnames';
 import ReactDOM from 'react-dom';
 import { IEmptySlot, ISlot } from '../../store/slotSlice';
 import {setHotkey} from '../../store/hotkeySlice';
-import './GridSlot.scss';
+import StageContext, {EStages} from '../../store/StageContext';
 import { translate } from '../../utils/utils';
 import { useDispatch } from 'react-redux';
+import './GridSlot.scss';
+
 
 interface IProps {
   data: IEmptySlot
@@ -15,32 +17,19 @@ interface IProps {
 
 const EmptySlot = ({data, onClick, className}: IProps) => {
   const [isBinding, setIsBinding] = useState<boolean>(false);
-  const dispatch = useDispatch();
-
-  const getKey = useCallback((event: KeyboardEvent) => {
-    const keyIs = event.key.toUpperCase();
-    setIsBinding(false);
-    document.removeEventListener('keydown', getKey);
-    dispatch(setHotkey({key: keyIs, id: data.position, type: 'slot'}));
-  }, []);
+  const {currentStage, changeStage} = useContext(StageContext);
+  const isVoid = currentStage === EStages.PLAY;
   
-  const handleClickBoundKey = () => {
-    setIsBinding(true);
-    document.addEventListener('keydown', getKey);
+  const handleClick= (data: IEmptySlot) => {
+    if (isVoid) return; // не знаю когда значение может не обновиться из за замыкания
+    onClick(data);
   }
 
   return (
-    <div className={cn('EmptySlot', {fixHoverStyles: isBinding}, className)} onClick={() => onClick(data)}>
+    <div className={cn('EmptySlot', {fixHoverStyles: isBinding}, {void: isVoid}, className)} onClick={() => handleClick(data)}>
       {
         isBinding && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement)
       }
-      {/* <div className={cn('EmptySlot__boundKey', {onTopOfTheSky: isBinding})} onClick={!isBinding ? handleClickBoundKey : () => null}>
-        {
-          isBinding ? <span className='EmptySlot__boundKeyInfo'>{translate('Press any key to bind')}</span> :
-                        <span className='EmptySlot__boundKeyText'>{data.boundKey}</span>
-        }
-        
-      </div> */}
     </div>
   );
 };

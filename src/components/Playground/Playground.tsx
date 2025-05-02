@@ -14,7 +14,7 @@ import Footer from '../Footer/Footer';
 
 
 const Playground = () => {
-  const [currentStage, setCurrentStage] = useState<EStages>(EStages.EDIT);
+  const [currentStage, setCurrentStage] = useState<EStages>(EStages.INITIAL);
   const changeStage = (stage: EStages) => setCurrentStage(stage);
   const payload = { currentStage, changeStage };
 

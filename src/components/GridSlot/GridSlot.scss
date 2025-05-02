@@ -12,8 +12,7 @@
     content: '';
     position: absolute;
     transition: all ease-in-out 0.3s;
-    background: vars.$uppperBackground;
-    background: #797979;;
+    background: #797979;
     transition: background-color ease-in-out 0.1s;
     top: 50%;
     left: 50%;
@@ -39,50 +38,15 @@
   }
 }
 
-.TunedSlot {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-size: cover;
-  object-fit: cover;
-  overflow: hidden;
-}
+.EmptySlot.void {
+  pointer-events: none;
+  background-image: url('../../../public/assets/other/placeholder.png');
+  background-position: center center;
+  background-size: cover; 
+  background-repeat: no-repeat;
 
-.TunedSlot__ownerBox {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 160px;
-  height: 160px;
-  z-index: 10;
-  border: 2px solid #92de7f;
-  overflow: hidden;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.TunedSlot__ownerImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
-  position: relative;
-  border: 1px solid greenyellow;
-  transform: rotate(-45deg) translate(25%, 25%);
-}
-
-.TunedSlot__ownerName {
-  position: absolute;
-  font-size: 16px;
-  left: 100%;
-  bottom: 0;
-  width: 100%;
-  background: rgba(161, 161, 161, 0.5);
-  color: #92de7f;
-  padding: 5px;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  transform: rotate(-90deg);
-  transform-origin: 0 100%;
+  &::before,
+  &::after {
+    display: none;
+  }
 }

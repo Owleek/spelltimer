@@ -3,16 +3,20 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 
-import React, { JSX, useEffect, useRef, useState } from 'react';
+import React, { JSX, useEffect, useRef, useState, useContext } from 'react';
 import cn from 'classnames';
 import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 // import { IDataItem, ISpells, IArtifacts, TMixedDataItem } from '../../data/data';
+import StageContext, {EStages} from '../../store/StageContext';
 import { ITimerData } from '../../data/data';
+import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
 import './Timer.scss';
 
 interface IProps {
-    ability: ITimerData | undefined
-    isTimeRuns: boolean
+    ability: ITimerData
+    appStatus: EAppStatus
+    runApp: () => any
+    pauseApp: () => any
 }
 
 enum ETimerStatus {
@@ -21,8 +25,10 @@ enum ETimerStatus {
     paused = 'paused'
 }
 
-const DumbTimer = ({ability, isTimeRuns = true}: IProps): JSX.Element => {
+const DumbTimer = ({ability, appStatus, runApp, pauseApp}: IProps): JSX.Element => {
     if (!ability) return <div></div>;
+
+    const {currentStage, changeStage} = useContext(StageContext);
 
     const [cooldown, setCooldown] = useState<number>(ability.cooldown[0]);
     const [timerStatus, setTimerStatus] = useState<ETimerStatus>(ETimerStatus.ready);
@@ -34,7 +40,8 @@ const DumbTimer = ({ability, isTimeRuns = true}: IProps): JSX.Element => {
     const circleRef = useRef<SVGCircleElement | null>(null);
     const strokeDashoffsetRef = useRef<number>(0);
 
-    const radius = 30;
+    const strokeWidth = 70;
+    const radius = 35;
     const length = 2 * Math.PI * radius;
     const step = length / (COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * ability.cooldown[0]);
 
@@ -49,17 +56,17 @@ const DumbTimer = ({ability, isTimeRuns = true}: IProps): JSX.Element => {
         };
     }, []);
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     if (!isTimeRuns && timerStatusRef.current === ETimerStatus.running) {
-    //         timerStatusRef.current = ETimerStatus.paused;
-    //     }
+        if ((appStatus === EAppStatus.PAUSED) && timerStatusRef.current === ETimerStatus.running) {
+            timerStatusRef.current = ETimerStatus.paused;
+        }
 
-    //     if (isTimeRuns && timerStatusRef.current === ETimerStatus.paused) {
-    //         timerStatusRef.current = ETimerStatus.running;
-    //     }
+        if ((appStatus === EAppStatus.RUNNING) && timerStatusRef.current === ETimerStatus.paused) {
+            timerStatusRef.current = ETimerStatus.running;
+        }
 
-    // }, [isTimeRuns]);
+    }, [appStatus]);
 
     const onTickNotify = () => {
         const _countMS = countMSRef.current;
@@ -114,41 +121,51 @@ const DumbTimer = ({ability, isTimeRuns = true}: IProps): JSX.Element => {
     }
 
     const handleClickTimer = () => {
-        if (!isTimeRuns && (timerStatusRef.current === ETimerStatus.running)) {
-            // showSpellToolbar
-            return;
-        }
-
         if ((timerStatusRef.current === ETimerStatus.ready) && circleRef.current) {
             circleRef.current.style.display = 'block';
         }
 
+        if (timerStatusRef.current === ETimerStatus.running) {
+            timerStatusRef.current = ETimerStatus.paused;
+            pauseApp();
+            return setTimerStatus(timerStatusRef.current);
+        }
+
         timerStatusRef.current = ETimerStatus.running;
         setTimerStatus(timerStatusRef.current);
+        runApp();
     }
 
-    return <div className="DumbTimer" onClick={handleClickTimer}>
-            <div className='DumbTimer__padding'>
-                <div className={cn('DumbTimer__innerContainer', {ready: timerStatus === ETimerStatus.ready})} style={{backgroundImage: `url('${ability.img}')`}}>
+    return <div className="Timer Playground__slotEasyShadow" style={{backgroundImage: `url('${ability.img}')`}}>
+                <svg className="Timer__svg" viewBox="0 0 120 120">
+                    <circle
+                        ref={circleRef}
+                        className={cn('Timer__circle transition')}
+                        cx="60"
+                        cy="60"
+                        strokeWidth={strokeWidth}
+                        r={radius}
+                        fill="transparent"
+                        strokeDasharray={length}
+                        strokeDashoffset={strokeDashoffsetRef.current}
+                        transform="rotate(-90 60 60)"/>
+                </svg>
+                {/* {cooldown} */}
+                {
+                    currentStage === EStages.PLAY &&
+                    <div className="Timer__cover" onClick={handleClickTimer}>
+                        {
+                            ((appStatus !== EAppStatus.RUNNING) || (timerStatus !== ETimerStatus.running)) &&
+                            <div className="Timer__play">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 30">
+                                    <path d="M24.9 12.1623C26.9 13.317 26.9 16.2038 24.9 17.3585L4.5594 29.1021C2.5594 30.2568 0.0594025 28.8134 0.0594025 26.504V3.01675C0.0594025 0.707349 2.5594 -0.736029 4.5594 0.418672L24.9 12.1623Z"/>
+                                </svg>
+                            </div>
+                        }
+                    </div>
+                }
 
-                    <svg className="TimerSVG" viewBox="0 0 120 120">
-                        <circle
-                            ref={circleRef}
-                            className={cn('TimerSVG__circle transition')}
-                            cx="60"
-                            cy="60"
-                            strokeWidth="60"
-                            r={radius}
-                            fill="transparent"
-                            strokeDasharray={length}
-                            strokeDashoffset={strokeDashoffsetRef.current}
-                            transform="rotate(-90 60 60)"/>
-                        </svg>
 
-                    {cooldown}
-
-                </div>
-            </div>
     </div>
 }
 

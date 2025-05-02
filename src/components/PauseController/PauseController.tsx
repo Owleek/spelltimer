@@ -44,7 +44,7 @@ const PauseController = (props: IProps): JSX.Element => {
         <div className={cn('PauseController', {leftOffset: !!noteHidden && currentStage === EStages.EDIT})}>
             { isBinding && ReactDOM.createPortal(<div className="GeneralOverlay"></div>, document.getElementById('root') as HTMLElement) }
             {
-                !noteHidden && (currentStage !== EStages.PLAY) &&
+                (currentStage === EStages.EDIT) && !noteHidden &&
                 <div className="PauseController__note">
                     <span className="PauseController__close" onClick={hideNote}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" >
@@ -60,7 +60,7 @@ const PauseController = (props: IProps): JSX.Element => {
             {props.children}
 
             {
-                currentStage === EStages.EDIT && 
+                currentStage === EStages.EDIT &&
                 <div className={cn('PauseController__hotKeyWrapper', {onTopOfTheSky: isBinding})}>
                     <div className={cn('PauseController__hotkey')} onClick={!isBinding ? onBindHotKey : () => null}>
                         {

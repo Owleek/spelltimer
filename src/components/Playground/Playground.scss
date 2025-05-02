@@ -68,9 +68,13 @@
   height: 100%;
   position: relative;
   padding: vars.$slotPadding;
-  background: vars.$lowerBackground;
-  overflow: hidden;
+  background-color: vars.$lowerBackground;
   box-shadow: vars.$innerSlotBoxShadow;
+  overflow: hidden;
+}
+
+.Playground__slotBox.void {
+  background-color: rgb(61, 61, 61);
 }
 
 .Playground__slotEasyShadow {
@@ -90,6 +94,16 @@
     top: 0;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.9) inset;
   }
+}
+
+.Playground__slotSettings {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  user-select: none;
 }
 
 .Playground__button {
@@ -216,9 +230,7 @@
 }
 
 .Playground__slotBox:hover {
-  // .Playground__slotHotkey, 
   .Playground__RemoveButton {
-    transform: translate(0, 0);
   }
 }
 
@@ -226,12 +238,12 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  right: 12px;
-  top: 12px;
+  right: 6px;
+  top: 6px;
   z-index: 102;
   cursor: pointer;
   transition: transform ease-in-out vars.$transitionTime;
-  transform: translate(calc(110% + 12px), calc(-110% - 12px));
+  // transform: translate(calc(110% + 12px), calc(-110% - 12px));
   background: rgb(177 177 177);
   border-radius: 3px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5) inset;
