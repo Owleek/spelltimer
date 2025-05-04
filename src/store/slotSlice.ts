@@ -55,6 +55,23 @@ export const slotSlice = createSlice({
                 if ('name' in slot) return slot.name === action.payload.name;
             });
             mapData(state, action, matchFoundIndex);
+        },
+        setActiveLevelIndex(state: Array<ISlot>, action: PayloadAction<{position: number, activeLevelIndex: number}>) {
+            const matchFoundIndex = state.findIndex(slot => {
+                return slot.position === action.payload.position;
+            });
+
+            const newData = {...state[matchFoundIndex], cooldownIndex: action.payload.activeLevelIndex};
+
+            state[matchFoundIndex] = newData;
+        },
+        setCustomCooldown(state: Array<ISlot>, action: PayloadAction<{position: number, customCooldown: number | null}>) {
+            const matchFoundIndex = state.findIndex(slot => {
+                return slot.position === action.payload.position;
+            });
+
+            const newData = {...state[matchFoundIndex], customCooldown: action.payload.customCooldown};
+            state[matchFoundIndex] = newData;
         }
     },
     extraReducers: (builder) => {
@@ -77,6 +94,6 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot } = slotSlice.actions;
+export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, setActiveLevelIndex, setCustomCooldown } = slotSlice.actions;
 
 export default slotSlice.reducer;

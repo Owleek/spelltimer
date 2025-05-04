@@ -29,11 +29,11 @@
     {   
         "hero": "Tidehunter",
         "name": "Ravage",
-        "cooldown": [150]
+        "cooldown": [150, 145, 140]
     },
     {   
         "hero": "Terrorblade",
         "name": "Metamorphosis",
-        "cooldown": [20]
+        "cooldown": [155, 150, 145, 140]
     }
 ]

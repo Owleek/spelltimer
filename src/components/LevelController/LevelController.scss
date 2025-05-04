@@ -1,0 +1,147 @@
+@use 'sass:color';
+@use '../../variables.scss' as vars;
+
+
+.LevelController {
+    display: flex;
+    position: absolute;
+    background: #c7c7c761;
+    min-height: 40px;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    border-radius: 4px;
+}
+
+.LevelController.view {
+    background: none;
+    pointer-events: none;
+    bottom: 2px;
+
+    & .LevelController__holder::before {
+        display: none;
+    }
+}
+
+.LevelController__btn {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: fill ease vars.$transitionTime;
+
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    &:hover {
+        fill: white;
+    }
+
+    &.active {
+        fill: vars.$activeButton;
+    }
+
+    &.save {
+        fill: #42d047;
+
+        &:hover {
+            fill: vars.$success;
+        }
+    }
+
+    &.remove {
+        fill: #d5d5d5;
+    
+        &:hover {
+            fill: vars.$danger;
+        }
+    }
+
+    &.save,
+    &.remove {
+        width: 25px;
+        padding: 10px 5px;
+    }
+
+    &.remove {
+        margin-right: 5px;
+    }
+
+
+    &.disabled {
+        fill: vars.$secondary !important;
+        pointer-events: none !important;
+    }
+}
+
+.LevelController__holder {
+    display: flex;
+    align-items: center;
+    position: relative;
+}   
+
+.LevelController__indicatorsContainer {
+    display: flex;
+    padding: 0 16px;
+}
+
+.LevelController__indicatorBox {
+    padding: 10px 4px;
+    cursor: pointer;
+}
+
+.LevelController__indicatorBox.pressed .LevelController__indicator{
+    transform: scale(0.95);
+}
+
+.LevelController__indicatorBox.active .LevelController__indicator {
+    background-color: vars.$activeButton;
+}
+
+.LevelController__indicator {
+    display: block;
+    width: 20px;
+    height: 10px;
+    border-radius: 2px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
+    background-color: #ffffff24;
+    transition-timing-function: ease;
+    transition-duration: vars.$transitionTime;
+    transition-property: transform, background-color;
+}
+
+
+.LevelController__customisation {
+    display: flex;
+    align-items: center;
+}
+
+.LevelController__inputBox {
+    width: 50px;
+    margin-right: 4px;
+}
+
+.LevelController__input {
+    text-align: center;
+    padding: 4px 8px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+    border: none;
+    border-radius: 4px;
+}
+
+.LevelController__customTimeNumber {
+    margin-right: 4px;
+}
+
+.LevelController__customTimeContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}

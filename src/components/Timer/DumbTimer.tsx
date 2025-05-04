@@ -150,12 +150,17 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp}: IProps): JSX.Element 
                         strokeDashoffset={strokeDashoffsetRef.current}
                         transform="rotate(-90 60 60)"/>
                 </svg>
-                {/* {cooldown} */}
+
+                {
+                    timerStatus !== ETimerStatus.ready &&
+                    <div className="Timer__countdown">{cooldown}</div>
+                }
+
                 {
                     currentStage === EStages.PLAY &&
                     <div className="Timer__cover" onClick={handleClickTimer}>
                         {
-                            ((appStatus !== EAppStatus.RUNNING) || (timerStatus !== ETimerStatus.running)) &&
+                            ((appStatus === EAppStatus.INITIAL) && (timerStatus === ETimerStatus.ready)) &&
                             <div className="Timer__play">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 30">
                                     <path d="M24.9 12.1623C26.9 13.317 26.9 16.2038 24.9 17.3585L4.5594 29.1021C2.5594 30.2568 0.0594025 28.8134 0.0594025 26.504V3.01675C0.0594025 0.707349 2.5594 -0.736029 4.5594 0.418672L24.9 12.1623Z"/>
@@ -165,7 +170,7 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp}: IProps): JSX.Element 
                     </div>
                 }
 
-
+                
     </div>
 }
 

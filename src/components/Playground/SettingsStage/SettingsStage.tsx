@@ -14,8 +14,10 @@ import {setHotkey} from '../../../store/hotkeySlice';
 import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
 import { getKeyFromCode } from '../../../data/keyCodeDictionary';
-import './SettingsStage.scss';
 import DumbTimer from '../../Timer/DumbTimer';
+import LevelController from '../../LevelController/LevelController';
+import LevelControllerView from '../../LevelController/LevelControllerView';
+import './SettingsStage.scss';
 
 export enum EAppStatus {
     RUNNING = 'runnig',
@@ -40,7 +42,6 @@ const SettingsStage = (): JSX.Element => {
     const continueDisabled = currentStage !== EStages.EDIT;
     const playDisabled = currentStage == EStages.INITIAL;
     const pauseDisabled = currentStage == EStages.INITIAL;
-
 
     const dispatch = useDispatch();
     const context = useContext(StageContext);
@@ -173,9 +174,8 @@ const SettingsStage = (): JSX.Element => {
                                         ? <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
                                         : <React.Fragment>
                                             <DumbTimer ability={slot} appStatus={appStatus} runApp={handeClickPlay} pauseApp={handleClickPause}/>
-
                                             {
-                                                currentStage === EStages.EDIT &&
+                                                currentStage === EStages.EDIT ?
                                                 <div className="Playground__slotSettings">
                                                     <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={() => handleBindKey(slot)}>
                                                         <div className='Playground__slotHotKeyTextBox'>
@@ -189,9 +189,10 @@ const SettingsStage = (): JSX.Element => {
                                                         </div>
                                                     </div>
                                                     <div className="Playground__RemoveButton" onClick={() => removeAbility(slot)}></div>
+                                                    <LevelController slot={slot}/>
                                                 </div>
+                                                : <LevelControllerView slot={slot}/>
                                             }
-
                                         </React.Fragment>
                                     }
                                 </div>
