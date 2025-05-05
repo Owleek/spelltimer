@@ -8,6 +8,16 @@
     overflow: hidden;
 }
 
+.Timer__innerWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 2;
+}
+
 .Timer__svg {
     position: absolute;
     left: 50%;
@@ -41,16 +51,8 @@
 }
 
 .Timer__play {
-    width: 50%;
-    height: 50%;
-    // fill: blueviolet;
-    // fill: darkviolet;
-    // fill: deepskyblue;
-    // fill: deeppink;
-    // fill: darkorange;
-    // fill: cornflowerblue;
-    // fill: darkseagreen;
-    // fill: lightgreen;
+    width: 35%;
+    height: 35%;
     fill: rgba(166, 236, 153, 0.6);
     display: flex;
     justify-content: center;
@@ -78,3 +80,41 @@
     font-weight: bold;
     user-select: none;
 }
+
+.Timer__ownerBox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 160px;
+    height: 160px;
+    z-index: 1;
+    border: 2px solid #92de7f;
+    overflow: hidden;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .Timer__ownerImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    position: relative;
+    border: 1px solid greenyellow;
+    transform: rotate(-45deg) translate(25%, 25%);
+  }
+  
+  .Timer__ownerName {
+    position: absolute;
+    font-size: 16px;
+    left: 100%;
+    bottom: 0;
+    width: 100%;
+    background: rgba(161, 161, 161, 0.5);
+    color: #92de7f;
+    padding: 5px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: rotate(-90deg);
+    transform-origin: 0 100%;
+  }

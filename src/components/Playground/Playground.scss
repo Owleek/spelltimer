@@ -104,6 +104,7 @@
   top: 0;
   overflow: hidden;
   user-select: none;
+  z-index: 10;
 }
 
 .Playground__button {
@@ -175,8 +176,7 @@
 
   position: absolute;
   top: 2px;
-  left: 2px;
-  transition: transform ease-in-out 0.2s;
+  right: 2px;
   color: vars.$lowerBackground;
 
   display: flex;
@@ -238,7 +238,7 @@
   width: 40px;
   height: 40px;
   right: 8px;
-  top: 8px;
+  bottom: 8px;
   z-index: 102;
   cursor: pointer;
   transition: transform ease-in-out vars.$transitionTime;

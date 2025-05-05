@@ -10,6 +10,7 @@ import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../util
 import StageContext, {EStages} from '../../store/StageContext';
 import { ITimerData } from '../../data/data';
 import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
+import fetchData from '../../data/data';
 import './Timer.scss';
 
 interface IProps {
@@ -44,6 +45,9 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp}: IProps): JSX.Element 
     const radius = 35;
     const length = 2 * Math.PI * radius;
     const step = length / (COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * ability.cooldown[0]);
+
+    const{ heroes } = fetchData;
+    const currentHero = ability.owner ? heroes.find(hero => hero.name === ability.owner) : null;
 
     useEffect(() => {
         const instance = TickNotifier.getInstance();
@@ -136,41 +140,48 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp}: IProps): JSX.Element 
         runApp();
     }
 
-    return <div className="Timer Playground__slotEasyShadow" style={{backgroundImage: `url('${ability.img}')`}}>
-                <svg className="Timer__svg" viewBox="0 0 120 120">
-                    <circle
-                        ref={circleRef}
-                        className={cn('Timer__circle transition')}
-                        cx="60"
-                        cy="60"
-                        strokeWidth={strokeWidth}
-                        r={radius}
-                        fill="transparent"
-                        strokeDasharray={length}
-                        strokeDashoffset={strokeDashoffsetRef.current}
-                        transform="rotate(-90 60 60)"/>
-                </svg>
-
-                {
-                    timerStatus !== ETimerStatus.ready &&
-                    <div className="Timer__countdown">{cooldown}</div>
+    return <div className="Timer" style={{backgroundImage: `url('${ability.img}')`}}>
+                {        
+                    currentHero && 
+                        <div className="Timer__ownerBox">
+                            <img className="Timer__ownerImg" src={currentHero.img}/>
+                            <span className="Timer__ownerName">{currentHero.name}</span>
+                        </div> 
                 }
+                <div className="Timer__innerWrapper Playground__slotEasyShadow">
+                    <svg className="Timer__svg" viewBox="0 0 120 120">
+                        <circle
+                            ref={circleRef}
+                            className={cn('Timer__circle transition')}
+                            cx="60"
+                            cy="60"
+                            strokeWidth={strokeWidth}
+                            r={radius}
+                            fill="transparent"
+                            strokeDasharray={length}
+                            strokeDashoffset={strokeDashoffsetRef.current}
+                            transform="rotate(-90 60 60)"/>
+                    </svg>
 
-                {
-                    currentStage === EStages.PLAY &&
-                    <div className="Timer__cover" onClick={handleClickTimer}>
-                        {
-                            ((appStatus === EAppStatus.INITIAL) && (timerStatus === ETimerStatus.ready)) &&
-                            <div className="Timer__play">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 30">
-                                    <path d="M24.9 12.1623C26.9 13.317 26.9 16.2038 24.9 17.3585L4.5594 29.1021C2.5594 30.2568 0.0594025 28.8134 0.0594025 26.504V3.01675C0.0594025 0.707349 2.5594 -0.736029 4.5594 0.418672L24.9 12.1623Z"/>
-                                </svg>
-                            </div>
-                        }
-                    </div>
-                }
+                    {
+                        timerStatus !== ETimerStatus.ready &&
+                        <div className="Timer__countdown">{cooldown}</div>
+                    }
 
-                
+                    {
+                        currentStage === EStages.PLAY &&
+                        <div className="Timer__cover" onClick={handleClickTimer}>
+                            {
+                                (timerStatus === ETimerStatus.ready) &&
+                                <div className="Timer__play">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 30">
+                                        <path d="M24.9 12.1623C26.9 13.317 26.9 16.2038 24.9 17.3585L4.5594 29.1021C2.5594 30.2568 0.0594025 28.8134 0.0594025 26.504V3.01675C0.0594025 0.707349 2.5594 -0.736029 4.5594 0.418672L24.9 12.1623Z"/>
+                                    </svg>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
     </div>
 }
 

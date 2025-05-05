@@ -11,6 +11,9 @@
     bottom: 8px;
     transform: translateX(-50%);
     border-radius: 4px;
+
+    max-width: 185px; // TODO - убрать ограничение и сделать по нормальному
+    overflow-x: auto; // TODO - убрать ограничение и сделать по нормальному
 }
 
 .LevelController.view {
@@ -24,6 +27,7 @@
 }
 
 .LevelController__btn {
+    flex-shrink: 0;
     width: 40px;
     height: 40px;
     padding: 10px;
@@ -64,12 +68,11 @@
 
     &.save,
     &.remove {
-        width: 25px;
-        padding: 10px 5px;
+        width: 35px;
     }
 
     &.remove {
-        margin-right: 5px;
+        fill: #000000;
     }
 
 
@@ -87,11 +90,11 @@
 
 .LevelController__indicatorsContainer {
     display: flex;
-    padding: 0 16px;
+    padding: 0 8px;
 }
 
 .LevelController__indicatorBox {
-    padding: 10px 4px;
+    padding: 10px 2px;
     cursor: pointer;
 }
 
@@ -143,5 +146,5 @@
 .LevelController__customTimeContainer {
     display: flex;
     align-items: center;
-    margin-right: 10px;
+    margin-right: 5px;
 }
