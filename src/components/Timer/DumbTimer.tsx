@@ -10,6 +10,7 @@ import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../util
 import StageContext, {EStages} from '../../store/StageContext';
 import { ITimerData } from '../../data/data';
 import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
+import SpellReducer from '../SpellReducer/SpellReducer';
 import fetchData from '../../data/data';
 import './Timer.scss';
 
@@ -162,12 +163,10 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp}: IProps): JSX.Element 
                             strokeDashoffset={strokeDashoffsetRef.current}
                             transform="rotate(-90 60 60)"/>
                     </svg>
-
                     {
                         timerStatus !== ETimerStatus.ready &&
                         <div className="Timer__countdown">{cooldown}</div>
                     }
-
                     {
                         currentStage === EStages.PLAY &&
                         <div className="Timer__cover" onClick={handleClickTimer}>

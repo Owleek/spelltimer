@@ -72,6 +72,39 @@ export const slotSlice = createSlice({
 
             const newData = {...state[matchFoundIndex], customCooldown: action.payload.customCooldown};
             state[matchFoundIndex] = newData;
+        },
+        applyReducer(state: Array<ISlot>, action: PayloadAction<{position: number, name: string, percent: number}>) {
+            const matchFoundIndex = state.findIndex(slot => {
+                return slot.position === action.payload.position;
+            });
+
+            if ('reducers' in state[matchFoundIndex]) {
+                state[matchFoundIndex].reducers?.push({name: action.payload.name, percent: action.payload.percent});
+            }
+
+            if ('cooldown' in state[matchFoundIndex]) {
+                state[matchFoundIndex].cooldown = state[matchFoundIndex].cooldown.map(cd => Math.round(cd - ((cd / 100) * action.payload.percent)));
+            }
+        },
+        removeReducer(state: Array<ISlot>, action: PayloadAction<{position: number, name: string}>) {
+            const matchFoundIndex = state.findIndex(slot => {
+                return slot.position === action.payload.position;
+            });
+
+            if ('reducers' in state[matchFoundIndex]) {
+                const filteredReducers = state[matchFoundIndex].reducers?.filter(reducer => reducer.name !== action.payload.name);
+
+                state[matchFoundIndex].reducers = filteredReducers;
+                const computed = state[matchFoundIndex].initialCooldown.slice();
+
+                filteredReducers?.forEach(reducer => {
+                    computed.forEach((el, idx) => {
+                        computed[idx] = Math.round(el - ((el / 100) * reducer.percent))
+                    })
+                });
+
+                state[matchFoundIndex].cooldown = computed;
+            }
         }
     },
     extraReducers: (builder) => {
@@ -94,6 +127,6 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, setActiveLevelIndex, setCustomCooldown } = slotSlice.actions;
+export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, setActiveLevelIndex, setCustomCooldown, applyReducer, removeReducer } = slotSlice.actions;
 
 export default slotSlice.reducer;

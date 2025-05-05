@@ -6,5 +6,9 @@
     {   
         "name": "Feverish",
         "percent": 15
+    },
+    {   
+        "name": "Time Warp Aura",
+        "percent": 11
     }
 ]

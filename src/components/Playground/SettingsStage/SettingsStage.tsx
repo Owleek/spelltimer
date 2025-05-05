@@ -17,6 +17,7 @@ import { getKeyFromCode } from '../../../data/keyCodeDictionary';
 import DumbTimer from '../../Timer/DumbTimer';
 import LevelController from '../../LevelController/LevelController';
 import LevelControllerView from '../../LevelController/LevelControllerView';
+import SpellReducer from '../../SpellReducer/SpellReducer';
 import './SettingsStage.scss';
 
 export enum EAppStatus {
@@ -177,24 +178,32 @@ const SettingsStage = (): JSX.Element => {
                                             {
                                                 currentStage === EStages.EDIT ?
                                                 <div className="Playground__slotSettings">
-                                                    <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={() => handleBindKey(slot)}>
-                                                        <div className='Playground__slotHotKeyTextBox'>
-                                                            <span className="Playground__slotHotKeyText">
-                                                                {
-                                                                    editingSlot.current === slot && isBinding 
-                                                                        ? translate('Press any key to bind') 
-                                                                        : getKeyFromCode(slot.boundKey)
-                                                                }
-                                                            </span>
-                                                        </div>
-                                                    </div>
                                                     <div className="Playground__RemoveButton" onClick={() => removeAbility(slot)}></div>
                                                     <LevelController slot={slot}/>
+                                                    <SpellReducer slot={slot}/>
                                                 </div>
-                                                : <LevelControllerView slot={slot}/>
+                                                : <React.Fragment>
+                                                    <LevelControllerView slot={slot}/>
+                                                    <SpellReducer slot={slot} view={true}/>
+                                                </React.Fragment>
                                             }
                                         </React.Fragment>
                                     }
+                                    {
+                                        currentStage === EStages.EDIT && 
+                                        <div className={cn('Playground__slotHotkey', {isBinding: editingSlot.current === slot && isBinding})} onClick={() => handleBindKey(slot)}>
+                                            <div className='Playground__slotHotKeyTextBox'>
+                                                <span className="Playground__slotHotKeyText">
+                                                    {
+                                                        editingSlot.current === slot && isBinding 
+                                                            ? translate('Press any key to bind') 
+                                                            : getKeyFromCode(slot.boundKey)
+                                                    }
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+    
                                 </div>
                         })
                     }

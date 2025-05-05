@@ -25,6 +25,7 @@ export interface IBaseFields {
 
 export interface IRequiredFields extends IBaseFields {
     cooldown: Array<number>
+    initialCooldown: Array<number>
     cooldownIndex: number
     customCooldown: number | null
     position: number
@@ -53,7 +54,7 @@ export interface IFeature extends IRequiredFields {
 }
 
 export interface ITimerData extends IRequiredFields {
-    reducers?: Array<IReducer>
+    reducers?: Array<{name: string, percent: number}>
     owner?: string | null
     hero?: string
     siblings?: Array<string>
@@ -78,6 +79,7 @@ const setRequredFields = <T>(arr: any): Array<IRequiredFields> => {
     return arr.map( (item: IRequiredFields) => {        
         return {
             ...item,
+            initialCooldown: item.cooldown.slice(),
             cooldownIndex: 0,
             customCooldown: null,
             position: 0,
