@@ -8,19 +8,20 @@ import cn from 'classnames';
 import StageContext, {EStages} from '../../store/StageContext';
 import { ITimerData, IRequiredFields } from '../../data/data';
 import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
-import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot, setActiveLevelIndex, setCustomCooldown} from '../../store/slotSlice';
+import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot, setActiveLevelIndex, setCustomCooldown, clearReducer} from '../../store/slotSlice';
 import {toSafeInteger} from '../../utils/utils';
 import './LevelController.scss';
 
 interface IProps {
     slot: IRequiredFields
+    setEditController: (val: boolean) => void
+    isEdit: boolean
 }
 
-const LevelControllerView = ({slot}: IProps): JSX.Element => {
+const LevelControllerView = ({slot, isEdit, setEditController}: IProps): JSX.Element => {
     const {cooldown: levels, cooldownIndex: activeLevelIndex, customCooldown} = slot;
     const initialCustomValue = customCooldown || levels[levels.length - 1];
     const [pressedIndicator, setPressedIndicator] = useState<number | null>(null);
-    const [isEdit, setIsEdit] = useState<boolean>(false);
 
     const [customValue, setCustomValue] = useState<number | ''>(initialCustomValue);
 
@@ -58,12 +59,13 @@ const LevelControllerView = ({slot}: IProps): JSX.Element => {
    
     const handleSave = () => {
         const number = +customValue;
-        setIsEdit(false);
-        dispatch(setCustomCooldown({position: slot.position, customCooldown: number}))
+        setEditController(false);
+        dispatch(setCustomCooldown({position: slot.position, customCooldown: number}));
+        dispatch(clearReducer({position: slot.position}));
     }
 
     const handleRemove = () => {
-        setIsEdit(false);
+        setEditController(false);
         dispatch(setCustomCooldown({position: slot.position, customCooldown: null}));
     }
 
@@ -108,7 +110,7 @@ const LevelControllerView = ({slot}: IProps): JSX.Element => {
                    </React.Fragment>
                 :
                     <div className="LevelController__holder">
-                        <span className={cn('LevelController__btn')} onClick={() => setIsEdit(true)}>
+                        <span className={cn('LevelController__btn')} onClick={() => setEditController(true)}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" >
                                 <path d="M19.0822 18.8828H1.4375C1.25724 18.8828 1.08435 18.9544 0.956888 19.0819C0.829422 19.2094 0.757813 19.3822 0.757812 19.5625C0.757813 19.7428 0.829422 19.9156 0.956888 20.0431C1.08435 20.1706 1.25724 20.2422 1.4375 20.2422H19.0822C19.2625 20.2422 19.4353 20.1706 19.5628 20.0431C19.6903 19.9156 19.7619 19.7428 19.7619 19.5625C19.7619 19.3822 19.6903 19.2094 19.5628 19.0819C19.4353 18.9544 19.2625 18.8828 19.0822 18.8828Z" />
                                 <path d="M19.4175 1.60969C18.1352 0.327344 15.8469 0.526719 14.3153 2.06281L5.17125 11.2023C5.08624 11.2859 5.02521 11.3908 4.99453 11.5059L3.63516 16.5628C3.60631 16.6778 3.60784 16.7983 3.6396 16.9126C3.67136 17.0268 3.73225 17.1308 3.81632 17.2144C3.90038 17.298 4.00473 17.3584 4.11913 17.3895C4.23354 17.4206 4.35406 17.4215 4.46891 17.392L9.52125 16.0327C9.63656 16.0048 9.74174 15.9451 9.82484 15.8605L18.9689 6.70734C20.3555 5.38422 20.8086 2.97813 19.4175 1.60969ZM8.99562 14.7503L5.25281 15.7608L6.26328 12.0225L13.5133 4.7725L16.232 7.49125L8.99562 14.7503ZM18.8919 3.99312C18.8511 4.98094 17.9086 5.87813 17.2062 6.54875L14.4875 3.83L15.285 3.02797C16.6942 1.53719 19.1094 1.91781 18.8919 3.99312Z" />

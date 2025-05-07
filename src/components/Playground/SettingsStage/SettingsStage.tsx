@@ -4,9 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import {TStoreState} from '../../../store/store';
 import EmptySlot from '../../GridSlot/EmptySlot';
-import TunedSlot from '../../GridSlot/TunedSlot';
 import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
-import EmptyMainTime from '../../MainTime/EmptyMainTime';
 import PauseController from '../../PauseController/PauseController';
 import {EAbility, ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../store/slotSlice';
@@ -15,6 +13,7 @@ import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
 import { getKeyFromCode } from '../../../data/keyCodeDictionary';
 import DumbTimer from '../../Timer/DumbTimer';
+import SmartTimer from '../../Timer/SmartTimer';
 import LevelController from '../../LevelController/LevelController';
 import LevelControllerView from '../../LevelController/LevelControllerView';
 import SpellReducer from '../../SpellReducer/SpellReducer';
@@ -33,6 +32,7 @@ const SettingsStage = (): JSX.Element => {
     const {currentStage, changeStage} = useContext(StageContext);
     const [isBinding, setIsBinding] = useState<boolean>(false);
     const [appStatus, setAppStatus] = useState<EAppStatus>(EAppStatus.INITIAL);
+    const [isEditLevelController, setIsEditLevelController] = useState<boolean>(false);
 
     const playActive = appStatus === EAppStatus.RUNNING;
     const pauseActive = appStatus === EAppStatus.PAUSED;
@@ -48,7 +48,6 @@ const SettingsStage = (): JSX.Element => {
     const context = useContext(StageContext);
     const slotListRef = useRef<ISlot[]>(slotList);
     const editingSlot = useRef<ISlot | null>(null);
-    const isTimeRuns = false;
 
     useEffect(() => { 
         slotListRef.current = slotList;
@@ -56,7 +55,7 @@ const SettingsStage = (): JSX.Element => {
         if (isEdit !== currentIsEdit) setIsEdit(currentIsEdit);
      }, [slotList]);
 
-    const removeAbility = (slot: ITimerData) => {
+    const removeTimer = useCallback((slot: ITimerData) => {
         const settedUpSlots = slotList.filter(slot => 'name' in slot);
 
         if (settedUpSlots.length === 1) {
@@ -65,8 +64,7 @@ const SettingsStage = (): JSX.Element => {
         }
 
         dispatch(removeTimerFromSlot(slot));
-    }
-
+    }, [slotList])
 
     const handleClickEmptySlot = (slot: ISlot) => setCurrnetSlot(slot);
 
@@ -94,11 +92,6 @@ const SettingsStage = (): JSX.Element => {
         setAppStatus(EAppStatus.INITIAL);
     }
 
-    const runApp = () => {
-        if (!context) throw new Error('change stages context is not found');
-        context.changeStage(EStages.PLAY);
-    }
-
     const getKey = useCallback((event: KeyboardEvent) => {
         const keyIs = event.code;
         setIsBinding(false);
@@ -123,6 +116,10 @@ const SettingsStage = (): JSX.Element => {
     const handeClickPlay = useCallback(() => {
         if (appStatus !== EAppStatus.RUNNING) return setAppStatus(EAppStatus.RUNNING);
     }, [appStatus]); 
+
+    const handleEditLevelController = (edit: boolean) => {
+        setIsEditLevelController(edit);
+    }
 
     return (
         <div className="Playground__inner">
@@ -174,19 +171,23 @@ const SettingsStage = (): JSX.Element => {
                                         !('name' in slot)
                                         ? <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
                                         : <React.Fragment>
-                                            <DumbTimer ability={slot} appStatus={appStatus} runApp={handeClickPlay} pauseApp={handleClickPause}/>
-                                            {
-                                                currentStage === EStages.EDIT ?
-                                                <div className="Playground__slotSettings">
-                                                    <div className="Playground__RemoveButton" onClick={() => removeAbility(slot)}></div>
-                                                    <LevelController slot={slot}/>
-                                                    <SpellReducer slot={slot}/>
-                                                </div>
-                                                : <React.Fragment>
-                                                    <LevelControllerView slot={slot}/>
-                                                    <SpellReducer slot={slot} view={true}/>
-                                                </React.Fragment>
-                                            }
+                                            <DumbTimer ability={slot} 
+                                                        appStatus={appStatus} 
+                                                        runApp={handeClickPlay} 
+                                                        pauseApp={handleClickPause} 
+                                                        currentStage={currentStage}
+                                                        removeTimer={removeTimer}/>
+                                        {
+                                            currentStage === EStages.EDIT ?
+                                            <div className="Playground__slotSettings">
+                                                <LevelController slot={slot} setEditController={handleEditLevelController} isEdit={isEditLevelController}/>
+                                                { !isEditLevelController && !slot.customCooldown && <SpellReducer slot={slot}/> }
+                                            </div>
+                                            : <React.Fragment>
+                                                <LevelControllerView slot={slot}/>
+                                                { !slot.customCooldown && <SpellReducer slot={slot} view={true}/> }
+                                            </React.Fragment>
+                                        }
                                         </React.Fragment>
                                     }
                                     {

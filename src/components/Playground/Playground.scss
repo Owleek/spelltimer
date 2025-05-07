@@ -233,49 +233,46 @@
   }
 }
 
-.Playground__RemoveButton {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  right: 8px;
-  bottom: 8px;
-  z-index: 102;
-  cursor: pointer;
-  transition: transform ease-in-out vars.$transitionTime;
-  border-radius: 3px;
-  background: rgba(199, 199, 199, 0.3803921569);
+// .Playground__RemoveButton {
+//   position: absolute;
+//   width: 40px;
+//   height: 40px;
+//   right: 8px;
+//   bottom: 8px;
+//   z-index: 102;
+//   cursor: pointer;
+//   transition: transform ease-in-out vars.$transitionTime;
+//   border-radius: 3px;
+//   background: rgba(199, 199, 199, 0.3803921569);
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    height: 50%;
-    top: 50%;
-    left: 50%;
-    border-radius: 2px;
-    background-color: rgb(255, 91, 91);
-  }
+//   &::before,
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     width: 3px;
+//     height: 50%;
+//     top: 50%;
+//     left: 50%;
+//     border-radius: 2px;
+//     background-color: rgb(255, 91, 91);
+//   }
 
-  &::before {
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
+//   &::before {
+//     transform: translate(-50%, -50%) rotate(-45deg);
+//   }
 
-  &::after {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-
-  &:hover {
-    &::before,
-    &::after {
-      background: rgb(255, 0, 0);
-    }
-  }
-}
+//   &::after {
+//     transform: translate(-50%, -50%) rotate(45deg);
+//   }
 
 
-
+//   &:hover {
+//     &::before,
+//     &::after {
+//       background: rgb(255, 0, 0);
+//     }
+//   }
+// }
 
 
 

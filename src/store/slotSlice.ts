@@ -105,6 +105,16 @@ export const slotSlice = createSlice({
 
                 state[matchFoundIndex].cooldown = computed;
             }
+        },
+        clearReducer(state: Array<ISlot>, action: PayloadAction<{position: number}>){
+            const matchFoundIndex = state.findIndex(slot => {
+                return slot.position === action.payload.position;
+            });
+
+            if (!('reducers' in state[matchFoundIndex])) throw new Error('Clear reducer issue');
+
+            state[matchFoundIndex].reducers = []
+            state[matchFoundIndex].cooldown = state[matchFoundIndex].initialCooldown.slice();
         }
     },
     extraReducers: (builder) => {
@@ -127,6 +137,6 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, setActiveLevelIndex, setCustomCooldown, applyReducer, removeReducer } = slotSlice.actions;
+export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, setActiveLevelIndex, setCustomCooldown, applyReducer, removeReducer, clearReducer } = slotSlice.actions;
 
 export default slotSlice.reducer;
