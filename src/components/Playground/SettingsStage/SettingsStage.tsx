@@ -28,21 +28,22 @@ export enum EAppStatus {
 const SettingsStage = (): JSX.Element => {
     // TODO - нужно сделать нормальную функцию сравнения или по другому использовать стейт
     const slotList = useSelector((state: TStoreState) => state.slotList, (prev, next) => JSON.stringify(prev) === JSON.stringify(next));
+    const runningSlots = useSelector((state: TStoreState) => state.runningSlice);
+
     const [currentSlot, setCurrnetSlot] = useState<ISlot | null>(null);
     const {currentStage, changeStage} = useContext(StageContext);
     const [isBinding, setIsBinding] = useState<boolean>(false);
     const [appStatus, setAppStatus] = useState<EAppStatus>(EAppStatus.INITIAL);
     const [isEditLevelController, setIsEditLevelController] = useState<boolean>(false);
 
-    const playActive = appStatus === EAppStatus.RUNNING;
     const pauseActive = appStatus === EAppStatus.PAUSED;
 
     const [isEdit, setIsEdit] = useState<boolean>(slotList.some(slot => 'name' in slot));
 
     const resetDisabled = currentStage !== EStages.EDIT;
-    const continueDisabled = currentStage !== EStages.EDIT;
-    const playDisabled = currentStage == EStages.INITIAL;
-    const pauseDisabled = currentStage == EStages.INITIAL;
+    const editToggleDisabled = currentStage === EStages.INITIAL;
+    const playDisabled = currentStage === EStages.INITIAL || !runningSlots.running.length;
+    const playActive = appStatus === EAppStatus.RUNNING;
 
     const dispatch = useDispatch();
     const context = useContext(StageContext);
@@ -110,12 +111,16 @@ const SettingsStage = (): JSX.Element => {
     }
 
     const handleClickPause = useCallback(() => {
-        if (appStatus === EAppStatus.RUNNING) return setAppStatus(EAppStatus.PAUSED);
-    }, [appStatus])
+        if (appStatus !== EAppStatus.PAUSED) return setAppStatus(EAppStatus.PAUSED);
+    }, [appStatus]);
     
-    const handeClickPlay = useCallback(() => {
+    const handleClickPlay = useCallback(() => {
         if (appStatus !== EAppStatus.RUNNING) return setAppStatus(EAppStatus.RUNNING);
-    }, [appStatus]); 
+    }, [appStatus]);
+
+    const togglePlay = useCallback(() => {
+        setAppStatus(appStatus === EAppStatus.RUNNING ? EAppStatus.PAUSED : EAppStatus.RUNNING);
+    }, [appStatus]);
 
     const handleEditLevelController = (edit: boolean) => {
         setIsEditLevelController(edit);
@@ -136,32 +141,29 @@ const SettingsStage = (): JSX.Element => {
                     </div>
 
                     <PauseController>
-                        <div className={cn('Playground__button', {disabled: playDisabled, active: playActive})} onClick={handeClickPlay}>
+                        <div className={cn('Playground__button', {disabled: playDisabled, active: playActive})} onClick={togglePlay}>
                             <svg viewBox="0 0 163.861 163.861">
                                 <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275   c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z"/>
                             </svg>
                         </div>
-                        <div className={cn('Playground__button', {disabled: pauseDisabled, active: pauseActive})} onClick={handleClickPause}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42">
-                                <path d="M5 3C5 1.34315 6.34315 0 8 0H14C15.6569 0 17 1.34315 17 3V39C17 40.6569 15.6569 42 14 42H8C6.34315 42 5 40.6569 5 39V3Z" />
-                                <path d="M25 3C25 1.34315 26.3431 0 28 0H34C35.6569 0 37 1.34315 37 3V39C37 40.6569 35.6569 42 34 42H28C26.3431 42 25 40.6569 25 39V3Z" />
-                            </svg>
-                        </div>
                     </PauseController>
-                    
-                    <div className="Playground__editToglers">
-                        <div className={cn('Playground__button SettingsStage__setsButton', {active: currentStage !== EStages.PLAY})} onClick={() => changeStage(EStages.EDIT)}>
-                            <svg viewBox="0 0 24 24">
-                                <path d="M22.2,14.4L21,13.7c-1.3-0.8-1.3-2.7,0-3.5l1.2-0.7c1-0.6,1.3-1.8,0.7-2.7l-1-1.7c-0.6-1-1.8-1.3-2.7-0.7   L18,5.1c-1.3,0.8-3-0.2-3-1.7V2c0-1.1-0.9-2-2-2h-2C9.9,0,9,0.9,9,2v1.3c0,1.5-1.7,2.5-3,1.7L4.8,4.4c-1-0.6-2.2-0.2-2.7,0.7   l-1,1.7C0.6,7.8,0.9,9,1.8,9.6L3,10.3C4.3,11,4.3,13,3,13.7l-1.2,0.7c-1,0.6-1.3,1.8-0.7,2.7l1,1.7c0.6,1,1.8,1.3,2.7,0.7L6,18.9   c1.3-0.8,3,0.2,3,1.7V22c0,1.1,0.9,2,2,2h2c1.1,0,2-0.9,2-2v-1.3c0-1.5,1.7-2.5,3-1.7l1.2,0.7c1,0.6,2.2,0.2,2.7-0.7l1-1.7   C23.4,16.2,23.1,15,22.2,14.4z M12,16c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,14.2,14.2,16,12,16z"/>
-                            </svg>
+
+                    {
+                        <div className={cn('Playground__button editToggle', {disabled: editToggleDisabled})} onClick={() => changeStage(currentStage ===  EStages.PLAY ? EStages.EDIT : EStages.PLAY)}>
+                            {
+                                currentStage ===  EStages.PLAY ?
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M22.2,14.4L21,13.7c-1.3-0.8-1.3-2.7,0-3.5l1.2-0.7c1-0.6,1.3-1.8,0.7-2.7l-1-1.7c-0.6-1-1.8-1.3-2.7-0.7   L18,5.1c-1.3,0.8-3-0.2-3-1.7V2c0-1.1-0.9-2-2-2h-2C9.9,0,9,0.9,9,2v1.3c0,1.5-1.7,2.5-3,1.7L4.8,4.4c-1-0.6-2.2-0.2-2.7,0.7   l-1,1.7C0.6,7.8,0.9,9,1.8,9.6L3,10.3C4.3,11,4.3,13,3,13.7l-1.2,0.7c-1,0.6-1.3,1.8-0.7,2.7l1,1.7c0.6,1,1.8,1.3,2.7,0.7L6,18.9   c1.3-0.8,3,0.2,3,1.7V22c0,1.1,0.9,2,2,2h2c1.1,0,2-0.9,2-2v-1.3c0-1.5,1.7-2.5,3-1.7l1.2,0.7c1,0.6,2.2,0.2,2.7-0.7l1-1.7   C23.4,16.2,23.1,15,22.2,14.4z M12,16c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,14.2,14.2,16,12,16z"/>
+                                    </svg>
+                                :
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 55" >
+                                    <path d="M52.001 0C53.1055 2.5638e-05 54.0009 0.895516 54.001 2L54 53C54 54.1046 53.1046 55 52 55H33C31.8954 55 31 54.1046 31 53V49.1426C31.0001 48.0381 31.8955 47.1426 33 47.1426H46L46.001 7.85742H33C31.8955 7.85742 31.0002 6.96186 31 5.85742V2C31 0.895431 31.8954 2.0133e-08 33 0H52.001Z" />
+                                    <path d="M15.1904 9.99414C15.1905 8.17693 17.4181 7.30168 18.6553 8.63281L34.9248 26.1387C35.638 26.9062 35.638 28.0938 34.9248 28.8613L18.6553 46.3672C17.4181 47.6983 15.1905 46.8231 15.1904 45.0059V33.5479H1C0.447716 33.5479 1.18768e-07 33.1001 0 32.5479V22.4521C3.88926e-06 21.8999 0.447718 21.4521 1 21.4521H15.1904V9.99414Z" />
+                                </svg>
+                            }
+
                         </div>
-                        <div className={cn('Playground__button continue', {disabled: continueDisabled})} onClick={() => changeStage(currentStage ===  EStages.PLAY ? EStages.EDIT : EStages.PLAY)}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 55" >
-                                <path d="M52.001 0C53.1055 2.5638e-05 54.0009 0.895516 54.001 2L54 53C54 54.1046 53.1046 55 52 55H33C31.8954 55 31 54.1046 31 53V49.1426C31.0001 48.0381 31.8955 47.1426 33 47.1426H46L46.001 7.85742H33C31.8955 7.85742 31.0002 6.96186 31 5.85742V2C31 0.895431 31.8954 2.0133e-08 33 0H52.001Z" />
-                                <path d="M15.1904 9.99414C15.1905 8.17693 17.4181 7.30168 18.6553 8.63281L34.9248 26.1387C35.638 26.9062 35.638 28.0938 34.9248 28.8613L18.6553 46.3672C17.4181 47.6983 15.1905 46.8231 15.1904 45.0059V33.5479H1C0.447716 33.5479 1.18768e-07 33.1001 0 32.5479V22.4521C3.88926e-06 21.8999 0.447718 21.4521 1 21.4521H15.1904V9.99414Z" />
-                            </svg>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <div className={cn('Playground__boxBody')}>
                     {
@@ -173,8 +175,8 @@ const SettingsStage = (): JSX.Element => {
                                         : <React.Fragment>
                                             <DumbTimer ability={slot} 
                                                         appStatus={appStatus} 
-                                                        runApp={handeClickPlay} 
-                                                        pauseApp={handleClickPause} 
+                                                        runApp={handleClickPlay} 
+                                                        pauseApp={handleClickPause}
                                                         currentStage={currentStage}
                                                         removeTimer={removeTimer}/>
                                         {

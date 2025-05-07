@@ -40,7 +40,7 @@
   padding: 1rem;
   padding-bottom: 0;
   display: grid;
-  grid-template-columns: 128px 5fr 128px;
+  grid-template-columns: 60px 1fr 60px;
 }
 
 .Playground__boxBody {
@@ -128,15 +128,10 @@
     filter: blur(2px);
   }
 
-  &:hover {
-    fill: goldenrod;
-  }
-
   &.active {
     fill: #fdfb00 !important;
     box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.5) inset;
     padding: 17px;
-    pointer-events: none;
 
     &::before {
       border-color: transparent;
@@ -158,17 +153,23 @@
   }
 }
 
-.Playground__editToglers {
-  display: flex;
-
-  & .Playground__button:first-of-type {
-    margin-right: 0.5rem;
-  }
+.Playground__setsButton.active {
+  pointer-events: none;
 }
 
-.Playground__button.continue {
+// .Playground__editToglers {
+//   display: flex;
+
+//   & .Playground__button:first-of-type {
+//     margin-right: 0.5rem;
+//   }
+// }
+
+.Playground__button.editToggle {
   fill: #00ff08;
 }
+
+
 
 .Playground__slotHotkey {
   width: 70px;
