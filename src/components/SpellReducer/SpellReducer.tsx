@@ -37,7 +37,7 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                     {
                         reducersForView.map(reducer => {
                             return (
-                                <div className={cn('SpellReducer__itemWrapper active')}>
+                                <div key={reducer.percent} className={cn('SpellReducer__itemWrapper active')}>
                                     <div className="SpellReducer__item" style={{backgroundImage: `url('${reducer.img}')`}} title={`-${reducer.percent}%`}>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                             const active = slotReducers?.find(rdr => rdr.name === reducer.name);
         
                             return (
-                                <div className={cn('SpellReducer__itemWrapper', {active: !!active})} onClick={() => handleClickReducer(reducer, !!active)}>
+                                <div key={reducer.percent} className={cn('SpellReducer__itemWrapper', {active: !!active})} onClick={() => handleClickReducer(reducer, !!active)}>
                                     <div className="SpellReducer__item" style={{backgroundImage: `url('${reducer.img}')`}} title={`-${reducer.percent}%`}>
                                     </div>
                                 </div>

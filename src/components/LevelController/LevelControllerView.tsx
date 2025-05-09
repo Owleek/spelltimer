@@ -22,7 +22,7 @@ const LevelController = ({slot}: IProps): JSX.Element => {
                 <div className="LevelController__indicatorsContainer">
                     {
                         levels.map((level, index) => 
-                            <div className={cn('LevelController__indicatorBox', {active: index <= activeLevelIndex})} title={String(level)}>
+                            <div key={level} className={cn('LevelController__indicatorBox', {active: index <= activeLevelIndex})} title={String(level)}>
                                 <span className="LevelController__indicator"></span>
                             </div>
                         )

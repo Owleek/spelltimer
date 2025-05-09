@@ -13,7 +13,6 @@ import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
 import { getKeyFromCode } from '../../../data/keyCodeDictionary';
 import DumbTimer from '../../Timer/DumbTimer';
-import SmartTimer from '../../Timer/SmartTimer';
 import LevelController from '../../LevelController/LevelController';
 import LevelControllerView from '../../LevelController/LevelControllerView';
 import SpellReducer from '../../SpellReducer/SpellReducer';
@@ -49,6 +48,7 @@ const SettingsStage = (): JSX.Element => {
     const context = useContext(StageContext);
     const slotListRef = useRef<ISlot[]>(slotList);
     const editingSlot = useRef<ISlot | null>(null);
+    const appStatusRef = useRef<EAppStatus>(appStatus);
 
     useEffect(() => { 
         slotListRef.current = slotList;
@@ -65,7 +65,11 @@ const SettingsStage = (): JSX.Element => {
         }
 
         dispatch(removeTimerFromSlot(slot));
-    }, [slotList])
+    }, [slotList]);
+
+    useEffect(() => {
+        appStatusRef.current = appStatus;
+    }, [appStatus]);
 
     const handleClickEmptySlot = (slot: ISlot) => setCurrnetSlot(slot);
 
@@ -111,16 +115,16 @@ const SettingsStage = (): JSX.Element => {
     }
 
     const handleClickPause = useCallback(() => {
-        if (appStatus !== EAppStatus.PAUSED) return setAppStatus(EAppStatus.PAUSED);
-    }, [appStatus]);
+        if (appStatusRef.current !== EAppStatus.PAUSED) return setAppStatus(EAppStatus.PAUSED);
+    }, []);
     
     const handleClickPlay = useCallback(() => {
-        if (appStatus !== EAppStatus.RUNNING) return setAppStatus(EAppStatus.RUNNING);
-    }, [appStatus]);
+        if (appStatusRef.current !== EAppStatus.RUNNING) return setAppStatus(EAppStatus.RUNNING);
+    }, []);
 
     const togglePlay = useCallback(() => {
-        setAppStatus(appStatus === EAppStatus.RUNNING ? EAppStatus.PAUSED : EAppStatus.RUNNING);
-    }, [appStatus]);
+        setAppStatus(appStatusRef.current === EAppStatus.RUNNING ? EAppStatus.PAUSED : EAppStatus.RUNNING);
+    }, []);
 
     const handleEditLevelController = (edit: boolean) => {
         setIsEditLevelController(edit);
@@ -140,7 +144,7 @@ const SettingsStage = (): JSX.Element => {
                         </svg>
                     </div>
 
-                    <PauseController>
+                    <PauseController appStatus={appStatus} handleClickPlay={handleClickPlay} handleClickPause={handleClickPause} disabled={playDisabled}>
                         <div className={cn('Playground__button', {disabled: playDisabled, active: playActive})} onClick={togglePlay}>
                             <svg viewBox="0 0 163.861 163.861">
                                 <path d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275   c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z"/>
@@ -161,14 +165,13 @@ const SettingsStage = (): JSX.Element => {
                                     <path d="M15.1904 9.99414C15.1905 8.17693 17.4181 7.30168 18.6553 8.63281L34.9248 26.1387C35.638 26.9062 35.638 28.0938 34.9248 28.8613L18.6553 46.3672C17.4181 47.6983 15.1905 46.8231 15.1904 45.0059V33.5479H1C0.447716 33.5479 1.18768e-07 33.1001 0 32.5479V22.4521C3.88926e-06 21.8999 0.447718 21.4521 1 21.4521H15.1904V9.99414Z" />
                                 </svg>
                             }
-
                         </div>
                     }
                 </div>
                 <div className={cn('Playground__boxBody')}>
                     {
                         slotList.map(slot => {
-                        return  <div className={cn('Playground__slotBox', {void: currentStage === EStages.PLAY})}>
+                        return  <div key={slot.position} className={cn('Playground__slotBox', {void: currentStage === EStages.PLAY})}>
                                     {
                                         !('name' in slot)
                                         ? <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
@@ -178,7 +181,8 @@ const SettingsStage = (): JSX.Element => {
                                                         runApp={handleClickPlay} 
                                                         pauseApp={handleClickPause}
                                                         currentStage={currentStage}
-                                                        removeTimer={removeTimer}/>
+                                                        removeTimer={removeTimer}
+                                                        isBinding={isBinding}/>
                                         {
                                             currentStage === EStages.EDIT ?
                                             <div className="Playground__slotSettings">
@@ -206,7 +210,6 @@ const SettingsStage = (): JSX.Element => {
                                             </div>
                                         </div>
                                     }
-    
                                 </div>
                         })
                     }

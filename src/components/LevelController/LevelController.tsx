@@ -128,7 +128,7 @@ const LevelControllerView = ({slot, isEdit, setEditController}: IProps): JSX.Ele
                                 <div className="LevelController__indicatorsContainer">
                                     {
                                         levels.map((level, index) => 
-                                            <div className={cn('LevelController__indicatorBox', {active: index <= activeLevelIndex, pressed: pressedIndicator === index})} 
+                                            <div key={level} className={cn('LevelController__indicatorBox', {active: index <= activeLevelIndex, pressed: pressedIndicator === index})} 
                                                     title={String(level)} 
                                                     onMouseOver={(event) => handeMouseOver(event)} 
                                                     onMouseLeave={(event) => handeMouseLeave(event)}

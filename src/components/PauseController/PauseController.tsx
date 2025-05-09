@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
@@ -11,9 +11,14 @@ import './PauseController.scss';
 import { translate } from '../../utils/utils';
 import { getKeyFromCode } from '../../data/keyCodeDictionary';
 import StageContext, {EStages} from '../../store/StageContext';
+import {EAppStatus} from '../Playground/SettingsStage/SettingsStage';
 
 interface IProps {
     children?: React.ReactNode
+    appStatus: EAppStatus
+    handleClickPlay: () => void
+    handleClickPause: () => void
+    disabled: boolean
 }
 
 const PauseController = (props: IProps): JSX.Element => {
@@ -22,6 +27,34 @@ const PauseController = (props: IProps): JSX.Element => {
     const noteHidden = useSelector((state: TStoreState) => state.noteSlice.value);
     const [isBinding, setIsBinding] = useState<boolean>(false);
     const {currentStage, changeStage} = useContext(StageContext);
+
+    const propsRef = useRef<IProps>(props);
+    const bindKeyRef = useRef<string>(bindKey);
+    const isBindingRef = useRef<boolean>(isBinding);
+
+    useEffect(()=>{
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, []);
+
+    useEffect(() => {
+        propsRef.current = props;
+    }, [props]);
+
+    useEffect(() => {
+        isBindingRef.current = isBinding;
+    }, [isBinding]);
+
+    useEffect(() => {
+        bindKeyRef.current = bindKey;
+    }, [bindKey]);
+
+    const onKeyDown = useCallback((event: KeyboardEvent) => {
+        const {disabled, appStatus, handleClickPlay, handleClickPause} = propsRef.current;
+        if (event.code !== bindKeyRef.current || isBindingRef.current || disabled) return;
+        if (appStatus === EAppStatus.PAUSED) return handleClickPlay();
+        if (appStatus === EAppStatus.RUNNING) return handleClickPause();
+    }, []);
 
     const getKey = useCallback((event: KeyboardEvent) => {
         const keyIs = event.code;
@@ -56,19 +89,17 @@ const PauseController = (props: IProps): JSX.Element => {
                     </div>
                 </div>
             }
-
-            {props.children}
-
+            { props.children }
             {
                 currentStage === EStages.EDIT &&
                 <div className={cn('PauseController__hotKeyWrapper', {onTopOfTheSky: isBinding})}>
                     <div className={cn('PauseController__hotkey')} onClick={!isBinding ? onBindHotKey : () => null}>
                         {
                             isBinding ? <span className='PauseController__hotKeySecondary'>{translate('Press any key to bind')}</span> :
-                                    <React.Fragment>
-                                            <div className="PauseController__hotkeyMain">{getKeyFromCode(bindKey)}</div>
-                                            <div className="PauseController__hotKeySecondary">{translate('play/stop')}</div>
-                                    </React.Fragment>
+                                <React.Fragment>
+                                    <div className="PauseController__hotkeyMain">{getKeyFromCode(bindKey)}</div>
+                                    <div className="PauseController__hotKeySecondary">{translate('play/stop')}</div>
+                                </React.Fragment>
                         }
                     </div>
                 </div>
