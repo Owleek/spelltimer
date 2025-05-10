@@ -107,6 +107,44 @@
   z-index: 10;
 }
 
+.appStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  padding: 1rem;
+  transition: fill ease vars.$transitionTime;
+  fill: #3d3d3d;
+  filter: blur(0.2px) brightness(0.7);
+  stroke: rgba(255, 255, 255, 0.1);
+
+  &.active {
+    fill: #fdfb00 !important;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 100, 0.6));
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 32%;
+    width: 25%;
+    height: 25%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: radial-gradient(white 0%, transparent 100%);
+    opacity: 0.2;
+    pointer-events: none;
+    filter: blur(3px);
+  }
+
+  svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
 .Playground__button {
   width: 60px;
   height: 60px;
