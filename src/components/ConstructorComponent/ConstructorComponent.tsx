@@ -3,10 +3,12 @@
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
 import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import Search from '../Search/Search';
 import ImageGrid from '../ImageGrid/ImageGrid';
 import fetchData, { IRequiredFields, ITimerData, IBaseFields } from '../../data/data';
+import { addTyping, removeTyping} from '../../store/typingSlice';
 import { EAbility } from '../../data/data';
 import { translate } from '../../utils/utils';
 import { ISlot } from '../../store/slotSlice';
@@ -30,6 +32,11 @@ interface IProps {
 }
 
 const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
+  const TYPING_MAIN_ID = 'MainSearch';
+  const TYPING_SIDE_ID = 'SideSearch';
+
+  const dispatch = useDispatch();
+
   const { spells, artifacts, features, heroes } = fetchData;
   const unionData: Array<ITimerData> = [...spells, ...artifacts, ...features];
 
@@ -103,10 +110,32 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
     setHeroList(heroes);
   };
 
+  const handleFocusMainSearch = () => {
+    dispatch(addTyping({value: TYPING_MAIN_ID}));
+  }
+
+  const handleBlurMainSearch = () => {
+    dispatch(removeTyping({value: TYPING_MAIN_ID}));
+  }
+
+  const handleFocusSideSearch = () => {
+    dispatch(addTyping({value: TYPING_SIDE_ID}));
+  }
+
+  const handleBlurSideSearch = () => {
+    dispatch(removeTyping({value: TYPING_SIDE_ID}));
+  }
+
   return (
     <div className="Constructor">
       <div className="Constructor__main">
-        <Search className='Constructor__search' searchValue={mainSearchValue} onChange={onChangeSearch} disabled={!!itemOwnership} onClickClear={clearMainSearch}/>
+        <Search className='Constructor__search' 
+                searchValue={mainSearchValue} 
+                onChange={onChangeSearch} 
+                disabled={!!itemOwnership} 
+                onClickClear={clearMainSearch}
+                handleFocus={handleFocusMainSearch}
+                handleBlur={handleBlurMainSearch}/>
         <div className="Constructor__body">
           <div className="Constructor__scrollContainer appStyledScroll">
             <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership}/>
@@ -123,7 +152,13 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
           </span>
         </div>
 
-        { itemOwnership && <Search className='Sidebar__search' searchValue={sideSearchValue} onChange={onChangeSideSearch} onClickClear={clearSideSearch}/> }
+        { itemOwnership && <Search className='Sidebar__search' 
+                                   searchValue={sideSearchValue} 
+                                   onChange={onChangeSideSearch} 
+                                   onClickClear={clearSideSearch}
+                                   handleFocus={handleFocusSideSearch} 
+                                   handleBlur={handleBlurSideSearch}/> 
+        }
         {  
           itemOwnership ?
             <div className="Sidebar__gridWrapper">

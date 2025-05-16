@@ -134,17 +134,18 @@
 }
 
 .Timer__controlButton {
-    width: 40px;
-    height: 40px;
-    padding: 12px;
+    width: 35px;
+    height: 35px;
+    padding: 10px;
     border-radius: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: vars.$slotglass;
+    fill: white;
     
 
-    transition: fill ease vars.$transitionTime;
+    // transition: fill ease vars.$transitionTime;
     transition-timing-function: ease;
     transition-property: fill, background-color;
     transition-duration: vars.$transitionTime;
@@ -161,11 +162,15 @@
 }
 
 .Timer__controlButton.remove {
-    fill: vars.$easyred;
+    &:hover {
+        background-color: vars.$danger;
+    }
 }
 
 .Timer__controlButton.refresh {
-    fill: vars.$success;
+    &:hover {
+        background-color: vars.$success;
+    }
 }
 
 .Timer__controlButton.disabled {

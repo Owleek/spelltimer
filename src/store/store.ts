@@ -4,6 +4,8 @@ import timeSlice from './timeSlice';
 import hotkeySlice from './hotkeySlice';
 import noteSlice from './noteSlice';
 import runningSlice from './runningSlice';
+import typingSlice from './typingSlice';
+import shiftSlice from './shiftSlice';
 
 const store = configureStore({
     reducer: {
@@ -11,7 +13,9 @@ const store = configureStore({
         timeSlice: timeSlice,
         hotkeySlice: hotkeySlice,
         noteSlice: noteSlice,
-        runningSlice: runningSlice
+        runningSlice: runningSlice,
+        typingSlice: typingSlice,
+        shiftSlice: shiftSlice
     }
 });
 

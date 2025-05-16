@@ -2,29 +2,39 @@ interface ISlotsHotkeys {
     [key: `position_${number}`]: string
 }
 
+interface ITimeControlKey {
+    [key: `timeControl_${number}`]: string
+}
+
 export const defaultTimeHotkey = 'F9';
 export const defaultSlotHotkeys: ISlotsHotkeys = {
     position_1: 'KeyQ',
     position_2: 'KeyW',
     position_3: 'KeyE',
-    position_4: 'KeyD',
-    position_5: 'KeyF',
-    position_6: 'KeyR'
+    position_4: 'KeyZ',
+    position_5: 'KeyX',
+    position_6: 'KeyC'
 };
 
-export function setTimeHotkey(string: string): void {
-    localStorage.setItem(`timeHotkey`, string);
+export const defaultControls: ITimeControlKey = {
+    timeControl_1: 'KeyB',
+    timeControl_2: 'KeyF',
 }
 
-export function getTimeHotkey(): string {
-    const gotHotkey = localStorage.getItem(`timeHotkey`);
+export function getTimeControlKey(position: number): string {
+    const gotHotkey = localStorage.getItem(`timeControl_${position}`);
 
     if (gotHotkey !== null) {
         return gotHotkey; 
     }
 
-    setTimeHotkey(defaultTimeHotkey);
-    return defaultTimeHotkey;
+    const hotkey = defaultControls[`timeControl_${position}`];
+    setTimeControlKey(position, hotkey);
+    return hotkey;
+}
+
+export function setTimeControlKey(position: number, value: string) {
+    localStorage.setItem(`timeControl_${position}`, value);
 }
 
 export function setPositionHotkey(number: number, string: string): void {

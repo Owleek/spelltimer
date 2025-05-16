@@ -37,10 +37,14 @@
 
 .Playground__boxHeader {
   width: 100%;
-  padding: 1rem;
-  padding-bottom: 0;
-  display: grid;
-  grid-template-columns: 60px 1fr 60px;
+  height: 70px;
+  padding: 1.5rem;
+  padding-bottom: 0.5rem;
+  // display: grid;
+  // grid-template-columns: 60px 1fr 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Playground__boxBody {
@@ -146,48 +150,55 @@
 }
 
 .Playground__button {
-  width: 60px;
-  height: 60px;
-  border: 1px solid #222;
+  // width: 60px;
+  // height: 60px;
+  width: 28px;
+  height: 28px;
+  // border: 1px solid #222;
   fill:rgb(214 214 214);
-  border-radius: 8px;
-  padding: 1rem;
-  background: linear-gradient(to right, #3f3e3e, #484747, #3f3e3e);
-  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.35) inset, 0 2px 5px 0px rgba(0, 0, 0, 0.5), 0 0px 25px 0px rgba(0, 0, 0, 0.15);
+  fill:lightslategrey;
+  // border-radius: 8px;
+  // padding: 1rem;
+  // background: linear-gradient(to right, #3f3e3e, #484747, #3f3e3e);
+  // box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.35) inset, 0 2px 5px 0px rgba(0, 0, 0, 0.5), 0 0px 25px 0px rgba(0, 0, 0, 0.15);
   position: relative;
   cursor: pointer;
   transition: all ease-in-out vars.$transitionTime;
   transform: scale(1);
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 3px 3px;
-    filter: blur(2px);
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   inset: 3px 3px;
+  //   filter: blur(2px);
+  // }
+
+  &:hover {
+     fill: antiquewhite;
   }
 
-  &.active {
-    fill: #fdfb00 !important;
-    box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.5) inset;
-    padding: 17px;
+  // &.active {
+  //   fill: #fdfb00 !important;
+  //   box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.5) inset;
+  //   padding: 17px;
 
-    &::before {
-      border-color: transparent;
-    }
-  }
+  //   &::before {
+  //     border-color: transparent;
+  //   }
+  // }
 
   &.disabled {
-    background: #3b3b3b;
-    box-shadow: none;
-    cursor: default;
+    // background: #3b3b3b;
+    // box-shadow: none;
     fill: #4a4a4a !important;
-    border-color: #333333;
+    // border-color: #333333;
+    cursor: default;
     pointer-events: none;
   }
 
   svg {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 
@@ -203,8 +214,16 @@
 //   }
 // }
 
-.Playground__button.editToggle {
-  fill: #00ff08;
+.Playground__button.play {
+  fill: vars.$success1;
+
+  &:hover {
+    filter: drop-shadow(0 0 5px vars.$success1);
+  }
+}
+
+.Playground__button.edit {
+  margin-left: auto;
 }
 
 
@@ -237,6 +256,7 @@
   color: vars.$keyColor;
   z-index: 1002;
   transform: translate(0, 0);
+  pointer-events: none;
 
   .Playground__slotHotKeyText {
     white-space: normal;

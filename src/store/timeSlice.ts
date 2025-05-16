@@ -1,37 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { setHotkey as setHotkeySlice } from './hotkeySlice';
-import { getTimeHotkey, setTimeHotkey } from '../user_cache/keys';
+import { getTimeControlKey, setTimeControlKey } from '../user_cache/keys';
 
 interface IState {
     key: string
+    position: number
 }
 
-const initialState = { key: getTimeHotkey() }
+const initialState: Array<IState> = Array.from({length: 2}, (item, idx) => ({position: idx + 1, key: getTimeControlKey(idx + 1)}));
 
 export const hotkeysSlice = createSlice({
     name: 'actionTimeSlice',
     initialState: initialState,
-    reducers: {
-        setHotkey(state: IState, action: PayloadAction<string>) {
-            state.key = action.payload;
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(setHotkeySlice, (state, action) => {
-            const matched = action.payload.key === state.key;
+            const matсhedRecord = state.findIndex(el => el.key === action.payload.key);
+            const targetRecord = state.findIndex(el => el.position === action.payload.id);
 
-            if (action.payload.type === 'slot') {
-                if (action.payload.key !== state.key) return;
-                state.key = '';
-                return setTimeHotkey('');
+            if (matсhedRecord !== -1) {
+                const value = '';
+                state[matсhedRecord] = {...state[matсhedRecord], key: value};
+                setTimeControlKey(state[matсhedRecord].position, value);
             }
 
-            state.key = action.payload.key;
-            setTimeHotkey(action.payload.key)
+            if (action.payload.type !== 'time') return;
+
+            const value = action.payload.key;
+            state[targetRecord] = {...state[targetRecord], key: value};
+            setTimeControlKey(state[targetRecord].position, value);
         });
     }
 });
 
-export const {setHotkey} = hotkeysSlice.actions;
+export const {} = hotkeysSlice.actions;
 
 export default hotkeysSlice.reducer;

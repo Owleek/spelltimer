@@ -13,7 +13,7 @@ interface IProps {
     slot: IRequiredFields
 }
 
-const LevelController = ({slot}: IProps): JSX.Element => {
+const LevelControllerView = ({slot}: IProps): JSX.Element => {
     const {cooldown: levels, cooldownIndex: activeLevelIndex} = slot;
 
     return (
@@ -33,4 +33,4 @@ const LevelController = ({slot}: IProps): JSX.Element => {
     )
 }
 
-export default LevelController;
+export default LevelControllerView;
