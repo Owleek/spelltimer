@@ -49,6 +49,14 @@ const SettingsStage = (): JSX.Element => {
     const slotListRef = useRef<ISlot[]>(slotList);
     const editingSlot = useRef<ISlot | null>(null);
     const appStatusRef = useRef<EAppStatus>(appStatus);
+    const currentStageRef = useRef<EStages>(currentStage);
+
+    const [animatedSlot, setAnimatedSlot] = useState<number>(1);
+    const animatedSlotRef = useRef<number>(1);
+
+    useEffect(() => {
+        currentStageRef.current = currentStage;
+    }, [currentStage]);
 
     useEffect(() => { 
         slotListRef.current = slotList;
@@ -70,6 +78,32 @@ const SettingsStage = (): JSX.Element => {
     useEffect(() => {
         appStatusRef.current = appStatus;
     }, [appStatus]);
+
+    useEffect(() => {
+        const parent = document.querySelector('#parentIdforFreezeAnimation');
+
+        const timerId = setInterval(() => {
+            if (currentStageRef.current !== EStages.INITIAL) {
+                animatedSlotRef.current = 0;
+                return setAnimatedSlot(animatedSlotRef.current);
+            }
+
+            if (!parent || parent.classList.contains('#parentIdforFreezeAnimation')) return;
+            
+            if (animatedSlotRef.current === slotListRef.current.length) {
+                animatedSlotRef.current = 0;
+            }
+
+            setAnimatedSlot(animatedSlotRef.current + 1);
+            animatedSlotRef.current += 1;
+        }, 3600);
+
+        return () => {
+            clearInterval(timerId);
+            animatedSlotRef.current = 1;
+            setAnimatedSlot(animatedSlotRef.current);
+        };
+    }, []);
 
     const handleClickEmptySlot = (slot: ISlot) => setCurrnetSlot(slot);
 
@@ -171,13 +205,17 @@ const SettingsStage = (): JSX.Element => {
                         </div>
                     }
                 </div>
-                <div className={cn('Playground__boxBody')}>
+                <div className={cn('Playground__boxBody')} id={'parentIdforFreezeAnimation'}>
                     {
                         slotList.map(slot => {
                         return  <div key={slot.position} className={cn('Playground__slotBox', {void: currentStage === EStages.PLAY})}>
                                     {
                                         !('name' in slot)
-                                        ? <EmptySlot key={slot.position} data={slot} onClick={handleClickEmptySlot} className='Playground__slotEasyShadow'/> 
+                                        ? <EmptySlot animate={(animatedSlot === slot.position) && (currentStage === EStages.INITIAL)} 
+                                                     key={slot.position} 
+                                                     data={slot} 
+                                                     onClick={handleClickEmptySlot} 
+                                                     className='Playground__slotEasyShadow'/> 
                                         : <React.Fragment>
                                             <DumbTimer ability={slot} 
                                                         appStatus={appStatus} 

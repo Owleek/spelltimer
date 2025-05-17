@@ -7,33 +7,9 @@
   position: relative;
   cursor: pointer;
 
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    transition: all ease-in-out 0.3s;
-    background: #797979;
-    transition: background-color ease-in-out 0.1s;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: background-color ease-in-out vars.$transitionTime;
-  }
-
-  &::before {
-    width: 60%;
-    height: 2px;
-  }
-
-  &::after {
-    height: 60%;
-    width: 2px;
-  }
-
   &:hover {
-    &::after,
-    &::before {
-      background: vars.$uppperBackground;
+    .EmptySlot__bar {
+      background-color: rgb(86, 86, 86);
     }
   }
 }
@@ -44,9 +20,71 @@
   background-position: center center;
   background-size: cover; 
   background-repeat: no-repeat;
+}
 
-  &::before,
-  &::after {
-    display: none;
-  }
+.EmptySlot__bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition-duration: vars.$transitionTime;
+  transition-property: background-color;
+  transition-timing-function: ease-in;
+  background-color: #8d8d8d;
+}
+
+.EmptySlot__bar.vertical {
+  width: 2px;
+  height: 45%;
+}
+
+.EmptySlot__bar.horizontal {
+  width: 45%;
+  height: 2px;
+}
+
+.EmptySlot__bar.animate {
+    animation-delay: 0.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-duration: 3s;
+    animation-name: pulse;
+}
+
+.Playground__boxBody.stopAnimation .EmptySlot__bar {
+  animation: none;
+}
+
+@keyframes pulse {
+    0% { 
+        transform: translate(-50%, -50%) scale(1);
+        background-color: #8d8d8d;
+    }
+
+    44% {
+        background-color: #565656;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    47% {
+        transform: translate(-50%, -50%) scale(1.07);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    53% {
+        transform: translate(-50%, -50%) scale(1.07);
+    }
+
+    56% {
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+
+    100% {
+        background-color: #8d8d8d;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
