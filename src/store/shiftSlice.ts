@@ -6,28 +6,56 @@ export enum EDirection {
 }
 
 export interface IShift {
-    value: number, 
-    direction: EDirection
+    value: number | null
+    direction: EDirection | null
 }
 
 interface IState {
-    shift: IShift | null
+    [key: string]: IShift
 }
 
-const initialState: IState = { shift: null };
+const initialState: IState = {
+    slot_1: {
+        value: null,
+        direction: null
+    },
+    slot_2: {
+        value: null,
+        direction: null
+    },
+    slot_3: {
+        value: null,
+        direction: null
+    },
+    slot_4: {
+        value: null,
+        direction: null
+    },
+    slot_5: {
+        value: null,
+        direction: null
+    },
+    slot_6: {
+        value: null,
+        direction: null
+    }
+};
 
 export const shiftSlice = createSlice({
     name: 'actionShiftSlice',
     initialState: initialState,
     reducers: {
         addShift(state: IState, action: PayloadAction<{value: number, direction: EDirection}>) { 
-            state.shift = {
-                value: action.payload.value,
-                direction: action.payload.direction
-            }
+            Object.keys(state).forEach(key => {
+                state[key] = {
+                    value: action.payload.value,
+                    direction: action.payload.direction
+                }
+            });
         },
-        removeShift(state: IState) {
-            state.shift = null;
+        removeShift(state: IState, action: PayloadAction<{position: number}>) {
+            state[`slot_${action.payload.position}`].value = null;
+            state[`slot_${action.payload.position}`].direction = null;
         }
     }
 });

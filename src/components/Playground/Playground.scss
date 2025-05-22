@@ -227,117 +227,24 @@
 }
 
 
-
-.Playground__slotHotkey {
-  width: 70px;
-  height: 70px;
-
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  color: vars.$lowerBackground;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.9);
-  background: vars.$lowerBackground;
-  z-index: 102;
-  cursor: pointer;
-
-  &:hover {
-    color: vars.$keyColor;
-  }
-}
-
-.Playground__slotHotkey.isBinding {
-  color: vars.$keyColor;
-  z-index: 1002;
-  transform: translate(0, 0);
-  pointer-events: none;
-
-  .Playground__slotHotKeyText {
-    white-space: normal;
-    font-size: 12px;
-  }
-}
-
-.Playground__slotHotKeyTextBox {
-  width: 85%;
-  height: 85%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 5px;
-  box-shadow: 0px 0px 8px 1px rgba(79, 73, 73, 0.4);
-  background: radial-gradient(circle, rgb(124 124 124) 0%, rgb(55, 58, 61) 100%);
-}
-
-.Playground__slotHotKeyText {
+.Playground__leftBtnContainer {
   width: auto;
-  max-width: 100%;
-  padding: 0 5px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  text-align: center;
-}
+  position: relative;
 
-.Playground__slotBox:hover {
-  .Playground__RemoveButton {
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
-// .Playground__RemoveButton {
-//   position: absolute;
-//   width: 40px;
-//   height: 40px;
-//   right: 8px;
-//   bottom: 8px;
-//   z-index: 102;
-//   cursor: pointer;
-//   transition: transform ease-in-out vars.$transitionTime;
-//   border-radius: 3px;
-//   background: rgba(199, 199, 199, 0.3803921569);
-
-//   &::before,
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     width: 3px;
-//     height: 50%;
-//     top: 50%;
-//     left: 50%;
-//     border-radius: 2px;
-//     background-color: rgb(255, 91, 91);
-//   }
-
-//   &::before {
-//     transform: translate(-50%, -50%) rotate(-45deg);
-//   }
-
-//   &::after {
-//     transform: translate(-50%, -50%) rotate(45deg);
-//   }
-
-
-//   &:hover {
-//     &::before,
-//     &::after {
-//       background: rgb(255, 0, 0);
-//     }
-//   }
-// }
-
-
-
-
-
-
+.Playground__button.refreshButton {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 1.5rem);
+  width: 26px;
+  height: 26px;
+  transform: translateY(-50%);
+}
 
 
 

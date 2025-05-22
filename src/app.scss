@@ -1,3 +1,4 @@
+@use './variables.scss' as vars;
 @import url('./assets/fonts/fontStyle.scss');
 @import url('./reset.scss');
 
@@ -17,8 +18,16 @@ body {
   height: 100vh;
   overflow: hidden;
   z-index: 1001;
-  background: black;
-  opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.GeneralOverlay__text {
+    position: absolute;
+    left: 50%;
+    top: 2rem;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: vars.$keyColor;
 }
 
 .appStyledScroll {

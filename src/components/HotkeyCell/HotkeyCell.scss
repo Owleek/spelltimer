@@ -6,6 +6,11 @@
     height: 38px;
     width: 38px;
     position: relative;
+
+    &.hidden {
+        pointer-events: none;
+        opacity: 0;
+    }
 }
 
 .HotkeyCell {
@@ -24,6 +29,8 @@
     border: 1px dashed rgb(128, 135, 151);
     color: rgb(128, 135, 151);
     cursor: pointer;
+    user-select: none;
+    overflow: hidden;
 
     &:hover {
         border-color: vars.$keyColor;
@@ -39,15 +46,12 @@
     pointer-events: none;
 }
 
-.HotkeyCell__inner {
-    width: calc(100% - 6px);
-    height: 100%;
-    position: relative;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    user-select: none;
+.HotkeyCell__text {
+    width: auto;
+    max-width: 100%;
+    padding: 0 5px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
 }

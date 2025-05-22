@@ -22,7 +22,7 @@
     align-items: center;
     width: 38px;
     height: 38px;
-    fill: lightslategrey;
+    fill: vars.$toolColor;
     cursor: pointer;
     transition: fill ease vars.$transitionTime;
     position: relative;
@@ -35,6 +35,10 @@
     &:hover {
         fill: antiquewhite;
     }
+
+    &.highlight {
+        fill: vars.$easygreen;
+    }
 }
 
 .CoundownEditor__inputCaption {
@@ -42,8 +46,9 @@
     left: 50%;
     top: 100%;
     transform: translate(-50%, 2px);
-    color: white;
+    color: vars.$toolColor;
     font-size: 14px;
+    user-select: none;
 }
 
 .CoundownEditor__inputBox {
@@ -53,6 +58,7 @@
     margin: 0 1rem;
     background: rgb(175, 175, 175);
     border-radius: 2px;
+    user-select: none;
 }
 
 .CoundownEditor__input {
@@ -82,4 +88,29 @@
     transform: translateX(-50%);
     font-size: 20px;
     color: vars.$keyColor;
+}
+
+.CoundownEditor__hint {
+    position: absolute;
+    top: 0;
+    user-select: none;
+    opacity: 0;
+    pointer-events: none;
+    color: vars.$toolColor;
+    color: #656565;
+    transform: translateY(-50%);
+    font-size: 12px;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &.left {
+        right: 100%;
+    }
+
+    &.right {
+        left: 100%;
+    }
 }

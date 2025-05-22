@@ -6,6 +6,8 @@ import noteSlice from './noteSlice';
 import runningSlice from './runningSlice';
 import typingSlice from './typingSlice';
 import shiftSlice from './shiftSlice';
+import refreshSlice from './refreshSlice';
+import bindingSlice from './bindingSlice';
 
 const store = configureStore({
     reducer: {
@@ -15,7 +17,9 @@ const store = configureStore({
         noteSlice: noteSlice,
         runningSlice: runningSlice,
         typingSlice: typingSlice,
-        shiftSlice: shiftSlice
+        shiftSlice: shiftSlice,
+        refreshSlice: refreshSlice,
+        bindingSlice: bindingSlice
     }
 });
 

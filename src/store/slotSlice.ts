@@ -125,7 +125,6 @@ export const slotSlice = createSlice({
             if (matсhedRecord !== -1) {
                 const value = '';
                 state[matсhedRecord] = {...state[matсhedRecord], boundKey: value};
-                debugger;
                 setPositionHotkey(state[matсhedRecord].position, value);
             }
 
