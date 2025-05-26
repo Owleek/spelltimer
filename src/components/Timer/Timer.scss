@@ -307,7 +307,7 @@ $lineSize: 4px;
 $lineWidth: 2*$buttonHeight + $buttonWidth;
 
 $length: 2*($buttonHeight + $buttonWidth);
-$duration: 4; //ms
+$duration: 2; //ms
 $speed: calc($length / $duration); // px per sec
 
 $secondDelay: calc($buttonHeight / $speed);

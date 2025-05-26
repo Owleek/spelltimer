@@ -8,16 +8,15 @@ import ConstructorComponent from '../../ConstructorComponent/ConstructorComponen
 import {EAbility, ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../store/slotSlice';
 import { addRefresh } from '../../../store/refreshSlice';
-import {setHotkey} from '../../../store/hotkeySlice';
 import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
-import { getKeyFromCode } from '../../../data/keyCodeDictionary';
 import DumbTimer from '../../Timer/DumbTimer';
 import LevelController from '../../LevelController/LevelController';
 import LevelControllerView from '../../LevelController/LevelControllerView';
 import SpellReducer from '../../SpellReducer/SpellReducer';
 import BindingOverlay from '../../BindingOverlay/BindingOverlay';
 import CountdownEditor from '../../CoundownEditor/CountdownEditor';
+import Notification from '../../Notification/Notification';
 import './SettingsStage.scss';
 
 export enum EAppStatus {
@@ -36,10 +35,8 @@ const SettingsStage = (): JSX.Element => {
     const {currentStage, changeStage} = useContext(StageContext);
     const [appStatus, setAppStatus] = useState<EAppStatus>(EAppStatus.INITIAL);
     const [editLevelControllers, setIsEditLevelController] = useState<number[]>([]);
-    const [isEdit, setIsEdit] = useState<boolean>(slotList.some(slot => 'name' in slot));
 
     const dispatch = useDispatch();
-    const context = useContext(StageContext);
     const slotListRef = useRef<ISlot[]>(slotList);
     const appStatusRef = useRef<EAppStatus>(appStatus);
     const currentStageRef = useRef<EStages>(currentStage);
@@ -53,20 +50,17 @@ const SettingsStage = (): JSX.Element => {
 
     useEffect(() => { 
         slotListRef.current = slotList;
-        const currentIsEdit = slotList.some(slot => 'name' in slot);
-        if (isEdit !== currentIsEdit) setIsEdit(currentIsEdit);
-     }, [slotList]);
+        const notEmpty = slotList.some(slot => 'name' in slot);
 
-    const removeTimer = useCallback((slot: ITimerData) => {
-        const settedUpSlots = slotList.filter(slot => 'name' in slot);
-
-        if (settedUpSlots.length === 1) {
+        if (notEmpty && currentStage === EStages.INITIAL) return changeStage(EStages.EDIT);
+        if (!notEmpty && currentStage !== EStages.INITIAL) {
             setAppStatus(EAppStatus.INITIAL);
             changeStage(EStages.INITIAL);
-        }
+        };
+        
+     }, [slotList]);
 
-        dispatch(removeTimerFromSlot(slot));
-    }, [slotList]);
+    const removeTimer = useCallback((slot: ITimerData) => dispatch(removeTimerFromSlot(slot)), []);
 
     useEffect(() => {
         appStatusRef.current = appStatus;
@@ -115,7 +109,7 @@ const SettingsStage = (): JSX.Element => {
 
     const onSelectAbility = (ability: ITimerData) => {
         if(!currentSlot) return;
-        if (currentStage !== EStages.EDIT) changeStage(EStages.EDIT);
+        // if (currentStage !== EStages.EDIT) changeStage(EStages.EDIT);
 
         const updData = {
             ...ability,
@@ -164,6 +158,8 @@ const SettingsStage = (): JSX.Element => {
         <div className="Playground__inner">
             { someOneIsBinding && <BindingOverlay /> }
             { currentSlot && <ConstructorComponent currentSlot={currentSlot as ISlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
+            
+            <Notification />
 
             <div className="Playground__box">
                 <div className="Playground__boxHeader">

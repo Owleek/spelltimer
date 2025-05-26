@@ -9,9 +9,7 @@ import Footer from '../Footer/Footer';
 import PageContext, { EPage } from '../../store/PageContext';
 import {setUserPlayed} from '../../user_cache/keys';
 import { translate, makeSnakeCase } from '../../utils/utils';
-
 import './welcome.scss';
-
 
 const text = {
     title: translate('One step ahead'),
@@ -30,7 +28,7 @@ const Welcome = () => {
 
     return (
         <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('settings11')}.png")`}}>
-            <Header />
+            <Header className="Welcome__header"/>
             <h1 className="Welcome__title">Control the game by mastering time.</h1>
             <button className="Welcome__button" onClick={handleClick}>
                 <i className="Welcone__animationArrow"/>
@@ -39,7 +37,7 @@ const Welcome = () => {
                 <i className="Welcone__animationArrow"/>
                 <span className="Welcome__buttonText">get starter</span>
             </button>
-            <Footer />
+            <Footer/>
         </div>
     );
 } ;

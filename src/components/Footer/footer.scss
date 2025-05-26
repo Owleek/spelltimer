@@ -33,8 +33,19 @@
     }
 }
 
-.foote__item:not(:last-of-type) {
-    margin-bottom: 4px;
+.footer__item {
+    padding: 2px 0;
+    cursor: pointer;
+    transition: color ease vars.$transitionTime;
+
+    &:hover {
+        color: vars.$warmHover;
+    }
+
+    &.active {
+        color: vars.$welcomeFontColor;
+        pointer-events: none;
+    }
 }
 
 .footer__button {
@@ -54,7 +65,7 @@
 
     &:hover {
         svg {
-            fill: rgb(255, 197, 90);
+            fill: vars.$warmHover;
         }
     }
 

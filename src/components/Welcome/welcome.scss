@@ -25,6 +25,10 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     position: relative;
 }
 
+.Welcome__header {
+    padding-bottom: 120px;
+}
+
 .Welcome__title {
     width: 100%;
     padding: 60px;

@@ -10,27 +10,44 @@ import Overview from './components/Overview/Overview';
 import PageContext, {EPage} from './store/PageContext';
 import LoadingComponent from './components/LoadingComponent/LoadingComponent';
 import store from './store/store';
+import About from './components/About/About';
+import Contact from './components/Contact/Contact';
+import Politics from './components/Politics/Politics';
 
 const App = () => {
+    
     const [currentPage, setCurrentPage] = useState<EPage>(EPage.LOADING);
     const navigate = (page: EPage) => setCurrentPage(page);
+
+    const [activeArticle, setActiveArticle] = useState<EPage | null>(null);
+
+    const onSelectArticle = (selectedArticle: EPage | null) => {
+        setActiveArticle(selectedArticle);
+        return selectedArticle === null ? navigate(EPage.WELCOME) : navigate(selectedArticle);
+    }
 
     const renderPage = (page: EPage): JSX.Element => {
         switch(page) {
             case EPage.LOADING:
                 return <LoadingComponent />
             case EPage.PLAYGROUND:
-                return <Playground />
+                return <Playground/>
             case EPage.OVERVIEW:
                 return <Overview />
+            case EPage.ABOUT:
+                return <About />
+            case EPage.CONTACT:
+                return <Contact />
+            case EPage.POLITICS:
+                return <Politics />
             default:
-                return <Welcome />
+                return <Welcome/>
         }
     }
 
     return (
         <Provider store={store}>
-            <PageContext.Provider value={{currentPage, navigate}}>
+            <PageContext.Provider value={{currentPage, navigate, activeArticle, onSelectArticle}}>
                 { renderPage(currentPage) }
             </PageContext.Provider>
         </Provider>

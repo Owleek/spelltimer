@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getNoteRunTrigger, setNoteRunTrigger } from '../user_cache/keys';
+import { getNotificationOfRunning, setNotificationOfRunning } from '../user_cache/keys';
 
-const initialSlotList: {value: string} = {value: getNoteRunTrigger()};
+const initialSlotList: {value: string} = {value: getNotificationOfRunning()};
 
 export const noteSlice = createSlice({
-    name: 'actionNoteSlice',
+    name: 'actionNotificationSlice',
     initialState: initialSlotList,
     reducers: {
-        hideNodeRunTrigger(state: {value: string}) {
-            state.value = setNoteRunTrigger();
+        hideNotificationOfRunning(state: {value: string}, action: PayloadAction<'temp' | 'storage'>) {
+            state.value = action.payload === 'temp' ? '1' : setNotificationOfRunning();
         },
     },
 });
 
-export const { hideNodeRunTrigger } = noteSlice.actions;
+export const { hideNotificationOfRunning } = noteSlice.actions;
 
 export default noteSlice.reducer;

@@ -2,30 +2,26 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
-import {setUserPlayed} from '../../user_cache/keys';
 import { translate, makeSnakeCase } from '../../utils/utils';
+import Modal from '../Modal/Modal';
+import cn from 'classnames';
 import './footer.scss';
 
 const Footer = () => {
     const context = useContext(PageContext);
-
     if (!context) return <ErrorComponent message={String(context)}/>
-    
-    const handleClick = () => {
-        setUserPlayed();
-        context.navigate(EPage.PLAYGROUND);
-    }
+    const {activeArticle, onSelectArticle} = context;
 
     return (
         <div className="footer">
             <div className="footer__column">
                 <ul className="footer__list">
-                    <li className="foote__item">О проекте</li>
-                    <li className="foote__item">Контакты</li>
-                    <li className="foote__item">Политика</li>
+                    <li className={cn('footer__item', {active: activeArticle === EPage.ABOUT})} onClick={() => onSelectArticle(EPage.ABOUT)}>О приложении</li>
+                    <li className={cn('footer__item', {active: activeArticle === EPage.CONTACT})} onClick={() => onSelectArticle(EPage.CONTACT)}>Контакты</li>
+                    <li className={cn('footer__item', {active: activeArticle === EPage.POLITICS})} onClick={() => onSelectArticle(EPage.POLITICS)}>Политика</li>
                 </ul>
             </div>
             <div className="footer__column">

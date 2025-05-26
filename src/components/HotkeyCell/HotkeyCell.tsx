@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
 import { useDispatch } from 'react-redux';
 import { setHotkey } from '../../store/hotkeySlice';
-import { hideNodeRunTrigger } from '../../store/noteSlice';
 import { setBindingSlice } from '../../store/bindingSlice';
 import cn from 'classnames';
 import {TStoreState} from '../../store/store';

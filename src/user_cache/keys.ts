@@ -61,11 +61,11 @@ export function setUserPlayed(): void {
     localStorage.setItem(`userPlayed`, 'true');
 }
 
-export function getNoteRunTrigger(): string {
-    return localStorage.getItem(`noteRunTrigger`) || '';
+export function getNotificationOfRunning(): string {
+    return localStorage.getItem(`runningNotification`) || '';
 }
 
-export function setNoteRunTrigger(): string {
-    localStorage.setItem(`noteRunTrigger`, 'settedUp');
-    return 'settedUp';
+export function setNotificationOfRunning(): string {
+    localStorage.setItem(`runningNotification`, '1');
+    return '1';
 }
