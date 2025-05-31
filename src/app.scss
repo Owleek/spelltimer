@@ -138,6 +138,12 @@ body {
   }
 }
 
+.adjustCenter {
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .AppLayout {
   display: flex;
   flex-direction: column;
@@ -145,6 +151,7 @@ body {
   justify-content: flex-start;
   background: rgba(0, 0, 0, 0.7);
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .AppContent {
@@ -152,13 +159,17 @@ body {
   padding-top: 3rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  padding-bottom: 2rem;
+  
+  height: 100%;
   display: flex;
   flex-direction: column;
   
   p {
     font-size: 18px;
-    margin-bottom: 1.4rem;
-    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    word-spacing: 2px;
   }
 }
 
@@ -196,4 +207,3 @@ body {
     }
   }
 }
-
