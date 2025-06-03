@@ -108,6 +108,7 @@
     justify-content: center;
     align-items: center;
     right: calc(100% + 1rem);
+    fill: vars.$fresh;
 
     svg {
       max-width: 100%;
@@ -115,21 +116,24 @@
     }
 }
 
-.Article__socialList {
+.Article__socialList,
+.Article__donationList {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   margin-bottom: 2rem;
 }
 
-.Article__social {
+.Article__social,
+.Article__donation {
   position: relative;
   display: inline-block;
   padding-left: 40px;
   cursor: pointer;
 }
 
-.Article__socialIcon {
+.Article__socialIcon,
+.Article__donationIcon {
   width: 30px;
   height: 30px;
   top: 50%;
@@ -146,12 +150,118 @@
   }
 }
 
-.Article__socialLink {
+.Article__socialLink,
+.Article__donationLink {
   white-space: nowrap;
   text-decoration: underline;
   transition: color ease vars.$transitionTime;
 
   &:hover {
     color: vars.$link;
+  }
+}
+
+.Article__donationLink {
+    color: vars.$primary;
+
+    &:visited {
+      color: vars.$primary;
+    }
+}
+
+.Article__donationContainer {
+  display: flex;
+  margin-top: 1rem;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+.Article__donationList {
+  align-items: flex-start;
+  margin-bottom: 0;
+  gap: 4rem;
+}
+
+.Article__donationIcon.bmc {
+  background: white;
+  border-radius: 4px;
+}
+
+.Article__walletList {
+  display: flex;
+  flex-direction: column;
+}
+
+.Article__wallet {
+  display: inline-block;
+  margin-bottom: 2rem;
+  padding-left: 45px;
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+}
+
+.Article__walletCopy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+  width: 30px;
+  height: 30px;
+
+  left: calc(100% + 1rem);
+  top: 50%;
+  transform: translateY(-50%);
+
+  stroke: vars.$primary;
+
+  svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+.Article__walletCopyText {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 4px;
+
+  color: vars.$primary;
+  background: vars.$success2;
+
+  text-transform: lowercase;
+
+  transform-origin: 50% 100%;
+  transform: translateX(-50%) scale(0);
+
+  transition-duration: vars.$transitionTime;
+  transition-property: transform;
+  transition-timing-function: ease;
+
+  z-index: 10;
+
+  &.show {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.Article__walletIcon {
+  width: 35px;
+  height: 35px;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+
+  svg {
+      max-width: 100%;
+      max-height: 100%;
   }
 }

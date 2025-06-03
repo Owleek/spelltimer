@@ -13,6 +13,7 @@ import store from './store/store';
 import About from './components/About/About';
 import Contact from './components/Contact/Contact';
 import Politics from './components/Politics/Politics';
+import Donation from './components/Donation/Donation';
 
 const App = () => {
     
@@ -40,6 +41,8 @@ const App = () => {
                 return <Contact />
             case EPage.POLITICS:
                 return <Politics />
+            case EPage.DONATION:
+                return <Donation />
             default:
                 return <Welcome/>
         }

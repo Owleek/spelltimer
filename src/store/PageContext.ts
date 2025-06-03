@@ -7,7 +7,8 @@ export enum EPage {
     LOADING = 'loading',
     ABOUT = 'about',
     CONTACT = 'contact',
-    POLITICS = 'politics'
+    POLITICS = 'politics',
+    DONATION = 'donation'
 }
 
 export type TPage = EPage | null;
