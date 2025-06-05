@@ -8,6 +8,7 @@ import typingSlice from './typingSlice';
 import shiftSlice from './shiftSlice';
 import refreshSlice from './refreshSlice';
 import bindingSlice from './bindingSlice';
+import localeSlice from './localeSlice';
 
 const store = configureStore({
     reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
         typingSlice: typingSlice,
         shiftSlice: shiftSlice,
         refreshSlice: refreshSlice,
-        bindingSlice: bindingSlice
+        bindingSlice: bindingSlice,
+        localeSlice: localeSlice
     }
 });
 

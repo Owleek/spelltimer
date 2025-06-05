@@ -69,3 +69,11 @@ export function setNotificationOfRunning(): string {
     localStorage.setItem(`runningNotification`, '1');
     return '1';
 }
+
+export function getLocale(): string {
+    return localStorage.getItem('locale') || '';
+}
+
+export function setLocale(locale: string) {
+    localStorage.setItem('locale', locale);
+}

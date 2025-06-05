@@ -9,34 +9,6 @@
     padding: 40px 60px;
 }
 
-.header__lang {
-    font-size: 20px;
-    cursor: pointer;
-    padding-right: 2rem;
-    font-weight: bold;
-    position: relative;
-
-    &:hover {
-        color: vars.$welcomeFontColor;
-
-        .header__langArrow svg {
-            fill: vars.$welcomeFontColor;
-        }
-    }
-}
-
-.header__langArrow {
-    position: absolute;
-    width: 20px;
-    top: calc(50% - 4px);
-    right: 0;
-    transform: translateY(-50%);
-    
-    svg {
-        fill: white;
-    }
-}
-
 .logo {
     position: relative;
     width: 146px;
@@ -57,6 +29,5 @@
     left: calc(100% + 5px);
     top: -18px;
     white-space: nowrap;
-    // color: #778899;
     color: #9babbb;
 }

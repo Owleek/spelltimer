@@ -1,3 +1,6 @@
+import { getLocale } from "../user_cache/keys";
+
+
 export function makeSnakeCase(str: string): string {
     return str.trim().split(' ').map(word => word.toLowerCase()).join('_');
 }
@@ -24,4 +27,21 @@ export function toSafeInteger(input: string): number | null {
     }
 
     return parsed;
+}
+
+export const detectLocale = (): string => {
+  const saved = getLocale();
+  if (saved) return saved;
+
+  // Простейшая версия синхронной детекции:
+  const browserLang = navigator.language;
+  if (browserLang.startsWith("ru")) return "ru";
+  if (browserLang.startsWith("es")) return "es";
+  if (browserLang.startsWith("zh")) return "zh";
+  if (browserLang.startsWith("ar")) return "ar";
+  return "en";
+};
+
+export function translateText(dictionary: Record<string, string>, text: string) {
+  return dictionary[text] || text;
 }

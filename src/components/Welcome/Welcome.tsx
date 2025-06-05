@@ -8,7 +8,9 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import PageContext, { EPage } from '../../store/PageContext';
 import {setUserPlayed} from '../../user_cache/keys';
-import { translate, makeSnakeCase } from '../../utils/utils';
+import { translate, makeSnakeCase, translateText } from '../../utils/utils';
+import { useSelector, useDispatch } from 'react-redux';
+import {TStoreState} from '../../store/store';
 import './welcome.scss';
 
 const text = {
@@ -18,6 +20,9 @@ const text = {
 
 const Welcome = () => {
     const context = useContext(PageContext);
+
+    const dictionary = useSelector((state: TStoreState) => state.localeSlice.dictionary);
+    if (!dictionary) return;
 
     if (!context) return <ErrorComponent message={String(context)}/>
     
@@ -35,7 +40,7 @@ const Welcome = () => {
                 <i className="Welcone__animationArrow"/>
                 <i className="Welcone__animationArrow"/>
                 <i className="Welcone__animationArrow"/>
-                <span className="Welcome__buttonText">get starter</span>
+                <span className="Welcome__buttonText">{translateText(dictionary, 'get_started')}</span>
             </button>
             <Footer/>
         </div>

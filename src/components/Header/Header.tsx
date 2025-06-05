@@ -9,6 +9,7 @@ import {setUserPlayed} from '../../user_cache/keys';
 import { translate, makeSnakeCase } from '../../utils/utils';
 import cn from 'classnames';
 import './header.scss';
+import LangSelector from '../LangSelector/LangSelector';
 
 const text = {
     title: translate('One step ahead'),
@@ -45,14 +46,8 @@ const Header = ({className}: IProps) => {
                     <path d="M447.866 7C447.866 4.23858 445.627 2 442.866 2H407.866C405.104 2 402.866 4.23857 402.866 7V14.8307C385.536 22.4821 372.736 38.5151 369.606 57.7918C368.971 61.7011 372.185 65 376.146 65H380.261C383.989 65 386.997 62.0495 387.814 58.4115C391.656 41.3174 406.722 28.4692 424.866 28.0126V67L454.968 92.9632C447.826 100.963 437.434 106 425.866 106C420.757 106 415.866 109.709 415.866 114.818V123.126C419.112 123.7 422.454 124 425.866 124C457.346 124 482.866 98.4802 482.866 67C482.866 43.318 468.423 23.0091 447.866 14.4007V7Z"/>
                 </svg>
             </div>
-            <div className="header__lang">
-                EN
-                <span className='header__langArrow'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59 22">
-                        <path d="M30.7521 20.8663C29.8173 21.4123 28.6609 21.4123 27.7261 20.8663L1.57176 5.59052C-1.07172 4.04656 0.0234356 5.80966e-06 3.08478 5.54203e-06L55.3934 9.69061e-07C58.4547 7.01431e-07 59.5499 4.04655 56.9064 5.59051L30.7521 20.8663Z" />
-                    </svg>
-                </span>
-            </div>
+
+            <LangSelector className='header__langSelector'/>
         </div>
     );
 } ;
