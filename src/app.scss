@@ -6,6 +6,7 @@ body {
     font-family: 'Balsamiq Sans';
     height: 100vh;
     overflow: hidden;
+    background-color: rgba(44, 44, 44);
 }
 
 #root {
@@ -140,6 +141,7 @@ body {
 
 .adjustCenter {
   height: 100%;
+  padding: 0 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }

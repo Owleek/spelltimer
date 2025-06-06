@@ -2,13 +2,15 @@
 
 .footer {
     width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     font-size: 14px;
-    margin-top: auto;
     padding: 1rem 60px;
     color: #dadada;
-    position: relative;
     display: flex;
     justify-content: center;
+    z-index: 1;
 }
 
 .footer__column {

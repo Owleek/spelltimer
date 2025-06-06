@@ -1,19 +1,54 @@
-import React, { JSX } from 'react';
+import React, { JSX, useContext } from 'react';
+import { translate, makeSnakeCase, translateText } from '../../utils/utils';
+import { useSelector, useDispatch } from 'react-redux';
+import PageContext, { EPage } from '../../store/PageContext';
+import {TStoreState} from '../../store/store';
+import {setUserPlayed} from '../../user_cache/keys';
+
 import cn from 'classnames';
 import './PlayButton.scss';
+import './SmallPlayButton.scss';
 
 interface IProps {
-    className: string
-    onClick: () => void
+    className?: string
+    small?: boolean
 }
 
-const PlayButton = ({className, onClick}: IProps): JSX.Element => {
+const PlayButton = ({className, small}: IProps): JSX.Element => {
+    const context = useContext(PageContext);
+
+    if (!context) throw new Error('no context in btn component');
+
+    const dictionary = useSelector((state: TStoreState) => state.localeSlice.dictionary);
+    const slotList = useSelector((state: TStoreState) => state.slotList, (prev, next) => JSON.stringify(prev) === JSON.stringify(next));
+    const inprogress = !!slotList.find(slot => 'name' in slot);
+
+    const handleClick = () => {
+        setUserPlayed();
+        context.navigate(EPage.PLAYGROUND);
+    }
+
     return (
-        <div className={cn('PlayButton', className)} onClick={onClick}>
-            <svg viewBox="0 0 24 24">
-                <path fillRule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z" clipRule="evenodd"/>
-            </svg>
-        </div>
+        <React.Fragment>
+            {
+                small ?
+                <button className={cn('SmallPlayButton', className)} onClick={handleClick}>
+                    <i className="SmallPlayButton__smallAnimationArrow"/>
+                    <i className="SmallPlayButton__smallAnimationArrow"/>
+                    <i className="SmallPlayButton__smallAnimationArrow"/>
+                    <i className="SmallPlayButton__smallAnimationArrow"/>
+                    <span className="SmallPlayButton__text">{translateText(dictionary, inprogress ? 'continue' : 'get_started')}</span>
+                </button>
+                :
+                <button className={cn('PlayButton', className)} onClick={handleClick}>
+                    <i className="PlayButton__animationArrow"/>
+                    <i className="PlayButton__animationArrow"/>
+                    <i className="PlayButton__animationArrow"/>
+                    <i className="PlayButton__animationArrow"/>
+                    <span className="PlayButton__text">{translateText(dictionary, inprogress ? 'continue' : 'get_started')}</span>
+                </button>
+            }
+        </React.Fragment>
     );
 }
 

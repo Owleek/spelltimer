@@ -4,45 +4,26 @@
 // 4. Стили и ассеты.
 import { useContext } from 'react';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import PageContext, { EPage } from '../../store/PageContext';
-import {setUserPlayed} from '../../user_cache/keys';
 import { translate, makeSnakeCase, translateText } from '../../utils/utils';
 import { useSelector, useDispatch } from 'react-redux';
 import {TStoreState} from '../../store/store';
+import PlayButton from '../PlayButton/PlayButton';
+import cn from 'classnames';
 import './welcome.scss';
 
-const text = {
-    title: translate('One step ahead'),
-    button: translate('get started')
-}
 
 const Welcome = () => {
-    const context = useContext(PageContext);
-
-    const dictionary = useSelector((state: TStoreState) => state.localeSlice.dictionary);
+    const {dictionary, currentLang} = useSelector((state: TStoreState) => state.localeSlice);
     if (!dictionary) return;
 
-    if (!context) return <ErrorComponent message={String(context)}/>
-    
-    const handleClick = () => {
-        setUserPlayed();
-        context.navigate(EPage.PLAYGROUND);
-    }
+    const fontStyleNormal = currentLang === 'ar' || currentLang === 'zh';
 
     return (
-        <div className="Welcome innerContainer" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('settings11')}.png")`}}>
-            <Header className="Welcome__header"/>
-            <h1 className="Welcome__title">Control the game by mastering time.</h1>
-            <button className="Welcome__button" onClick={handleClick}>
-                <i className="Welcone__animationArrow"/>
-                <i className="Welcone__animationArrow"/>
-                <i className="Welcone__animationArrow"/>
-                <i className="Welcone__animationArrow"/>
-                <span className="Welcome__buttonText">{translateText(dictionary, 'get_started')}</span>
-            </button>
-            <Footer/>
+        <div className="Welcome">
+            <div className="Welcome__titleStripe">
+                <h1 className={cn('Welcome__title', {fontStyleNormal})}>{translateText(dictionary, 'welcome_title')}</h1>
+            </div>
+            <PlayButton />
         </div>
     );
 } ;

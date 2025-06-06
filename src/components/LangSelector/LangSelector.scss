@@ -2,13 +2,14 @@
 @use '../../variables.scss' as vars;
 
 $menuWidth: 170px;
-$menuHeadHeight: 30px;
+$menuHeadHeight: 40px;
 
 .LangSelector {
     white-space: nowrap;
     font-size: 20px;
     font-weight: bold;
     position: relative;
+    border: 3px solid transparent;
 
     color: vars.$welcomeFontColor;
     fill: vars.$welcomeFontColor;
@@ -17,8 +18,9 @@ $menuHeadHeight: 30px;
     transition-timing-function: ease;
     transition-property: fill, color;
 
-    width: $menuWidth;
-    height: 30px;
+    height: $menuHeadHeight;
+    width: 140px;
+
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -65,8 +67,16 @@ $menuHeadHeight: 30px;
     top: calc(100% + 5px);
     transform: scaleY(0);
     padding: 5px 0;
+    z-index: 1;
 
-    background: rgba(0, 0, 0, 0.7);
+    // background: rgba(0, 0, 0, 0.7);
+    background: vars.$toolColor;
+    background: vars.$article;
+    background: vars.$lowerBackground;
+    background: #819A91;
+    background: #7F8CAA;
+    background: rgba(182, 176, 159, 0.4);
+
     color: vars.$primary;
     border-radius: 5px;
 
@@ -108,5 +118,7 @@ $menuHeadHeight: 30px;
 
     &:hover {
         color: vars.$welcomeFontColor;
+        color: #66b3a1;
+        // color: vars.$goldenrod;
     }
 }

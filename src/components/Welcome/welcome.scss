@@ -1,155 +1,45 @@
 @use '../../variables.scss' as vars;
 
-$buttonHeight: 80; // px
-$buttonWidth: 380; // px
-$lineSize: 6px;
-$lineWidth: 2*$buttonHeight + $buttonWidth;
-
-$length: 2*($buttonHeight + $buttonWidth);
-$duration: 12; //ms
-$speed: calc($length / $duration); // px per sec
-
-$secondDelay: calc($buttonHeight / $speed);
-$thirdDelay: calc(($buttonHeight + $buttonWidth) / $speed);
-$fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
-
 .Welcome {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     height: 100vh;
+    padding-top: 25vh;
+
+    background-image: url('../../../public/assets/other/settings11.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     overflow: hidden;
     position: relative;
 }
 
-.Welcome__header {
-    padding-bottom: 120px;
-}
-
-.Welcome__title {
+.Welcome__titleStripe {
+    height: 180px;
     width: 100%;
-    padding: 60px;
-    margin-bottom: 130px;
-    font-size: 44px;
-    font-weight: bold;
-    font-style: italic;
-    text-align: center;
-    color: vars.$welcomeFontColor;
-    background: rgba(0, 0, 0, 0.5);
-}
 
-.Welcome__button {
-    width: #{$buttonWidth}px;
-    height: #{$buttonHeight}px;
-    flex-shrink: 0; // todo fix height
-    padding: 0 1.5rem;
+    margin-bottom: 130px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    color: vars.$welcomeFontColor;
-    text-transform:uppercase;
-    text-decoration:none;
-    letter-spacing: 5px;
-    font-size: 18px;
-    font-weight: bold;
+
     background: rgba(0, 0, 0, 0.5);
-    transition: background-color ease-in-out vars.$transitionTime;
-    position: relative;
-    overflow: hidden;
-
-    &:hover {
-        background: rgba(0, 0, 0, 0.7);
-    }
 }
 
-.Welcome__buttonText {
-    width: 100%;
-    display: inline-block;
+.Welcome__title {
+    font-size: 44px;
+
+    font-weight: bold;
+    font-style: italic;
+
+    color: vars.$welcomeFontColor;
     text-align: center;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
 
-.Welcone__animationArrow {
-    width: #{$lineWidth}px;
-    height: $lineSize;
-    position:absolute;
-    background:linear-gradient(to right, rgba(244,243,247,0) 0%, vars.$welcomeFontColor 50%);
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    animation-duration: #{$duration}s;
-}
-
-.Welcone__animationArrow:nth-of-type(1) {
-    bottom: 0;
-    left: 0;
-    transform: translateY(#{$lineWidth}px) rotateZ(-90deg);
-    transform-origin: 0% 0%;
-    animation-name: animationArrow_1;
-}
-
-.Welcone__animationArrow:nth-of-type(2) {
-    top: 0;
-    left: 0;
-    transform: translateX(-100%);
-    animation-name: animationArrow_2;
-    animation-delay: #{$secondDelay}s;
-}
-
-.Welcone__animationArrow:nth-of-type(3) {
-    top: 0;
-    right: 0;
-    transform-origin: 100% 0%;
-    transform: rotateZ(90deg);
-    animation-name: animationArrow_3;
-    animation-delay: #{$thirdDelay}s;
-}
-
-.Welcone__animationArrow:nth-of-type(4) {
-    right: 0;
-    bottom: 0;
-    transform-origin: 100% 50%;
-    transform: rotateZ(180deg);
-    animation-name: animationArrow_4;
-    animation-delay: #{$fourthDelay}s;
-}
-
-@keyframes animationArrow_1 {
-    0% { 
-        bottom: 0;
-    }
-    100% { 
-        bottom: #{$length}px;
-    }
-}
-
-@keyframes animationArrow_2 {
-    0% { 
-        left: 0;
-    }
-    100% { 
-        left: #{$length}px;
-    }
-}
-
-@keyframes animationArrow_3 {
-    0% { 
-        top: 0;
-    }
-    100% { 
-        top: #{$length}px;
-    }
-}
-
-@keyframes animationArrow_4 {
-    0% { 
-        right: 0;
-    }
-    100% { 
-        right: #{$length}px;
+    &.fontStyleNormal {
+        font-style: normal;
     }
 }

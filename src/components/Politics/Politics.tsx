@@ -5,7 +5,6 @@ import '../../article.scss';
 
 const Politics = () => {
     return <div className="Article">
-        <Header />
         <div className="Article__body">
             <div className="adjustCenter">
                 <div className="Article__bodyInner">
@@ -104,7 +103,6 @@ const Politics = () => {
                 </div>
             </div>
         </div>
-        <Footer />
     </div>
 }
 

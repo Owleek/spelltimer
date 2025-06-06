@@ -6,10 +6,12 @@ import { useContext } from 'react';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
 import {setUserPlayed} from '../../user_cache/keys';
-import { translate, makeSnakeCase } from '../../utils/utils';
+import { translate, makeSnakeCase, translateText } from '../../utils/utils';
+
 import cn from 'classnames';
 import './header.scss';
 import LangSelector from '../LangSelector/LangSelector';
+import PlayButton from '../PlayButton/PlayButton';
 
 const text = {
     title: translate('One step ahead'),
@@ -18,9 +20,10 @@ const text = {
 
 interface IProps {
     className?: string
+    isPlaygroundButtonShown?: boolean
 }
 
-const Header = ({className}: IProps) => {
+const Header = ({className, isPlaygroundButtonShown}: IProps) => {
     const context = useContext(PageContext);
 
     if (!context) return <ErrorComponent message={String(context)}/>
@@ -29,7 +32,7 @@ const Header = ({className}: IProps) => {
     const handleClick = () => onSelectArticle(null);
 
     return (
-        <div className={cn('header', className)}>
+        <div className={cn('header', className, {alignCenter: !!isPlaygroundButtonShown})}>
             <div className="logo">
                 <div className="patch">sync 7.38c</div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 494 217" onClick={handleClick}>
@@ -46,7 +49,10 @@ const Header = ({className}: IProps) => {
                     <path d="M447.866 7C447.866 4.23858 445.627 2 442.866 2H407.866C405.104 2 402.866 4.23857 402.866 7V14.8307C385.536 22.4821 372.736 38.5151 369.606 57.7918C368.971 61.7011 372.185 65 376.146 65H380.261C383.989 65 386.997 62.0495 387.814 58.4115C391.656 41.3174 406.722 28.4692 424.866 28.0126V67L454.968 92.9632C447.826 100.963 437.434 106 425.866 106C420.757 106 415.866 109.709 415.866 114.818V123.126C419.112 123.7 422.454 124 425.866 124C457.346 124 482.866 98.4802 482.866 67C482.866 43.318 468.423 23.0091 447.866 14.4007V7Z"/>
                 </svg>
             </div>
-
+            {
+                isPlaygroundButtonShown &&
+                <PlayButton small={true} className='header__button'/>
+            }
             <LangSelector className='header__langSelector'/>
         </div>
     );

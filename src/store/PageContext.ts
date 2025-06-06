@@ -3,7 +3,6 @@ import { createContext } from 'react';
 export enum EPage {
     WELCOME = 'welcome',
     PLAYGROUND = 'playground',
-    OVERVIEW = 'overview',
     LOADING = 'loading',
     ABOUT = 'about',
     CONTACT = 'contact',

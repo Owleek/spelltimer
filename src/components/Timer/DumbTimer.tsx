@@ -281,7 +281,7 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
         const keyIs = event.code;
         setIsBinding(false);
         dispatch(setBindingSlice(false));
-        document.removeEventListener('keydown', getKey);
+        document.removeEventListener('keyup', getKey);
         if (keyIs === 'Escape') return;
         dispatch(setHotkey({key: keyIs, id: ability.position, type: 'slot'}));
     }, []);
@@ -289,7 +289,7 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
     const handleBindKey = () => {
         setIsBinding(true);
         dispatch(setBindingSlice(true));
-        document.addEventListener('keydown', getKey);
+        document.addEventListener('keyup', getKey);
     }
 
     const hotkey = getKeyFromCode(ability.boundKey);

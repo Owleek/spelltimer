@@ -26,9 +26,7 @@ const Playground = () => {
   return (
     <div className="Playground" style={{backgroundImage: `url("/assets/other/${makeSnakeCase('settings')}.png")`}}>
       <StageContext.Provider value={payload}>
-        <Header/>
         <SettingsStage />
-        {/* <Footer/> */}
       </StageContext.Provider>
     </div>
   );
