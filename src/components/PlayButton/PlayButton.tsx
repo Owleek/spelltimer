@@ -25,7 +25,7 @@ const PlayButton = ({className, small}: IProps): JSX.Element => {
 
     const handleClick = () => {
         setUserPlayed();
-        context.navigate(EPage.PLAYGROUND);
+        context.onSelectArticle(EPage.PLAYGROUND);
     }
 
     return (

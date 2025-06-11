@@ -128,7 +128,14 @@
   position: relative;
   display: inline-block;
   padding-left: 40px;
+}
+
+.Article__donationLinkHoverContainer:hover {
   cursor: pointer;
+
+  & .Article__donationLink {
+    color: vars.$link;
+  }
 }
 
 .Article__socialIcon,
@@ -154,10 +161,6 @@
   white-space: nowrap;
   text-decoration: underline;
   transition: color ease vars.$transitionTime;
-
-  &:hover {
-    color: vars.$link;
-  }
 }
 
 .Article__donationLink {
@@ -171,7 +174,7 @@
 .Article__donationContainer {
   display: flex;
   margin-top: 1rem;
-  gap: 5rem;
+  gap: 6.5rem;
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
 }
@@ -198,23 +201,26 @@
   padding-left: 45px;
   white-space: nowrap;
   position: relative;
-  cursor: pointer;
 }
 
-.Article__walletCopy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.Article__walletPayTools {
   position: absolute;
-
-  width: 30px;
-  height: 30px;
-
   left: calc(100% + 1rem);
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  gap: 1rem;
+}
 
-  stroke: vars.$primary;
+.Article__walletCopy, 
+.Article__walletQRCODE {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 
   svg {
     max-width: 100%;
@@ -222,12 +228,33 @@
   }
 }
 
+.Article__walletCopy {
+    stroke: vars.$primary;
+    fill: none;
+    transition: stroke vars.$transitionTime ease;
+    position: relative;
+
+    &:hover {
+      stroke: vars.$goldenrod;
+    }
+}
+
+.Article__walletQRCODE {
+    fill: vars.$primary;
+    transition: fill vars.$transitionTime ease;
+    
+    &:hover {
+      fill: vars.$goldenrod;
+    }
+}
+
+
 .Article__walletCopyText {
   position: absolute;
   bottom: calc(100% + 4px);
   left: 50%;
   transform: translateX(-50%);
-  padding: 4px 8px;
+  padding: 4px 12px;
   border-radius: 4px;
 
   color: vars.$primary;

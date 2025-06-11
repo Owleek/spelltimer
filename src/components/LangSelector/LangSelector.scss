@@ -9,10 +9,9 @@ $menuHeadHeight: 40px;
     font-size: 20px;
     font-weight: bold;
     position: relative;
-    border: 3px solid transparent;
 
-    color: vars.$welcomeFontColor;
-    fill: vars.$welcomeFontColor;
+    color: vars.$primary;
+    fill: vars.$primary;
 
     transition-duration: vars.$transitionTime;
     transition-timing-function: ease;
@@ -119,6 +118,5 @@ $menuHeadHeight: 40px;
     &:hover {
         color: vars.$welcomeFontColor;
         color: #66b3a1;
-        // color: vars.$goldenrod;
     }
 }

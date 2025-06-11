@@ -308,7 +308,7 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
                         <span className="Timer__hintText">{hotkey}</span>
                     </div>
                 }
-                <div className="Timer__innerWrapper Playground__slotEasyShadow">
+                <div className="Timer__innerWrapper">
                     <svg className="Timer__svg" viewBox="0 0 120 120">
                         <circle
                             className="Timer__circle transition"

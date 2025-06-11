@@ -28,20 +28,20 @@ $fourthDelay: calc(($smallButtonHeight + $smallButtonWidth + $smallButtonHeight)
     letter-spacing: 2px;
     font-size: 14px;
     font-weight: bold;
-    background: rgba(0, 0, 0, 0.5);
     transition: background-color ease-in-out vars.$transitionTime;
     position: relative;
     overflow: hidden;
+    background: rgb(255, 255, 255, 0.1);
 
     &:hover {
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.1);
     }
 
     &::before {
         content: '';
         width: 100%;
         height: 100%;
-        border: 1px solid #8ec6b9;
+        border: 1px solid rgb(142, 198, 185);
         position: absolute;
         left: 0;
         top: 0;

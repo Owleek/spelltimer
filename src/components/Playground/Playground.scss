@@ -23,7 +23,6 @@
   padding: 1rem 0;
 }
 
-
 .Playground__box {
   display: flex;
   flex-direction: column;
@@ -37,8 +36,6 @@
   height: 70px;
   padding: 1.5rem;
   padding-bottom: 0.5rem;
-  // display: grid;
-  // grid-template-columns: 60px 1fr 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -69,17 +66,8 @@
   height: 100%;
   position: relative;
   padding: vars.$slotPadding;
-  background-color: vars.$lowerBackground;
-  box-shadow: vars.$innerSlotBoxShadow;
+  background-color: rgba(255, 255, 255, 0.06);
   overflow: hidden;
-}
-
-.Playground__slotBox.void {
-  background-color: rgb(61, 61, 61);
-}
-
-.Playground__slotEasyShadow {
-  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.9) inset;
 }
 
 .Playground__slotHeavyShadow {
@@ -147,48 +135,21 @@
 }
 
 .Playground__button {
-  // width: 60px;
-  // height: 60px;
   width: 28px;
   height: 28px;
-  // border: 1px solid #222;
   fill:rgb(214 214 214);
   fill:lightslategrey;
-  // border-radius: 8px;
-  // padding: 1rem;
-  // background: linear-gradient(to right, #3f3e3e, #484747, #3f3e3e);
-  // box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.35) inset, 0 2px 5px 0px rgba(0, 0, 0, 0.5), 0 0px 25px 0px rgba(0, 0, 0, 0.15);
   position: relative;
   cursor: pointer;
   transition: all ease-in-out vars.$transitionTime;
   transform: scale(1);
 
-  // &::before {
-  //   content: '';
-  //   position: absolute;
-  //   inset: 3px 3px;
-  //   filter: blur(2px);
-  // }
-
   &:hover {
      fill: antiquewhite;
   }
 
-  // &.active {
-  //   fill: #fdfb00 !important;
-  //   box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0.5) inset;
-  //   padding: 17px;
-
-  //   &::before {
-  //     border-color: transparent;
-  //   }
-  // }
-
   &.disabled {
-    // background: #3b3b3b;
-    // box-shadow: none;
     fill: #4a4a4a !important;
-    // border-color: #333333;
     cursor: default;
     pointer-events: none;
   }
@@ -202,14 +163,6 @@
 .Playground__setsButton.active {
   pointer-events: none;
 }
-
-// .Playground__editToglers {
-//   display: flex;
-
-//   & .Playground__button:first-of-type {
-//     margin-right: 0.5rem;
-//   }
-// }
 
 .Playground__button.play {
   fill: vars.$success1;
@@ -241,98 +194,4 @@
   width: 26px;
   height: 26px;
   transform: translateY(-50%);
-}
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////
-
-.Playground__container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-template-rows: repeat(9, 1fr);
-  grid-template-columns: repeat(8, 1fr);
-  overflow: hidden;
-}
-
-.Playground__slot {
-  position: relative;
-}
-
-.Playground__ability,
-.Playground__emptyContainer {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.Playground__ability {
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-
-  &:hover {
-
-  }
-}
-
-.Playground__emptyContainer {
-  border: 1px dashed rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
-  cursor: pointer;
-
-  &:hover {
-    border: 1px dashed rgba(255, 255, 255, 0.9);
-
-    &::after,
-    &::before {
-      border: 1px dashed rgba(255, 255, 255, 0.9);
-    }
-  }
-
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    border: 1px dashed rgba(255, 255, 255, 0.5);
-  }
-
-  &::before {
-    width: 0;
-    height: 60%;
-    left: calc(50% - 3px);
-    top: 20%;
-  }
-
-  &::after {
-    width: 60%;
-    height: 0;
-    top: calc(50% - 3px);
-    left: 20%;
-  }
 }

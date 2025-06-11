@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import Timer from './Timer';
-import TimerWheel from '../TimerWheel/TimerWheel';
-import { translate, createArrayFromNumber } from '../../utils/utils';
+import { translate } from '../../utils/utils';
 import './TimerController.scss';
 
 const reducers = [
@@ -78,7 +77,6 @@ const TimerController = () => {
                 </div>
                 <span className="TimerController__levelControl">+</span>
             </div>
-            <TimerWheel numbers={createArrayFromNumber(120)} currentValue={90} onChange={(value) => console.log(value)}/>
         </div>
     );
 }

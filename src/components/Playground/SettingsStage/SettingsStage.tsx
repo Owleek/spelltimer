@@ -209,8 +209,7 @@ const SettingsStage = (): JSX.Element => {
                                     ? <EmptySlot animate={(animatedSlot === slot.position) && (currentStage === EStages.INITIAL)} 
                                                     key={slot.position} 
                                                     data={slot}
-                                                    onClick={handleClickEmptySlot} 
-                                                    className='Playground__slotEasyShadow'/> 
+                                                    onClick={handleClickEmptySlot} /> 
                                     : <React.Fragment>
                                         <DumbTimer ability={slot}
                                                     appStatus={appStatus} 

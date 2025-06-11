@@ -8,14 +8,14 @@ import zh from '../assets/locales/zh.json';
 import ar from '../assets/locales/ar.json';
 import en from '../assets/locales/en.json';
 
-export type TLang = 'en' | 'zh' | 'es' | 'ar' | 'ru';
+export type TLang = 'ru' | 'en' | 'zh' | 'es' | 'ar';
 
 const langHashmap = {
+    ru: 'Русский',
     en: 'English',
     zh: '中文',
     es: 'español',
-    ar: 'العربية',
-    ru: 'Русский'
+    ar: 'العربية'
 }
 
 const initialLang: Array<TLang> = Object.keys(langHashmap) as  Array<TLang>;

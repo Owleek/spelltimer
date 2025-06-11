@@ -9,14 +9,13 @@
 
   &:hover {
     .EmptySlot__bar {
-      background-color: rgb(86, 86, 86);
+      background-color: #999999;
     }
   }
 }
 
 .EmptySlot.void {
   pointer-events: none;
-  // background-image: url('../../../public/assets/other/placeholder.png');
   background-position: center center;
   background-size: cover; 
   background-repeat: no-repeat;
@@ -31,7 +30,7 @@
   transition-duration: vars.$transitionTime;
   transition-property: background-color;
   transition-timing-function: ease-in;
-  background-color: #8d8d8d;
+  background-color: vars.$slotPlaceholder;
 }
 
 .EmptySlot__bar.vertical {
@@ -67,6 +66,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  fill: #696969;
 
   svg {
     max-width: 100%;
@@ -77,32 +77,36 @@
 @keyframes pulse {
     0% { 
         transform: translate(-50%, -50%) scale(1);
-        background-color: #8d8d8d;
+        background-color: vars.$slotPlaceholder;
     }
 
     44% {
-        background-color: #565656;
+        background-color: #999999;
         transform: translate(-50%, -50%) scale(1.15);
     }
 
     47% {
+        background-color: vars.$slotPlaceholder;
         transform: translate(-50%, -50%) scale(1.07);
     }
 
     50% {
+        background-color: #999999;
         transform: translate(-50%, -50%) scale(1.15);
     }
 
     53% {
+        background-color: vars.$slotPlaceholder;
         transform: translate(-50%, -50%) scale(1.07);
     }
 
     56% {
+      background-color: #999999;
         transform: translate(-50%, -50%) scale(1.15);
     }
 
     100% {
-        background-color: #8d8d8d;
+        background-color: vars.$slotPlaceholder;
         transform: translate(-50%, -50%) scale(1);
     }
 }
