@@ -9,7 +9,7 @@
 
   &:hover {
     .EmptySlot__bar {
-      background-color: #999999;
+      background-color: vars.$antiqWhite;
     }
   }
 }
@@ -69,6 +69,7 @@
   fill: #696969;
 
   svg {
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.4));
     max-width: 100%;
     max-height: 100%;
   }
@@ -81,7 +82,7 @@
     }
 
     44% {
-        background-color: #999999;
+        background-color: vars.$antiqWhite;
         transform: translate(-50%, -50%) scale(1.15);
     }
 
@@ -91,7 +92,7 @@
     }
 
     50% {
-        background-color: #999999;
+        background-color: vars.$antiqWhite;
         transform: translate(-50%, -50%) scale(1.15);
     }
 
@@ -101,7 +102,7 @@
     }
 
     56% {
-      background-color: #999999;
+      background-color: vars.$antiqWhite;
         transform: translate(-50%, -50%) scale(1.15);
     }
 

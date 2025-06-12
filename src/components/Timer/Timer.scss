@@ -286,7 +286,7 @@
   transition: color ease vars.$transitionTime;
 
   &.highlight {
-    color: vars.$easygreen;
+    color: vars.$fresh;
   }
 }
 
@@ -345,7 +345,7 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
 
 .Timer__statusIndicatorBackground {
     position: absolute;
-    background: #CA7842;
+    background: #a8d057;
 }
 
 
@@ -381,7 +381,7 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     width: #{$lineWidth}px;
     height: $lineSize;
     position:absolute;
-    background: linear-gradient(90deg,rgba(254, 198, 32, 0) 0%, #ff9100 100%);
+    background: linear-gradient(90deg,rgba(254, 198, 32, 0) 0%, #d4ff7f 100%);
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: #{$duration}s;

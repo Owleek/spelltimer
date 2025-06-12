@@ -130,6 +130,10 @@
   padding-left: 40px;
 }
 
+.Article__donation { 
+  padding-right: 40px;
+}
+
 .Article__donationLinkHoverContainer:hover {
   cursor: pointer;
 
@@ -174,15 +178,14 @@
 .Article__donationContainer {
   display: flex;
   margin-top: 1rem;
-  gap: 6.5rem;
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
 }
 
 .Article__donationList {
   align-items: flex-start;
-  margin-bottom: 0;
   gap: 4rem;
+  margin-right: 3rem;
 }
 
 .Article__donationIcon.bmc {
@@ -199,16 +202,19 @@
   display: inline-block;
   margin-bottom: 2rem;
   padding-left: 45px;
+  padding-right: 80px;
   white-space: nowrap;
   position: relative;
 }
 
 .Article__walletPayTools {
   position: absolute;
-  left: calc(100% + 1rem);
+  right:  0;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -218,8 +224,8 @@
   justify-content: center;
   align-items: center;
 
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
 
   svg {
@@ -293,13 +299,33 @@
   }
 }
 
-.Article__thanks {
-  font-size: 18px;
-  text-align: center;
+.Article__thanksContainer {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 24px;
   font-weight: bold;
-  color: vars.$keyColor;
   color: vars.$easygreen;
-  line-height: 1.7;
+  line-height: 1.3;
+  text-align: center;
+
+  & .Article__textIcon {
+    margin-right: 4px;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+}
+
+.Article__thanksText {
+  position: relative;
+  transform: translateY(-100%);
 }
 
 .Article__textIcon {

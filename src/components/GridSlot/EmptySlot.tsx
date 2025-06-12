@@ -15,10 +15,6 @@ interface IProps {
 const EmptySlot = ({data, onClick, className, animate}: IProps) => {
   const {currentStage, changeStage} = useContext(StageContext);
   const isVoid = currentStage === EStages.PLAY;
-  
-  const handleClick= (data: IEmptySlot) => {
-    if (!isVoid) onClick(data);
-  }
 
   const handleMouseEnter = (e: any) => {
     const parent = e.target.closest('#parentIdforFreezeAnimation');
@@ -33,8 +29,14 @@ const EmptySlot = ({data, onClick, className, animate}: IProps) => {
     parent.classList.remove('stopAnimation');
   }
 
+  const handleClick= (data: IEmptySlot, event: any) => {
+    if (isVoid) return;
+    onClick(data);
+    setTimeout(() => handleMouseEnter(event), 0);  // hack для того чтобы обойти handleMouseLeave
+  }
+
   return (
-    <div className={cn('EmptySlot', {void: isVoid}, className)} onClick={() => handleClick(data)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className={cn('EmptySlot', {void: isVoid}, className)} onClick={(event) => handleClick(data, event)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {
           isVoid && 
           <div className="EmptySlot__placeholder">
