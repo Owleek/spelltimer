@@ -134,6 +134,14 @@
   padding-right: 40px;
 }
 
+.Article__social {
+  cursor: pointer;
+
+  &:hover {
+    color: vars.$link;
+  }
+}
+
 .Article__donationLinkHoverContainer:hover {
   cursor: pointer;
 
@@ -177,7 +185,7 @@
 
 .Article__donationContainer {
   display: flex;
-  margin-top: 1rem;
+  margin-top: 2rem;
   flex-wrap: wrap;
   margin-bottom: 2.5rem;
 }
@@ -241,7 +249,7 @@
     position: relative;
 
     &:hover {
-      stroke: vars.$goldenrod;
+      stroke: vars.$keyColor;
     }
 }
 
@@ -250,7 +258,7 @@
     transition: fill vars.$transitionTime ease;
     
     &:hover {
-      fill: vars.$goldenrod;
+      fill: vars.$keyColor;
     }
 }
 

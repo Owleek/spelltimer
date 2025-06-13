@@ -7,7 +7,7 @@
     bottom: 0;
     font-size: 14px;
     padding: 1rem 60px;
-    color: #dadada;
+    color: vars.$footerColor;
     display: flex;
     justify-content: center;
     z-index: 1;
@@ -27,7 +27,7 @@
         content: '';
         width: 1px;
         height: 60%;
-        background: #dadada;
+        background: vars.$footerColor;
         position: absolute;
         top: 50%;
         right: 0;
@@ -41,7 +41,7 @@
     transition: color ease vars.$transitionTime;
 
     &:hover {
-        color: vars.$warmHover;
+        color: vars.$keyColor;
     }
 
     &.active {
@@ -54,7 +54,7 @@
     width: 50px;
     height: 50px;
     cursor: pointer;
-    fill: #dadada;
+    fill: vars.$footerColor;
     align-self: center;
     margin-left: 2rem;
 
@@ -64,11 +64,11 @@
     }
 
     &:hover {
-        fill: vars.$goldenrod;
+        fill: vars.$keyColor;
     }
 
     &.active {
-        fill: vars.$goldenrod;
+        fill: vars.$keyColor;
         pointer-events: none;
     }
 }

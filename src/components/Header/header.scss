@@ -17,15 +17,12 @@
 .logo {
     position: relative;
     width: 146px;
-
+    fill: vars.$welcomeFontColor;
+    
     svg {
         width: 100%;
         height: 100%;
         cursor: pointer;
-
-        path {
-            fill: vars.$welcomeFontColor;
-        }
     }
 }
 
@@ -34,7 +31,7 @@
     left: calc(100% + 5px);
     top: -18px;
     white-space: nowrap;
-    color: #9babbb;
+    color: #818992;
 }
 
 .header__button {
