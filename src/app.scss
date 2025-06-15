@@ -3,10 +3,15 @@
 @import url('./reset.scss');
 
 body {
-    font-family: 'Balsamiq Sans';
+    font-family: 'Balsamiq Sans', sans-serif;
     height: 100vh;
     overflow: hidden;
     background-color: rgba(44, 44, 44);
+    min-width: 320px;
+}
+
+body.textRight {
+  text-align: right !important;
 }
 
 #root {
@@ -137,13 +142,6 @@ body {
       fill: white;
     }
   }
-}
-
-.adjustCenter {
-  height: 100%;
-  padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
 }
 
 .AppLayout {

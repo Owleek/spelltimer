@@ -1,5 +1,27 @@
 {
     "get_started": "Get started",
     "continue": "Continue",
-    "welcome_title": "Control the game by mastering time"
+    "welcome_title": "Control the game by mastering time",
+    "about": "About",
+    "contact": "Contacts",
+    "policy": "Policy",
+    "rights": "All rights reserved",
+    "about_1": "👀 SpellTimer is a free assistant app for tracking cooldowns of abilities and items in Dota 2.",
+    "about_2": "✨ SpellTimer fully adheres to Valve’s fair play guidelines, as it does not access data directly from the Dota 2 client. The app provides an intuitive interface where all actions are performed manually by the player—no more need to type cooldowns into the in-game chat.",
+    "about_3": "🚀 The app requires no installation or account creation—it is available directly in your browser.",
+    "about_4": "⚡ Currently, SpellTimer includes basic features and minimal conveniences, enough to gauge its usefulness among players. Once its demand is confirmed, the next update will address shortcomings, optimize performance, and enhance the user experience.",
+    "about_5": "🎨 The current version of SpellTimer is targeted exclusively at Dota 2 players. However, if demand arises, the app may be expanded to support other games with similar mechanics.",
+    "about_6": "📌 SpellTimer is an unofficial project and is not affiliated with Valve Corporation. All mentioned names, logos, and trademarks are the property of their respective owners and are used for informational and non-commercial purposes only.",
+    "contact_1": "We’re always open to feedback and strive to consider players’ suggestions. If you have ideas, questions, or suggestions—don’t hesitate to contact us via email or social media:",
+    "contact_2": "My name is Artemiy. I’m the developer and creator of SpellTimer, an interface solution for Dota 2 players. This is a personal initiative into which I’ve poured my experience, attention to detail, and love for the game. I’m open to professional collaboration in web development and startup projects.",
+    "contact_3": "For collaboration inquiries, feel free to contact me via email:",
+    "author": "Author",
+    "support": "Support the project",
+    "donation_1": "We sincerely hope that SpellTimer is useful to you — it was created with love and enthusiasm.",
+    "donation_2": "Maintaining servers and continuing development takes time and resources. Even the smallest contribution means a lot to us!",
+    "donation_3": "If you enjoy the app and would like to support the project, you can do so using the links below. Thank you for your support!",
+    "thnx_btn": "I supported the project",
+    "thnx_1": "🎉 Thank you for your support!",
+    "thnx_2": "🚀 Thanks to you, the project keeps growing and improving!",
+    "copied": "Copied"
 }

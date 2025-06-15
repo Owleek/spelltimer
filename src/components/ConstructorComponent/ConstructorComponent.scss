@@ -142,7 +142,7 @@ $bodyMaxHeight: 750px;
 }
 
 .Menu__item.active {
-    color: white;
+    color: vars.$success;
 
     & .Menu__picbox::before {
         display: none;
@@ -155,7 +155,7 @@ $bodyMaxHeight: 750px;
 }
 
 .Menu__picbox.all {
-    background-image: url('../../../public/assets/other/all.png');
+    background-image: url('../../../public/assets/other/mixedAbilities.png');
 }
 .Menu__picbox.spells {
     background-image: url('../../../public/assets/other/spells.png');

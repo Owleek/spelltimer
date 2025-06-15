@@ -11,6 +11,10 @@
         pointer-events: none;
         opacity: 0;
     }
+
+    @media (pointer: coarse) {
+        display: none !important;
+    }
 }
 
 .HotkeyCell {

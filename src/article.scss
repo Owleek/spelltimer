@@ -7,7 +7,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-image: url('../public/assets/other/settings4.png');
+  background-image: url('../public/assets/other/article.png');
   position: relative;
   overflow: hidden;
   display: flex;
@@ -20,8 +20,23 @@
   flex-grow: 1;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.7);
+  padding: clamp(100px, vars.pxToVH(150), 150px) 0 100px;
 
-  padding: 150px 0 100px;
+
+  @media (max-width: #{vars.$SLIMDEVICEWIDTH}px) {
+      padding-bottom: 210px;
+  }
+}
+
+.adjustCenter {
+  height: 100%;
+  padding: 0 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    padding: 0 20px;
+  }
 }
 
 .Article__bodyInner {
@@ -40,26 +55,34 @@
   font-size: 22px;
   font-weight: bold;
   text-transform: uppercase;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    font-size: 18px;
+  }
 }
 
 .Article__contentHeader {
-  padding: 1rem 0;
+  padding: 1rem 1rem 1rem 2rem;
 }
 
 .Article__headline {
   padding: 2rem 0;
-  padding-bottom: 2rem;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    padding: 1rem 0 1.5rem;
+  }
 }
 
 .Article__contentWrapper {
   flex-grow: 1;
-  padding: 2rem;
-  
+
   mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 90%, transparent 100%);
 
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+
+  padding: 22px 16px 10px 0px;
 }
 
 .Article__content {
@@ -69,10 +92,13 @@
   flex-direction: column;
 
   font-size: 18px;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    font-size: 16px;
+  }
 }
 
 .Article__content p {
-  font-size: 18px;
   margin-bottom: 1.5rem;
   line-height: 1.6;
   word-spacing: 2px;
@@ -88,6 +114,10 @@
   font-size: 22px;
   margin-bottom: 1.5rem;
   font-weight: bold;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    font-size: 20px;
+  }
 }
 
 .Article__caption {
@@ -95,6 +125,10 @@
   margin-bottom: 1rem;
   font-weight: bold;
   padding-left: 10px;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    font-size: 18px;
+  }
 }
 
 .Article__titleIcon {
@@ -113,6 +147,12 @@
       max-width: 100%;
       max-height: 100%;
     }
+
+  @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+    width: 30px;
+    height: 30px;
+    right: calc(100% + 10px);
+  }
 }
 
 .Article__socialList,
@@ -185,9 +225,13 @@
 
 .Article__donationContainer {
   display: flex;
-  margin-top: 2rem;
   flex-wrap: wrap;
-  margin-bottom: 2.5rem;
+  padding: 2rem 0 2.5rem;
+  
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    font-size: 16px;
+    padding: 1rem 0 0 0;
+  }
 }
 
 .Article__donationList {
@@ -211,8 +255,15 @@
   margin-bottom: 2rem;
   padding-left: 45px;
   padding-right: 80px;
-  white-space: nowrap;
   position: relative;
+}
+
+.Article__walletID {
+  word-break: break-word;
+
+  @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    font-size: 14px;
+  }
 }
 
 .Article__walletPayTools {

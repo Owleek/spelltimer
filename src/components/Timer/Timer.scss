@@ -222,6 +222,11 @@
   &:hover {
     color: vars.$keyColor;
   }
+
+
+  @media (pointer: coarse) {
+    display: none !important;
+  }
 }
 
 .Timer__slotHotkey.isBinding {
@@ -288,6 +293,10 @@
   &.highlight {
     color: vars.$fresh;
   }
+
+  @media (pointer: coarse) {
+    display: none !important;
+  }
 }
 
 .Timer__hintText {
@@ -298,10 +307,6 @@
 //   overflow: hidden;
 //   text-overflow: ellipsis;
 }
-
-
-// $buttonHeight: 229.95; // px
-// $buttonWidth: 285.15; // px
 
 $buttonHeight: 218.95; // px
 $buttonWidth: 274.15; // px

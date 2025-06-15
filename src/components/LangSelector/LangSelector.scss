@@ -28,6 +28,10 @@ $menuHeadHeight: 40px;
         color: vars.$welcomeFontColor;
         fill: vars.$welcomeFontColor;
     }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+       font-size: 16px;
+    }
 }
 
 .LangSelector__head {
@@ -68,13 +72,8 @@ $menuHeadHeight: 40px;
     padding: 5px 0;
     z-index: 1;
 
-    // background: rgba(0, 0, 0, 0.7);
-    background: vars.$toolColor;
-    background: vars.$article;
-    background: vars.$lowerBackground;
-    background: #819A91;
-    background: #7F8CAA;
     background: rgba(182, 176, 159, 0.4);
+    backdrop-filter: blur(5px);
 
     color: vars.$primary;
     border-radius: 5px;
@@ -116,7 +115,14 @@ $menuHeadHeight: 40px;
     }
 
     &:hover {
-        color: vars.$welcomeFontColor;
         color: #66b3a1;
+    }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+       padding: 10px 20px;
+
+        &:hover {
+            color: vars.$primary;
+        }
     }
 }

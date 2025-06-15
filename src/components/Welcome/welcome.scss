@@ -8,7 +8,7 @@
     height: 100vh;
     padding-top: 25vh;
 
-    background-image: url('../../../public/assets/other/welcome_try1.png');
+    background-image: url('../../../public/assets/other/welcome.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,26 +19,33 @@
 
 .Welcome__titleStripe {
     height: 180px;
+    max-height: 180px;
+    min-height: 90px;
     width: 100%;
+    padding: 0 1rem;
 
-    margin-bottom: 130px;
+    margin-bottom: vars.pxToVH(130);
+    font-size: clamp(20px, vars.pxToVW(44), 44px);
+
+    font-weight: bold;
+    font-style: italic;
+    color: vars.$welcomeFontColor;
+    text-align: center;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
     background: rgba(0, 0, 0, 0.5);
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        height: vars.pxToVH(180);
+        margin-bottom: vars.pxToVH(90);
+        max-height: 140px;
+    }
 }
 
 .Welcome__title {
-    font-size: 44px;
-
-    font-weight: bold;
-    font-style: italic;
-
-    color: vars.$welcomeFontColor;
-    text-align: center;
-
     &.fontStyleNormal {
         font-style: normal;
     }

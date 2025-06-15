@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import {makeSnakeCase} from '../../utils/utils';
 import { createPortal } from 'react-dom';
 import './QrComponent.scss';
 
@@ -7,9 +6,10 @@ interface IProps {
     img: string
     onClose: () => void
     onDonate: () => void
+    btnText: string
 }
 
-const QrComponent = ({img, onClose, onDonate}: IProps) => {
+const QrComponent = ({img, onClose, onDonate, btnText}: IProps) => {
     return createPortal(
         <div className="QrComponent">
             <div className="QrComponent__inner">
@@ -23,7 +23,7 @@ const QrComponent = ({img, onClose, onDonate}: IProps) => {
                     <div className="QrComponent__button" onClick={onDonate}>
                         <span className="QrComponent__bracket left"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 40"><path d="M12 2H2V38H12V40H0V0H12V2Z"/></svg></span>
                         <span className="QrComponent__bracket right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 40"><path d="M12 40H0V38H10V2H0V0H12V40Z"/></svg></span>
-                        <span className="QrComponent__buttonText">Я поддержал проект</span>
+                        <span className="QrComponent__buttonText">{btnText}</span>
                     </div>
                 </div>
             </div>

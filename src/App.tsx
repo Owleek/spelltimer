@@ -51,6 +51,10 @@ const App = () => {
                              currentPage === EPage.CONTACT ||
                              currentPage === EPage.POLITICS || 
                              currentPage === EPage.DONATION;
+
+
+    const hideLogoOnMobile = currentPage !== EPage.WELCOME && currentPage !== EPage.PLAYGROUND;
+
     return (
         <Provider store={store}>
             <PageContext.Provider value={{currentPage, navigate, activeArticle, onSelectArticle}}>
@@ -59,7 +63,7 @@ const App = () => {
                     options={{ webvisor: true, clickmap: true, trackLinks: true }}
                     version="2"
                 />
-                <Header isPlaygroundButtonShown={backToPlayground}/>
+                <Header isPlaygroundButtonShown={backToPlayground} hideLogoOnMobile={hideLogoOnMobile}/>
                     { renderPage(currentPage) }
                 <Footer />
             </PageContext.Provider>

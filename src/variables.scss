@@ -45,10 +45,20 @@ $slotglass: rgba(199, 199, 199, 0.35);
 $toolColor: #778899;
 $goldenrod: #daa520;
 
+
+$DEVICEMAXWIDTH: 1023;
+$MEDIUMDEVICEWIDTH: 767;
+$SLIMDEVICEWIDTH: 429;
+
 // $link: #258FFF;
 $link: #61B0FF;
-
-
 $article: #242a37;
 
+@function pxToVW($px) {
+  @return calc(($px / $DEVICEMAXWIDTH) * 100vw);
+}
+
+@function pxToVH($px) {
+  @return calc(($px / $DEVICEMAXWIDTH) * 100vh);
+}
 

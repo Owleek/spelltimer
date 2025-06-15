@@ -15,12 +15,10 @@ import {removeShift, EDirection, IShift} from '../../store/shiftSlice';
 import StageContext, {EStages} from '../../store/StageContext';
 import { ITimerData } from '../../data/data';
 import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
-import SpellReducer from '../SpellReducer/SpellReducer';
 import fetchData from '../../data/data';
 import './Timer.scss';
 import { IRefresh, removeRefresh } from '../../store/refreshSlice';
 import { getKeyFromCode } from '../../data/keyCodeDictionary';
-import BindingOverlay from '../BindingOverlay/BindingOverlay';
 import {setHotkey} from '../../store/hotkeySlice';
 import { setBindingSlice } from '../../store/bindingSlice';
 
