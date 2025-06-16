@@ -20,7 +20,6 @@ const Donation = () => {
     const [donated, setDonated] = useState<boolean>(false);
 
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    if (!dictionary) return;
 
     const wallets = [
         {

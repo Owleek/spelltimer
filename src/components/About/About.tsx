@@ -6,7 +6,6 @@ import '../../article.scss';
 
 const About = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    if (!dictionary) return;
 
     return <div className="Article">
         <div className="Article__body">

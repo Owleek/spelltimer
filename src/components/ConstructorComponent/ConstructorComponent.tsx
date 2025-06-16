@@ -10,8 +10,9 @@ import ImageGrid from '../ImageGrid/ImageGrid';
 import fetchData, { IRequiredFields, ITimerData, IBaseFields } from '../../data/data';
 import { addTyping, removeTyping} from '../../store/typingSlice';
 import { EAbility } from '../../data/data';
-import { translate } from '../../utils/utils';
+import { translate, translateText } from '../../utils/utils';
 import { ISlot } from '../../store/slotSlice';
+import {TStoreState} from '../../store/store';
 import './ConstructorComponent.scss';
 
 enum TabKey {
@@ -23,7 +24,6 @@ enum TabKey {
 
 type TabItem = { key: TabKey, label: string };
 type TabList = Array<TabItem>;
-const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translate(key)}));
 
 interface IProps {
   onSelectAbility: (ability: ITimerData) => void
@@ -34,6 +34,11 @@ interface IProps {
 const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   const TYPING_MAIN_ID = 'MainSearch';
   const TYPING_SIDE_ID = 'SideSearch';
+
+  const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
+
+  const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translateText(dictionary, key)}));
+
 
   const dispatch = useDispatch();
 

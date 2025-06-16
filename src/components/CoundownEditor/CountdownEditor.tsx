@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
-import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
 import { useDispatch } from 'react-redux';
-import { setHotkey } from '../../store/hotkeySlice';
 import { addTyping, removeTyping } from '../../store/typingSlice';
 import { addShift, EDirection } from '../../store/shiftSlice';
 import cn from 'classnames';
 import {TStoreState} from '../../store/store';
 import './CountdownEditor.scss';
-import { translate } from '../../utils/utils';
+import { translateText } from '../../utils/utils';
 import { getKeyFromCode } from '../../data/keyCodeDictionary';
 import StageContext, {EStages} from '../../store/StageContext';
-import {EAppStatus} from '../Playground/SettingsStage/SettingsStage';
 import {toSafeInteger} from '../../utils/utils';
 import HotkeyCell from '../HotkeyCell/HotkeyCell';
 
@@ -38,6 +35,8 @@ const CountdownEditor = (props: IProps): JSX.Element => {
 
     const backwardHint = hotkeys.find(item => item.position === 1);
     const forwardHint = hotkeys.find(item => item.position === 2);
+
+    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
     if (!forwardHint || !backwardHint) throw new Error('backward or forward keys not found');
 
@@ -120,7 +119,7 @@ const CountdownEditor = (props: IProps): JSX.Element => {
                 <div className="CoundownEditor__inputBox">
                     <input type="text" className="CoundownEditor__input" value={inputValue} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} onKeyUp={handleKeyUpInput}/>
                 </div>
-                <span className='CoundownEditor__inputCaption'>sec</span>
+                <span className='CoundownEditor__inputCaption'>{translateText(dictionary, 'sec')}</span>
             </div>
 
             <div className={cn('CoundownEditor__iconBox', {highlight: keyPressed === 2})} onMouseDown={() => handleMouseDown(2)} onMouseUp={() => handleMouseUp(2)}>

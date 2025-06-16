@@ -1,16 +1,19 @@
 import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import {useSelector} from 'react-redux';
+import {TStoreState} from '../../store/store';
+import { translateText } from '../../utils/utils';
 import '../../article.scss';
 
 const Politics = () => {
+    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
+
     return <div className="Article">
         <div className="Article__body">
             <div className="adjustCenter">
                 <div className="Article__bodyInner">
                     <div className='Article__contentHeader'>
                         <h2 className='Article__title'>
-                            Политика конфиденциальности для приложения SpellTimer
+                            { translateText(dictionary, 'politics_1') }
                             <span className="Article__titleIcon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M15.1142 20H0.878735C0.726421 20 0.585823 19.8594 0.585823 19.7071V0.304629C0.585823 0.140599 0.726421 0.0117175 0.878735 0.0117175H11.7516C11.9156 0.0117175 12.0328 0.140599 12.0445 0.281196L12.0914 3.25718L15.1142 3.22203C15.2783 3.22203 15.4071 3.35091 15.4071 3.50322V10.4511C15.4071 10.6151 15.2783 10.744 15.1142 10.744C14.9502 10.744 14.8213 10.6151 14.8213 10.4511V3.79613L11.7985 3.83128C11.6344 3.83128 11.5056 3.69069 11.5056 3.55009L11.4821 0.574108H1.15993V19.4259H15.1142C15.2783 19.4259 15.4071 19.5548 15.4071 19.7188C15.4071 19.8828 15.2783 20 15.1142 20Z"/>
@@ -27,77 +30,23 @@ const Politics = () => {
                     </div>
                     <div className="Article__contentWrapper appStyledScroll">
                         <div className="Article__content">
-                            <p>Дата обновления: 31.05.2025</p>
-                            <p>Ваше доверие важно для нас. В этой политике мы объясняем, какие данные мы собираем, как их используем и как защищаем.</p>
-
-                            <h3 className="Article__subTitle">
-                                1. Какие данные мы собираем
-                            </h3>
-                            <h4 className="Article__caption">
-                                1.1 Локально на устройстве
-                            </h4>
-                            <p>
-                                Мы сохраняем только данные, которые вы вводите вручную, а именно: <br/>
-                                - Назначенные горячие клавиши<br/>
-                                - Предпочтения интерфейса и таймеров<br/>
-                                Эти данные хранятся только в вашем браузере через localStorage. Мы не передаём их ни на какие серверы.
-                            </p>
-                            <h4 className="Article__caption">
-                                1.2 Анонимная статистика через Яндекс Метрику
-                            </h4>
-                            <p>
-                                Мы используем Яндекс Метрику для сбора анонимной статистики использования приложения. Это включает:<br/>
-                                Количество визитов и посещений<br/>
-                                Географию пользователей (страна/город, на основе IP-адреса)<br/>
-                                Тип устройства и браузера<br/>
-                                Посещённые страницы<br/>
-                                Технические ошибки (если они возникают)<br/>
-                                Все эти данные не позволяют нас идентифицировать вас как личность.
-                            </p>
-
-
-
-                            <h3 className="Article__subTitle">
-                                2. Пожертвования
-                            </h3>
-                            <p>
-                                Если вы решите поддержать проект пожертвованием, вы будете перенаправлены на сторонние платёжные платформы (например, Boosty, Donatello и др.).
-                                Мы не обрабатываем и не храним ваши платёжные данные — все транзакции происходят через защищённые системы самих платёжных сервисов.
-                            </p>
-
-
-                            <h3 className="Article__subTitle">
-                                3. Сторонние сервисы
-                            </h3>
-                            <p>
-                                Приложение использует только один сторонний сервис:<br/>
-                                Яндекс Метрика — для сбора обезличенной аналитики.
-                            </p>
-
-
-                            <h3 className="Article__subTitle">
-                                4. Безопасность
-                            </h3>
-                            <p>
-                                Мы не храним и не передаём персональные данные.<br/>
-                                Все пользовательские настройки остаются только в вашем браузере.<br/>
-                                Аналитика полностью анонимна и используется только для улучшения качества работы приложения.
-                            </p>
-
-                            <h3 className="Article__subTitle">
-                                5. Контакты
-                            </h3>
-                            <p>
-                                Если у вас есть вопросы или предложения, вы можете связаться с нами по почте: spelltimer@gmail.com
-                            </p>
-
-
-                            <h3 className="Article__subTitle">
-                                6. Обновления политики
-                            </h3>
-                            <p>
-                                Мы можем периодически вносить изменения в эту политику. Актуальная версия всегда будет доступна по ссылке в приложении.
-                            </p>
+                            <p>{ translateText(dictionary, 'politics_2') } 31.05.2025</p>
+                            <p>{ translateText(dictionary, 'politics_3') }</p>
+                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_4') }</h3>
+                            <h4 className="Article__caption">{ translateText(dictionary, 'politics_5') }</h4>
+                            <p>{ translateText(dictionary, 'politics_6') }</p>
+                            <h4 className="Article__caption">{ translateText(dictionary, 'politics_7') }</h4>
+                            <p>{ translateText(dictionary, 'politics_8') }</p>
+                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_9') }</h3>
+                            <p>{ translateText(dictionary, 'politics_10') }</p>
+                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_11') }</h3>
+                            <p>{ translateText(dictionary, 'politics_12') }</p>
+                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_13') }</h3>
+                            <p>{ translateText(dictionary, 'politics_14') }</p>
+                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_15') }</h3>
+                            <p>{ translateText(dictionary, 'politics_16') }</p>
+                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_17') }</h3>
+                            <p>{ translateText(dictionary, 'politics_18') }</p>
                         </div>
                     </div>
                 </div>
