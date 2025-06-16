@@ -129,13 +129,15 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   return (
     <div className="Constructor">
       <div className="Constructor__main">
-        <Search className='Constructor__search' 
-                searchValue={mainSearchValue} 
-                onChange={onChangeSearch} 
-                disabled={!!itemOwnership} 
-                onClickClear={clearMainSearch}
-                handleFocus={handleFocusMainSearch}
-                handleBlur={handleBlurMainSearch}/>
+        <div className="Constructor__searchWrapper">
+          <Search searchValue={mainSearchValue} 
+                  onChange={onChangeSearch} 
+                  disabled={!!itemOwnership} 
+                  onClickClear={clearMainSearch}
+                  handleFocus={handleFocusMainSearch}
+                  handleBlur={handleBlurMainSearch}/>
+        </div>
+
         <div className="Constructor__body">
           <div className="Constructor__scrollContainer appStyledScroll">
             <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership}/>
@@ -152,12 +154,24 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
           </span>
         </div>
 
-        { itemOwnership && <Search className='Sidebar__search' 
-                                   searchValue={sideSearchValue} 
-                                   onChange={onChangeSideSearch} 
-                                   onClickClear={clearSideSearch}
-                                   handleFocus={handleFocusSideSearch} 
-                                   handleBlur={handleBlurSideSearch}/> 
+        {
+          itemOwnership &&
+          <div className="Constructor__back" onClick={cancelArtifact}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 19">
+              <path d="M3.62653 5.66667L6.02905 8.0819L4.68947 9.42857L0 4.71429L4.68947 0L6.02905 1.34667L3.62653 3.7619H10.4211C12.4311 3.7619 14.3589 4.56462 15.7802 5.99347C17.2015 7.42232 18 9.36025 18 11.381C18 13.4016 17.2015 15.3396 15.7802 16.7684C14.3589 18.1973 12.4311 19 10.4211 19H1.89474V17.0952H10.4211C11.9286 17.0952 13.3744 16.4932 14.4404 15.4216C15.5064 14.3499 16.1053 12.8965 16.1053 11.381C16.1053 9.86543 15.5064 8.41198 14.4404 7.34034C13.3744 6.26871 11.9286 5.66667 10.4211 5.66667H3.62653Z"/>
+            </svg>
+          </div>
+        }
+
+        { 
+        itemOwnership && 
+          <div className="Constructor__searchWrapper">
+              <Search  searchValue={sideSearchValue} 
+                        onChange={onChangeSideSearch} 
+                        onClickClear={clearSideSearch}
+                        handleFocus={handleFocusSideSearch} 
+                        handleBlur={handleBlurSideSearch}/> 
+          </div>
         }
         {  
           itemOwnership ?
