@@ -6,7 +6,10 @@
     align-items: center;
 
     height: 100vh;
+    height: 100dvh;
+
     padding-top: 25vh;
+    padding-top: 25dvh;
 
     background-image: url('../../../public/assets/other/welcome.png');
     background-size: cover;
@@ -25,6 +28,8 @@
     padding: 0 1rem;
 
     margin-bottom: vars.pxToVH(130);
+    margin-bottom: vars.pxToDVH(130);
+
     font-size: clamp(20px, vars.pxToVW(44), 44px);
 
     font-weight: bold;
@@ -41,6 +46,10 @@
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
         height: vars.pxToVH(180);
         margin-bottom: vars.pxToVH(90);
+
+        height: vars.pxToDVH(180);
+        margin-bottom: vars.pxToDVH(90);
+
         max-height: 140px;
     }
 }

@@ -161,8 +161,8 @@ const SettingsStage = (): JSX.Element => {
             
             <Notification />
 
-            <div className="Playground__box">
-                <div className="Playground__boxHeader">
+            <div className="TimerGear">
+                <div className="TimerGear__header">
 
                     <div className={cn('Playground__leftBtnContainer', {hidden: currentStage !== EStages.EDIT})}>
                         <div className={cn('Playground__button')} title={translate('Clean slots')} onClick={reset}>
@@ -200,39 +200,41 @@ const SettingsStage = (): JSX.Element => {
                         </div>
                     }
                 </div>
-                <div className={cn('Playground__boxBody')} id={'parentIdforFreezeAnimation'}>
+                <div className={cn('TimerGear__main appStyledScroll')} id={'parentIdforFreezeAnimation'}>
                     {
                         slotList.map(slot => 
                             <div key={slot.position} className={cn('Playground__slotBox', {void: currentStage === EStages.PLAY})}>
-                                {
-                                    !('name' in slot)
-                                    ? <EmptySlot animate={(animatedSlot === slot.position) && (currentStage === EStages.INITIAL)} 
-                                                    key={slot.position} 
-                                                    data={slot}
-                                                    onClick={handleClickEmptySlot} /> 
-                                    : <React.Fragment>
-                                        <DumbTimer ability={slot}
-                                                    appStatus={appStatus} 
-                                                    runApp={handleClickPlay} 
-                                                    pauseApp={handleClickPause}
-                                                    currentStage={currentStage}
-                                                    removeTimer={removeTimer}/>
+                                <div className="timerBox">
                                     {
-                                        currentStage === EStages.EDIT ?
-                                        <div className="Playground__slotSettings">
-                                            <LevelController slot={slot}
-                                                                editLevelController={editLevelController}
-                                                                cancelEditLevelController={cancelEditLevelController}
-                                                                isEdit={editLevelControllers.includes(slot.position)} />
-                                            { !editLevelControllers.includes(slot.position) && !slot.customCooldown && <SpellReducer slot={slot}/> }
-                                        </div>
+                                        !('name' in slot)
+                                        ? <EmptySlot animate={(animatedSlot === slot.position) && (currentStage === EStages.INITIAL)} 
+                                                        key={slot.position} 
+                                                        data={slot}
+                                                        onClick={handleClickEmptySlot} /> 
                                         : <React.Fragment>
-                                            <LevelControllerView slot={slot}/>
-                                            { !slot.customCooldown && <SpellReducer slot={slot} view={true}/> }
+                                            <DumbTimer ability={slot}
+                                                        appStatus={appStatus} 
+                                                        runApp={handleClickPlay} 
+                                                        pauseApp={handleClickPause}
+                                                        currentStage={currentStage}
+                                                        removeTimer={removeTimer}/>
+                                        {
+                                            currentStage === EStages.EDIT ?
+                                            <div className="Playground__slotSettings">
+                                                <LevelController slot={slot}
+                                                                    editLevelController={editLevelController}
+                                                                    cancelEditLevelController={cancelEditLevelController}
+                                                                    isEdit={editLevelControllers.includes(slot.position)} />
+                                                { !editLevelControllers.includes(slot.position) && !slot.customCooldown && <SpellReducer slot={slot}/> }
+                                            </div>
+                                            : <React.Fragment>
+                                                <LevelControllerView slot={slot}/>
+                                                { !slot.customCooldown && <SpellReducer slot={slot} view={true}/> }
+                                            </React.Fragment>
+                                        }
                                         </React.Fragment>
                                     }
-                                    </React.Fragment>
-                                }
+                                </div>
                             </div>
                         )
                     }

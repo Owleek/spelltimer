@@ -68,11 +68,6 @@
         max-width: 100%;
         max-height: 100%;
     }
-
-    &.hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
 }
 
 
@@ -206,10 +201,6 @@
   justify-content: center;
   align-items: center;
 
-//   border-radius: 5px;
-//   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.9);
-//   background: vars.$lowerBackground;
-
   background-color: transparent;
 
   user-select: none;
@@ -227,6 +218,10 @@
   @media (pointer: coarse) {
     display: none !important;
   }
+
+   @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        display: none !important;
+    }
 }
 
 .Timer__slotHotkey.isBinding {
@@ -250,7 +245,7 @@
 
   border-radius: 5px;
   box-shadow: 0px 0px 8px 1px rgba(79, 73, 73, 0.4);
-  background: radial-gradient(circle, rgb(124 124 124) 0%, rgb(55, 58, 61) 100%);
+  background: radial-gradient(circle, rgba(124, 124, 124, 0.8) 0%, rgba(55, 58, 61, 0.8) 100%);
 }
 
 .Timer__slotHotKeyText {
@@ -269,14 +264,6 @@
   z-index: 102;
   top: 12px;
   right: 16px;
-
-//   top: 8px;
-//   right: 8px;
-//   width: 42px;
-//   height: 42px;
-//   font-size: 12px;
-//   border-radius: 50%;
-
   font-size: 16px;
 
   display: flex;
@@ -284,9 +271,6 @@
   align-items: center;
 
   color: #bbbbbb;
-  
-//   color: #ececec;
-//   background: radial-gradient(circle,rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
   transition: color ease vars.$transitionTime;
 
@@ -297,6 +281,10 @@
   @media (pointer: coarse) {
     display: none !important;
   }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        display: none !important;
+    }
 }
 
 .Timer__hintText {

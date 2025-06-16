@@ -113,4 +113,12 @@
     &.right {
         left: 100%;
     }
+
+    @media (pointer: coarse) {
+        display: none !important;
+    }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        display: none !important;
+    }
 }

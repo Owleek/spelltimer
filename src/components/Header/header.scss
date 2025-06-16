@@ -13,15 +13,13 @@
     top: 0;
     z-index: 999;
 
-
-
     &.hideLogoOnMobile .header__logo {
         @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
             display: none;
         }
     }
 
-    @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
       padding: 30px 20px;
     }
 }
@@ -40,7 +38,7 @@
     }
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
-        width: vars.pxToVW(146);
+        width: 100px;
     }
 }
 
@@ -50,10 +48,6 @@
     top: -18px;
     white-space: nowrap;
     color: #818992;
-
-    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
-        font-size: 10px;
-    }
 }
 
 .header__button {

@@ -3,7 +3,10 @@
 
 .Article {
   width: 100vw;
+
   height: 100vh;
+  height: 100dvh;
+
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -20,8 +23,14 @@
   flex-grow: 1;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.7);
-  padding: clamp(100px, vars.pxToVH(150), 150px) 0 100px;
 
+  padding-top: 150px;
+  padding-bottom: 100px;
+
+  @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+    padding-top: 110px;
+    padding-bottom: 90px;
+  }
 
   @media (max-width: #{vars.$SLIMDEVICEWIDTH}px) {
       padding-bottom: 210px;
