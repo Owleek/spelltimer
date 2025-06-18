@@ -64,30 +64,44 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
     return () => document.removeEventListener('keyup', handleEscape);
   }, [handleEscape]);
 
-
   const tabContentStructure = {all: unionData, spells: spells, items: artifacts, other: features};
 
-  useEffect(() => {
-    setTabContent(tabContentStructure[activeTab]);
-  }, [activeTab]);
+  const isMatchByShortName = (searchValue: string, name: string) => {
+    const nameArr = name.split(' ').map(item => item.toLocaleLowerCase());
+    return searchValue[0] === nameArr[0]?.at(0) && searchValue[1] === nameArr[1]?.at(0);
+  };
 
-  const filterTabContent = (str: string): Array<ITimerData> => {
-    return tabContentStructure[activeTab].filter(ability => {
-      const nameIncludes = ability.name.toLowerCase().includes(str);
-      const heroIncludes = ability.hero?.toLowerCase().includes(str);
+
+  const filterTabContent = (str: string, tab: TabKey): Array<ITimerData> => {
+    
+    return tabContentStructure[tab].filter(item => {
+
+      const _name = item.name.toLowerCase().trim().split(' ');
+      const _heroOwner = item.hero?.toLowerCase().trim().split(' ') || [];
+      const nameIncludes = !!_name.find(substr => substr.startsWith(str)) || isMatchByShortName(str, item.name);
+      const heroIncludes = _heroOwner.find(substr => substr.startsWith(str)) || isMatchByShortName(str, item.name);
+      
       return nameIncludes || heroIncludes;
     });
   }
 
+
   const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
     const value = event.target.value;
     setMainSearchValue(value);
-    setTabContent(value ? filterTabContent(value) : tabContentStructure[activeTab]);
+    setTabContent(value ? filterTabContent(value, activeTab) : tabContentStructure[activeTab]);
   }
 
   const onChangeSideSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
-    const value = event.target.value;
-    const filteredHeroes = value ? heroes.filter(hero => hero.name.toLocaleLowerCase().includes(value)) : heroes;
+    const value = event.target.value.toLocaleLowerCase();
+
+    const _filteredHeroes = heroes.filter(hero => {
+        const currentHero = hero.name.toLowerCase().trim().split(' ') || [];
+        return !!(currentHero || []).find(substr => substr.startsWith(value)) || isMatchByShortName(value, hero.name);
+    })
+
+    const filteredHeroes = value ? _filteredHeroes : heroes;
+
     setSideSearchValue(value);
     setHeroList(filteredHeroes);
   }
@@ -129,6 +143,11 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const handleBlurSideSearch = () => {
     dispatch(removeTyping({value: TYPING_SIDE_ID}));
+  }
+
+  const onSelectMenuItem = (key: TabKey) => {
+      setActiveTab(key);
+      setTabContent(mainSearchValue ? filterTabContent(mainSearchValue, key) : tabContentStructure[key]);
   }
 
   return (
@@ -183,7 +202,7 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
             <div className="Sidebar__gridWrapper">
               <div className="Sidebar__scrollContainer appStyledScroll">
                 <ul className="Sidebar__grid">
-                  { heroList.map(hero => <li key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img}/></li>) }
+                  { heroList.map(hero => <li key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img} title={hero.name}/></li>) }
                 </ul>
               </div>
             </div>
@@ -191,7 +210,7 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
             <ul className="Menu">
               {
                 tabList.map(el => 
-                <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab}, {[el.key]: el.key})} onClick={() => setActiveTab(el.key)}>
+                <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab}, {[el.key]: el.key})} onClick={() => onSelectMenuItem(el.key)}>
                   <div className="Menu__text">{el.label}</div>
                   <div className={cn('Menu__picbox', {[el.key]: el.key})}></div>
                 </li>)

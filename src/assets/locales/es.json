@@ -26,7 +26,7 @@
     "copied": "Copiado",
     "all": "Todos",
     "spells": "Hechizos",
-    "items": "Objetos",
+    "items": "Artefactos",
     "other": "Otros",
     "notification": "Iniciar o pausar uno de los temporizadores aplica automáticamente la misma acción a todos los temporizadores previamente activados, ya que los tiempos de reutilización en Dota 2 están sincronizados para todas las habilidades y objetos.",
     "notification_checkbox": "No volver a mostrar esta notificación",

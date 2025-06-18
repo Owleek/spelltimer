@@ -292,7 +292,7 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
 
     const hotkey = getKeyFromCode(ability.boundKey);
 
-    return <div className="Timer" style={{backgroundImage: `url('${ability.img}')`}} ref={timerRef}>
+    return <div className="Timer" style={{backgroundImage: `url("${ability.img}")`}} ref={timerRef}>
                 {        
                     currentHero &&
                     <div className="Timer__ownerBox">

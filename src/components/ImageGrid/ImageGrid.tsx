@@ -16,7 +16,7 @@ interface IProps {
 const ImageGrid = ({abilities, onClick, disableItemsExceptCurrent}: IProps): JSX.Element => {
     return (
         <div className='AbilityGrid'>
-            { abilities.map(ability => <span key={ability.id} className={cn('AbilityItem', {disabled: disableItemsExceptCurrent && disableItemsExceptCurrent !== ability})} onClick={() => onClick(ability)}>
+            { abilities.map(ability => <span key={ability.id} className={cn('AbilityItem', {disabled: disableItemsExceptCurrent && disableItemsExceptCurrent !== ability})} onClick={() => onClick(ability)} title={ability.name}>
                     <img key={ability.id} src={ability.img} />
                 </span>) 
             }

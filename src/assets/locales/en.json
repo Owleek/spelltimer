@@ -26,7 +26,7 @@
     "copied": "Copied",
     "all": "All",
     "spells": "Spells",
-    "items": "Items",
+    "items": "Artifacts",
     "other": "Other",
     "notification": "Starting or pausing one of the timers automatically applies the same action to all previously activated timers, since cooldown timing in Dota 2 is synchronized across all abilities and items.",
     "notification_checkbox": "Don’t show this notification again",
