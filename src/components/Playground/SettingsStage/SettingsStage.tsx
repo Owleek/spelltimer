@@ -10,7 +10,7 @@ import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, re
 import { addRefresh } from '../../../store/refreshSlice';
 import StageContext, {EStages} from '../../../store/StageContext';
 import { translate } from '../../../utils/utils';
-import DumbTimer from '../../Timer/DumbTimer';
+import Timer from '../../Timer/Timer';
 import LevelController from '../../LevelController/LevelController';
 import LevelControllerView from '../../LevelController/LevelControllerView';
 import SpellReducer from '../../SpellReducer/SpellReducer';
@@ -109,7 +109,6 @@ const SettingsStage = (): JSX.Element => {
 
     const onSelectAbility = (ability: ITimerData) => {
         if(!currentSlot) return;
-        // if (currentStage !== EStages.EDIT) changeStage(EStages.EDIT);
 
         const updData = {
             ...ability,
@@ -212,7 +211,7 @@ const SettingsStage = (): JSX.Element => {
                                                         data={slot}
                                                         onClick={handleClickEmptySlot} /> 
                                         : <React.Fragment>
-                                            <DumbTimer ability={slot}
+                                            <Timer ability={slot}
                                                         appStatus={appStatus} 
                                                         runApp={handleClickPlay} 
                                                         pauseApp={handleClickPause}

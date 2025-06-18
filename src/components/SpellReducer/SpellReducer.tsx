@@ -2,15 +2,13 @@
 // 2. Компоненты вашего проекта.
 // 3. Утилиты и бизнес-логика.
 // 4. Стили и ассеты.
-import React, { JSX, useEffect, useRef, useState, useContext } from 'react';
+import React, { JSX } from 'react';
 import cn from 'classnames';
-import { useSelector, useDispatch } from 'react-redux';
-import StageContext, {EStages} from '../../store/StageContext';
-import { ITimerData, IRequiredFields, IReducer } from '../../data/data';
+import { useDispatch } from 'react-redux';
+import { ITimerData, IReducer } from '../../data/data';
 import {applyReducer, removeReducer, toggleUpgradeCooldown} from '../../store/slotSlice';
-import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
-import './SpellReducer.scss';
 import fetchData from '../../data/data';
+import './SpellReducer.scss';
 
 interface IProps {
     slot: ITimerData
