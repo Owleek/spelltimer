@@ -24,6 +24,25 @@ function mapData(state: Array<ISlot>, action: PayloadAction<ITimerData>, matchFo
     state[destinationIndex] = action.payload;
 }
 
+function recalculateCooldown(cooldown: number[] = [], reducers: {name: string, percent: number}[] = []): number[] {
+    return cooldown.map((currentCD) => reducers.reduce((acc, curr) => Math.round(acc - ((acc / 100) * curr.percent)), currentCD));
+}
+
+function recalculateWithScepter(currentSlot: ISlot): number[] {
+
+    //@ts-ignore
+    const initialCooldown = currentSlot.initialCooldown || [];
+    //@ts-ignore
+    const reducers = currentSlot.reducers || [];
+    //@ts-ignore
+    const hasScepter = !!currentSlot.isUpgrade;
+    //@ts-ignore
+    const scepterValues = currentSlot.upgradeByScepter || initialCooldown;
+
+    return !!hasScepter ? recalculateCooldown(scepterValues, reducers) : recalculateCooldown(initialCooldown, reducers);
+}
+
+
 export const slotSlice = createSlice({
     name: 'actionSlotSlice',
     initialState: initialSlotList,
@@ -74,47 +93,41 @@ export const slotSlice = createSlice({
             state[matchFoundIndex] = newData;
         },
         applyReducer(state: Array<ISlot>, action: PayloadAction<{position: number, name: string, percent: number}>) {
-            const matchFoundIndex = state.findIndex(slot => {
-                return slot.position === action.payload.position;
-            });
+            const matchFoundIndex = state.findIndex(slot => slot.position === action.payload.position);
+            const currentSlot = state[matchFoundIndex];
+            if (!('reducers' in currentSlot)) return;
 
-            if ('reducers' in state[matchFoundIndex]) {
-                state[matchFoundIndex].reducers?.push({name: action.payload.name, percent: action.payload.percent});
-            }
-
-            if ('cooldown' in state[matchFoundIndex]) {
-                state[matchFoundIndex].cooldown = state[matchFoundIndex].cooldown.map(cd => Math.round(cd - ((cd / 100) * action.payload.percent)));
-            }
+            currentSlot.reducers?.push({name: action.payload.name, percent: action.payload.percent});
+            currentSlot.cooldown = recalculateWithScepter(currentSlot);
+            state[matchFoundIndex] = currentSlot;
         },
         removeReducer(state: Array<ISlot>, action: PayloadAction<{position: number, name: string}>) {
-            const matchFoundIndex = state.findIndex(slot => {
-                return slot.position === action.payload.position;
-            });
+            const matchFoundIndex = state.findIndex(slot => slot.position === action.payload.position);            
+            const currentSlot = state[matchFoundIndex];
+            if (!('reducers' in currentSlot)) return;
 
-            if ('reducers' in state[matchFoundIndex]) {
-                const filteredReducers = state[matchFoundIndex].reducers?.filter(reducer => reducer.name !== action.payload.name);
-
-                state[matchFoundIndex].reducers = filteredReducers;
-                const computed = state[matchFoundIndex].initialCooldown.slice();
-
-                filteredReducers?.forEach(reducer => {
-                    computed.forEach((el, idx) => {
-                        computed[idx] = Math.round(el - ((el / 100) * reducer.percent))
-                    })
-                });
-
-                state[matchFoundIndex].cooldown = computed;
-            }
+            currentSlot.reducers = currentSlot.reducers?.filter(reducer => reducer.name !== action.payload.name);
+            currentSlot.cooldown = recalculateWithScepter(currentSlot);
+            state[matchFoundIndex] = currentSlot;
         },
         clearReducer(state: Array<ISlot>, action: PayloadAction<{position: number}>){
-            const matchFoundIndex = state.findIndex(slot => {
-                return slot.position === action.payload.position;
-            });
+            const matchFoundIndex = state.findIndex(slot => slot.position === action.payload.position);
+            const currentSlot = state[matchFoundIndex];
+            if (!('reducers' in currentSlot)) return;
 
-            if (!('reducers' in state[matchFoundIndex])) throw new Error('Clear reducer issue');
+            currentSlot.reducers = [];
+            currentSlot.isUpgrade = false;
+            currentSlot.cooldown = recalculateWithScepter(currentSlot);
+            state[matchFoundIndex] = currentSlot;
+        },
+        toggleUpgradeCooldown(state: Array<ISlot>, action: PayloadAction<{position: number}>) {
+            const matchFoundIndex = state.findIndex(slot => slot.position === action.payload.position);
+            const currentSlot = state[matchFoundIndex];
+            if (!('reducers' in currentSlot)) return;
 
-            state[matchFoundIndex].reducers = []
-            state[matchFoundIndex].cooldown = state[matchFoundIndex].initialCooldown.slice();
+            currentSlot.isUpgrade = !!currentSlot.isUpgrade ? false : true;
+            currentSlot.cooldown = recalculateWithScepter(currentSlot);
+            state[matchFoundIndex] = currentSlot;
         }
     },
     extraReducers: (builder) => {
@@ -137,6 +150,18 @@ export const slotSlice = createSlice({
       }
 });
 
-export const { removeTimerFromSlot, resetState, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, setActiveLevelIndex, setCustomCooldown, applyReducer, removeReducer, clearReducer } = slotSlice.actions;
+export const { 
+    removeTimerFromSlot, 
+    resetState, 
+    mapSpellToSlot, 
+    mapItemToSlot, 
+    mapFeatureToSlot, 
+    setActiveLevelIndex, 
+    setCustomCooldown, 
+    applyReducer, 
+    removeReducer, 
+    clearReducer,
+    toggleUpgradeCooldown
+ } = slotSlice.actions;
 
 export default slotSlice.reducer;

@@ -307,6 +307,7 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
                     </div>
                 }
                 <div className="Timer__innerWrapper">
+
                     <svg className="Timer__svg" viewBox="0 0 120 120">
                         <circle
                             className="Timer__circle transition"
@@ -320,7 +321,9 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
                             transform="rotate(-90 60 60)"
                             fill="transparent"/>
                     </svg>
+
                     <div className="Timer__countdown">{currentCountdown}</div>
+                    
                     {
                         currentStage === EStages.PLAY &&
                         <div className="Timer__cover" onClick={handleClickTimer}>
@@ -371,22 +374,22 @@ const DumbTimer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
                             </React.Fragment>
                             , outerContainer as Element)
                     }
-                {
-                    currentStage === EStages.PLAY && timerStatus === ETimerStatus.READY &&
-                    createPortal(
-                    <div className={cn('Timer__statusBox', {animateIndicator})}>
-                        <div className={cn('Timer__statusInnerWrapper')}>
-                            <div className="Timer__statusIndicatorBackground"></div>
-                            <div className="Timer__statusIndicatorBackground"></div>
-                            <div className="Timer__statusIndicatorBackground"></div>
-                            <div className="Timer__statusIndicatorBackground"></div>
-                            <span className="Timer__statusIndicator"></span>
-                            <span className="Timer__statusIndicator"></span>
-                            <span className="Timer__statusIndicator"></span>
-                            <span className="Timer__statusIndicator"></span>
-                        </div>
-                    </div>, outerContainer as Element)
-                }
+                    {
+                        currentStage === EStages.PLAY && timerStatus === ETimerStatus.READY &&
+                        createPortal(
+                        <div className={cn('Timer__statusBox', {animateIndicator})}>
+                            <div className={cn('Timer__statusInnerWrapper')}>
+                                <div className="Timer__statusIndicatorBackground"></div>
+                                <div className="Timer__statusIndicatorBackground"></div>
+                                <div className="Timer__statusIndicatorBackground"></div>
+                                <div className="Timer__statusIndicatorBackground"></div>
+                                <span className="Timer__statusIndicator"></span>
+                                <span className="Timer__statusIndicator"></span>
+                                <span className="Timer__statusIndicator"></span>
+                                <span className="Timer__statusIndicator"></span>
+                            </div>
+                        </div>, outerContainer as Element)
+                    }
                 </div>
     </div>
 }

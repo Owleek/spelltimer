@@ -42,6 +42,8 @@ export interface ISpell extends IRequiredFields {
     reducers: Array<string>
     hero: string
     siblings?: Array<string>
+    upgradeByScepter?: Array<number>
+    isUpgrade?: boolean
 }
 
 export interface IArtifact extends IRequiredFields {
@@ -58,6 +60,8 @@ export interface ITimerData extends IRequiredFields {
     owner?: string | null
     hero?: string
     siblings?: Array<string>
+    upgradeByScepter?: Array<number>
+    isUpgrade?: boolean
 }
 
 const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {

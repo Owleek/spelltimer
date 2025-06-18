@@ -162,7 +162,8 @@
     {   
         "hero": "Wraith King",
         "name": "Reincarnation",
-        "cooldown": [180, 150, 120]
+        "cooldown": [180, 150, 120],
+        "upgradeByScepter": [165, 135, 105]
     },
     {   
         "hero": "Anti Mage",

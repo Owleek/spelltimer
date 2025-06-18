@@ -7,7 +7,7 @@ import cn from 'classnames';
 import { useSelector, useDispatch } from 'react-redux';
 import StageContext, {EStages} from '../../store/StageContext';
 import { ITimerData, IRequiredFields, IReducer } from '../../data/data';
-import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot, applyReducer, removeReducer} from '../../store/slotSlice';
+import {applyReducer, removeReducer, toggleUpgradeCooldown} from '../../store/slotSlice';
 import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
 import './SpellReducer.scss';
 import fetchData from '../../data/data';
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 const SpellReducer = ({slot, view}: IProps): JSX.Element => {
-    const { cooldown: levels, cooldownIndex: activeLevelIndex, reducers: slotReducers } = slot;  
+    const { cooldown: levels, cooldownIndex: activeLevelIndex, reducers: slotReducers, upgradeByScepter, isUpgrade } = slot;  
     const { reducers } = fetchData;
 
     const dispatch = useDispatch();
@@ -28,6 +28,8 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
     const handleClickReducer = (reducer: IReducer, isActive: boolean) => {
         dispatch(isActive ? removeReducer({position: slot.position, name: reducer.name}) : applyReducer({position: slot.position, name: reducer.name, percent: reducer.percent}));
     }
+
+    const recalculateReducingAfterUpgrade = () => dispatch(toggleUpgradeCooldown({position: slot.position}));
 
     return (
         <React.Fragment>
@@ -44,6 +46,13 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                             )
                         })
                     }
+                    {
+                        upgradeByScepter?.length && 
+                        <div className={cn('SpellReducer__itemWrapper active')}>
+                            <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.png")`}} title={`${String(upgradeByScepter)}`}>
+                            </div>
+                        </div>
+                    }
                 </ul>
                 :
                 <ul className="SpellReducer">
@@ -58,7 +67,13 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                                 </div>
                             )
                         })
-        
+                    }
+                    {
+                        upgradeByScepter?.length && 
+                        <div className={cn('SpellReducer__itemWrapper', {active: !!isUpgrade})} onClick={recalculateReducingAfterUpgrade}>
+                            <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.png")`}} title={`${String(upgradeByScepter)}`}>
+                            </div>
+                        </div>
                     }
                 </ul>
             }
