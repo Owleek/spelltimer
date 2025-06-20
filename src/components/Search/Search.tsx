@@ -1,8 +1,4 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import cn from 'classnames';
 import './search.scss';
 
@@ -19,7 +15,7 @@ interface IProps {
 const Search = ({searchValue, onChange, disabled, onClickClear, className, handleFocus, handleBlur}: IProps) => {
   return (
     <div className={cn('Search', {disabled: !!disabled}, className)}>
-      <input disabled={!!disabled} autoFocus={true} type='text' onChange={onChange} value={searchValue} onFocus={handleFocus} onBlur={handleBlur}/>
+      <input autoFocus={true} type='text' onChange={onChange} value={searchValue} onFocus={handleFocus} onBlur={handleBlur}/>
       {
         !!searchValue && 
         <span className="Search__clear" onClick={onClickClear}>

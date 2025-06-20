@@ -1,4 +1,4 @@
-import { makeSnakeCase, translate } from '../utils/utils';
+import { makeSnakeCase } from '../utils/utils';
 
 import spells from './spells.json';
 import artifacts from './artifacts.json';

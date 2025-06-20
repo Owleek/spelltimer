@@ -6,7 +6,6 @@ import {TStoreState} from '../../store/store';
 import { translateText } from '../../utils/utils';
 import '../../article.scss';
 
-
 enum EQRItem {
     dna = '/assets/qrcodes/dna.png',
     btc = '/assets/qrcodes/bitcoin.png',
@@ -131,7 +130,7 @@ const Donation = () => {
                                                 </a>
                                             </div>
                                             <div className="Article__walletPayTools">
-                                                <span className="Article__walletQRCODE" onClick={() => handleClickQRcode(EQRItem.dna)}>
+                                                <span className="Article__walletQRCODE" onClick={() => handleClickQRcode(EQRItem.dna)} title={translateText(dictionary, 'show_qr')}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
                                                         <path d="M1 20C1.55228 20 2 20.4477 2 21V28H9C9.55228 28 10 28.4477 10 29C10 29.5523 9.55228 30 9 30H0V21C0 20.4477 0.447715 20 1 20Z" />
                                                         <path d="M29 20C29.5523 20 30 20.4477 30 21V30H21C20.4477 30 20 29.5523 20 29C20 28.4477 20.4477 28 21 28H28V21C28 20.4477 28.4477 20 29 20Z" />
@@ -180,13 +179,13 @@ const Donation = () => {
                                             wallets.map(wlt => <div key={wlt.address} className="Article__wallet">
                                                 <span className="Article__walletIcon">{wlt.icon}</span>
                                                 <div className="Article__walletPayTools">
-                                                    <span className="Article__walletCopy" onClick={() => handleCopy(wlt.address)}>
+                                                    <span className="Article__walletCopy" onClick={() => handleCopy(wlt.address)} title={translateText(dictionary, 'copy')}>
                                                         <span className={cn('Article__walletCopyText', {show: copied === wlt.address})}>{translateText(dictionary, 'copied')}</span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                                                             <path d="M4.375 15.625H3.25C2.65326 15.625 2.08097 15.3879 1.65901 14.966C1.23705 14.544 1 13.9717 1 13.375V3.25C1 2.65326 1.23705 2.08097 1.65901 1.65901C2.08097 1.23705 2.65326 1 3.25 1H13.375C13.9717 1 14.544 1.23705 14.966 1.65901C15.3879 2.08097 15.625 2.65326 15.625 3.25V4.375M11.125 8.875H21.25C22.4926 8.875 23.5 9.88236 23.5 11.125V21.25C23.5 22.4926 22.4926 23.5 21.25 23.5H11.125C9.88236 23.5 8.875 22.4926 8.875 21.25V11.125C8.875 9.88236 9.88236 8.875 11.125 8.875Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                                         </svg>
                                                     </span>
-                                                    <span className="Article__walletQRCODE" onClick={() => handleClickQRcode(wlt.qrImg)}>
+                                                    <span className="Article__walletQRCODE" onClick={() => handleClickQRcode(wlt.qrImg)} title={translateText(dictionary, 'show_qr')}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
                                                             <path d="M1 20C1.55228 20 2 20.4477 2 21V28H9C9.55228 28 10 28.4477 10 29C10 29.5523 9.55228 30 9 30H0V21C0 20.4477 0.447715 20 1 20Z" />
                                                             <path d="M29 20C29.5523 20 30 20.4477 30 21V30H21C20.4477 30 20 29.5523 20 29C20 28.4477 20.4477 28 21 28H28V21C28 20.4477 28.4477 20 29 20Z" />

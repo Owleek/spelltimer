@@ -1,12 +1,6 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
-import React, { JSX, useEffect, useRef, useState, useContext } from 'react';
+import React, { JSX } from 'react';
 import cn from 'classnames';
-import StageContext, {EStages} from '../../store/StageContext';
-import { ITimerData, IRequiredFields } from '../../data/data';
-import { EAppStatus } from '../Playground/SettingsStage/SettingsStage';
+import { IRequiredFields } from '../../data/data';
 import './LevelController.scss';
 
 interface IProps {

@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { JSX } from 'react/jsx-runtime';
-import { translate } from '../../utils/utils';
+import { translateText } from '../../utils/utils';
+import {useSelector} from 'react-redux';
+import {TStoreState} from '../../store/store';
 
-interface IProps {
+const BindingOverlay = (): JSX.Element => {
 
-}
-
-const BindingOverlay = (props: IProps): JSX.Element => {
+    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
     
     return <React.Fragment>
         {
             ReactDOM.createPortal(<div className="GeneralOverlay">
-                             <span className='GeneralOverlay__text'>{translate('Press any key to bind new key')}</span>
+                             <span className='GeneralOverlay__text'>{translateText(dictionary, 'press_to_bind')}</span>
                             </div>, document.getElementById('root') as HTMLElement)
         }
     </React.Fragment>

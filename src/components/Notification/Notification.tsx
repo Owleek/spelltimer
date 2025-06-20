@@ -1,15 +1,11 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
-import React, { JSX, useContext, useEffect, useRef, useState } from 'react';
+import React, { JSX, useContext, useEffect, useState } from 'react';
 import { translateText } from '../../utils/utils';
 import {TStoreState} from '../../store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
-import cn from 'classnames';
 import StageContext, {EStages} from '../../store/StageContext';
 import { hideNotificationOfRunning } from '../../store/noteSlice';
+import cn from 'classnames';
 import './Notification.scss';
 
 const Notification = (): JSX.Element => {

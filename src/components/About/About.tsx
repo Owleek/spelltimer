@@ -30,6 +30,7 @@ const About = () => {
                             <p>{ translateText(dictionary, 'about_4') }</p>
                             <p>{ translateText(dictionary, 'about_5') }</p>
                             <p>{ translateText(dictionary, 'about_6') }</p>
+                            <p className='Article__small'>{ translateText(dictionary, 'last_update') }</p>
                         </div>
                     </div>
                 </div>

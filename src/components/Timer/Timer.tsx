@@ -14,6 +14,7 @@ import { IRefresh, removeRefresh } from '../../store/refreshSlice';
 import { getKeyFromCode } from '../../data/keyCodeDictionary';
 import {setHotkey} from '../../store/hotkeySlice';
 import { setBindingSlice } from '../../store/bindingSlice';
+import { translateText } from '../../utils/utils';
 import './Timer.scss';
 
 interface IProps {
@@ -38,6 +39,8 @@ const LENGTH = 2 * Math.PI * RADIUS;
 const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}: IProps): JSX.Element => {
     if (!ability) throw new Error('ability not found [Timer]');
     const dispatch = useDispatch();
+
+    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
     const typigEntitiesSlice = useSelector((state: TStoreState) => state.typingSlice);
     const shiftSlice = useSelector((state: TStoreState) => state.shiftSlice[`slot_${ability.position}`]);
@@ -78,7 +81,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
     const boundKeyRef = useRef<string>(ability.boundKey);
     const isTypingRef = useRef<boolean>(!!typigEntitiesSlice.entities.length);
     const shiftRef = useRef<IShift | null>(shiftSlice);
-    const refreshRef = useRef<IRefresh>(refreshSlice);
+    const refreshRef = useRef<IRefresh>(refreshSlice);    
 
     useEffect(() => {
         if (timerRef.current?.parentNode) setOuterContainer(timerRef.current?.parentNode as Element); // чтобы renderControls корректно отрисовал содержимое
@@ -319,7 +322,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
                     
                     {
                         currentStage === EStages.PLAY &&
-                        <div className="Timer__cover" onClick={handleClickTimer}>
+                        <div className="Timer__cover" onClick={handleClickTimer} title={translateText(dictionary, timerStatus === ETimerStatus.RUNNING ? 'pause' : 'start')}>
                             <div className={cn('Timer__play')}>
                                 {
                                     timerStatus === ETimerStatus.RUNNING ?
@@ -341,7 +344,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
                         createPortal(
                             <React.Fragment>
 
-                                <div className={cn('Timer__slotHotkey', {isBinding: isBinding, highlight: keyPressed})} onClick={handleBindKey} title={hotkey}>
+                                <div className={cn('Timer__slotHotkey', {isBinding: isBinding, highlight: keyPressed})} onClick={handleBindKey} title={translateText(dictionary, 'hotkey_toggle_timer')}>
                                     <div className='Timer__slotHotKeyTextBox'>
                                         <span className="Timer__slotHotKeyText">
                                             { isBinding ? <span>...</span> : hotkey }
@@ -350,12 +353,12 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
                                 </div>
 
                                 <div className="Timer__controls">
-                                    <div className={cn('Timer__controlButton refresh', {hidden: timerStatus === ETimerStatus.READY})} onClick={refreshTimer}>
+                                    <div className={cn('Timer__controlButton refresh', {hidden: timerStatus === ETimerStatus.READY})} onClick={refreshTimer} title={translateText(dictionary, 'reset_timer')}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
                                             <path d="M16.5 9C15.7381 9 15.3769 9.53688 15.25 10.1038C14.7931 12.1438 12.8544 15.25 9 15.25C5.54813 15.25 2.75 12.4512 2.75 9C2.75 5.54875 5.54813 2.75 9 2.75C10.4 2.75 11.6844 3.22063 12.725 4H11.5C10.81 4 10.25 4.56 10.25 5.25C10.25 5.94 10.81 6.5 11.5 6.5H15.25C15.94 6.5 16.5 5.94 16.5 5.25V1.5C16.5 0.81 15.94 0.25 15.25 0.25C14.56 0.25 14 0.81 14 1.5V1.82375C12.5831 0.8325 10.8606 0.25 9 0.25C4.1675 0.25 0.25 4.1675 0.25 9C0.25 13.8325 4.1675 17.75 9 17.75C15.2369 17.75 17.75 11.8125 17.75 10.3281C17.75 9.42 17.0863 9 16.5 9Z"/>
                                         </svg>
                                     </div>
-                                    <div className="Timer__controlButton remove" onClick={() => removeTimer(ability)}>
+                                    <div className="Timer__controlButton remove" onClick={() => removeTimer(ability)} title={translateText(dictionary, 'delete')}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 22">
                                             <path d="M8.05801 9.125C8.61029 9.125 9.05801 9.57271 9.05801 10.125V15.875C9.05783 16.4271 8.61018 16.875 8.05801 16.875C7.50598 16.8748 7.05818 16.427 7.05801 15.875V10.125C7.05801 9.57282 7.50587 9.12518 8.05801 9.125Z" />
                                             <path d="M11.892 9.125C12.4441 9.12518 12.892 9.57282 12.892 10.125V15.875C12.8918 16.427 12.444 16.8748 11.892 16.875C11.3398 16.875 10.8922 16.4271 10.892 15.875V10.125C10.892 9.57271 11.3397 9.125 11.892 9.125Z" />

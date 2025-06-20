@@ -1,4 +1,3 @@
-@use 'sass:color';
 @use '../../../variables.scss' as vars;
 
 .SettingsStage {
@@ -24,7 +23,7 @@
     left: 50%;
     bottom: 5rem;
     font-size: 18px;
-    color: white;
+    color: #ffffff;
     transform: translateX(-50%);
 }
 
@@ -40,7 +39,7 @@
 }
 
 .SettingsStage__info {
-    color: wheat;
+    color: #f5deb3;
     text-align: center;
     margin-bottom: 1.5rem;
 }

@@ -1,24 +1,12 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ErrorComponent from '../ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
 import {TStoreState} from '../../store/store';
-import {setUserPlayed} from '../../user_cache/keys';
-import { translate, makeSnakeCase, translateText } from '../../utils/utils';
-
-import cn from 'classnames';
-import './header.scss';
 import LangSelector from '../LangSelector/LangSelector';
 import PlayButton from '../PlayButton/PlayButton';
-
-const text = {
-    title: translate('One step ahead'),
-    button: translate('get started')
-}
+import cn from 'classnames';
+import './header.scss';
 
 interface IProps {
     className?: string
@@ -34,7 +22,6 @@ const Header = ({className, isPlaygroundButtonShown, hideLogoOnMobile}: IProps) 
     const {onSelectArticle} = context;
     const handleClick = () => onSelectArticle(null);
 
-
     const {currentLang} = useSelector((state: TStoreState) => state.localeSlice);
 
     useEffect(() => {
@@ -44,7 +31,6 @@ const Header = ({className, isPlaygroundButtonShown, hideLogoOnMobile}: IProps) 
     return (
         <div className={cn('header', className, {alignCenter: !!isPlaygroundButtonShown, hideLogoOnMobile})}>
             <div className="header__logo">
-                <div className="header__logoPatch">sync 7.39b</div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 494 217" onClick={handleClick}>
                     <path d="M121.327 216.352C120.233 216.352 119.368 216.193 118.73 215.874C118.092 215.555 117.613 215.076 117.294 214.438C116.975 213.755 116.816 212.889 116.816 211.84V135.415H93.0948C92.0011 135.415 91.1352 135.255 90.4972 134.936C89.8591 134.617 89.3806 134.139 89.0616 133.501C88.7426 132.863 88.5831 131.997 88.5831 130.903V122.221C88.5831 121.173 88.7426 120.33 89.0616 119.692C89.3806 119.008 89.8591 118.507 90.4972 118.188C91.1808 117.869 92.0466 117.71 93.0948 117.71H162.138C163.186 117.71 164.029 117.869 164.667 118.188C165.351 118.507 165.852 119.008 166.171 119.692C166.49 120.33 166.65 121.173 166.65 122.221V130.903C166.65 131.951 166.49 132.817 166.171 133.501C165.852 134.139 165.351 134.617 164.667 134.936C164.029 135.255 163.186 135.415 162.138 135.415H138.417V211.84C138.417 212.889 138.258 213.755 137.939 214.438C137.62 215.076 137.118 215.555 136.435 215.874C135.797 216.193 134.954 216.352 133.905 216.352H121.327Z"/>
                     <path d="M181.962 216.352C180.914 216.352 180.048 216.193 179.364 215.874C178.726 215.555 178.248 215.076 177.929 214.438C177.61 213.755 177.45 212.889 177.45 211.84V122.221C177.45 121.173 177.61 120.33 177.929 119.692C178.248 119.008 178.726 118.507 179.364 118.188C180.048 117.869 180.914 117.71 181.962 117.71H194.54C195.588 117.71 196.431 117.869 197.069 118.188C197.753 118.507 198.254 119.008 198.573 119.692C198.892 120.33 199.052 121.173 199.052 122.221V211.84C199.052 212.889 198.892 213.755 198.573 214.438C198.254 215.076 197.753 215.555 197.069 215.874C196.431 216.193 195.588 216.352 194.54 216.352H181.962Z"/>

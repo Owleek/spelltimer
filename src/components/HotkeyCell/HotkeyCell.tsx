@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useCallback, useContext, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
 import { useDispatch } from 'react-redux';
 import { setHotkey } from '../../store/hotkeySlice';
 import { setBindingSlice } from '../../store/bindingSlice';
-import cn from 'classnames';
 import {TStoreState} from '../../store/store';
-import './HotkeyCell.scss';
 import { getKeyFromCode } from '../../data/keyCodeDictionary';
+import cn from 'classnames';
+import './HotkeyCell.scss';
 
 interface IProps {
     className: string

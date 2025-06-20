@@ -25,6 +25,11 @@
         "cooldown": [60, 45, 30]
     },
     {   
+        "hero": "Clockwerk",
+        "name": "Overclocking",
+        "cooldown": [50]
+    },
+    {   
         "hero": "Dawnbreaker",
         "name": "Solar Guardian",
         "cooldown": [120, 105, 90]
@@ -43,6 +48,11 @@
         "hero": "Earth Spirit",
         "name": "Magnetize",
         "cooldown": [100, 90, 80]
+    },
+    {   
+        "hero": "Earth Spirit",
+        "name": "Enchant Remnant",
+        "cooldown": [45]
     },
     {   
         "hero": "Earthshaker",
@@ -87,7 +97,7 @@
     {   
         "hero": "Mars",
         "name": "Arena of Blood",
-        "cooldown": [100, 196, 90]
+        "cooldown": [100, 95, 90]
     },
     {   
         "hero": "Night Staler",
@@ -127,7 +137,7 @@
     {   
         "hero": "Sven",
         "name": "God's Strength",
-        "cooldown": [75, 55, 35]
+        "cooldown": [110, 105, 100]
     },
     {   
         "hero": "Tidehunter",
@@ -142,7 +152,8 @@
     {   
         "hero": "Underlord",
         "name": "Fiend's Gate",
-        "cooldown": [110, 105, 100]
+        "cooldown": [110, 105, 100],
+        "upgradeByScepter": [100, 95, 90]
     },
     {   
         "hero": "Undying",
@@ -185,7 +196,7 @@
         "hero": "Faceless Void",
         "name": "Time Zone",
         "siblings": ["Chronosphere"],
-        "cooldown": [130, 120, 110]
+        "cooldown": [130, 125, 120]
     },
     {   
         "hero": "Gyrocopter",
@@ -262,12 +273,13 @@
     {   
         "hero": "Razor",
         "name": "Eye of the Storm",
-        "cooldown": [160, 130, 100]
+        "cooldown": [70, 70, 60]
     },
     {   
         "hero": "Shadow Fiend",
         "name": "Requiem of Souls",
-        "cooldown": [120, 110, 100]
+        "cooldown": [120, 110, 100],
+        "upgradeByScepter": [90, 80, 70]
     },
     {   
         "hero": "Slark",
@@ -302,7 +314,8 @@
     {   
         "hero": "Ursa",
         "name": "Enrage",
-        "cooldown": [70, 50, 30]
+        "cooldown": [70, 50, 30],
+        "upgradeByScepter": [30, 24, 18]
     },
     {   
         "hero": "Viper",
@@ -322,7 +335,8 @@
     {   
         "hero": "Chen",
         "name": "Hand of God",
-        "cooldown": [150, 130, 110]
+        "cooldown": [150, 130, 110],
+        "upgradeByScepter": [110, 90, 70]
     },
     {   
         "hero": "Crystal Maiden",
@@ -397,7 +411,8 @@
     {   
         "hero": "Lion",
         "name": "Finger of Death",
-        "cooldown": [130, 85, 40]
+        "cooldown": [130, 85, 40],
+        "upgradeByScepter": [90, 60, 30]
     },
     {   
         "hero": "Muerta",
@@ -413,6 +428,11 @@
         "hero": "Oracle",
         "name": "False Promise",
         "cooldown": [110, 85, 60]
+    },
+    {   
+        "hero": "Oracle",
+        "name": "Rain of Destiny",
+        "cooldown": [40]
     },
     {   
         "hero": "Outworld Destroyer",
@@ -432,7 +452,7 @@
     {   
         "hero": "Ringmaster",
         "name": "Wheel of Wonder",
-        "cooldown": [110, 95, 80]
+        "cooldown": [90, 80, 70]
     },
     {   
         "hero": "Shadow Demon",
@@ -502,7 +522,8 @@
     {   
         "hero": "Bane",
         "name": "Fiend's Grip",
-        "cooldown": [120, 110, 100]
+        "cooldown": [120, 110, 100],
+        "upgradeByScepter": [75, 65, 55]
     },
     {   
         "hero": "Batrider",
@@ -547,7 +568,8 @@
     {   
         "hero": "Marci",
         "name": "Unleash",
-        "cooldown": [90, 75, 60]
+        "cooldown": [90, 75, 60],
+        "upgradeByScepter": [80, 65, 50]
     },
     {   
         "hero": "Natures's Prophet",
@@ -570,6 +592,11 @@
         "cooldown": [120, 110, 100]
     },
     {   
+        "hero": "Snapfire",
+        "name": "Gobble Up",
+        "cooldown": [40]
+    },
+    {   
         "hero": "Spectre",
         "name": "Shadow Step",
         "cooldown": [60, 55, 50]
@@ -588,6 +615,11 @@
         "hero": "Visage",
         "name": "Summon Familiars",
         "cooldown": [130, 120, 110]
+    },
+    {   
+        "hero": "Visage",
+        "name": "Silent as the Grave",
+        "cooldown": [45]
     },
     {   
         "hero": "Windranger",
