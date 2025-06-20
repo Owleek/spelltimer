@@ -1,6 +1,7 @@
 const path = require('path'); 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.tsx',
@@ -21,7 +22,7 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.css/i,
@@ -39,7 +40,12 @@ module.exports = {
             patterns: [
               { from: "public", to: "public" }
             ]
-          })
+          }),
+        new webpack.BannerPlugin({
+            banner: `SpellTimer v1.0.0\nAuthor: ARTEMII KHAFIZOV\nContact: spelltimer@gmail.com\nLicense: 2025 spelltimer.com. All rights reserved.`,
+            raw: false,
+            entryOnly: true,
+        })
     ],
     devServer: {
         historyApiFallback: true,

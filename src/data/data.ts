@@ -73,7 +73,7 @@ const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {
             id: `${idx}-${type}-${key}`,
             key: key,
             name: item.name,
-            img: `/assets/${type}/${key}.png`,
+            img: `/public/assets/${type}/${key}.png`,
             type: type
         }
     })

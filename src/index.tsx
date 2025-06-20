@@ -1,7 +1,10 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
+/*!
+ * SpellTimer v1.0.0
+ * Author: ARTEMII KHAFIZOV
+ * Contact: artemy.hafizov@gmail.com
+ * License: MIT
+ */
+
 import ReactDom from 'react-dom/client';
 import {StrictMode} from 'react';
 import App from './App';

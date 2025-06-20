@@ -1,7 +1,3 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
 import { JSX, useState } from 'react';
 import { Provider } from 'react-redux';
 import { YMInitializer } from 'react-yandex-metrika';
