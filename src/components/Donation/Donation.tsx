@@ -7,10 +7,10 @@ import { translateText } from '../../utils/utils';
 import '../../article.scss';
 
 enum EQRItem {
-    dna = '/assets/qrcodes/dna.png',
-    btc = '/assets/qrcodes/bitcoin.png',
-    eth = '/assets/qrcodes/eth.png',
-    usdtTRON = '/assets/qrcodes/tron.png'
+    dna = '/assets/qrcodes/dna.webp',
+    btc = '/assets/qrcodes/bitcoin.webp',
+    eth = '/assets/qrcodes/eth.webp',
+    usdtTRON = '/assets/qrcodes/tron.webp'
 }
 
 const Donation = () => {

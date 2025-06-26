@@ -29,7 +29,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
+                test: /\.(png|jpe?g|gif|svg|webp)$/i,
                 type: "asset/resource",
             }
         ]
@@ -38,7 +38,7 @@ module.exports = {
         new HtmlWebpackPlugin({template: './src/index.html'}),
         new CopyWebpackPlugin({
             patterns: [
-              { from: "public", to: "public" }
+              { from: "public", to: "." }
             ]
           }),
         new webpack.BannerPlugin({

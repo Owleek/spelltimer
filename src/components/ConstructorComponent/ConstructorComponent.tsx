@@ -34,7 +34,6 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translateText(dictionary, key)}));
 
-
   const dispatch = useDispatch();
 
   const { spells, artifacts, features, heroes } = fetchData;
@@ -46,7 +45,6 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   const [mainSearchValue, setMainSearchValue] = useState<string>('');
   const [sideSearchValue, setSideSearchValue] = useState<string>('');
   const [itemOwnership, setItemOwnership] = useState<ITimerData | null>(null);
-
 
   const handleEscape = useCallback((event: KeyboardEvent) => {
     if (event.code !== 'Escape') return;
@@ -61,25 +59,29 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const tabContentStructure = {all: unionData, spells: spells, items: artifacts, other: features};
 
-  const isMatchByShortName = (searchValue: string, name: string) => {
-    const nameArr = name.split(' ').map(item => item.toLocaleLowerCase());
-    return searchValue[0] === nameArr[0]?.at(0) && searchValue[1] === nameArr[1]?.at(0);
+  const isMatchByShortName = (searchValue: string, nameArr: string[]) => {
+    if (!nameArr.length || searchValue.length > nameArr.length) return false;
+    return Array.prototype.every.call(searchValue, (char, idx) => char === nameArr[idx][0]);
   };
 
+  const isIncludes = (inputValue: string, target: string): boolean => {
+      const lowercasedTarget = target.toLocaleLowerCase();
+      const splittedTarget = lowercasedTarget.split(' ');
+      const simpleSearchTarget = lowercasedTarget.startsWith(inputValue);
+      const chunkedSearchTarget = !!splittedTarget.find(substr => substr.startsWith(inputValue));
+      const shortSearchTarget = isMatchByShortName(inputValue, splittedTarget);
+      return simpleSearchTarget || chunkedSearchTarget || shortSearchTarget;      
+  }
 
   const filterTabContent = (str: string, tab: TabKey): Array<ITimerData> => {
+    const inputvalue = str.toLocaleLowerCase();
     
-    return tabContentStructure[tab].filter(item => {
-
-      const _name = item.name.toLowerCase().trim().split(' ');
-      const _heroOwner = item.hero?.toLowerCase().trim().split(' ') || [];
-      const nameIncludes = !!_name.find(substr => substr.startsWith(str)) || isMatchByShortName(str, item.name);
-      const heroIncludes = _heroOwner.find(substr => substr.startsWith(str)) || isMatchByShortName(str, item.name);
-      
+    return tabContentStructure[tab].filter(item => {      
+      const nameIncludes = isIncludes(inputvalue, item.name);
+      const heroIncludes = isIncludes(inputvalue, item.hero || '');
       return nameIncludes || heroIncludes;
     });
   }
-
 
   const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
     const value = event.target.value;
@@ -88,13 +90,10 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   }
 
   const onChangeSideSearch = (event: React.ChangeEvent<HTMLInputElement>) => {    
-    const value = event.target.value.toLocaleLowerCase();
+    const value = event.target.value;
+    const inputvalue = event.target.value.toLocaleLowerCase();
 
-    const _filteredHeroes = heroes.filter(hero => {
-        const currentHero = hero.name.toLowerCase().trim().split(' ') || [];
-        return !!(currentHero || []).find(substr => substr.startsWith(value)) || isMatchByShortName(value, hero.name);
-    })
-
+    const _filteredHeroes = heroes.filter(hero => isIncludes(inputvalue, hero.name));
     const filteredHeroes = value ? _filteredHeroes : heroes;
 
     setSideSearchValue(value);

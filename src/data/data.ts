@@ -14,7 +14,6 @@ export enum EAbility {
     HEROES = 'heroes'
 }
 
-
 export interface IBaseFields {
     id: string
     key: string
@@ -73,7 +72,7 @@ const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {
             id: `${idx}-${type}-${key}`,
             key: key,
             name: item.name,
-            img: `/public/assets/${type}/${key}.png`,
+            img: `/assets/${type}/${key}.webp`,
             type: type
         }
     })

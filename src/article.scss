@@ -9,7 +9,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  background-image: url('../public/assets/other/article.png');
+  background-image: url('../public/assets/other/article.webp');
   position: relative;
   overflow: hidden;
   display: flex;
@@ -318,6 +318,12 @@
     
     &:hover {
       fill: vars.$keyColor;
+    }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+      display: none !important;
+      opacity: 0;
+      pointer-events: none;
     }
 }
 

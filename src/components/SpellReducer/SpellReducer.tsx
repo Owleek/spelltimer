@@ -33,7 +33,7 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                     {
                         upgradeByScepter?.length && 
                         <div className={cn('SpellReducer__itemWrapper active')}>
-                            <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.png")`}} title={`${String(upgradeByScepter)}`}>
+                            <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.webp")`}} title={`${String(upgradeByScepter)}`}>
                             </div>
                         </div>
                     }
@@ -53,7 +53,7 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                     {
                         upgradeByScepter?.length && 
                         <div className={cn('SpellReducer__itemWrapper', {active: !!isUpgrade})} onClick={recalculateReducingAfterUpgrade}>
-                            <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.png")`}} title={`${String(upgradeByScepter)}`}>
+                            <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.webp")`}} title={`${String(upgradeByScepter)}`}>
                             </div>
                         </div>
                     }

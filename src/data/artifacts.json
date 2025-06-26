@@ -144,10 +144,6 @@
         "cooldown": [15]
     },
     {   
-        "name": "Magic Lamp",
-        "cooldown": [75]
-    },
-    {   
         "name": "Manta Style",
         "cooldown": [34]
     },

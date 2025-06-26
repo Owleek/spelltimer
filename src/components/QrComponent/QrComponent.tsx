@@ -24,7 +24,7 @@ const QrComponent = ({img, onClose, onDonate, btnText}: IProps) => {
                     </svg>
                 </span>
                 <div className="QrComponent__content">
-                    <div className="QrComponent__code" style={{backgroundImage: `url(${img})`}}></div>
+                    <div className="QrComponent__code" style={{backgroundImage: `url("${img}")`}}></div>
                     <div className="QrComponent__button" onClick={onDonate}>
                         <span className="QrComponent__bracket left"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 40"><path d="M12 2H2V38H12V40H0V0H12V2Z"/></svg></span>
                         <span className="QrComponent__bracket right"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 40"><path d="M12 40H0V38H10V2H0V0H12V40Z"/></svg></span>
