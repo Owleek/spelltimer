@@ -1,13 +1,13 @@
 @use '../../variables.scss' as vars;
 
-.CoundownEditor {
+.CountdownEditor {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.CoundownEditor__inputOuter {
+.CountdownEditor__inputOuter {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -15,7 +15,7 @@
     position: relative;
 }
 
-.CoundownEditor__iconBox {
+.CountdownEditor__iconBox {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,14 +25,20 @@
     cursor: pointer;
     transition: fill ease vars.$transitionTime;
     position: relative;
+    user-select: none;
 
     svg {
         max-width: 100%;
         max-height: 100%;
+        user-select: none;
     }
 
     &:hover {
         fill: #faebd7;
+
+        @media (pointer: coarse) {
+            fill: vars.$toolColor;
+        }
     }
 
     &.highlight {
@@ -40,7 +46,7 @@
     }
 }
 
-.CoundownEditor__inputCaption {
+.CountdownEditor__inputCaption {
     position: absolute;
     left: 50%;
     top: 100%;
@@ -50,7 +56,7 @@
     user-select: none;
 }
 
-.CoundownEditor__inputBox {
+.CountdownEditor__inputBox {
     width: 40px;
     height: 34px;
     padding: 2px;
@@ -60,7 +66,7 @@
     user-select: none;
 }
 
-.CoundownEditor__input {
+.CountdownEditor__input {
     color: black;
     width: 100%;
     height: 100%;
@@ -72,11 +78,11 @@
     box-shadow: 0 0 5px 0px rgba(0, 0, 0, 0.5) inset;
 }
 
-.CoundownEditor__rigthHotkey {
+.CountdownEditor__rigthHotkey {
     margin-left: 5px;
 }
 
-.CoundownEditor__leftHotkey {
+.CountdownEditor__leftHotkey {
     margin-right: 5px;
 }
 
@@ -89,7 +95,7 @@
     color: vars.$keyColor;
 }
 
-.CoundownEditor__hint {
+.CountdownEditor__hint {
     position: absolute;
     top: 0;
     user-select: none;

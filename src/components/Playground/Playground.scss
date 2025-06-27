@@ -153,8 +153,7 @@
 .Playground__button {
   width: 28px;
   height: 28px;
-  fill:rgb(214 214 214);
-  fill:lightslategrey;
+  fill: #778899;
   position: relative;
   cursor: pointer;
   transition: all ease-in-out vars.$transitionTime;
@@ -162,6 +161,10 @@
 
   &:hover {
      fill: #faebd7;
+
+      @media (pointer: coarse) {
+          fill: #778899;
+      }
   }
 
   &.disabled {
@@ -185,6 +188,10 @@
 
   &:hover {
     filter: drop-shadow(0 0 5px vars.$success1);
+
+      @media (pointer: coarse) {
+          filter: none;
+      }
   }
 }
 
@@ -236,7 +243,7 @@
     left: calc(100% + 15px);
   }
   
-  .CoundownEditor__inputBox {
+  .CountdownEditor__inputBox {
     margin: 0 7px;
   }
 }

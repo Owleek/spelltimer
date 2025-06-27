@@ -2,6 +2,19 @@
 @import url('./assets/fonts/fontStyle.scss');
 @import url('./reset.scss');
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+a:focus,
+svg:focus,
+svg:active,
+a:active {
+  outline: none;
+  box-shadow: none;
+}
+
 body {
     font-family: 'Balsamiq Sans', sans-serif;
 

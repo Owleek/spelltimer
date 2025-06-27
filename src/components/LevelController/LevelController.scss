@@ -50,6 +50,10 @@
     &.edit {
         &:hover {
             background-color: vars.$success;
+
+            @media (pointer: coarse) {
+                background-color: none;
+            }
         }
     }
 
@@ -59,12 +63,20 @@
 
         &:hover {
             background-color: vars.$success;
+
+            @media (pointer: coarse) {
+                background-color: none;
+            }
         }
     }
 
     &.remove {
         &:hover {
             background-color: vars.$danger;
+
+            @media (pointer: coarse) {
+                background-color: none;
+            }
         }
     }
 

@@ -13,7 +13,7 @@ import LevelController from '../../LevelController/LevelController';
 import LevelControllerView from '../../LevelController/LevelControllerView';
 import SpellReducer from '../../SpellReducer/SpellReducer';
 import BindingOverlay from '../../BindingOverlay/BindingOverlay';
-import CountdownEditor from '../../CoundownEditor/CountdownEditor';
+import CountdownEditor from '../../CountdownEditor/CountdownEditor';
 import Notification from '../../Notification/Notification';
 import { translateText } from '../../../utils/utils';
 import './SettingsStage.scss';
@@ -225,7 +225,7 @@ const SettingsStage = (): JSX.Element => {
                                                                     editLevelController={editLevelController}
                                                                     cancelEditLevelController={cancelEditLevelController}
                                                                     isEdit={editLevelControllers.includes(slot.position)} />
-                                                { !editLevelControllers.includes(slot.position) && !slot.customCooldown && <SpellReducer slot={slot}/> }
+                                                { !editLevelControllers.includes(slot.position) && !slot.customCooldown && slot.type !== EAbility.FEATURES && <SpellReducer slot={slot}/> }
                                             </div>
                                             : <React.Fragment>
                                                 <LevelControllerView slot={slot}/>

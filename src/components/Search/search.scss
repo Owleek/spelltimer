@@ -51,6 +51,10 @@
     &:hover {
         svg {
             fill: rgb(55, 58, 61);
+            
+            @media (pointer: coarse) {
+                fill: #797979;
+            }
         }
     }
 }

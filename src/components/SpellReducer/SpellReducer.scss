@@ -27,6 +27,10 @@
 
     &:hover .SpellReducer__item {
         border-color: vars.$activeButton;
+
+        @media (pointer: coarse) {
+            border-color: rgb(145, 145, 145);
+        }
     }
 
     &.active .SpellReducer__item {

@@ -60,6 +60,10 @@
 
     &:hover {
         color: vars.$keyColor;
+
+        @media (pointer: coarse) {
+            color: vars.$footerColor;
+        }
     }
 
     &.active {
@@ -70,10 +74,6 @@
     @media (max-width: #{vars.$SLIMDEVICEWIDTH}px) {
         text-align: center;
         padding: 4px 0;
-
-        &:hover {
-            color: vars.$footerColor;
-        }
     }
 }
 
@@ -92,19 +92,19 @@
 
     &:hover {
         fill: vars.$keyColor;
+
+        @media (pointer: coarse) {
+            fill: vars.$footerColor;
+        }
     }
 
     &.active {
-        fill: vars.$keyColor;
+        fill: vars.$success;
         pointer-events: none;
     }
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
         margin: 0 1rem;
-
-        &:hover {
-            fill: vars.$footerColor;
-        }
     }
 
     @media (max-width: #{vars.$SLIMDEVICEWIDTH}px) {

@@ -26,6 +26,11 @@ $menuHeadHeight: 40px;
     &:hover {
         color: vars.$welcomeFontColor;
         fill: vars.$welcomeFontColor;
+
+        @media (pointer: coarse) {
+            color: vars.$primary;
+            fill: vars.$primary;
+        }
     }
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
@@ -115,13 +120,13 @@ $menuHeadHeight: 40px;
 
     &:hover {
         color: #66b3a1;
+
+        @media (pointer: coarse) {
+           color: vars.$primary;
+        }
     }
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
        padding: 10px 20px;
-
-        &:hover {
-            color: vars.$primary;
-        }
     }
 }

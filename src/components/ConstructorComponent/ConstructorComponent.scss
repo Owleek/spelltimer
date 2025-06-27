@@ -85,7 +85,6 @@ $paddingtopForCloseButton: 50px;
     cursor: pointer;
     transition: background-color ease-in-out vars.$transitionTime;
 
-
     svg {
         max-width: 100%;
         max-height: 100%;
@@ -98,6 +97,10 @@ $paddingtopForCloseButton: 50px;
 
     &:hover {
         background-color: #ff0000;
+
+        @media (pointer: coarse) {
+            background-color: rgb(253, 75, 75);
+        }
     }
 }
 
@@ -105,11 +108,14 @@ $paddingtopForCloseButton: 50px;
     left: 0;
     cursor: pointer;
     background-color: vars.$toolColor;
-
     padding: 9px 10px 10px 10px;
 
     &:hover {
         background-color: vars.$toolColorDeep;
+
+        @media (pointer: coarse) {
+            background-color: vars.$toolColor;
+        }
     }
 }
 
@@ -231,6 +237,10 @@ $paddingtopForCloseButton: 50px;
 
     &:hover {
         transform: scale(0.95);
+
+        @media (pointer: coarse) {
+             transform: scale(1);
+        }
     }
 }
 

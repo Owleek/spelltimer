@@ -13,12 +13,21 @@
     position: relative;
     border-radius: 6px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-    transition: transform ease-in-out vars.$transitionTime;
+    // transition: transform ease-in-out vars.$transitionTime;
+
+    transition-property: transform, opacity;
+    transition-timing-function: ease;
+    transition-duration: vars.$transitionTime;
+
     overflow: hidden;
     cursor: pointer;
 
     &:hover {
-        transform: scale(0.95);
+        transform: scale(0.9);
+
+        @media (pointer: coarse) {
+            transform: scale(1);
+        }
     }
 
     img {
@@ -34,5 +43,9 @@
 
     &:hover {
         opacity: 0.8;
+
+        @media (pointer: coarse) {
+            opacity: 0.2;
+        }
     }
 }

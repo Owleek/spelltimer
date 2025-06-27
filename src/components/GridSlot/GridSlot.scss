@@ -9,6 +9,10 @@
   &:hover {
     .EmptySlot__bar {
       background-color: vars.$antiqWhite;
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotPlaceholder;
+        }
     }
   }
 }

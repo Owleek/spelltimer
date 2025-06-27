@@ -1,8 +1,8 @@
 /*!
  * SpellTimer v1.0.0
  * Author: ARTEMII KHAFIZOV
- * Contact: artemy.hafizov@gmail.com
- * License: MIT
+ * Contact: spelltimer@gmail.com
+ * License: 2025 spelltimer.com. All rights reserved.
  */
 
 import ReactDom from 'react-dom/client';

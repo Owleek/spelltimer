@@ -187,6 +187,14 @@
 
   &:hover {
     color: vars.$link;
+
+    @media (pointer: coarse) {
+        color: vars.$primary;
+    }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        color: vars.$primary;
+    }
   }
 }
 
@@ -195,6 +203,16 @@
 
   & .Article__donationLink {
     color: vars.$link;
+
+    @media (pointer: coarse) {
+        color: vars.$primary;
+        cursor: default;
+    }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        color: vars.$primary;
+        cursor: default;
+    }
   }
 }
 
@@ -219,12 +237,12 @@
 .Article__socialLink,
 .Article__donationLink {
   white-space: nowrap;
-  text-decoration: underline;
   transition: color ease vars.$transitionTime;
 }
 
 .Article__donationLink {
     color: vars.$primary;
+    text-decoration: none;
 
     &:visited {
       color: vars.$primary;
@@ -309,6 +327,14 @@
 
     &:hover {
       stroke: vars.$keyColor;
+
+      @media (pointer: coarse) {
+          stroke: vars.$primary;
+      }
+
+      @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+          stroke: vars.$primary;
+      }
     }
 }
 
@@ -318,6 +344,14 @@
     
     &:hover {
       fill: vars.$keyColor;
+
+      @media (pointer: coarse) {
+          fill: vars.$primary;
+      }
+
+      @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+          fill: vars.$primary;
+      }
     }
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {

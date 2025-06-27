@@ -22,8 +22,8 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
     justify-content: center;
     align-items: center;
     color: vars.$welcomeFontColor;
-    text-transform:uppercase;
-    text-decoration:none;
+    text-transform: uppercase;
+    text-decoration: none;
     letter-spacing: 5px;
 
     font-size: clamp(14px, vars.pxToVW(18), 18px);
@@ -36,6 +36,10 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
 
     &:hover {
         background: rgba(0, 0, 0, 0.7);
+
+        @media (pointer: coarse) {
+            background: rgba(0, 0, 0, 0.5);
+        }
     }
 }
 
@@ -150,10 +154,6 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
         height: #{$mobileButtonHeight}px;
         padding: 0 16px;
         letter-spacing: 1px;
-
-        &:hover {
-            background: rgba(0, 0, 0, 0.5);
-        }
     }
 
     .PlayButton__animationArrow {

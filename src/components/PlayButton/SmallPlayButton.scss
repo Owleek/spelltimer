@@ -35,6 +35,10 @@ $fourthDelay: calc(($smallButtonHeight + $smallButtonWidth + $smallButtonHeight)
 
     &:hover {
         background: rgba(0, 0, 0, 0.1);
+
+        @media (pointer: coarse) {
+            background: rgb(255, 255, 255, 0.1);
+        }
     }
 
     &::before {

@@ -162,6 +162,10 @@
 
     &:hover {
         background-color: rgba(199, 199, 199, 0.6);
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotglass;
+        }
     }
 
     &.hidden {
@@ -173,12 +177,20 @@
 .Timer__controlButton.remove {
     &:hover {
         background-color: vars.$danger;
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotglass;
+        }
     }
 }
 
 .Timer__controlButton.refresh {
     &:hover {
         background-color: vars.$success;
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotglass;
+        }
     }
 }
 
@@ -188,35 +200,34 @@
 }
 
 .Timer__slotHotkey {
-  width: 70px;
-  height: 70px;
+    width: 70px;
+    height: 70px;
 
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  color: vars.$lowerBackground;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: vars.$lowerBackground;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  background-color: transparent;
+    background-color: transparent;
 
-  user-select: none;
-  z-index: 102;
-  cursor: pointer;
-  transition-property: fill, transform;
-  transition-duration: vars.$transitionTime;
-  transition-timing-function: ease;
+    user-select: none;
+    z-index: 102;
+    cursor: pointer;
+    transition-property: fill, transform;
+    transition-duration: vars.$transitionTime;
+    transition-timing-function: ease;
 
-  &:hover {
-    color: vars.$keyColor;
-  }
+    &:hover {
+        color: vars.$keyColor;
+    }
 
-
-  @media (pointer: coarse) {
-    display: none !important;
-  }
+    @media (pointer: coarse) {
+        display: none !important;
+    }
 
    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
         display: none !important;
