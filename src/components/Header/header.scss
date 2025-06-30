@@ -32,6 +32,7 @@
         height: 43dvh;
         transform: translateY(-100%);
         overflow: hidden;
+        z-index: 10030;
 
         &::after {
             content: '';

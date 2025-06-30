@@ -163,7 +163,7 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
         </div>
       </div>
 
-      <div className="Sidebar">
+      <div className={cn('Sidebar', {absoluteOnMobile: !!itemOwnership})}>
         <div className="Constructor__close" onClick={onCancel} title={translateText(dictionary, 'close')}>
           <span className="Constructor__closeIcon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45 45" >
@@ -191,6 +191,7 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
                         handleBlur={handleBlurSideSearch}/> 
           </div>
         }
+
         {  
           itemOwnership ?
             <div className="Sidebar__gridWrapper">
@@ -201,15 +202,19 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
               </div>
             </div>
           : 
-            <ul className="Menu">
-              {
-                tabList.map(el => 
-                <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab}, {[el.key]: el.key})} onClick={() => onSelectMenuItem(el.key)}>
-                  <div className="Menu__text">{el.label}</div>
-                  <div className={cn('Menu__picbox', {[el.key]: el.key})}></div>
-                </li>)
-              }
-            </ul>
+          <div className="MenuOuter">
+            <div className="MenuScrollContainer appStyledScroll">
+              <ul className="Menu">
+                {
+                  tabList.map(el => 
+                  <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab}, {[el.key]: el.key})} onClick={() => onSelectMenuItem(el.key)} title={el.label}>
+                    <div className="Menu__text">{el.label}</div>
+                    <div className={cn('Menu__picbox', {[el.key]: el.key})}></div>
+                  </li>)
+                }
+              </ul>
+            </div>
+          </div>
         }
       </div>
     </div>
