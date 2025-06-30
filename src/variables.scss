@@ -45,7 +45,6 @@ $toolColor: rgb(119, 136, 153);
 $toolColorDeep: #5e6c7a;
 $goldenrod: #daa520;
 
-
 $DEVICEMAXWIDTH: 1023;
 $MEDIUMDEVICEWIDTH: 767;
 $SLIMDEVICEWIDTH: 429;
@@ -64,4 +63,3 @@ $article: #242a37;
 @function pxToDVH($px) {
   @return calc(($px / $DEVICEMAXWIDTH) * 100dvh);
 }
-

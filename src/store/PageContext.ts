@@ -17,6 +17,7 @@ interface IPageContext {
     navigate: (page: EPage) => void
     activeArticle: TPage
     onSelectArticle: (selectedArticle: TPage) => void
+    headerBottomOnMobile: boolean
 }
 
 const PageContext = createContext<IPageContext | null>(null);

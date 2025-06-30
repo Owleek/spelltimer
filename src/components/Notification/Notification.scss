@@ -21,7 +21,7 @@
     z-index: 1010;
 
     opacity: 0;
-    transform: translate(-50%, -100%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
     transform-origin: 50% 50%;
     pointer-events: none;
 
@@ -33,7 +33,7 @@
 .Notification.visible {
     pointer-events: auto;
     opacity: 1;
-    transform: translate(-50%, -100%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .Notification__info {

@@ -7,16 +7,16 @@ import { translateText } from '../../utils/utils';
 import cn from 'classnames';
 import './footer.scss';
 
-const Footer = () => {
+const Footer = ({className}: {className: string}) => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
     if (!dictionary) return;
 
     const context = useContext(PageContext);
     if (!context) return <ErrorComponent message={String(context)}/>
-    const {activeArticle, onSelectArticle} = context;
+    const {activeArticle, onSelectArticle, headerBottomOnMobile} = context;
 
     return (
-        <div className="footer">
+        <div className={cn('footer', className, {headerBottomOnMobile})}>
             <div className="footer__column">
                 <ul className="footer__list">
                     <li className={cn('footer__item', {active: activeArticle === EPage.ABOUT})} onClick={() => onSelectArticle(EPage.ABOUT)} style={{whiteSpace: 'nowrap'}}>{translateText(dictionary, 'about')}</li>

@@ -1,4 +1,5 @@
 @use '../../variables.scss' as vars;
+@use '../../mixin.scss' as *;
 
 .Welcome {
     display: flex;
@@ -18,6 +19,11 @@
 
     overflow: hidden;
     position: relative;
+
+    @include responsiveBlock {
+        padding-top: 21vh;
+        padding-top: 21dvh;
+    }
 }
 
 .Welcome__titleStripe {

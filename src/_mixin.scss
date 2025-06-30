@@ -1,0 +1,31 @@
+@use './variables.scss' as vars;
+
+@mixin responsiveBlock {
+  @media (max-height: #{vars.$MEDIUMDEVICEWIDTH}px), (max-height: #{vars.$DEVICEMAXWIDTH}px) and (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    @content;
+  }
+}
+
+@mixin responsiveBlockForArticle {
+  @media (max-width: #{vars.$SLIMDEVICEWIDTH}px) and (min-height: 1024px) {
+    @content;
+  }
+}
+
+@mixin responsiveBlockForPlayground {
+  @media (max-height: #{vars.$MEDIUMDEVICEWIDTH}px), (max-height: #{vars.$DEVICEMAXWIDTH}px) and (max-width: #{vars.$MEDIUMDEVICEWIDTH}px), (max-width: 619px) and (max-height: 1739px), (max-width: #{vars.$SLIMDEVICEWIDTH}px) and (max-height: 1859px) {
+    @content;
+  }
+}
+
+@mixin responsiveSlimForPlayground {
+  @media (max-width: #{vars.$SLIMDEVICEWIDTH}px) and (min-height: 1740px) {
+    @content;
+  }
+}
+
+@mixin bandForTimerGear {
+  @media (max-height: 579px) {
+    @content;
+  }
+}

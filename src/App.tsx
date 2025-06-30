@@ -12,6 +12,7 @@ import Politics from './components/Politics/Politics';
 import Donation from './components/Donation/Donation';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import cn from 'classnames';
 
 const App = () => {
     const [currentPage, setCurrentPage] = useState<EPage>(EPage.LOADING);
@@ -19,8 +20,11 @@ const App = () => {
 
     const [activeArticle, setActiveArticle] = useState<EPage | null>(null);
 
+    const [headerBottomOnMobile, setHeaderBottomOnMobile] = useState<boolean>(false);
+
     const onSelectArticle = (selectedArticle: EPage | null) => {
         setActiveArticle(selectedArticle);
+        setHeaderBottomOnMobile(false);
         return selectedArticle === null ? navigate(EPage.WELCOME) : navigate(selectedArticle);
     }
 
@@ -48,41 +52,34 @@ const App = () => {
                              currentPage === EPage.POLITICS || 
                              currentPage === EPage.DONATION;
 
-
     const hideLogoOnMobile = currentPage !== EPage.WELCOME && currentPage !== EPage.PLAYGROUND;
 
+    const playgroundTops = currentPage === EPage.PLAYGROUND;
+
     return (
-        <Provider store={store}>
-            <PageContext.Provider value={{currentPage, navigate, activeArticle, onSelectArticle}}>
-                <YMInitializer
-                    accounts={[102442825]}
-                    options={{ webvisor: true, clickmap: true, trackLinks: true }}
-                    version="2"
-                />
-                <Header isPlaygroundButtonShown={backToPlayground} hideLogoOnMobile={hideLogoOnMobile}/>
-                    { renderPage(currentPage) }
-                <Footer />
-            </PageContext.Provider>
-        </Provider>
+        <div className="AppContainer">
+            <Provider store={store}>
+                <PageContext.Provider value={{currentPage, navigate, activeArticle, onSelectArticle, headerBottomOnMobile}}>
+                    <YMInitializer
+                        accounts={[102442825]}
+                        options={{ webvisor: true, clickmap: true, trackLinks: true }}
+                        version="2"
+                    />
+                    <Header isPlaygroundButtonShown={backToPlayground} hideLogoOnMobile={hideLogoOnMobile} className={playgroundTops ? 'PlaygroundHeader' : ''}/>
+                        { renderPage(currentPage) }
+                    <Footer className={playgroundTops ? 'PlaygroundFooter' : ''}/>
+                </PageContext.Provider>
+            </Provider>
+            <div className={cn('toggleHeaderBottomOnMobile', {PlaygroundToggleHeaderBottomOnMobile: playgroundTops})} onClick={() => setHeaderBottomOnMobile(!headerBottomOnMobile)}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M17.3125 14.5C17.8648 14.5 18.3125 14.9477 18.3125 15.5C18.3125 16.0523 17.8648 16.5 17.3125 16.5H6.4375C5.88522 16.5 5.4375 16.0523 5.4375 15.5C5.4375 14.9477 5.88522 14.5 6.4375 14.5H17.3125Z" />
+                <path d="M17.3125 10.875C17.8648 10.875 18.3125 11.3227 18.3125 11.875C18.3125 12.4273 17.8648 12.875 17.3125 12.875H6.4375C5.88522 12.875 5.4375 12.4273 5.4375 11.875C5.4375 11.3227 5.88522 10.875 6.4375 10.875H17.3125Z" />
+                <path d="M17.3125 7.25C17.8648 7.25 18.3125 7.69772 18.3125 8.25C18.3125 8.80228 17.8648 9.25 17.3125 9.25H6.4375C5.88522 9.25 5.4375 8.80228 5.4375 8.25C5.4375 7.69772 5.88522 7.25 6.4375 7.25H17.3125Z" />
+                <path fillRule="evenodd" clipRule="evenodd" d="M19.125 0C21.671 0 23.75 2.07897 23.75 4.625V19.125C23.75 21.671 21.671 23.75 19.125 23.75H4.625C2.07897 23.75 0 21.671 0 19.125V4.625C0 2.07897 2.07897 0 4.625 0H19.125ZM4.625 2C3.18353 2 2 3.18353 2 4.625V19.125C2 20.5665 3.18353 21.75 4.625 21.75H19.125C20.5665 21.75 21.75 20.5665 21.75 19.125V4.625C21.75 3.18353 20.5665 2 19.125 2H4.625Z" />
+                </svg>
+            </div>
+        </div>
     )
 };
 
 export default App;
-
-// <!-- Yandex.Metrika counter -->
-// <script type="text/javascript" >
-//    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-//    m[i].l=1*new Date();
-//    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-//    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-//    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-//    ym(102442825, "init", {
-//         clickmap:true,
-//         trackLinks:true,
-//         accurateTrackBounce:true,
-//         webvisor:true
-//    });
-// </script>
-// <noscript><div><img src="https://mc.yandex.ru/watch/102442825" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-// <!-- /Yandex.Metrika counter -->

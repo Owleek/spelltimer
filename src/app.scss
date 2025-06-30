@@ -1,4 +1,5 @@
 @use './variables.scss' as vars;
+@use './mixin.scss' as *;
 @import url('./assets/fonts/fontStyle.scss');
 @import url('./reset.scss');
 
@@ -55,6 +56,13 @@ body.textRight {
     transform: translateX(-50%);
     font-size: 20px;
     color: vars.$keyColor;
+}
+
+.AppContainer {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
 }
 
 .appStyledScroll {
@@ -224,5 +232,42 @@ body.textRight {
     &.right {
       left: calc(100% + 1rem);
     }
+  }
+}
+
+.toggleHeaderBottomOnMobile {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+
+  display: none;
+
+  left: 4px;
+  top: 34vh;
+  top: 34dvh;
+  padding: 10px;
+
+  fill: rgba(147, 147, 147, 0.3);
+
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+
+  cursor: pointer;
+  z-index: 10030;
+
+  svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  @include responsiveBlock {
+      display: block;
+  }
+}
+
+.toggleHeaderBottomOnMobile.PlaygroundToggleHeaderBottomOnMobile {
+  @include responsiveBlockForPlayground {
+      display: block;
   }
 }
