@@ -152,6 +152,10 @@
 }
 
 .Playground__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 28px;
   height: 28px;
   fill: #778899;
@@ -204,6 +208,9 @@
 .Playground__leftBtnContainer {
   width: auto;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.hidden {
     opacity: 0;

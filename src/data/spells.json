@@ -380,8 +380,8 @@
     },
     {   
         "hero": "Invoker",
-        "name": "Sun Strike",
-        "cooldown": [23]
+        "name": "Cataclysm",
+        "cooldown": [90]
     },
     {   
         "hero": "Keeper of the Light",

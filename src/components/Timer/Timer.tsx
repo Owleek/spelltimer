@@ -15,6 +15,7 @@ import { getKeyFromCode } from '../../data/keyCodeDictionary';
 import {setHotkey} from '../../store/hotkeySlice';
 import { setBindingSlice } from '../../store/bindingSlice';
 import { translateText } from '../../utils/utils';
+import { playSound, AUTOEND, END_SOUND, PAUSE_SOUND, RUN_SOUND } from '../../utils/sound';
 import './Timer.scss';
 
 interface IProps {
@@ -24,6 +25,7 @@ interface IProps {
     pauseApp: () => any
     currentStage: EStages
     removeTimer: (slot: ITimerData) => void
+    withSound?: boolean
 }
 
 enum ETimerStatus {
@@ -36,7 +38,7 @@ const STROKEWIDTH = 70;
 const RADIUS = 35;
 const LENGTH = 2 * Math.PI * RADIUS;
 
-const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}: IProps): JSX.Element => {
+const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer, withSound = true}: IProps): JSX.Element => {
     if (!ability) throw new Error('ability not found [Timer]');
     const dispatch = useDispatch();
 
@@ -81,7 +83,8 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
     const boundKeyRef = useRef<string>(ability.boundKey);
     const isTypingRef = useRef<boolean>(!!typigEntitiesSlice.entities.length);
     const shiftRef = useRef<IShift | null>(shiftSlice);
-    const refreshRef = useRef<IRefresh>(refreshSlice);    
+    const refreshRef = useRef<IRefresh>(refreshSlice); 
+    const withSoundRef = useRef<boolean>(withSound);
 
     useEffect(() => {
         if (timerRef.current?.parentNode) setOuterContainer(timerRef.current?.parentNode as Element); // чтобы renderControls корректно отрисовал содержимое
@@ -145,6 +148,10 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
         if (refreshRef.current.value) refreshTimer();
     }, [refreshSlice]);
 
+    useEffect(() => {
+        withSoundRef.current = withSound;
+    }, [withSound]);
+
     const handleKeyDown = useCallback((event: KeyboardEvent) => {
         if (event.code !== boundKeyRef.current || bindingRef.current || isTypingRef.current) return;
         setKeyPressed(true);
@@ -166,7 +173,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
         if (countMSRef.current === COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
             countMSRef.current = 0;
             currentCountdownRef.current -= 1;
-            return currentCountdownRef.current === 0 ? refreshTimer() : setCurrentCountdown(currentCountdownRef.current);
+            return currentCountdownRef.current === 0 ? refreshTimer(AUTOEND) : setCurrentCountdown(currentCountdownRef.current);
         }
 
         countMSRef.current += 1;
@@ -228,12 +235,14 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
 
     }, []);
 
-    const refreshTimer = useCallback(() => {
+    const refreshTimer = useCallback((autoend?: any) => {
         if (!circleRef.current) return;
 
         timerStatusRef.current = ETimerStatus.READY;
         currentCountdownRef.current = initialCountdownRef.current;
         stepRef.current = nextStepRef.current;
+
+        if (autoend === AUTOEND) playSoundDecorator(END_SOUND);
 
         setTimerStatus(timerStatusRef.current);
         setCurrentCountdown(currentCountdownRef.current);
@@ -261,12 +270,14 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
         if (timerStatusRef.current === ETimerStatus.RUNNING) {
             timerStatusRef.current = ETimerStatus.PAUSED;
             pauseApp();
+            playSoundDecorator(PAUSE_SOUND);
             return setTimerStatus(timerStatusRef.current);
         }
 
         timerStatusRef.current = ETimerStatus.RUNNING;
         setAnimateIndicator(false);
         setTimerStatus(timerStatusRef.current);
+        playSoundDecorator(RUN_SOUND);
         runApp();
         dispatch(addRunning({value: ability.position}));
     }
@@ -287,6 +298,8 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
     }
 
     const hotkey = getKeyFromCode(ability.boundKey);
+
+    const playSoundDecorator = useCallback((str: string) => playSound(str, withSoundRef.current), []);
 
     return <div className="Timer" style={{backgroundImage: `url("${ability.img}")`}} ref={timerRef}>
                 {        
@@ -343,6 +356,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer}
                         currentStage === EStages.EDIT && !!outerContainer &&
                         createPortal(
                             <React.Fragment>
+                                <div className="Timer__disabled"></div>
 
                                 <div className={cn('Timer__slotHotkey', {isBinding: isBinding, highlight: keyPressed})} onClick={handleBindKey} title={translateText(dictionary, 'hotkey_toggle_timer')}>
                                     <div className='Timer__slotHotKeyTextBox'>

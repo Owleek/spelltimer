@@ -12,6 +12,7 @@
     "about_4": "⚡ Currently, SpellTimer includes basic features and minimal conveniences, enough to gauge its usefulness among players. Once its demand is confirmed, the next update will address shortcomings, optimize performance, and enhance the user experience.",
     "about_5": "🎨 The current version of SpellTimer is targeted exclusively at Dota 2 players. However, if demand arises, the app may be expanded to support other games with similar mechanics.",
     "about_6": "📌 SpellTimer is an unofficial project and is not affiliated with Valve Corporation. All mentioned names, logos, and trademarks are the property of their respective owners and are used for informational and non-commercial purposes only.",
+    "about_7": "Sound effect provided by ZapSplat.com",
     "contact_1": "We’re always open to feedback and strive to consider players’ suggestions. If you have ideas, questions, or suggestions—don’t hesitate to contact us via email or social media:",
     "contact_2": "My name is Artemiy. I’m the developer and creator of SpellTimer, an interface solution for Dota 2 players. This is a personal initiative into which I’ve poured my experience, attention to detail, and love for the game. I’m open to professional collaboration in web development and startup projects.",
     "contact_3": "For collaboration inquiries, feel free to contact me via email:",
@@ -73,5 +74,7 @@
     "show_qr": "Show QR code",
     "press_to_bind": "Press any key to bind it",
     "hotkey_toggle_timer": "Hotkey to start/pause timer",
-    "last_update": "Last update: 20.06.2025"
+    "last_update": "Last update: 01.07.2025",
+    "with_sound": "With sound",
+    "without_sound": "Without sound"
 }

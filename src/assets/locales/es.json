@@ -12,6 +12,7 @@
     "about_4": "⚡ Actualmente, SpellTimer ofrece funciones básicas y comodidad mínima, suficientes para evaluar su utilidad entre los jugadores. Una vez se confirme su demanda, la siguiente actualización solucionará errores, optimizará el rendimiento y mejorará la experiencia del usuario.",
     "about_5": "🎨 La versión actual de SpellTimer está orientada exclusivamente a los jugadores de Dota 2, pero si hay suficiente interés, la aplicación podría expandirse a otros juegos con mecánicas similares.",
     "about_6": "📌 SpellTimer es un proyecto no oficial y no está afiliado a Valve Corporation. Todos los nombres, logotipos y marcas mencionados son propiedad de sus respectivos dueños y se usan solo con fines informativos y no comerciales.",
+    "about_7": "Efecto de sonido proporcionado por ZapSplat.com",
     "contact_1": "Siempre estamos abiertos a recibir comentarios y procuramos tener en cuenta las sugerencias de los jugadores. Si tienes ideas, preguntas o propuestas, no dudes en contactarnos por correo electrónico o redes sociales:",
     "contact_2": "Mi nombre es Artemiy. Soy el desarrollador y creador de SpellTimer, una solución de interfaz para jugadores de Dota 2. Este proyecto es una iniciativa personal en la que he volcado mi experiencia, atención al detalle y amor por el juego. Estoy abierto a colaborar profesionalmente en desarrollo web y proyectos emergentes.",
     "contact_3": "Para consultas de colaboración, no dudes en contactarme por correo electrónico:",
@@ -73,5 +74,7 @@
     "show_qr": "Mostrar código QR",
     "press_to_bind": "Presiona cualquier tecla para asignarla",
     "hotkey_toggle_timer": "Tecla rápida para iniciar/pausar el temporizador",
-    "last_update": "Última actualización: 20.06.2025"
+    "last_update": "Última actualización: 01.07.2025",
+    "with_sound": "Con sonido",
+    "without_sound": "Sin sonido"
 }

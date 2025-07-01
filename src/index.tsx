@@ -1,5 +1,5 @@
 /*!
- * SpellTimer v1.0.0
+ * SpellTimer v1.0.1
  * Author: ARTEMII KHAFIZOV
  * Contact: spelltimer@gmail.com
  * License: 2025 spelltimer.com. All rights reserved.
