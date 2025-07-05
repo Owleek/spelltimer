@@ -15,7 +15,7 @@ import { getKeyFromCode } from '../../data/keyCodeDictionary';
 import {setHotkey} from '../../store/hotkeySlice';
 import { setBindingSlice } from '../../store/bindingSlice';
 import { translateText } from '../../utils/utils';
-import { playSound, AUTOEND, END_SOUND, PAUSE_SOUND, RUN_SOUND } from '../../utils/sound';
+import { playSound, AUTOEND, END_SOUND, RUN_SOUND } from '../../utils/sound';
 import './Timer.scss';
 
 interface IProps {
@@ -270,7 +270,6 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
         if (timerStatusRef.current === ETimerStatus.RUNNING) {
             timerStatusRef.current = ETimerStatus.PAUSED;
             pauseApp();
-            playSoundDecorator(PAUSE_SOUND);
             return setTimerStatus(timerStatusRef.current);
         }
 

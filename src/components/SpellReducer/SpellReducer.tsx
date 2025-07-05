@@ -31,7 +31,7 @@ const SpellReducer = ({slot, view}: IProps): JSX.Element => {
                 view ?
                 <ul className="SpellReducer view">
                     {
-                        upgradeByScepter?.length && 
+                        isUpgrade && 
                         <div className={cn('SpellReducer__itemWrapper active')}>
                             <div className="SpellReducer__item" style={{backgroundImage: `url("/assets/reducers/aghanim's_scepter.webp")`}} title={`${String(upgradeByScepter)}`}>
                             </div>
