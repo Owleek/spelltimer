@@ -1,6 +1,6 @@
 # SpellTimer
 
-**Version:** 1.0.1 
+**Version:** 1.0.2 
 **Author:** ARTEMII KHAFIZOV 
 **Contact:** spelltimer@gmail.com  
 **License:** 2025 spelltimer.com. All rights reserved.
