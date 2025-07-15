@@ -22,7 +22,25 @@ module.exports = {
             },
             {
                 test: /\.s[ac]ss$/i,
+                exclude: /\.module\.scss$/,
                 use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+            },
+            {
+                test: /\.module\.scss$/,
+                use: [
+                        'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: {
+                                    localIdentName: '[hash:base64:5]',
+                                },
+                                sourceMap: true,
+                            },
+                        },
+                        'postcss-loader',
+                        'sass-loader',
+                ],
             },
             {
                 test: /\.css/i,

@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {TStoreState} from '../../store/store';
 import { translateText } from '../../utils/utils';
 import '../../article.scss';
+import style from '../../Article.module.scss';
 
 const About = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
