@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import Search from '../Search/Search';
@@ -45,6 +45,27 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   const [mainSearchValue, setMainSearchValue] = useState<string>('');
   const [sideSearchValue, setSideSearchValue] = useState<string>('');
   const [itemOwnership, setItemOwnership] = useState<ITimerData | null>(null);
+
+
+  const [sidebarLoading, setSidebarLoading] = useState<boolean>(true);
+  const sidebarImagesLoadedRef = useRef<string[] | []>([]);
+
+  const onSidebarImageLoad = (key: string) => {
+    const newArr = [...sidebarImagesLoadedRef.current, key];
+    sidebarImagesLoadedRef.current = newArr;
+    if (sidebarImagesLoadedRef.current.length === heroList.length) setSidebarLoading(false);
+  }
+
+
+  const [abilitiesLoading, setAbilitiesLoading] = useState<boolean>(true);
+  const abilitiesLoadedRef = useRef<string[] | []>([]);
+
+  const onAbilitiesImageLoad = (key: string) => {
+    const newArr = [...abilitiesLoadedRef.current, key];
+    abilitiesLoadedRef.current = newArr;
+    if (abilitiesLoadedRef.current.length === tabContent.length) setAbilitiesLoading(false);
+  }
+
 
   const handleEscape = useCallback((event: KeyboardEvent) => {
     if (event.code !== 'Escape') return;
@@ -158,7 +179,8 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
         <div className="Constructor__body">
           <div className="Constructor__scrollContainer appStyledScroll">
-            <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership}/>
+            { abilitiesLoading && <div className='loaderContainer'><div className="loader"></div></div> }
+            <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership} onLoad={onAbilitiesImageLoad}/>
           </div>
         </div>
       </div>
@@ -196,9 +218,14 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
           itemOwnership ?
             <div className="Sidebar__gridWrapper">
               <div className="Sidebar__scrollContainer appStyledScroll">
-                <ul className="Sidebar__grid">
-                  { heroList.map(hero => <li key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img} title={hero.name}/></li>) }
-                </ul>
+                {
+                  sidebarLoading && <div className='loaderContainer'><div className="loader"></div></div>
+                }
+                { 
+                  <ul className="Sidebar__grid">
+                    { heroList.map(hero => <li key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img} alt="" title={hero.name} onLoad={() => onSidebarImageLoad(hero.id)}/></li>) }
+                  </ul>
+                }
               </div>
             </div>
           : 
