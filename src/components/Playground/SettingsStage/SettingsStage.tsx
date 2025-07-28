@@ -17,6 +17,7 @@ import CountdownEditor from '../../CountdownEditor/CountdownEditor';
 import Notification from '../../Notification/Notification';
 import { translateText } from '../../../utils/utils';
 import { playSound, SOUND } from '../../../utils/sound';
+import useImageLoaded from '../../../utils/useImageLoaded';
 import './SettingsStage.scss';
 
 export enum EAppStatus {
@@ -161,8 +162,12 @@ const SettingsStage = (): JSX.Element => {
         setWithSound(!withSound);
     }
 
+    const { imageLoaded, onLoadImage } = useImageLoaded();
+
     return (
         <div className="Playground__inner">
+            <img src="/assets/other/playground.webp" alt="" className={cn('imageBackground', {visible: imageLoaded})} onLoad={onLoadImage}/>
+
             { someOneIsBinding && <BindingOverlay /> }
             { currentSlot && <ConstructorComponent currentSlot={currentSlot as ISlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
             

@@ -1,28 +1,36 @@
+import React, {useContext} from 'react';
+import PageContext, {EPage} from '../../store/PageContext';
 import { translateText } from '../../utils/utils';
 import { useSelector } from 'react-redux';
 import {TStoreState} from '../../store/store';
 import PlayButton from '../PlayButton/PlayButton';
 import cn from 'classnames';
-import './welcome.scss';
 import { useState } from 'react';
+import useImageLoaded from '../../utils/useImageLoaded';
+import './welcome.scss';
 
 
 const Welcome = () => {
+    const context = useContext(PageContext);
+    if (!context) throw new Error('Context not found on Welcome page');
+
     const {dictionary, currentLang} = useSelector((state: TStoreState) => state.localeSlice);
     if (!dictionary) return;
 
     const fontStyleNormal = currentLang === 'ar' || currentLang === 'zh';
     const [videoShown, setVideoShown] = useState<boolean>(false);
 
-    return (
+    const { imageLoaded, onLoadImage } = useImageLoaded();
+
+    return <React.Fragment>
         <div className="Welcome">
+            <img src="/assets/other/welcome.webp" alt="" className={cn('imageBackground', {visible: imageLoaded})} onLoad={onLoadImage}/>
+
             <div className="Welcome__titleStripe">
                 <h1 className={cn('Welcome__title', {fontStyleNormal})}>{translateText(dictionary, 'welcome_title')}</h1>
             </div>
             <PlayButton />
-            {
-                currentLang === 'ru' && <div className="Welcome__guideText" onClick={() => setVideoShown(true)}>Как пользоваться ?</div>
-            }
+            { currentLang === 'ru' && <div className="Welcome__guideText" onClick={() => setVideoShown(true)}>Как пользоваться ?</div> }
             {
                 videoShown &&
                 <div className="Welcome__videoContainer">
@@ -39,7 +47,7 @@ const Welcome = () => {
                 </div>
             }
         </div>
-    );
+    </React.Fragment> 
 } ;
 
 export default Welcome;

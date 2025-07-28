@@ -3,7 +3,6 @@ import { createContext } from 'react';
 export enum EPage {
     WELCOME = 'welcome',
     PLAYGROUND = 'playground',
-    LOADING = 'loading',
     ABOUT = 'about',
     CONTACT = 'contact',
     POLITICS = 'politics',
@@ -18,6 +17,8 @@ interface IPageContext {
     activeArticle: TPage
     onSelectArticle: (selectedArticle: TPage) => void
     headerBottomOnMobile: boolean
+    loading: boolean
+    setLoading: (val: boolean) => void
 }
 
 const PageContext = createContext<IPageContext | null>(null);

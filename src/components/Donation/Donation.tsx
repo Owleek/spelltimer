@@ -4,6 +4,7 @@ import QrComponent from '../QrComponent/QrComponent';
 import {useSelector} from 'react-redux';
 import {TStoreState} from '../../store/store';
 import { translateText } from '../../utils/utils';
+import useImageLoaded from '../../utils/useImageLoaded';
 import '../../article.scss';
 
 enum EQRItem {
@@ -19,6 +20,7 @@ const Donation = () => {
     const [donated, setDonated] = useState<boolean>(false);
 
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
+    const { imageLoaded, onLoadImage } = useImageLoaded();
 
     const wallets = [
         {
@@ -75,7 +77,8 @@ const Donation = () => {
     }
 
     return <div className="Article">
-
+        <img src="/assets/other/article.webp" alt="" className={cn('imageBackground', {visible: imageLoaded})} onLoad={onLoadImage}/>
+        
        { !!qrItem &&  <QrComponent img={qrItem} onClose={handleClose} onDonate={handleDonate} btnText={translateText(dictionary, 'thnx_btn')}/> }
         
         <div className="Article__body">
