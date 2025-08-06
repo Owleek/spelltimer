@@ -1,6 +1,8 @@
-**Version:** 1.0.2 
-**Author:** ARTEMII KHAFIZOV 
-**Contact:** spelltimer@gmail.com  
+**Version:** 1.0.2
+
+**Author:** ARTEMII KHAFIZOV
+
+**[spelltimer.com →](https://spelltimer.com)**
 
 ---
 
