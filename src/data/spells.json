@@ -122,7 +122,7 @@
     {   
         "hero": "Primal Beast",
         "name": "Pulverize",
-        "cooldown": [40, 36, 32]
+        "cooldown": [40, 35, 30]
     },
     {   
         "hero": "Pudge",
@@ -190,13 +190,13 @@
         "hero": "Faceless Void",
         "name": "Chronosphere",
         "siblings": ["Time Zone"],
-        "cooldown": [160, 150, 140]
+        "cooldown": [155, 145, 135]
     },
     {   
         "hero": "Faceless Void",
         "name": "Time Zone",
         "siblings": ["Chronosphere"],
-        "cooldown": [130, 125, 120]
+        "cooldown": [125, 120, 115]
     },
     {   
         "hero": "Gyrocopter",
@@ -248,7 +248,7 @@
     {   
         "hero": "Luna",
         "name": "Eclipse",
-        "cooldown": [110]
+        "cooldown": [105]
     },
     {   
         "hero": "Medusa",

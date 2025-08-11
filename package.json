@@ -1,6 +1,6 @@
 {
   "name": "spelltimer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "SpellTimer is a free-to-use app for tracking the cooldowns of abilities and items in Dota 2.",
   "main": "index.js",
   "scripts": {
