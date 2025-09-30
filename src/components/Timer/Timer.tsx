@@ -73,7 +73,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
     const [isBinding, setIsBinding] = useState<boolean>(false);
     const [keyPressed, setKeyPressed] = useState<boolean>(false);
 
-    const [animateIndicator, setAnimateIndicator] = useState<boolean>(false);
+    const [animateIndicator, setAnimateIndicator] = useState<boolean>(true);
 
     const{ heroes } = fetchData;
     const currentHero = ability.owner ? heroes.find(hero => hero.name === ability.owner) : null;
