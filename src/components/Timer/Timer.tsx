@@ -15,7 +15,7 @@ import { getKeyFromCode } from '../../data/keyCodeDictionary';
 import {setHotkey} from '../../store/hotkeySlice';
 import { setBindingSlice } from '../../store/bindingSlice';
 import { translateText } from '../../utils/utils';
-import { playSound, AUTOEND, END_SOUND, RUN_SOUND } from '../../utils/sound';
+import { playSound, preloadSound, unlockAudio, AUTOEND, END_SOUND, RUN_SOUND, SOUND } from '../../utils/sound';
 import './Timer.scss';
 
 interface IProps {
@@ -152,6 +152,14 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
         withSoundRef.current = withSound;
     }, [withSound]);
 
+    // Preload sounds asap and unlock audio context on first gesture
+    useEffect(() => {
+        // Предзагрузка снижает задержку до ~0ms при старте/окончании
+        preloadSound(RUN_SOUND);
+        preloadSound(END_SOUND);
+        preloadSound(SOUND);
+    }, []);
+
     const handleKeyDown = useCallback((event: KeyboardEvent) => {
         if (event.code !== boundKeyRef.current || bindingRef.current || isTypingRef.current) return;
         setKeyPressed(true);
@@ -263,6 +271,8 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
     }, []);
 
     const handleClickTimer = () => {
+        // Разблокируем аудио контекст на первое действие пользователя
+        unlockAudio();
         if ((timerStatusRef.current === ETimerStatus.READY) && circleRef.current) {
             circleRef.current.style.display = 'block';
         }
