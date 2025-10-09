@@ -1,7 +1,7 @@
-import React, {useState, useContext, useCallback} from 'react';
-import PageContext, {EPage} from '../store/PageContext';
+import { useState, useContext, useCallback } from 'react';
+import PageContext from '../store/PageContext';
 
-const useImageLoaded = () => {
+export const useImageLoaded = () => {
 
     const context = useContext(PageContext);
     if (!context) throw new Error('PageContext not found');

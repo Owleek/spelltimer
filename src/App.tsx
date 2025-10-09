@@ -21,7 +21,7 @@ const App = () => {
         setCurrentPage(page);
     }
 
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const [activeArticle, setActiveArticle] = useState<EPage | null>(null);
 
@@ -61,7 +61,6 @@ const App = () => {
 
     return (
         <div className="AppContainer">
-            { loading && <div className="Loading"><div className="loader"></div></div>}
             <React.Fragment>
                 <Provider store={store}>
                     <PageContext.Provider value={{currentPage, navigate, activeArticle, onSelectArticle, headerBottomOnMobile, loading, setLoading}}>
