@@ -1,0 +1,170 @@
+@use '../../variables.scss' as vars;
+@use '../../mixin' as *;
+
+.Welcome {
+    height: 100vh;
+    height: 100dvh;
+
+    overflow: hidden;
+    position: relative;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.Welcome__heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    will-change: opacity;
+
+    &.visible {
+        opacity: 1;
+    }
+}
+
+.Welcome__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+    position: relative;
+}
+
+.Welcome__titleStripe {
+    height: 180px;
+    max-height: 180px;
+    min-height: 90px;
+    width: 100%;
+    margin-top: 25vh;
+    margin-top: 25dvh;
+    padding: 0 1rem;
+
+    margin-bottom: vars.pxToVH(130);
+    margin-bottom: vars.pxToDVH(130);
+
+    font-size: clamp(20px, vars.pxToVW(44), 44px);
+
+    font-weight: bold;
+    font-style: italic;
+    color: vars.$welcomeFontColor;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        height: vars.pxToVH(180);
+        margin-bottom: vars.pxToVH(90);
+
+        height: vars.pxToDVH(180);
+        margin-bottom: vars.pxToDVH(90);
+
+        max-height: 140px;
+    }
+
+    @include responsiveBlock {
+        margin-top: 21vh;
+        margin-top: 21dvh;
+    }
+}
+
+.Welcome__title {
+    &.fontStyleNormal {
+        font-style: normal;
+    }
+}
+
+.Welcome__guideText {
+    margin-top: 20px;
+    color: #e8e8e8;;
+    transition: color ease vars.$transitionTime;
+    cursor: pointer;
+
+    &:hover {
+        color: vars.$welcomeFontColor;
+
+        @media (pointer: coarse) {
+            color: #e8e8e8;;
+        }
+    }
+}
+
+.Welcome__videoContainer {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    z-index: 10200;
+}
+
+.Welcome__videoClose {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+    top: 10px;
+    right: 10px;
+    fill: #ffffff;
+    cursor: pointer;
+    transition: background-color ease-in-out vars.$transitionTime;
+    z-index: 1;
+
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.Welcome__outerBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 55px;
+    box-sizing: border-box;
+}
+
+
+.Welcome__videoBox {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 900px;
+    max-height: 100%;
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+}
+

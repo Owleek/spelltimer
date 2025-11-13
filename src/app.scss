@@ -1,5 +1,5 @@
 @use './variables.scss' as vars;
-@use './mixin.scss' as *;
+@use './mixin' as *;
 @import url('./assets/fonts/fontStyle.scss');
 @import url('./reset.scss');
 
@@ -17,14 +17,7 @@ a:active {
 }
 
 body {
-    font-family: 'Balsamiq Sans', sans-serif;
-
-    height: 100vh;
-    height: 100dvh;
-
-    overflow: hidden;
-    background-color: rgba(44, 44, 44);
-    min-width: 320px;
+  font-family: 'Balsamiq Sans', sans-serif;
 }
 
 body.textRight {
