@@ -5,13 +5,15 @@ import { translateText } from '../../utils/utils';
 import cn from 'classnames';
 import useImageLoaded from '../../utils/useImageLoaded';
 import '../../article.scss';
+import ImageCover from '../../components/ImageCover/ImageCover';
 
 const About = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    const { imageLoaded, onLoadImage } = useImageLoaded();
+    
 
     return <div className="Article">
-        <img src="/assets/other/article.webp" alt="" className={cn('imageBackground', {visible: imageLoaded})} onLoad={onLoadImage}/>
+        <ImageCover image="article.webp" />
+        
         <div className="Article__body">
             <div className="adjustCenter">
                 <div className="Article__bodyInner">
@@ -45,3 +47,4 @@ const About = () => {
 }
 
 export default About;
+

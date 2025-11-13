@@ -2,22 +2,22 @@ import React, { JSX, useState, useCallback, useEffect, useRef, useContext } from
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import {TStoreState} from '../../../store/store';
-import EmptySlot from '../../GridSlot/EmptySlot';
-import ConstructorComponent from '../../ConstructorComponent/ConstructorComponent';
+import EmptySlot from '../../../components/GridSlot/EmptySlot';
+import ConstructorComponent from '../../../components/ConstructorComponent/ConstructorComponent';
 import {EAbility, ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../store/slotSlice';
 import { addRefresh } from '../../../store/refreshSlice';
 import StageContext, {EStages} from '../../../store/StageContext';
-import Timer from '../../Timer/Timer';
-import LevelController from '../../LevelController/LevelController';
-import LevelControllerView from '../../LevelController/LevelControllerView';
-import SpellReducer from '../../SpellReducer/SpellReducer';
-import BindingOverlay from '../../BindingOverlay/BindingOverlay';
-import CountdownEditor from '../../CountdownEditor/CountdownEditor';
-import Notification from '../../Notification/Notification';
+import Timer from '../../../components/Timer/Timer';
+import LevelController from '../../../components/LevelController/LevelController';
+import LevelControllerView from '../../../components/LevelController/LevelControllerView';
+import SpellReducer from '../../../components/SpellReducer/SpellReducer';
+import BindingOverlay from '../../../components/BindingOverlay/BindingOverlay';
+import CountdownEditor from '../../../components/CountdownEditor/CountdownEditor';
+import Notification from '../../../components/Notification/Notification';
 import { translateText } from '../../../utils/utils';
 import { playSound, SOUND } from '../../../utils/sound';
-import useImageLoaded from '../../../utils/useImageLoaded';
+import ImageCover from '../../../components/ImageCover/ImageCover';
 import './SettingsStage.scss';
 
 export enum EAppStatus {
@@ -162,11 +162,9 @@ const SettingsStage = (): JSX.Element => {
         setWithSound(!withSound);
     }
 
-    const { imageLoaded, onLoadImage } = useImageLoaded();
-
     return (
         <div className="Playground__inner">
-            <img src="/assets/other/playground.webp" alt="" className={cn('imageBackground', {visible: imageLoaded})} onLoad={onLoadImage}/>
+            <ImageCover image="playground.webp" />
 
             { someOneIsBinding && <BindingOverlay /> }
             { currentSlot && <ConstructorComponent currentSlot={currentSlot as ISlot} onSelectAbility={onSelectAbility} onCancel={onConstructorCancel}/> }
@@ -275,3 +273,4 @@ const SettingsStage = (): JSX.Element => {
 }
 
 export default SettingsStage;
+

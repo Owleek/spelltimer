@@ -3,7 +3,7 @@ import PageContext, {EPage} from '../../store/PageContext';
 import { translateText } from '../../utils/utils';
 import { useSelector } from 'react-redux';
 import {TStoreState} from '../../store/store';
-import PlayButton from '../PlayButton/PlayButton';
+import PlayButton from '../../components/PlayButton/PlayButton';
 import cn from 'classnames';
 import { useState } from 'react';
 import useImageLoaded from '../../utils/useImageLoaded';
@@ -55,3 +55,4 @@ const Welcome = () => {
 } ;
 
 export default Welcome;
+
