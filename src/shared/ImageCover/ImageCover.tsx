@@ -17,3 +17,4 @@ const ImageCover = ({ image }: { image: string }) => {
 }
 
 export default ImageCover;
+

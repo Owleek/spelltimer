@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ErrorComponent from '../ErrorComponent/ErrorComponent';
+import ErrorComponent from '../../shared/ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
 import {TStoreState} from '../../store/store';
-import LangSelector from '../LangSelector/LangSelector';
-import PlayButton from '../PlayButton/PlayButton';
+import LangSelector from '../../features/LangSelector/LangSelector';
+import PlayButton from '../../components/PlayButton/PlayButton';
 import cn from 'classnames';
 import './header.scss';
 
@@ -55,3 +55,4 @@ const Header = ({className, isPlaygroundButtonShown, hideLogoOnMobile}: IProps) 
 } ;
 
 export default Header;
+

@@ -19,3 +19,4 @@ const BindingOverlay = (): JSX.Element => {
 }
 
 export default BindingOverlay;
+

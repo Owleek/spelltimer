@@ -12,12 +12,12 @@ import Timer from '../../../components/Timer/Timer';
 import LevelController from '../../../components/LevelController/LevelController';
 import LevelControllerView from '../../../components/LevelController/LevelControllerView';
 import SpellReducer from '../../../components/SpellReducer/SpellReducer';
-import BindingOverlay from '../../../components/BindingOverlay/BindingOverlay';
+import BindingOverlay from '../../../shared/BindingOverlay/BindingOverlay';
 import CountdownEditor from '../../../components/CountdownEditor/CountdownEditor';
-import Notification from '../../../components/Notification/Notification';
+import Notification from '../../../widgets/Notification/Notification';
 import { translateText } from '../../../utils/utils';
 import { playSound, SOUND } from '../../../utils/sound';
-import ImageCover from '../../../components/ImageCover/ImageCover';
+import ImageCover from '../../../shared/ImageCover/ImageCover';
 import './SettingsStage.scss';
 
 export enum EAppStatus {
