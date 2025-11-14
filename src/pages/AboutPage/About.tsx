@@ -5,7 +5,7 @@ import { translateText } from '../../utils/utils';
 import cn from 'classnames';
 import useImageLoaded from '../../utils/useImageLoaded';
 import '../../article.scss';
-import ImageCover from '../../components/ImageCover/ImageCover';
+import ImageCover from '../../shared/ImageCover/ImageCover';
 
 const About = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);

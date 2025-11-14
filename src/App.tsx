@@ -9,8 +9,8 @@ import About from './pages/AboutPage/About';
 import Contact from './pages/ContactPage/Contact';
 import Politics from './pages/PoliticsPage/Politics';
 import Donation from './pages/DonationPage/Donation';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import Header from './widgets/Header/Header';
+import Footer from './widgets/Footer/Footer';
 import cn from 'classnames';
 
 const App = () => {

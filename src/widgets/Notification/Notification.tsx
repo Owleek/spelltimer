@@ -69,3 +69,4 @@ const Notification = (): JSX.Element => {
 } ;
 
 export default Notification;
+

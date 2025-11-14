@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {TStoreState} from '../../store/store';
 import { translateText } from '../../utils/utils';
 import '../../article.scss';
-import ImageCover from '../../components/ImageCover/ImageCover';
+import ImageCover from '../../shared/ImageCover/ImageCover';
 
 enum EQRItem {
     dna = '/assets/qrcodes/dna.webp',

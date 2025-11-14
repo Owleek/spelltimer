@@ -6,7 +6,7 @@ import { translateText } from '../../utils/utils';
 import useImageLoaded from '../../utils/useImageLoaded';
 import cn from 'classnames';
 import '../../article.scss';
-import ImageCover from '../../components/ImageCover/ImageCover';
+import ImageCover from '../../shared/ImageCover/ImageCover';
 
 const Contact = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);

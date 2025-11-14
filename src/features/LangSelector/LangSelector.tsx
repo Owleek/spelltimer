@@ -57,3 +57,4 @@ const LangSelector = ({className}: IProps) => {
 }
 
 export default LangSelector;
+

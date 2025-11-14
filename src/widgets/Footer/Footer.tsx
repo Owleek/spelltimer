@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import {useSelector} from 'react-redux';
 import {TStoreState} from '../../store/store';
-import ErrorComponent from '../ErrorComponent/ErrorComponent';
+import ErrorComponent from '../../shared/ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
 import { translateText } from '../../utils/utils';
 import cn from 'classnames';
@@ -38,3 +38,4 @@ const Footer = ({className}: {className: string}) => {
 } ;
 
 export default Footer;
+
