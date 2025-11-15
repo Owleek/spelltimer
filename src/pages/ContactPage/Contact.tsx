@@ -1,5 +1,5 @@
 import React from 'react';
-import Social from '../../components/Social/Social';
+import Social from './Social/Social';
 import {useSelector} from 'react-redux';
 import {TStoreState} from '../../store/store';
 import { translateText } from '../../utils/utils';
