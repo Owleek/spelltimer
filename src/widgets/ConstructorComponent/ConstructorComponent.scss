@@ -1,0 +1,380 @@
+@use '../../variables.scss' as vars;
+
+$sidebarWidth: 384px; // 768 / 2 MediumDevices and higher
+$paddingtopForCloseButton: 50px;
+
+.Constructor {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    background:rgba(98, 98, 98, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    display: flex;
+}
+
+.Constructor__main {
+    width: calc(100% - $sidebarWidth);
+    height: 100%;
+    overflow: hidden;
+
+    padding: 0 16px 16px 16px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.Sidebar {
+    width: $sidebarWidth;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    padding: 0 0.5rem 1rem 0.5rem;
+
+
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 2;
+}
+
+.Constructor__searchWrapper,
+.Sidebar__searchWrapper {    
+    padding: $paddingtopForCloseButton 0 1rem;
+    flex-shrink: 0;
+}
+
+.Constructor__body {
+    padding: 1rem 4px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.Constructor__scrollContainer,
+.Sidebar__scrollContainer {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.Constructor__scrollContainer {
+    padding: 0 8px;
+}
+
+.Sidebar__scrollContainer { 
+    padding: 0 4px;
+}
+
+.Constructor__close,
+.Constructor__back {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    padding: 10px;
+    top: 0;
+    fill: #ffffff;
+    cursor: pointer;
+    transition: background-color ease-in-out vars.$transitionTime;
+
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.Constructor__close {
+    right: 0;
+    background-color: rgb(253, 75, 75);
+
+    &:hover {
+        background-color: #ff0000;
+
+        @media (pointer: coarse) {
+            background-color: rgb(253, 75, 75);
+        }
+    }
+}
+
+.Constructor__back {
+    left: 0;
+    cursor: pointer;
+    background-color: vars.$toolColor;
+    padding: 9px 10px 10px 10px;
+
+    &:hover {
+        background-color: vars.$toolColorDeep;
+
+        @media (pointer: coarse) {
+            background-color: vars.$toolColor;
+        }
+    }
+}
+
+.Constructor__closeIcon {
+    display: block;
+}
+
+.MenuOuter {
+    max-height: 100%;
+    overflow: hidden;
+    padding: 132px 8px 16px;
+}
+
+.MenuScrollContainer {
+    padding: 0px 6px 0px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.Menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Menu__item {
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    font-weight: bold;
+
+    opacity: 0.3;
+
+    transition: opacity vars.$transitionTime ease;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &.active {
+        color: vars.$darkGreen;
+        opacity: 1;
+        cursor: default;
+    }
+}
+
+.Menu__text {
+    font-weight: bold;
+    position: absolute;
+    z-index: 1;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: default;
+}
+
+.Menu__picbox {
+    height: 60px;
+    width: 100%;
+    border-radius: 7px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+}
+
+.Menu__picbox.all {
+    background-image: url('../../../public/assets/other/mixedAbilities.webp');
+}
+.Menu__picbox.spells {
+    background-image: url('../../../public/assets/other/spells.webp');
+}
+.Menu__picbox.items {
+    background-image: url('../../../public/assets/other/items.webp');
+}
+.Menu__picbox.other {
+    background-image: url('../../../public/assets/other/other.webp');
+}
+
+.Sidebar__button {
+    width: 300px;
+    height: 90px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background: #079b0b;
+    text-transform: uppercase;
+    font-size: 20px;
+    border: none;
+    align-self: center;
+    cursor: pointer;
+}
+
+.Sidebar__gridWrapper {
+    flex-grow: 1;
+    overflow: hidden;
+
+    padding: 1rem 4px 1rem 4px;
+    border-radius: 4px;
+    background: #c6c6c624;
+}
+
+.Sidebar__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    width: 100%;
+    gap: 10px;
+}
+
+.Sidebar__gridItem {
+    height: 46px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform ease-in-out vars.$transitionTime;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-position: center center;
+        object-fit: cover;
+    }
+
+    &:hover {
+        transform: scale(0.95);
+
+        @media (pointer: coarse) {
+             transform: scale(1);
+        }
+    }
+}
+
+
+@media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+    .Constructor {
+        flex-direction: column;
+    }
+
+    .Constructor__main, .Sidebar {
+        width: 100%;
+    }
+
+    .Constructor__main {
+        background: rgba(0, 0, 0, 0.4);
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .Sidebar {
+        height: auto;
+        padding-top: 0;
+        padding-bottom: 10px;
+        margin-bottom: 2px;
+        overflow: visible;
+        background: rgba(0, 0, 0, 0.4);
+        position: static;
+        backdrop-filter: none;
+    }
+
+    .Sidebar.absoluteOnMobile {
+        position: absolute;
+        height: 100vh;
+        height: 100dvh;
+        left: 0;
+        top: 0;
+        background: rgb(31, 31, 31);
+    }
+
+    .Constructor__body {
+        background: none;
+    }
+
+    .MenuOuter {
+        width: 100%;
+        padding: 6px 10px 10px;
+    }
+
+    .MenuScrollContainer {
+        overflow-x: hidden;
+    }
+
+    .Menu {
+        width: 100%;
+        overflow: hidden;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .Menu__item {
+        padding: 1rem;
+        margin-bottom: 0;
+        background-color: rgba(119, 136, 153, 0.3);
+        overflow: hidden;
+    }
+
+    .Menu__text {
+        width: auto;
+        max-width: 100%;
+        padding: 0 5px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+
+        position: static;
+        left: auto;
+        bottom: auto;
+        top: auto;
+        transform: none;
+    }
+
+    .Menu__picbox {
+        display: none;
+    }
+
+    .Sidebar__searchWrapper {
+        padding: 24px 8px 8px;
+    }
+
+    .Constructor__searchWrapper {
+        padding: $paddingtopForCloseButton 8px 8px;
+    }
+
+    .Constructor__body {
+        padding: 1rem 0 0 0;
+    }
+
+    .Sidebar__gridWrapper {
+        background: none;
+        padding: 1rem 0;
+        height: 146px;
+    }
+
+    .Sidebar__scrollContainer { 
+        padding: 0 8px;
+    }
+
+    .AbilityGrid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+
+    .AbilityItem {
+        height: 52px;
+    }
+
+    .Sidebar__gridItem {
+        height: 52px;
+    }
+
+}
+

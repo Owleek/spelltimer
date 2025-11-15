@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import ErrorComponent from '../../shared/ErrorComponent/ErrorComponent';
 import PageContext, { EPage } from '../../store/PageContext';
 import {TStoreState} from '../../store/store';
-import LangSelector from '../../features/LangSelector/LangSelector';
-import PlayButton from '../../components/PlayButton/PlayButton';
+import LangSelector from '../../shared/LangSelector/LangSelector';
+import PlayButton from '../../widgets/TimerPanel/PlayButton/PlayButton';
 import cn from 'classnames';
 import './header.scss';
 

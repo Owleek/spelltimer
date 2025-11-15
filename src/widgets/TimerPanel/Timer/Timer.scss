@@ -1,0 +1,466 @@
+@use '../../../variables.scss' as vars;
+
+.Timer {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    overflow: hidden;
+}
+
+.Timer__disabled {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    background: rgba(39, 39, 39, 0.83);
+    z-index: 2;
+}
+
+.Timer__innerWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.Timer__svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 145%;
+    height: 145%;
+    transform: rotateY(180deg) translate(50%, -50%);
+}
+
+.Timer__circle {
+    display: none;
+    stroke: black;
+    opacity: 0.7;
+}
+
+.Timer__circle.transition {
+    transition: stroke-dashoffset 0.05s linear;
+}
+
+.Timer__cover {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.Timer__play {
+    width: 35px;
+    height: 35px;
+    fill: rgba(40, 255, 0, 0.66);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    margin-left: 5px;
+    transition: opacity ease vars.$transitionTime;
+    opacity: 1;
+
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+
+
+.Timer__countdown {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    font-size: 60px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-weight: bold;
+    user-select: none;
+}
+
+.Timer__ownerBox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 160px;
+    height: 160px;
+    z-index: 1;
+    border: 2px solid #92de7f;
+    overflow: hidden;
+    transform: translate(-50%, -50%) rotate(45deg);
+    user-select: none;
+  }
+  
+  .Timer__ownerImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+    position: relative;
+    border: 1px solid greenyellow;
+    transform: rotate(-45deg) translate(25%, 25%);
+  }
+  
+  .Timer__ownerName {
+    position: absolute;
+    font-size: 16px;
+    left: 100%;
+    bottom: 0;
+    width: 100%;
+    background: rgba(161, 161, 161, 0.5);
+    color: #92de7f;
+    padding: 5px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: rotate(-90deg);
+    transform-origin: 0 100%;
+  }
+
+.Timer__controls {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    right: 8px;
+    bottom: 8px;
+    z-index: 102;
+}
+
+.Timer__controlButton {
+    width: 35px;
+    height: 35px;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: vars.$slotglass;
+    fill: #ffffff;
+
+    transition-timing-function: ease;
+    transition-property: fill, background-color;
+    transition-duration: vars.$transitionTime;
+    cursor: pointer;
+    opacity: 1;
+
+  
+    svg {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    &:hover {
+        background-color: rgba(199, 199, 199, 0.6);
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotglass;
+        }
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.Timer__controlButton.remove {
+    &:hover {
+        background-color: vars.$danger;
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotglass;
+        }
+    }
+}
+
+.Timer__controlButton.refresh {
+    &:hover {
+        background-color: vars.$success;
+
+        @media (pointer: coarse) {
+            background-color: vars.$slotglass;
+        }
+    }
+}
+
+.Timer__controlButton.disabled {
+    pointer-events: none !important;
+    fill: #818181 !important;
+}
+
+.Timer__slotHotkey {
+    width: 70px;
+    height: 70px;
+
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: vars.$lowerBackground;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: transparent;
+
+    user-select: none;
+    z-index: 102;
+    cursor: pointer;
+    transition-property: fill, transform;
+    transition-duration: vars.$transitionTime;
+    transition-timing-function: ease;
+
+    &:hover {
+        color: vars.$keyColor;
+    }
+
+    @media (pointer: coarse) {
+        display: none !important;
+    }
+
+   @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        display: none !important;
+    }
+}
+
+.Timer__slotHotkey.isBinding {
+  color: vars.$keyColor;
+  z-index: 1002;
+  transform: translate(0, 0);
+  pointer-events: none;
+}
+
+.Timer__slotHotkey.highlight {
+  color: vars.$easygreen;
+}
+
+.Timer__slotHotKeyTextBox {
+  width: 85%;
+  height: 85%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px 1px rgba(79, 73, 73, 0.4);
+  background: radial-gradient(circle, rgba(124, 124, 124, 0.8) 0%, rgba(55, 58, 61, 0.8) 100%);
+}
+
+.Timer__slotHotKeyText {
+  width: auto;
+  max-width: 100%;
+  padding: 0 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+
+.Timer__hint {
+  position: absolute;
+  z-index: 102;
+  top: 12px;
+  right: 16px;
+  font-size: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #bbbbbb;
+  pointer-events: none;
+  transition: color ease vars.$transitionTime;
+
+  user-select: none;
+
+  &.highlight {
+    color: vars.$fresh;
+  }
+
+  @media (pointer: coarse) {
+    display: none !important;
+  }
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        display: none !important;
+    }
+}
+
+$buttonHeight: 218.95; // px
+$buttonWidth: 274.15; // px
+
+$lineSize: 4px;
+$lineWidth: 2*$buttonHeight + $buttonWidth;
+
+$length: 2*($buttonHeight + $buttonWidth);
+$duration: 2; //ms
+$speed: calc($length / $duration); // px per sec
+
+$secondDelay: calc($buttonHeight / $speed);
+$thirdDelay: calc(($buttonHeight + $buttonWidth) / $speed);
+$fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
+
+
+.Timer__statusBox {
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  z-index: 1;
+  transition: opacity ease vars.$transitionTime;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.Timer__statusBox.animateIndicator {
+  opacity: 1;
+}
+
+.Timer__statusInnerWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.9) inset;
+}
+
+.Timer__statusIndicatorBackground {
+    position: absolute;
+    background: #a8d057;
+}
+
+
+.Timer__statusIndicatorBackground:nth-of-type(1) {
+    width: 4px;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.Timer__statusIndicatorBackground:nth-of-type(2) {
+    width: 100%;
+    height: 4px;
+    left: 0;
+    top: 0;
+}
+
+.Timer__statusIndicatorBackground:nth-of-type(3) {
+    width: 4px;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.Timer__statusIndicatorBackground:nth-of-type(4) {
+    width: 100%;
+    height: 4px;
+    left: 0;
+    bottom: 0;
+}
+
+.Timer__statusIndicator {
+    width: #{$lineWidth}px;
+    height: $lineSize;
+    position:absolute;
+    background: linear-gradient(90deg,rgba(254, 198, 32, 0) 0%, #d4ff7f 100%);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: #{$duration}s;
+}
+
+.Timer__statusIndicator:nth-of-type(1) {
+    bottom: 0;
+    left: 0;
+    transform: translateY(#{$lineWidth}px) rotateZ(-90deg);
+    transform-origin: 0% 0%;
+    animation-name: animationIndicator_1;
+}
+
+.Timer__statusIndicator:nth-of-type(2) {
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    animation-name: animationIndicator_2;
+    animation-delay: #{$secondDelay}s;
+}
+
+.Timer__statusIndicator:nth-of-type(3) {
+    top: 0;
+    right: 0;
+    transform-origin: 100% 0%;
+    transform: rotateZ(90deg);
+    animation-name: animationIndicator_3;
+    animation-delay: #{$thirdDelay}s;
+}
+
+.Timer__statusIndicator:nth-of-type(4) {
+    right: 0;
+    bottom: 0;
+    transform-origin: 100% 50%;
+    transform: rotateZ(180deg);
+    animation-name: animationIndicator_4;
+    animation-delay: #{$fourthDelay}s;
+}
+
+@keyframes animationIndicator_1 {
+    0% { 
+        bottom: 0;
+    }
+    100% { 
+        bottom: #{$length}px;
+    }
+}
+
+@keyframes animationIndicator_2 {
+    0% { 
+        left: 0;
+    }
+    100% { 
+        left: #{$length}px;
+    }
+}
+
+@keyframes animationIndicator_3 {
+    0% { 
+        top: 0;
+    }
+    100% { 
+        top: #{$length}px;
+    }
+}
+
+@keyframes animationIndicator_4 {
+    0% { 
+        right: 0;
+    }
+    100% { 
+        right: #{$length}px;
+    }
+}
+
