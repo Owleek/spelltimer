@@ -8,7 +8,7 @@ import {addRunning, removeRunning} from '../../../store/runningSlice';
 import {removeShift, EDirection, IShift} from '../../../store/shiftSlice';
 import {EStages} from '../../../store/StageContext';
 import { ITimerData } from '../../../data/data';
-import { EAppStatus } from '../../../pages/PlaygroundPage/SettingsStage/SettingsStage';
+import { EAppStatus } from '../../../pages/PlaygroundPage/Playground';
 import fetchData from '../../../data/data';
 import { IRefresh, removeRefresh } from '../../../store/refreshSlice';
 import { getKeyFromCode } from '../../../data/keyCodeDictionary';
