@@ -2,10 +2,10 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
 import { useDispatch } from 'react-redux';
-import { setHotkey } from '../../../store/hotkeySlice';
-import { setBindingSlice } from '../../../store/bindingSlice';
-import {TStoreState} from '../../../store/store';
-import { getKeyFromCode } from '../../../data/keyCodeDictionary';
+import { setHotkey } from '../../../shared/store/hotkeySlice';
+import { setBindingSlice } from '../../../shared/store/bindingSlice';
+import {TStoreState} from '../../../shared/store/store';
+import { getKeyFromCode } from '../../../shared/data/keyCodeDictionary';
 import cn from 'classnames';
 import './HotkeyCell.scss';
 

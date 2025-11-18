@@ -1,10 +1,10 @@
 import React, { JSX, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IRequiredFields } from '../../../data/data';
-import {setActiveLevelIndex, setCustomCooldown, clearReducer} from '../../../store/slotSlice';
-import {toSafeInteger, translateText} from '../../../utils/utils';
-import {TStoreState} from '../../../store/store';
-import { addTyping, removeTyping } from '../../../store/typingSlice';
+import { IRequiredFields } from '../../../shared/data/data';
+import {setActiveLevelIndex, setCustomCooldown, clearReducer} from '../../../shared/store/slotSlice';
+import {toSafeInteger, translateText} from '../../../shared/lib/utils';
+import {TStoreState} from '../../../shared/store/store';
+import { addTyping, removeTyping } from '../../../shared/store/typingSlice';
 import cn from 'classnames';
 import './LevelController.scss';
 

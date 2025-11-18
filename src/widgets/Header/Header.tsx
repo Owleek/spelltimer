@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import ErrorComponent from '../../shared/ErrorComponent/ErrorComponent';
-import PageContext, { EPage } from '../../store/PageContext';
-import {TStoreState} from '../../store/store';
-import LangSelector from '../../shared/LangSelector/LangSelector';
+import ErrorComponent from '../../shared/ui/ErrorComponent/ErrorComponent';
+import PageContext, { EPage } from '../../shared/store/PageContext';
+import {TStoreState} from '../../shared/store/store';
+import LangSelector from '../../shared/ui/LangSelector/LangSelector';
 import PlayButton from '../../widgets/TimerPanel/PlayButton/PlayButton';
 import cn from 'classnames';
 import './header.scss';

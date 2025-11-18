@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import Search from '../../shared/Search/Search';
+import Search from '../../shared/ui/Search/Search';
 import ImageGrid from './ImageGrid/ImageGrid';
-import fetchData, { ITimerData, IBaseFields } from '../../data/data';
-import { addTyping, removeTyping} from '../../store/typingSlice';
-import { translateText } from '../../utils/utils';
-import { ISlot } from '../../store/slotSlice';
-import {TStoreState} from '../../store/store';
+import fetchData, { ITimerData, IBaseFields } from '../../shared/data/data';
+import { addTyping, removeTyping} from '../../shared/store/typingSlice';
+import { translateText } from '../../shared/lib/utils';
+import { ISlot } from '../../shared/store/slotSlice';
+import {TStoreState} from '../../shared/store/store';
 import './ConstructorComponent.scss';
 
 enum TabKey {

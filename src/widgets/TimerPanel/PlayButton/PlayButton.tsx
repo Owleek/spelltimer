@@ -1,9 +1,9 @@
 import React, { JSX, useContext } from 'react';
-import { translateText } from '../../../utils/utils';
+import { translateText } from '../../../shared/lib/utils';
 import { useSelector } from 'react-redux';
-import PageContext, { EPage } from '../../../store/PageContext';
-import { TStoreState } from '../../../store/store';
-import { setUserPlayed } from '../../../user_cache/keys';
+import PageContext, { EPage } from '../../../shared/store/PageContext';
+import { TStoreState } from '../../../shared/store/store';
+import { setUserPlayed } from '../../../shared/data/localStorageData';
 import cn from 'classnames';
 import './PlayButton.scss';
 import './SmallPlayButton.scss';

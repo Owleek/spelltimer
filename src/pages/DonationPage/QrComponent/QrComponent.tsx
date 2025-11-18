@@ -1,8 +1,8 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../../store/store';
-import { translateText } from '../../../utils/utils';
+import {TStoreState} from '../../../shared/store/store';
+import { translateText } from '../../../shared/lib/utils';
 import './QrComponent.scss';
 
 interface IProps {

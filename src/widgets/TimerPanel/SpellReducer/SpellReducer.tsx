@@ -1,8 +1,8 @@
 import React, { JSX } from 'react';
 import { useDispatch } from 'react-redux';
-import { ITimerData, IReducer } from '../../../data/data';
-import {applyReducer, removeReducer, toggleUpgradeCooldown} from '../../../store/slotSlice';
-import fetchData from '../../../data/data';
+import { ITimerData, IReducer } from '../../../shared/data/data';
+import {applyReducer, removeReducer, toggleUpgradeCooldown} from '../../../shared/store/slotSlice';
+import fetchData from '../../../shared/data/data';
 import cn from 'classnames';
 import './SpellReducer.scss';
 

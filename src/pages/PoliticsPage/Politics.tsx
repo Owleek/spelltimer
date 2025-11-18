@@ -1,10 +1,9 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../store/store';
-import { translateText } from '../../utils/utils';
+import {TStoreState} from '../../shared/store/store';
+import { translateText } from '../../shared/lib/utils';
 import cn from 'classnames';
-import '../../article.scss';
-import ImageCover from '../../shared/ImageCover/ImageCover';
+import ImageCover from '../../shared/ui/ImageCover/ImageCover';
 
 const Politics = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);

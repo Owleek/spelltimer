@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { ITimerData } from '../../../data/data';
+import { ITimerData } from '../../../shared/data/data';
 import cn from 'classnames';
 import './ImageGrid.scss';
 

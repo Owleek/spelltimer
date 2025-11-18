@@ -1,21 +1,21 @@
 import React, { JSX, useEffect, useRef, useState, useContext, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {TStoreState} from '../../../store/store';
+import {TStoreState} from '../../../shared/store/store';
 import {createPortal} from 'react-dom';
 import cn from 'classnames';
-import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../../utils/TickNotifier';
-import {addRunning, removeRunning} from '../../../store/runningSlice';
-import {removeShift, EDirection, IShift} from '../../../store/shiftSlice';
-import {EStages} from '../../../store/StageContext';
-import { ITimerData } from '../../../data/data';
+import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../../shared/lib/TickNotifier';
+import {addRunning, removeRunning} from '../../../shared/store/runningSlice';
+import {removeShift, EDirection, IShift} from '../../../shared/store/shiftSlice';
+import {EStages} from '../../../shared/store/StageContext';
+import { ITimerData } from '../../../shared/data/data';
 import { EAppStatus } from '../../../pages/PlaygroundPage/Playground';
-import fetchData from '../../../data/data';
-import { IRefresh, removeRefresh } from '../../../store/refreshSlice';
-import { getKeyFromCode } from '../../../data/keyCodeDictionary';
-import {setHotkey} from '../../../store/hotkeySlice';
-import { setBindingSlice } from '../../../store/bindingSlice';
-import { translateText } from '../../../utils/utils';
-import { playSound, preloadSound, unlockAudio, AUTOEND, END_SOUND, RUN_SOUND, SOUND } from '../../../utils/sound';
+import fetchData from '../../../shared/data/data';
+import { IRefresh, removeRefresh } from '../../../shared/store/refreshSlice';
+import { getKeyFromCode } from '../../../shared/data/keyCodeDictionary';
+import {setHotkey} from '../../../shared/store/hotkeySlice';
+import { setBindingSlice } from '../../../shared/store/bindingSlice';
+import { translateText } from '../../../shared/lib/utils';
+import { playSound, preloadSound, unlockAudio, AUTOEND, END_SOUND, RUN_SOUND, SOUND } from '../../../shared/lib/sound';
 import './Timer.scss';
 
 interface IProps {

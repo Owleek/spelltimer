@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../store/store';
-import ErrorComponent from '../../shared/ErrorComponent/ErrorComponent';
-import PageContext, { EPage } from '../../store/PageContext';
-import { translateText } from '../../utils/utils';
+import {TStoreState} from '../../shared/store/store';
+import ErrorComponent from '../../shared/ui/ErrorComponent/ErrorComponent';
+import PageContext, { EPage } from '../../shared/store/PageContext';
+import { translateText } from '../../shared/lib/utils';
 import cn from 'classnames';
 import './footer.scss';
 
