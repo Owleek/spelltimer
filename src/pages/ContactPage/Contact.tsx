@@ -1,12 +1,11 @@
 import React from 'react';
 import Social from './Social/Social';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../store/store';
-import { translateText } from '../../utils/utils';
-import useImageLoaded from '../../utils/useImageLoaded';
+import {TStoreState} from '../../shared/store/store';
+import { translateText } from '../../shared/lib/utils';
+import useImageLoaded from '../../shared/lib/useImageLoaded';
 import cn from 'classnames';
-import '../../article.scss';
-import ImageCover from '../../shared/ImageCover/ImageCover';
+import ImageCover from '../../shared/ui/ImageCover/ImageCover';
 
 const Contact = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);

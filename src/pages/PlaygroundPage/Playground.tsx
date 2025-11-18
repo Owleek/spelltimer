@@ -1,23 +1,23 @@
 import React, { JSX, useState, useCallback, useEffect, useRef, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import {TStoreState} from '../../store/store';
+import {TStoreState} from '../../shared/store/store';
 import EmptySlot from '../../widgets/TimerPanel/GridSlot/EmptySlot';
 import ConstructorComponent from '../../widgets/ConstructorComponent/ConstructorComponent';
-import {EAbility, ITimerData} from '../../data/data';
-import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../store/slotSlice';
-import { addRefresh } from '../../store/refreshSlice';
-import StageContext, {EStages} from '../../store/StageContext';
+import {EAbility, ITimerData} from '../../shared/data/data';
+import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../shared/store/slotSlice';
+import { addRefresh } from '../../shared/store/refreshSlice';
+import StageContext, {EStages} from '../../shared/store/StageContext';
 import Timer from '../../widgets/TimerPanel/Timer/Timer';
 import LevelController from '../../widgets/TimerPanel/LevelController/LevelController';
 import LevelControllerView from '../../widgets/TimerPanel/LevelController/LevelControllerView';
 import SpellReducer from '../../widgets/TimerPanel/SpellReducer/SpellReducer';
-import BindingOverlay from '../../shared/BindingOverlay/BindingOverlay';
+import BindingOverlay from '../../shared/ui/BindingOverlay/BindingOverlay';
 import CountdownEditor from '../../widgets/TimerPanel/CountdownEditor/CountdownEditor';
 import Notification from '../../widgets/Notification/Notification';
-import { translateText } from '../../utils/utils';
-import { playSound, SOUND } from '../../utils/sound';
-import ImageCover from '../../shared/ImageCover/ImageCover';
+import { translateText } from '../../shared/lib/utils';
+import { playSound, SOUND } from '../../shared/lib/sound';
+import ImageCover from '../../shared/ui/ImageCover/ImageCover';
 import './Playground.scss';
 
 export enum EAppStatus {
@@ -26,7 +26,7 @@ export enum EAppStatus {
     INITIAL = 'initial'
 }
 
-const SettingsStage = (): JSX.Element => {
+const Playground = (): JSX.Element => {
     const [currentStage, setCurrentStage] = useState<EStages>(EStages.INITIAL);
     const changeStage = (stage: EStages) => setCurrentStage(stage);
     const payload = { currentStage, changeStage };
@@ -279,5 +279,4 @@ const SettingsStage = (): JSX.Element => {
     )
 }
 
-export default SettingsStage;
-
+export default Playground;

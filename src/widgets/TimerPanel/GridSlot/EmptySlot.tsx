@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { IEmptySlot, ISlot } from '../../../store/slotSlice';
-import StageContext, {EStages} from '../../../store/StageContext';
+import { IEmptySlot, ISlot } from '../../../shared/store/slotSlice';
+import StageContext, {EStages} from '../../../shared/store/StageContext';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../../store/store';
-import { translateText } from '../../../utils/utils';
+import {TStoreState} from '../../../shared/store/store';
+import { translateText } from '../../../shared/lib/utils';
 import cn from 'classnames';
 import './GridSlot.scss';
 

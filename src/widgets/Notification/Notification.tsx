@@ -1,10 +1,10 @@
 import React, { JSX, useContext, useEffect, useState } from 'react';
-import { translateText } from '../../utils/utils';
-import {TStoreState} from '../../store/store';
+import { translateText } from '../../shared/lib/utils';
+import {TStoreState} from '../../shared/store/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
-import StageContext, {EStages} from '../../store/StageContext';
-import { hideNotificationOfRunning } from '../../store/noteSlice';
+import StageContext, {EStages} from '../../shared/store/StageContext';
+import { hideNotificationOfRunning } from '../../shared/store/noteSlice';
 import cn from 'classnames';
 import './Notification.scss';
 

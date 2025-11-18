@@ -2,14 +2,14 @@ import React, { useEffect, useState, useCallback, useContext, useRef } from 'rea
 import { useSelector } from 'react-redux';
 import { JSX } from 'react/jsx-runtime';
 import { useDispatch } from 'react-redux';
-import { addTyping, removeTyping } from '../../../store/typingSlice';
-import { addShift, EDirection } from '../../../store/shiftSlice';
+import { addTyping, removeTyping } from '../../../shared/store/typingSlice';
+import { addShift, EDirection } from '../../../shared/store/shiftSlice';
 import cn from 'classnames';
-import {TStoreState} from '../../../store/store';
-import { translateText } from '../../../utils/utils';
-import { getKeyFromCode } from '../../../data/keyCodeDictionary';
-import StageContext, {EStages} from '../../../store/StageContext';
-import {toSafeInteger} from '../../../utils/utils';
+import {TStoreState} from '../../../shared/store/store';
+import { translateText } from '../../../shared/lib/utils';
+import { getKeyFromCode } from '../../../shared/data/keyCodeDictionary';
+import StageContext, {EStages} from '../../../shared/store/StageContext';
+import {toSafeInteger} from '../../../shared/lib/utils';
 import HotkeyCell from '../HotkeyCell/HotkeyCell';
 import './CountdownEditor.scss';
 

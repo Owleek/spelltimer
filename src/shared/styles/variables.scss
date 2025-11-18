@@ -1,0 +1,65 @@
+$primary: aliceblue;
+$secondary: #a0a0a0;
+$control: #d2d4d5;
+
+
+
+$welcomeFontColor: #b1efe0;
+
+$lowerBackground: rgb(168 168 168);
+$uppperBackground: rgb(55, 58, 61);
+$innerBoxShadow: rgba(0, 0, 0, 0.3);
+$slotPadding: 5px;
+
+$innerSlotBoxShadowBlur: 10px;
+$innerSlotBoxShadowColor: rgba(0, 0, 0, 0.9);
+
+$innerSlotBoxShadow: 0 0 $innerSlotBoxShadowBlur 0px $innerSlotBoxShadowColor inset;
+$slotBorderColor: rgb(21, 23, 24);
+
+$footerColor: #dadada;
+$keyColor: #ffdfa2;
+$antiqWhite: #a7a7a7;
+$slotPlaceholder: #696969;
+
+$transitionTime: 0.2s;
+
+$warmHover: #ffc55a;
+
+$activeButton: #fdfb00;
+$easygreen: #a3d6a5;
+$success1: #00ff08;
+$fresh: #6FFF1C;
+
+$arrowBG: #59cf14;
+
+$darkGreen: #6FFF1C;
+$softred: #fc7272;
+$easyred: #fb5353;
+$danger: rgb(255, 75, 75);
+$success: #00ff08a0;
+$success2: #358837;
+
+$slotglass: rgba(199, 199, 199, 0.35);
+$toolColor: rgb(119, 136, 153);
+$toolColorDeep: #5e6c7a;
+$goldenrod: #daa520;
+
+$DEVICEMAXWIDTH: 1023;
+$MEDIUMDEVICEWIDTH: 767;
+$SLIMDEVICEWIDTH: 429;
+
+$link: #61B0FF;
+$article: #242a37;
+
+@function pxToVW($px) {
+  @return calc(($px / $DEVICEMAXWIDTH) * 100vw);
+}
+
+@function pxToVH($px) {
+  @return calc(($px / $DEVICEMAXWIDTH) * 100vh);
+}
+
+@function pxToDVH($px) {
+  @return calc(($px / $DEVICEMAXWIDTH) * 100dvh);
+}
