@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {changeLocale, TLang} from '../../store/localeSlice';
-import {TStoreState} from '../../store/store';
+import {changeLocale, TLang} from '../../../../../shared/store/localeSlice';
+import {TStoreState} from '../../../../../shared/store/store';
 import cn from 'classnames';
 import './LangSelector.scss';
 
