@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/index.tsx',
+    entry: './index.tsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
@@ -53,7 +53,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({template: './src/index.html'}),
+        new HtmlWebpackPlugin({template: './index.html'}),
         new CopyWebpackPlugin({
             patterns: [
               { from: "public", to: "." }
