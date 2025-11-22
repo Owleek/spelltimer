@@ -1,7 +1,5 @@
-'use client';
+import App from './App';
 
-import App from './index';
-
-export default function Home() {
-  return <h1>sdfsdfsd</h1>;
+export default function () {
+  return <App />;
 }
