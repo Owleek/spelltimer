@@ -1,3 +1,5 @@
+'use client';
+
 import React, { JSX, useState } from 'react';
 import { Provider } from 'react-redux';
 import { YMInitializer } from 'react-yandex-metrika';
@@ -55,7 +57,7 @@ const App = () => {
                              currentPage === EPage.POLITICS || 
                              currentPage === EPage.DONATION;
 
-    const hideLogoOnMobile = currentPage !== EPage.WELCOME && currentPage !== EPage.PLAYGROUND;
+    const isArticlePage = currentPage !== EPage.WELCOME && currentPage !== EPage.PLAYGROUND;
 
     const playgroundTops = currentPage === EPage.PLAYGROUND;
 
@@ -69,7 +71,7 @@ const App = () => {
                             options={{ webvisor: true, clickmap: true, trackLinks: true }}
                             version="2"
                         />
-                        <Header isPlaygroundButtonShown={backToPlayground} hideLogoOnMobile={hideLogoOnMobile} className={playgroundTops ? 'PlaygroundHeader' : ''}/>
+                        <Header isPlaygroundButtonShown={backToPlayground} isArticlePage={isArticlePage} className={playgroundTops ? 'PlaygroundHeader' : ''}/>
                             { renderPage(currentPage) }
                         <Footer className={playgroundTops ? 'PlaygroundFooter' : ''}/>
                     </PageContext.Provider>

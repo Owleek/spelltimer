@@ -5,10 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "start": "webpack serve --mode development --open --port 3000",
-    "build": "webpack --mode production",
-    "build:next": "next build",
-    "start:next": "next start"
+    "start": "next start",
+    "build": "next build"
   },
   "keywords": [],
   "author": "ARTEMII KHAFIZOV",
@@ -43,6 +41,12 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.0"
   },
+  "browserslist": [
+    "last 10 versions",
+    ">1%",
+    "not dead",
+    "since 2017-01-01"
+  ],
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
     "classnames": "^2.5.1",

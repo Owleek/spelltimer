@@ -1,3 +1,4 @@
+'use client';
 import { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ErrorComponent from '../../shared/ui/ErrorComponent/ErrorComponent';
@@ -11,10 +12,10 @@ import './header.scss';
 interface IProps {
     className?: string
     isPlaygroundButtonShown?: boolean
-    hideLogoOnMobile?: boolean
+    isArticlePage?: boolean
 }
 
-const Header = ({className, isPlaygroundButtonShown, hideLogoOnMobile}: IProps) => {
+const Header = ({className, isPlaygroundButtonShown, isArticlePage}: IProps) => {
     const context = useContext(PageContext);
 
     if (!context) return <ErrorComponent message={String(context)}/>
@@ -29,7 +30,7 @@ const Header = ({className, isPlaygroundButtonShown, hideLogoOnMobile}: IProps) 
     }, [currentLang]);
 
     return (
-        <div className={cn('header', className, {alignCenter: !!isPlaygroundButtonShown, hideLogoOnMobile, headerBottomOnMobile})}>
+        <div className={cn('header', className, {alignCenter: !!isPlaygroundButtonShown, hideLogoOnMobile: isArticlePage, headerBottomOnMobile})}>
             <div className="header__logo">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 494 217" onClick={handleClick}>
                     <path d="M121.327 216.352C120.233 216.352 119.368 216.193 118.73 215.874C118.092 215.555 117.613 215.076 117.294 214.438C116.975 213.755 116.816 212.889 116.816 211.84V135.415H93.0948C92.0011 135.415 91.1352 135.255 90.4972 134.936C89.8591 134.617 89.3806 134.139 89.0616 133.501C88.7426 132.863 88.5831 131.997 88.5831 130.903V122.221C88.5831 121.173 88.7426 120.33 89.0616 119.692C89.3806 119.008 89.8591 118.507 90.4972 118.188C91.1808 117.869 92.0466 117.71 93.0948 117.71H162.138C163.186 117.71 164.029 117.869 164.667 118.188C165.351 118.507 165.852 119.008 166.171 119.692C166.49 120.33 166.65 121.173 166.65 122.221V130.903C166.65 131.951 166.49 132.817 166.171 133.501C165.852 134.139 165.351 134.617 164.667 134.936C164.029 135.255 163.186 135.415 162.138 135.415H138.417V211.84C138.417 212.889 138.258 213.755 137.939 214.438C137.62 215.076 137.118 215.555 136.435 215.874C135.797 216.193 134.954 216.352 133.905 216.352H121.327Z"/>

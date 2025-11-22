@@ -5,10 +5,13 @@
  * License: 2025 spelltimer.com. All rights reserved.
  */
 
+import React from 'react';
 import ReactDom from 'react-dom/client';
 import {StrictMode} from 'react';
-import App from './app';
+import RootLayout from './app/layout';
+import PageLayout from './app/page';
 import './app/styles/app.scss';
+
 
 const rootElement = document.getElementById('root');
 
@@ -17,4 +20,4 @@ if (!rootElement) {
 }
 
 const root = ReactDom.createRoot(rootElement);
-root.render(<StrictMode><App/></StrictMode>);
+root.render(<StrictMode><RootLayout><PageLayout /></RootLayout></StrictMode>);
