@@ -3,7 +3,7 @@ import PageContext, {EPage} from '../../shared/store/PageContext';
 import { translateText } from '../../shared/lib/utils';
 import { useSelector } from 'react-redux';
 import {TStoreState} from '../../shared/store/store';
-import PlayButton from '../../widgets/TimerPanel/PlayButton/PlayButton';
+import Button from '../../shared/ui/Button/Button';
 import cn from 'classnames';
 import { useState } from 'react';
 import useImageLoaded from '../../shared/lib/useImageLoaded';
@@ -32,7 +32,7 @@ const Welcome = () => {
                 <div className="Welcome__titleStripe">
                     <h1 className={cn('Welcome__title', {fontStyleNormal})}>{translateText(dictionary, 'welcome_title')}</h1>
                 </div>
-                <PlayButton />
+                <Button />
                 { currentLang === 'ru' && <div className="Welcome__guideText" onClick={() => setVideoShown(true)}>Как пользоваться ?</div> }
                 {
                     videoShown &&

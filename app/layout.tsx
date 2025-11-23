@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import './styles/app.scss';
-import Providers from './Providers';
 import Header from '../widgets/Header/Header';
 import Footer from '../widgets/Footer/Footer';
-import ToggleButton from './ToggleButton';
 
 export const metadata: Metadata = {
   title: 'SpellTimer — контроль кулдаунов',
@@ -49,14 +47,10 @@ export default function RootLayout({
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       </head>
       <body style={{ height: '100dvh', overflow: 'hidden', minWidth: '320px', backgroundColor: 'rgba(60, 60, 60)', margin: 0, padding: 0 }}>
-        <Providers>
           <div className="AppContainer">
             <Header />
             {children}
-            <Footer className="" />
-            <ToggleButton />
           </div>
-        </Providers>
       </body>
     </html>
   );
