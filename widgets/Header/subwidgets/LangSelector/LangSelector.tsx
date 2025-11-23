@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+'use client';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {changeLocale, TLang} from '../../../../shared/store/localeSlice';
 import {TStoreState} from '../../../../shared/store/store';
@@ -13,6 +14,10 @@ const LangSelector = ({className}: IProps) => {
     const dispatch = useDispatch();
 
     const {currentLang, dictionary, hashMap, langList} = useSelector((state: TStoreState) => state.localeSlice);
+
+    useEffect(() => {
+        document.body.classList.toggle('textRight', currentLang === 'ar');
+    }, [currentLang]);
 
     if (!langList || !currentLang || !dictionary || !hashMap) return;
 
@@ -35,7 +40,7 @@ const LangSelector = ({className}: IProps) => {
     }
 
     return (
-        <div className={cn('LangSelector', className)}>
+        <div className={cn('LangSelector header__langSelector', className)}>
             <div className="LangSelector__head" onClick={handleClick}>
                 <span className="LangSelector__code">{hashMap[currentLang]}</span>
                 <span className='LangSelector__arrow'>

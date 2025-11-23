@@ -71,9 +71,8 @@ const App = () => {
                             options={{ webvisor: true, clickmap: true, trackLinks: true }}
                             version="2"
                         />
-                        <Header isPlaygroundButtonShown={backToPlayground} isArticlePage={isArticlePage} className={playgroundTops ? 'PlaygroundHeader' : ''}/>
                             { renderPage(currentPage) }
-                        <Footer className={playgroundTops ? 'PlaygroundFooter' : ''}/>
+                        <Footer className={''}/>
                     </PageContext.Provider>
                 </Provider>
                 <div className={cn('toggleHeaderBottomOnMobile', {PlaygroundToggleHeaderBottomOnMobile: playgroundTops})} onClick={() => setHeaderBottomOnMobile(!headerBottomOnMobile)}>
