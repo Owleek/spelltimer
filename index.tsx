@@ -10,7 +10,7 @@ import ReactDom from 'react-dom/client';
 import {StrictMode} from 'react';
 import RootLayout from './app/layout';
 import PageLayout from './app/page';
-import './app/styles/app.scss';
+import './temp/styles/app.scss';
 
 
 const rootElement = document.getElementById('root');
