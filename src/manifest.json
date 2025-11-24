@@ -1,0 +1,33 @@
+{
+  "name": "SpellTimer",
+  "short_name": "SpellTimer",
+  "description": "Вспомогательное приложение для игроков Dota 2. SpellTimer помогает отслеживать перезарядку способностей и предметов, повышая осознанность и точность действий в игре.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "ru",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/spelltimer.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "author": "Artemii Khafizov",
+  "dir": "ltr"
+}

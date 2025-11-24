@@ -1,0 +1,234 @@
+@use '../../../shared/styles/variables.scss' as vars;
+
+$buttonHeight: 80; // px
+$buttonWidth: 380; // px
+$lineSize: 3px;
+$lineWidth: 2*$buttonHeight + $buttonWidth;
+
+$length: 2*($buttonHeight + $buttonWidth);
+$duration: 12; //ms
+$speed: calc($length / $duration); // px per sec
+
+$secondDelay: calc($buttonHeight / $speed);
+$thirdDelay: calc(($buttonHeight + $buttonWidth) / $speed);
+$fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
+
+.PlayButton {
+    width: #{$buttonWidth}px;
+    height: #{$buttonHeight}px;
+    flex-shrink: 0; // todo fix height
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: vars.$welcomeFontColor;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 5px;
+
+    font-size: clamp(14px, vars.pxToVW(18), 18px);
+
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    transition: background-color ease-in-out vars.$transitionTime;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.7);
+
+        @media (pointer: coarse) {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    }
+}
+
+.PlayButton__text {
+    // width: 100%;
+    // display: inline-block;
+    // text-align: center;
+    // overflow: hidden;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+}
+
+.PlayButton__animationArrow {
+    width: #{$lineWidth}px;
+    height: $lineSize;
+    position:absolute;
+    background:linear-gradient(to right, rgba(244,243,247,0) 0%, vars.$welcomeFontColor 50%);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: #{$duration}s;
+}
+
+.PlayButton__animationArrow:nth-of-type(1) {
+    bottom: 0;
+    left: 0;
+    transform: translateY(#{$lineWidth}px) rotateZ(-90deg);
+    transform-origin: 0% 0%;
+    animation-name: animationArrow_1;
+}
+
+.PlayButton__animationArrow:nth-of-type(2) {
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    animation-name: animationArrow_2;
+    animation-delay: #{$secondDelay}s;
+}
+
+.PlayButton__animationArrow:nth-of-type(3) {
+    top: 0;
+    right: 0;
+    transform-origin: 100% 0%;
+    transform: rotateZ(90deg);
+    animation-name: animationArrow_3;
+    animation-delay: #{$thirdDelay}s;
+}
+
+.PlayButton__animationArrow:nth-of-type(4) {
+    right: 0;
+    bottom: 0;
+    transform-origin: 100% 50%;
+    transform: rotateZ(180deg);
+    animation-name: animationArrow_4;
+    animation-delay: #{$fourthDelay}s;
+}
+
+@keyframes animationArrow_1 {
+    0% { 
+        bottom: 0;
+    }
+    100% { 
+        bottom: #{$length}px;
+    }
+}
+
+@keyframes animationArrow_2 {
+    0% { 
+        left: 0;
+    }
+    100% { 
+        left: #{$length}px;
+    }
+}
+
+@keyframes animationArrow_3 {
+    0% { 
+        top: 0;
+    }
+    100% { 
+        top: #{$length}px;
+    }
+}
+
+@keyframes animationArrow_4 {
+    0% { 
+        right: 0;
+    }
+    100% { 
+        right: #{$length}px;
+    }
+}
+
+
+
+@media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+    
+    $mobileButtonHeight: 50; // px
+    $mobileButtonWidth: 230; // px
+    $mobileLineSize: 1px;
+
+    $lineWidth: 2*$mobileButtonHeight + $mobileButtonWidth;
+    $length: 2*($mobileButtonHeight + $mobileButtonWidth);
+    $duration: 12; //ms
+    $speed: calc($length / $duration); // px per sec
+
+    $secondDelay: calc($mobileButtonHeight / $speed);
+    $thirdDelay: calc(($mobileButtonHeight + $mobileButtonWidth) / $speed);
+    $fourthDelay: calc(($mobileButtonHeight + $mobileButtonWidth + $mobileButtonHeight) / $speed);
+
+    .PlayButton {
+        width: #{$mobileButtonWidth}px;
+        height: #{$mobileButtonHeight}px;
+        padding: 0 16px;
+        letter-spacing: 1px;
+    }
+
+    .PlayButton__animationArrow {
+        width: #{$lineWidth}px;
+        height: $mobileLineSize;
+    }
+
+    .PlayButton__animationArrow:nth-of-type(1) {
+        bottom: 0;
+        left: 0;
+        transform: translateY(#{$lineWidth}px) rotateZ(-90deg);
+        transform-origin: 0% 0%;
+        animation-name: mobileAnimationArrow_1;
+    }
+
+    .PlayButton__animationArrow:nth-of-type(2) {
+        top: 0;
+        left: 0;
+        transform: translateX(-100%);
+        animation-name: mobileAnimationArrow_2;
+        animation-delay: #{$secondDelay}s;
+    }
+
+    .PlayButton__animationArrow:nth-of-type(3) {
+        top: 0;
+        right: 0;
+        transform-origin: 100% 0%;
+        transform: rotateZ(90deg);
+        animation-name: mobileAnimationArrow_3;
+        animation-delay: #{$thirdDelay}s;
+    }
+
+    .PlayButton__animationArrow:nth-of-type(4) {
+        right: 0;
+        bottom: 0;
+        transform-origin: 100% 50%;
+        transform: rotateZ(180deg);
+        animation-name: mobileAnimationArrow_4;
+        animation-delay: #{$fourthDelay}s;
+    }
+
+    @keyframes mobileAnimationArrow_1 {
+        0% { 
+            bottom: 0;
+        }
+        100% { 
+            bottom: #{$length}px;
+        }
+    }
+
+    @keyframes mobileAnimationArrow_2 {
+        0% { 
+            left: 0;
+        }
+        100% { 
+            left: #{$length}px;
+        }
+    }
+
+    @keyframes mobileAnimationArrow_3 {
+        0% { 
+            top: 0;
+        }
+        100% { 
+            top: #{$length}px;
+        }
+    }
+
+    @keyframes mobileAnimationArrow_4 {
+        0% { 
+            right: 0;
+        }
+        100% { 
+            right: #{$length}px;
+        }
+    }
+}
+

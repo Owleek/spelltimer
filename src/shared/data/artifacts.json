@@ -1,0 +1,242 @@
+[
+    {   
+        "name": "Abyssal Blade",
+        "cooldown": [35]
+    },
+    {   
+        "name": "Aeon Disk",
+        "cooldown": [105, 125, 145, 165]
+    },
+    {   
+        "name": "Arcane Blink",
+        "cooldown": [9]
+    },
+    {   
+        "name": "Arcane Boots",
+        "cooldown": [55]
+    },
+    {   
+        "name": "Black King Bar",
+        "cooldown": [95]
+    },
+    {   
+        "name": "Blade Mail",
+        "cooldown": [25]
+    },
+    {   
+        "name": "Blink Dagger",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Bloodstone",
+        "cooldown": [30]
+    },
+    {   
+        "name": "Bloodthorn",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Book of the Dead",
+        "cooldown": [80]
+    },
+    {   
+        "name": "Boots of Bearing",
+        "cooldown": [30]
+    },
+    {   
+        "name": "Boots of Travel",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Boots of Travel 2",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Crimson Guard",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Dagon",
+        "cooldown": [27]
+    },
+    {   
+        "name": "Diffusal Blade",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Disperser",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Drum of Endurance",
+        "cooldown": [45]
+    },
+    {   
+        "name": "Essence Ring",
+        "cooldown": [25]
+    },
+    {   
+        "name": "Ethereal Blade",
+        "cooldown": [22]
+    },
+    {   
+        "name": "Eul's Scepter of Divinity",
+        "cooldown": [23]
+    },
+    {   
+        "name": "Fallen Sky",
+        "cooldown": [25]
+    },
+    {   
+        "name": "Force Staff",
+        "cooldown": [19]
+    },
+    {   
+        "name": "Gale Guard",
+        "cooldown": [19]
+    },
+    {   
+        "name": "Ghost Scepter",
+        "cooldown": [22]
+    },
+    {   
+        "name": "Gleipnir",
+        "cooldown": [18]
+    },
+    {   
+        "name": "Glimmer Cape",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Guardian Greaves",
+        "cooldown": [45]
+    },
+    {   
+        "name": "Hand of Midas",
+        "cooldown": [110]
+    },
+    {   
+        "name": "Harpoon",
+        "cooldown": [14]
+    },
+    {   
+        "name": "Heaven's Halberd",
+        "cooldown": [18]
+    },
+    {   
+        "name": "Helm of the Dominator",
+        "cooldown": [45]
+    },
+    {   
+        "name": "Helm of the Overlord",
+        "cooldown": [45]
+    },
+    {   
+        "name": "Hurricane Pike",
+        "cooldown": [19]
+    },
+    {   
+        "name": "Linken's Sphere",
+        "cooldown": [14]
+    },
+    {   
+        "name": "Lotus Orb",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Manta Style",
+        "cooldown": [34]
+    },
+    {   
+        "name": "Mekansm",
+        "cooldown": [50]
+    },
+    {   
+        "name": "Meteor Hammer",
+        "cooldown": [24]
+    },
+    {   
+        "name": "Minotaur Horn",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Ninja Gear",
+        "cooldown": [45]
+    },
+    {   
+        "name": "Nullifier",
+        "cooldown": [10]
+    },
+    {   
+        "name": "Ogre Seal Totem",
+        "cooldown": [10]
+    },
+    {   
+        "name": "Orchid Malevolence",
+        "cooldown": [18]
+    },
+    {   
+        "name": "Overwhelming Blink",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Pavise",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Pipe of Insight",
+        "cooldown": [60]
+    },
+    {   
+        "name": "Pyrrhic Cloak",
+        "cooldown": [40]
+    },
+    {   
+        "name": "Refresher Orb",
+        "cooldown": [180]
+    },
+    {   
+        "name": "Rod of Atos",
+        "cooldown": [18]
+    },
+    {   
+        "name": "Satanic",
+        "cooldown": [30]
+    },
+    {   
+        "name": "Scythe of Vyse",
+        "cooldown": [20]
+    },
+    {   
+        "name": "Shadow Amulet",
+        "cooldown": [18]
+    },
+    {   
+        "name": "Shiva's Guard",
+        "cooldown": [27]
+    },
+    {   
+        "name": "Solar Crest",
+        "cooldown": [16]
+    },
+    {   
+        "name": "Swift Blink",
+        "cooldown": [15]
+    },
+    {   
+        "name": "Town portal Scroll",
+        "cooldown": [80]
+    },
+    {   
+        "name": "Tumbler's Toy",
+        "cooldown": [30]
+    },
+    {   
+        "name": "Veil of Discord",
+        "cooldown": [16]
+    },
+    {   
+        "name": "Wind Waker",
+        "cooldown": [16]
+    }
+]

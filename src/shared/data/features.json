@@ -1,0 +1,15 @@
+[
+    {   
+        "name": "Buyback",
+        "cooldown": [480],
+        "owner": "not set"
+    },
+    {   
+        "name": "Glyph of Fortification",
+        "cooldown": [300]
+    },
+    {   
+        "name": "Tormentor",
+        "cooldown": [600]
+    }
+]
