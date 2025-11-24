@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
-import PageContext, {EPage} from '../../shared/store/PageContext';
-import { translateText } from '../../shared/lib/utils';
+import PageContext, {EPage} from '../../store/PageContext';
+import { translateText } from '../../utils/utils';
 import { useSelector } from 'react-redux';
-import {TStoreState} from '../../shared/store/store';
-import PlayButton from '../../widgets/TimerPanel/PlayButton/PlayButton';
+import {TStoreState} from '../../store/store';
+import PlayButton from '../../components/PlayButton/PlayButton';
 import cn from 'classnames';
 import { useState } from 'react';
-import useImageLoaded from '../../shared/lib/useImageLoaded';
+import useImageLoaded from '../../utils/useImageLoaded';
 import './welcome.scss';
 
 

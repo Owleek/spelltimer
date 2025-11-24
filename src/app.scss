@@ -1,0 +1,334 @@
+@use './variables.scss' as vars;
+@use './mixin' as *;
+@import url('./assets/fonts/fontStyle.scss');
+@import url('./reset.scss');
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+a:focus,
+svg:focus,
+svg:active,
+a:active {
+  outline: none;
+  box-shadow: none;
+}
+
+body {
+  font-family: 'Balsamiq Sans', sans-serif;
+}
+
+body.textRight {
+  text-align: right !important;
+}
+
+#root {
+  position: relative;
+}
+
+.GeneralOverlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+
+  height: 100vh;
+  height: 100dvh;
+  
+  overflow: hidden;
+  z-index: 1001;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.GeneralOverlay__text {
+    position: absolute;
+    left: 50%;
+    top: 2rem;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: vars.$keyColor;
+}
+
+.AppContainer {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
+}
+
+.appStyledScroll {
+  
+  &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 10px;
+      background: rgb(168, 168, 168, 0.9);
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background-color: rgb(102, 102, 102, 0.9);
+      border-radius: 10px;
+      border: 3px solid rgb(168, 168, 168, 0.9);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(68, 68, 68, 0.9);
+  }
+
+  &::-webkit-scrollbar-button {
+      display: none;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+
+.ToolBox {
+  position: absolute;
+  top: 40px;
+  right: -40px;
+  width: 100px;
+  height: 60px;
+  background: #7c7f7b;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &.RefreshTool {
+    right: auto;
+    left: -40px;
+
+    & .ToolBox__icon {
+      margin-left: auto;
+      width: 35px;
+      height: 35px;
+      margin-right: 10px;
+    }
+  }
+}
+
+.ToolBox.success {
+  background: #63aa5b;
+}
+
+.ToolBox.success .ToolBox__icon svg path {
+  fill: white;
+}
+
+.ToolBox__icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-left: 5px;
+
+  svg {
+    fill: #393636;
+    max-width: 100%;
+    max-height: 100%;
+
+    path {
+      fill: #393636;
+    }
+  }
+}
+
+.ToolBox.success .ToolBox__save {
+  display: block;
+}
+
+.ToolBox__save {
+  display: none;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 20px;
+  height: 20px;
+
+  svg {
+    fill: white;
+    max-width: 100%;
+    max-height: 100%;
+
+    path {
+      fill: white;
+    }
+  }
+}
+
+.AppLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: rgba(0, 0, 0, 0.7);
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.AppContent {
+  max-width: 1200px;
+  padding-top: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+  
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  p {
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    word-spacing: 2px;
+  }
+}
+
+.AppTitle {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    &.left {
+      right: calc(100% + 1rem);
+    }
+
+    &.right {
+      left: calc(100% + 1rem);
+    }
+  }
+}
+
+.toggleHeaderBottomOnMobile {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+
+  display: none;
+
+  left: 4px;
+  top: 34vh;
+  top: 34dvh;
+  padding: 10px;
+
+  fill: rgba(147, 147, 147, 0.3);
+
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+
+  cursor: pointer;
+  z-index: 10030;
+
+  svg {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  @include responsiveBlock {
+      display: block;
+  }
+}
+
+.toggleHeaderBottomOnMobile.PlaygroundToggleHeaderBottomOnMobile {
+  @include responsiveBlockForPlayground {
+      display: block;
+  }
+}
+
+.imageBackground {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    opacity: 0;
+    transition: opacity vars.$transitionTime ease;
+
+    position: absolute;
+    z-index: -1;
+    left: 0; top: 0;
+
+    &.visible {
+        opacity: 1;
+    }
+}
+
+.Loading {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1000000;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(56, 56, 56);
+}
+
+.loaderContainer {
+  position: absolute;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(56, 56, 56);
+  left: 0;
+  top: 0;
+}
+
+.loader {
+  --s: 64px;
+  width: var(--s);
+  aspect-ratio: 2;
+  --_g: #3797FF 90%, #0000;
+  background: 
+    radial-gradient(farthest-side at bottom,var(--_g)) 0    calc(50% - var(--s)/16),
+    radial-gradient(farthest-side at top   ,var(--_g)) 0    calc(50% + var(--s)/16),
+    radial-gradient(farthest-side at bottom,var(--_g)) 50%  calc(50% - var(--s)/16),
+    radial-gradient(farthest-side at top   ,var(--_g)) 50%  calc(50% + var(--s)/16),
+    radial-gradient(farthest-side at bottom,var(--_g)) 100% calc(50% - var(--s)/16),
+    radial-gradient(farthest-side at top   ,var(--_g)) 100% calc(50% + var(--s)/16);
+  background-size: 25% 25%;
+  background-repeat: no-repeat;
+  animation: l13 1s infinite linear;
+}
+@keyframes l13 {
+    16.67% {background-position:0 0,0 100%,50% calc(50% - var(--s)/8),50% calc(50% + var(--s)/16),100% calc(50% - var(--s)/16),100% calc(50% + var(--s)/16)}
+    33.33% {background-position:0 0,0 100%,50% 0,50% 100%,100% calc(50% - var(--s)/16),100% calc(50% + var(--s)/16)}
+    50%    {background-position:0 0,0 100%,50% 0,50% 100%,100% 0,100% 100%}
+    66.67% {background-position:0 calc(50% - var(--s)/16),0 calc(50% + var(--s)/16),50% 0,50% 100%,100% 0,100% 100%}
+    83.33% {background-position:0 calc(50% - var(--s)/16),0 calc(50% + var(--s)/16),50% calc(50% - var(--s)/16),50% calc(50% + var(--s)/16),100% 0,100% 100%}
+}
