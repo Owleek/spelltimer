@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import useImageLoaded from '../../lib/useImageLoaded';
 import cn from 'classnames';

@@ -1,25 +1,17 @@
 import React from 'react';
 import Social from './Social/Social';
-import {useSelector} from 'react-redux';
-import {TStoreState} from '../../shared/store/store';
-import { translateText } from '../../shared/lib/utils';
-import useImageLoaded from '../../shared/lib/useImageLoaded';
 import cn from 'classnames';
 import ImageCover from '../../shared/ui/ImageCover/ImageCover';
 
 const Contact = () => {
-    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    const { imageLoaded, onLoadImage } = useImageLoaded();
-
     return <div className="Article">
         <ImageCover image="article.webp" />
-
         <div className="Article__body">
             <div className="adjustCenter">
                 <div className="Article__bodyInner">
                     <div className='Article__contentHeader'>
                         <h2 className="Article__title">
-                            { translateText(dictionary, 'contact') }
+                            contact
                             <span className="Article__titleIcon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 16">
                                     <path d="M11.5504 12.7488L11.4784 12.6886C11.2682 12.513 10.997 12.4278 10.7241 12.4517C10.4513 12.4755 10.199 12.6065 10.0224 12.8159L10.3677 12.4021C10.5433 12.1919 10.6285 11.9207 10.6047 11.6478C10.5808 11.3749 10.4498 11.1226 10.2404 10.9461L10.1684 10.8859C9.95822 10.7103 9.68701 10.6251 9.41414 10.6489C9.14128 10.6728 8.88896 10.8037 8.71242 11.0132C8.73806 10.9826 8.76421 10.9564 8.78985 10.9254L9.05866 10.5998C9.146 10.4963 9.21196 10.3764 9.25276 10.2473C9.29356 10.1181 9.30838 9.98209 9.29636 9.84715C9.28435 9.71221 9.24574 9.58098 9.18277 9.46103C9.11979 9.34108 9.03369 9.23479 8.92944 9.14828L8.85693 9.08613C8.75337 8.9988 8.63353 8.93283 8.50435 8.89203C8.37516 8.85123 8.23918 8.83642 8.10424 8.84843C7.9693 8.86044 7.83807 8.89905 7.71812 8.96203C7.59817 9.025 7.49188 9.1111 7.40537 9.21536L7.0537 9.62868C7.23003 9.41886 7.31601 9.1477 7.29281 8.87461C7.2696 8.60152 7.13911 8.34876 6.9299 8.17169L6.8574 8.10955C6.75333 8.02218 6.63304 7.95621 6.50343 7.91541C6.37382 7.87461 6.23744 7.85979 6.10209 7.8718C5.96674 7.8838 5.83509 7.9224 5.71468 7.98537C5.59428 8.04834 5.48748 8.13445 5.40041 8.23877L4.13776 9.74508C4.11711 9.76957 4.09815 9.79544 4.08104 9.82252C3.93347 10.0338 3.87022 10.2926 3.90371 10.5481C3.93721 10.8037 4.06502 11.0374 4.26205 11.2035L4.33406 11.2657C4.54459 11.4415 4.81628 11.5267 5.08952 11.5025C5.36276 11.4782 5.61523 11.3466 5.79154 11.1365C5.61594 11.3469 5.53089 11.6183 5.55502 11.8913C5.57915 12.1643 5.71049 12.4166 5.92027 12.593L5.99278 12.6497C6.20184 12.8256 6.47217 12.9114 6.74441 12.8882C7.01666 12.8649 7.26856 12.7347 7.44483 12.5259L7.44779 12.5224C7.36054 12.6263 7.29461 12.7464 7.25378 12.8758C7.21295 13.0052 7.19802 13.1414 7.20984 13.2765C7.22166 13.4117 7.25999 13.5432 7.32266 13.6636C7.38532 13.7839 7.47108 13.8907 7.57504 13.9779L7.64705 14.0386C7.85731 14.2142 8.12856 14.2993 8.40143 14.2753C8.6743 14.2514 8.92657 14.1203 9.10305 13.9109C8.92743 14.1211 8.84223 14.3923 8.86607 14.6651C8.88992 14.938 9.02088 15.1903 9.2303 15.3669L9.30231 15.4275C9.51251 15.6031 9.78372 15.6883 10.0566 15.6645C10.3295 15.6407 10.5818 15.5097 10.7583 15.3003L11.6782 14.2038C11.8534 13.9936 11.9384 13.7226 11.9144 13.45C11.8905 13.1773 11.7596 12.9253 11.5504 12.7488Z"/>
@@ -33,7 +25,7 @@ const Contact = () => {
                     </div>
                     <div className="Article__contentWrapper appStyledScroll">
                         <div className="Article__content">
-                            <p>{ translateText(dictionary, 'contact_1') }</p>
+                            <p>contact_1</p>
                             <div className="Article__socialList">
                                 <div className="Article__social">
                                     <span className="Article__socialIcon">
@@ -78,11 +70,11 @@ const Contact = () => {
                                         <path fillRule="evenodd" clipRule="evenodd" d="M5.43769 15.3991C5.31848 15.3991 5.22189 15.3025 5.22189 15.1833V10.6359C5.22189 10.5167 5.31848 10.4201 5.43769 10.4201C5.55687 10.4201 5.6535 10.5167 5.6535 10.6359V15.1833C5.6535 15.3025 5.55687 15.3991 5.43769 15.3991Z"/>
                                         </svg>
                                     </span>
-                                    { translateText(dictionary, 'author') }
+                                    author
                                 </h2>
                             </div>
-                            <p>{ translateText(dictionary, 'contact_2') }</p>
-                            <p><span style={{marginRight: '15px'}}>{ translateText(dictionary, 'contact_3') }</span>
+                            <p>contact_2</p>
+                            <p><span style={{marginRight: '15px'}}>contact_3</span>
                                 <div className="Article__social">
                                     <span className="Article__socialIcon">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 17">

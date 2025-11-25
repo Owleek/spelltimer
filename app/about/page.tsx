@@ -1,14 +1,8 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {TStoreState} from '../../shared/store/store';
-import { translateText } from '../../shared/lib/utils';
 import cn from 'classnames';
-import useImageLoaded from '../../shared/lib/useImageLoaded';
 import ImageCover from '../../shared/ui/ImageCover/ImageCover';
 
-const About = () => {
-    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    
+const About = () => {    
 
     return <div className="Article">
         <ImageCover image="article.webp" />
@@ -18,7 +12,7 @@ const About = () => {
                 <div className="Article__bodyInner">
                     <div className='Article__contentHeader'>
                         <h2 className='Article__title'>
-                            { translateText(dictionary, 'about') }
+                            about
                             <span className="Article__titleIcon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 32">
                                     <path d="M39.3125 31.625H1.6875C1.28438 31.625 0.746875 31.3563 0.478125 30.9531C0.209375 30.55 0.209375 30.0125 0.478125 29.6094L3.16563 25.5781C3.43438 25.175 3.8375 24.9062 4.375 24.9062H36.625C37.1625 24.9062 37.5656 25.175 37.8344 25.7125L40.5219 29.7437C40.7906 30.1469 40.6562 30.6844 40.5219 31.0875C40.2531 31.3562 39.7156 31.625 39.3125 31.625Z"/>
@@ -29,14 +23,14 @@ const About = () => {
                     </div>
                     <div className="Article__contentWrapper appStyledScroll">
                         <div className="Article__content">
-                            <p>{ translateText(dictionary, 'about_1') }</p>
-                            <p>{ translateText(dictionary, 'about_2') }</p>
-                            <p>{ translateText(dictionary, 'about_3') }</p>
-                            <p>{ translateText(dictionary, 'about_4') }</p>
-                            <p>{ translateText(dictionary, 'about_5') }</p>
-                            <p>{ translateText(dictionary, 'about_6') }</p>
-                            <p>{ translateText(dictionary, 'about_7') }</p>
-                            <p className='Article__small'>{ translateText(dictionary, 'last_update') }</p>
+                            <p>about_1</p>
+                            <p>about_2</p>
+                            <p>about_3</p>
+                            <p>about_4</p>
+                            <p>about_5</p>
+                            <p>about_6</p>
+                            <p>about_7</p>
+                            <p className='Article__small'>last_update</p>
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,8 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {TStoreState} from '../../shared/store/store';
-import { translateText } from '../../shared/lib/utils';
 import cn from 'classnames';
 import ImageCover from '../../shared/ui/ImageCover/ImageCover';
 
 const Politics = () => {
-    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
     return <div className="Article">
         <ImageCover image="article.webp" />
@@ -15,7 +11,7 @@ const Politics = () => {
                 <div className="Article__bodyInner">
                     <div className='Article__contentHeader'>
                         <h2 className='Article__title'>
-                            { translateText(dictionary, 'politics_1') }
+                            politics_1
                             <span className="Article__titleIcon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fillRule="evenodd" clipRule="evenodd" d="M15.1142 20H0.878735C0.726421 20 0.585823 19.8594 0.585823 19.7071V0.304629C0.585823 0.140599 0.726421 0.0117175 0.878735 0.0117175H11.7516C11.9156 0.0117175 12.0328 0.140599 12.0445 0.281196L12.0914 3.25718L15.1142 3.22203C15.2783 3.22203 15.4071 3.35091 15.4071 3.50322V10.4511C15.4071 10.6151 15.2783 10.744 15.1142 10.744C14.9502 10.744 14.8213 10.6151 14.8213 10.4511V3.79613L11.7985 3.83128C11.6344 3.83128 11.5056 3.69069 11.5056 3.55009L11.4821 0.574108H1.15993V19.4259H15.1142C15.2783 19.4259 15.4071 19.5548 15.4071 19.7188C15.4071 19.8828 15.2783 20 15.1142 20Z"/>
@@ -32,23 +28,23 @@ const Politics = () => {
                     </div>
                     <div className="Article__contentWrapper appStyledScroll">
                         <div className="Article__content">
-                            <p>{ translateText(dictionary, 'politics_2') } 31.05.2025</p>
-                            <p>{ translateText(dictionary, 'politics_3') }</p>
-                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_4') }</h3>
-                            <h4 className="Article__caption">{ translateText(dictionary, 'politics_5') }</h4>
-                            <p>{ translateText(dictionary, 'politics_6') }</p>
-                            <h4 className="Article__caption">{ translateText(dictionary, 'politics_7') }</h4>
-                            <p>{ translateText(dictionary, 'politics_8') }</p>
-                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_9') }</h3>
-                            <p>{ translateText(dictionary, 'politics_10') }</p>
-                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_11') }</h3>
-                            <p>{ translateText(dictionary, 'politics_12') }</p>
-                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_13') }</h3>
-                            <p>{ translateText(dictionary, 'politics_14') }</p>
-                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_15') }</h3>
-                            <p>{ translateText(dictionary, 'politics_16') }</p>
-                            <h3 className="Article__subTitle">{ translateText(dictionary, 'politics_17') }</h3>
-                            <p>{ translateText(dictionary, 'politics_18') }</p>
+                            <p>politics_2 31.05.2025</p>
+                            <p>politics_3</p>
+                            <h3 className="Article__subTitle">politics_4</h3>
+                            <h4 className="Article__caption">politics_5</h4>
+                            <p>politics_6</p>
+                            <h4 className="Article__caption">politics_7</h4>
+                            <p>politics_8</p>
+                            <h3 className="Article__subTitle">politics_9</h3>
+                            <p>politics_10</p>
+                            <h3 className="Article__subTitle">politics_11</h3>
+                            <p>politics_12</p>
+                            <h3 className="Article__subTitle">politics_13</h3>
+                            <p>politics_14</p>
+                            <h3 className="Article__subTitle">politics_15</h3>
+                            <p>politics_16</p>
+                            <h3 className="Article__subTitle">politics_17</h3>
+                            <p>politics_18</p>
                         </div>
                     </div>
                 </div>

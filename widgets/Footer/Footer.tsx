@@ -1,34 +1,22 @@
-'use client';
 import React, { useContext } from 'react';
-import {useSelector} from 'react-redux';
-import {TStoreState} from '../../shared/store/store';
-import ErrorComponent from '../../shared/ui/ErrorComponent/ErrorComponent';
-import PageContext, { EPage } from '../../shared/store/PageContext';
-import { translateText } from '../../shared/lib/utils';
 import cn from 'classnames';
 import './footer.scss';
 import Link from 'next/link';
 
 const Footer = ({className}: {className: string}) => {
-    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    if (!dictionary) return;
-
-    const context = useContext(PageContext);
-    if (!context) return <ErrorComponent message={String(context)}/>
-    const {activeArticle, onSelectArticle, headerBottomOnMobile} = context;
 
     return (
-        <div className={cn('footer', className, {headerBottomOnMobile})}>
+        <div className={cn('footer', className)}>
             <div className="footer__column">
                 <ul className="footer__list">
-                    <Link href={'/about'}>{translateText(dictionary, 'about')}</Link>
-                    <Link href={'/contact'}>{translateText(dictionary, 'contact')}</Link>
-                    <Link href={'/about'}>{translateText(dictionary, 'policy')}</Link>
+                    <Link href={'/about'}>about</Link>
+                    <Link href={'/contact'}>contact</Link>
+                    <Link href={'/about'}>policy</Link>
                 </ul>
             </div>
             <div className="footer__column rights">
                 <p className="footer__item">© 2025 spelltimer.com</p>
-                <p className="footer__item">{translateText(dictionary, 'rights')}</p>
+                <p className="footer__item">rights</p>
             </div>
             <Link href={'/donation'}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 173">

@@ -1,3 +1,4 @@
+'use client';
 import React, { JSX, useState, useCallback, useEffect, useRef, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
