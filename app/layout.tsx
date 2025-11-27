@@ -1,14 +1,22 @@
-import type { Metadata } from 'next';
-import '../temp/styles/app.scss';
+import type { Metadata, Viewport } from 'next';
+import StoreProvider from './_internal/providers/StoreProvider';
 import Header from '../widgets/Header/Header';
 import Footer from '../widgets/Footer/Footer';
+import './global.scss';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+  viewportFit: 'cover',
+  themeColor: '#000000',
+};
 
 export const metadata: Metadata = {
   title: 'SpellTimer — контроль кулдаунов',
   description: 'SpellTimer — бесплатное вспомогательное приложение для контроля кулдаунов способностей и предметов в Dota 2. Без нарушений, без установки, прямо в браузере.',
   keywords: 'Dota 2, таймер, перезарядка, SpellTimer, cooldown, dota tools, вспомогательное приложение, дота 2, кулдаун, кд, отслеживать кд, приложение для дота 2, утилита для дота 2, софт для дота 2, калькулятор кд, посчитать кд спелов, посчитать кд способностей дота 2, посчитать кд aбилок, spell timer, speltimer, spel timer, таймер способностей, таймер перезарядок, таймер кулдаунов, таймер кд, кд спелов, кд способностей, timer',
-  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover',
-  themeColor: '#000000',
   openGraph: {
     title: 'SpellTimer — контроль кулдаунов',
     description: 'SpellTimer — бесплатный инструмент для отслеживания таймеров способностей в Dota 2.',
@@ -48,9 +56,11 @@ export default function RootLayout({
       </head>
       <body style={{ height: '100dvh', overflow: 'hidden', minWidth: '320px', backgroundColor: 'rgba(60, 60, 60)', margin: 0, padding: 0 }}>
           <div className="AppContainer">
-            <Header />
-            {children}
-            <Footer className=''/>
+            <StoreProvider>
+              <Header />
+              {children}
+              <Footer className=''/>
+            </StoreProvider>
           </div>
       </body>
     </html>

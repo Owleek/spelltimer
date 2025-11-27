@@ -22,6 +22,10 @@ export const defaultControls: ITimeControlKey = {
 }
 
 export function getTimeControlKey(position: number): string {
+    if (typeof window === 'undefined') {
+        return defaultControls[`timeControl_${position}`];
+    }
+
     const gotHotkey = localStorage.getItem(`timeControl_${position}`);
 
     if (gotHotkey !== null) {
@@ -34,14 +38,20 @@ export function getTimeControlKey(position: number): string {
 }
 
 export function setTimeControlKey(position: number, value: string) {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(`timeControl_${position}`, value);
 }
 
 export function setPositionHotkey(number: number, string: string): void {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(`position_${number}`, string); 
 }
 
 export function getPositionHotkey(number: number): string {
+    if (typeof window === 'undefined') {
+        return defaultSlotHotkeys[`position_${number}`];
+    }
+
     const gotItem = localStorage.getItem(`position_${number}`);
     
     if (gotItem !== null) {
@@ -54,27 +64,33 @@ export function getPositionHotkey(number: number): string {
 }
 
 export function isUserPlayed(): boolean {
+    if (typeof window === 'undefined') return false;
     return !!localStorage.getItem(`userPlayed`);
 }
 
 export function setUserPlayed(): void {
+    if (typeof window === 'undefined') return;
     localStorage.setItem(`userPlayed`, 'true');
 }
 
 export function getNotificationOfRunning(): string {
+    if (typeof window === 'undefined') return '';
     return localStorage.getItem(`runningNotification`) || '';
 }
 
 export function setNotificationOfRunning(): string {
+    if (typeof window === 'undefined') return '1';
     localStorage.setItem(`runningNotification`, '1');
     return '1';
 }
 
 export function getLocale(): string {
+    if (typeof window === 'undefined') return '';
     return localStorage.getItem('locale') || '';
 }
 
 export function setLocale(locale: string) {
+    if (typeof window === 'undefined') return;
     localStorage.setItem('locale', locale);
 }
 
