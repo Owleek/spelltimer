@@ -1,13 +1,13 @@
 @use '../../shared/styles/variables.scss' as vars;
 
-.Welcome__guideText {
+.VideoPresentation__guideText {
     margin-top: 20px;
     color: #e8e8e8;;
     transition: color ease vars.$transitionTime;
     cursor: pointer;
 
     &:hover {
-        color: vars.$welcomeFontColor;
+        color: vars.$VideoPresentationFontColor;
 
         @media (pointer: coarse) {
             color: #e8e8e8;;
@@ -15,7 +15,7 @@
     }
 }
 
-.Welcome__videoContainer {
+.VideoPresentation__videoContainer {
     width: 100%;
     height: 100vh;
     height: 100dvh;
@@ -33,7 +33,7 @@
     z-index: 10200;
 }
 
-.Welcome__videoClose {
+.VideoPresentation__videoClose {
     position: absolute;
     width: 35px;
     height: 35px;
@@ -51,7 +51,7 @@
     }
 }
 
-.Welcome__outerBox {
+.VideoPresentation__outerBox {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,7 +64,7 @@
 }
 
 
-.Welcome__videoBox {
+.VideoPresentation__videoBox {
     aspect-ratio: 16 / 9;
     width: 100%;
     max-width: 900px;
