@@ -53,7 +53,7 @@
     }
 }
 
-.footer__column:not(:last-of-type) {
+.footer__column:not(:last-child) {
     &::after {
         content: '';
         width: 1px;
@@ -70,10 +70,12 @@
     }
 }
 
-.footer__item {
+.footer__item, .footer__link {
     padding: 2px 0;
     cursor: pointer;
     transition: color ease vars.$transitionTime;
+    color: vars.$footerColor;
+    text-decoration: none;
 
     &:hover {
         color: vars.$keyColor;
@@ -101,6 +103,7 @@
     fill: vars.$footerColor;
     align-self: center;
     margin: 0 2rem;
+    text-decoration: none;
 
     svg {
         max-width: 100%;

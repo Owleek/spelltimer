@@ -13,7 +13,7 @@ const Header = ({className}: IProps) => {
     return (
         <div className={cn('header', className)}>
             <div className="header__logo"><Link href="/"><Logo /></Link></div>
-            <Link href="/playground"><SmallButton /></Link>
+            <Link href="/playground" className="header__button"><SmallButton /></Link>
         </div>
     );
 } ;
