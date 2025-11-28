@@ -15,7 +15,7 @@ export default function () {
                     <h1 className={cn('Welcome__title')}>welcome_title</h1>
                 </div>
 
-                <Link href="/playground"><Button /></Link>
+                <Link href="/playground" className="Welcome__button"><Button /></Link>
 
                 <VideoPresentation />
             </div>

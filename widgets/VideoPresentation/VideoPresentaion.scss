@@ -7,7 +7,7 @@
     cursor: pointer;
 
     &:hover {
-        color: vars.$VideoPresentationFontColor;
+        color: vars.$welcomeFontColor;
 
         @media (pointer: coarse) {
             color: #e8e8e8;;
