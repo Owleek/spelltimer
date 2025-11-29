@@ -1,0 +1,48 @@
+@use '../../../shared/styles/variables.scss' as vars;
+@use '../../../shared/styles/mixin.scss' as *;
+
+.TimerGear {
+    width: 100%;
+    max-width: 925px;
+    max-height: 100%;
+    height: auto;
+    overflow: hidden;
+  
+    padding: 0px 10px 10px;
+  
+    display: flex;
+    flex-direction: column;
+  
+    background: rgba(55, 58, 61, 0.7);
+    backdrop-filter: blur(15px);
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        max-width: 630px;
+    }
+
+    @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+        max-width: 100%;
+        backdrop-filter: blur(10px);
+    }
+
+    @media (max-height: 579px) {
+        max-width: 1810px;
+    }
+}
+
+
+.TimerGear__main {
+    max-width: 100%;
+
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+  
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+    justify-items: center;
+    
+    padding: 10px;
+    row-gap: 10px;
+    column-gap: 10px;
+}
