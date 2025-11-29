@@ -70,6 +70,10 @@
     }
 }
 
+.footer__link {
+    align-self: flex-start;
+}
+
 .footer__item, .footer__link {
     padding: 2px 0;
     cursor: pointer;
