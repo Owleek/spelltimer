@@ -59,7 +59,7 @@ export default function RootLayout({
             <StoreProvider>
               <Header />
               {children}
-              <Footer className=''/>
+              <Footer />
             </StoreProvider>
           </div>
       </body>
