@@ -6,9 +6,10 @@ import './Button.scss';
 
 interface IProps {
     className?: string
+    title?: string
 }
 
-const Button = ({className}: IProps): JSX.Element => {
+const Button = ({className, title}: IProps): JSX.Element => {
     const handleClick = () => {
         setUserPlayed();
     }
@@ -19,7 +20,7 @@ const Button = ({className}: IProps): JSX.Element => {
             <i className="PlayButton__animationArrow"/>
             <i className="PlayButton__animationArrow"/>
             <i className="PlayButton__animationArrow"/>
-            <span className="PlayButton__text">{'get_started'}</span>
+            <span className="PlayButton__text">{title || 'button'}</span>
         </button>
     );
 }

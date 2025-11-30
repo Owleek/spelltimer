@@ -1,7 +1,7 @@
 import React from 'react';
 import Social from './Social/Social';
 import cn from 'classnames';
-import ImageCover from '../../shared/ui/ImageCover/ImageCover';
+import ImageCover from '../../../shared/ui/ImageCover/ImageCover';
 
 const Contact = () => {
     return <div className="Article">

@@ -3,9 +3,8 @@ import React, {useState} from 'react';
 import cn from 'classnames';
 import QrComponent from './QrComponent/QrComponent';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../shared/store/store';
-import { translateText } from '../../shared/lib/utils';
-import ImageCover from '../../shared/ui/ImageCover/ImageCover';
+import {TStoreState} from '../../../shared/store/store';
+import ImageCover from '../../../shared/ui/ImageCover/ImageCover';
 
 enum EQRItem {
     dna = '/assets/qrcodes/dna.webp',

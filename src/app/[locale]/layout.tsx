@@ -1,7 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import StoreProvider from './_internal/providers/StoreProvider';
-import Header from '../widgets/Header/Header';
-import Footer from '../widgets/Footer/Footer';
+
+
+import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import {notFound} from 'next/navigation';
+import {routing} from '../../i18n/routing';
+
+import StoreProvider from '../_internal/providers/StoreProvider';
+import Header from '../../widgets/Header/Header';
+import Footer from '../../widgets/Footer/Footer';
 import './global.scss';
 
 export const viewport: Viewport = {
@@ -43,11 +49,20 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-export default function RootLayout({
-  children,
-}: {
+
+type Props = {
   children: React.ReactNode;
-}) {
+  params: Promise<{locale: string}>;
+};
+
+export default async function RootLayout({ children, params }: Props) {
+
+  const {locale} = await params;
+  
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   return (
     <html lang="ru">
       <head>
@@ -57,9 +72,11 @@ export default function RootLayout({
       <body style={{ height: '100dvh', overflow: 'hidden', minWidth: '320px', backgroundColor: 'rgba(60, 60, 60)', margin: 0, padding: 0 }}>
           <div className="AppContainer">
             <StoreProvider>
-              <Header />
-              {children}
-              <Footer />
+              <NextIntlClientProvider>
+                <Header />
+                  {children}
+                <Footer />
+              </NextIntlClientProvider>
             </StoreProvider>
           </div>
       </body>

@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import ImageCover from '../../shared/ui/ImageCover/ImageCover';
+import ImageCover from '../../../shared/ui/ImageCover/ImageCover';
 
 const Politics = () => {
 

@@ -1,5 +1,5 @@
-import ImageCover from '../../shared/ui/ImageCover/ImageCover'
-import TimerPanel from '../../widgets/TimerPanel/TimerPanel'
+import ImageCover from '../../../shared/ui/ImageCover/ImageCover'
+import TimerPanel from '../../../widgets/TimerPanel/TimerPanel'
 import './Playground.scss'
 
 const Playground = () => {
