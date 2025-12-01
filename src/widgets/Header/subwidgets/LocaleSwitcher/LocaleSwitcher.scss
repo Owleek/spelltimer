@@ -2,8 +2,9 @@
 
 $menuWidth: 170px;
 $menuHeadHeight: 40px;
+$activeColor: #66b3a1;
 
-.LangSelector {
+.LocaleSwitcher {
     white-space: nowrap;
     font-size: 20px;
     font-weight: bold;
@@ -33,12 +34,22 @@ $menuHeadHeight: 40px;
         }
     }
 
+    &.keepActiveColor {
+        color: $activeColor;
+        fill: $activeColor;
+
+        &:hover {
+            color: $activeColor;
+            fill: $activeColor;
+        }
+    }
+
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
        font-size: 16px;
     }
 }
 
-.LangSelector__head {
+.LocaleSwitcher__head {
     height: $menuHeadHeight;
     padding-left: 15px;
     padding-right: 5px;
@@ -48,12 +59,12 @@ $menuHeadHeight: 40px;
     cursor: pointer;
 }
 
-.LangSelector__code {
+.LocaleSwitcher__code {
     display: flex;
     align-items: center;
 }
 
-.LangSelector__arrow {
+.LocaleSwitcher__arrow {
     width: 20px;
     flex-shrink: 0;
     display: flex;
@@ -67,7 +78,7 @@ $menuHeadHeight: 40px;
     }
 }
 
-.LangSelector__menu {
+.LocaleSwitcher__menu {
     position: absolute;
     right: 0; 
     width: $menuWidth;
@@ -94,7 +105,7 @@ $menuHeadHeight: 40px;
     }
 }
 
-.LangSelector__item {
+.LocaleSwitcher__item {
     padding: 10px 30px;
     position: relative;
     color: vars.$primary;
@@ -119,7 +130,7 @@ $menuHeadHeight: 40px;
     }
 
     &:hover {
-        color: #66b3a1;
+        color: vars.$labelHoverColor;
 
         @media (pointer: coarse) {
            color: vars.$primary;
@@ -128,6 +139,10 @@ $menuHeadHeight: 40px;
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
        padding: 10px 20px;
+    }
+
+    &.active {
+        color: $activeColor;
     }
 }
 
