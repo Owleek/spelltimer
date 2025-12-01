@@ -3,9 +3,9 @@ import cn from 'classnames'
 import VideoPresentation from '../../widgets/VideoPresentation/VideoPresentation'
 import ImageCover from '../../shared/ui/ImageCover/ImageCover'
 import Link from 'next/link'
+import {useTranslations} from 'next-intl'
 import '../_internal/styles/root-page.scss'
 
-import { useTranslations } from 'next-intl';
 
 export default function () {
     const translate = useTranslations('HomePage');

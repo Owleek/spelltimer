@@ -82,7 +82,7 @@
     text-decoration: none;
 
     &:hover {
-        color: vars.$keyColor;
+        color: vars.$labelHoverColor;
 
         @media (pointer: coarse) {
             color: vars.$footerColor;
@@ -115,7 +115,7 @@
     }
 
     &:hover {
-        fill: vars.$keyColor;
+        fill: vars.$labelHoverColor;
 
         @media (pointer: coarse) {
             fill: vars.$footerColor;

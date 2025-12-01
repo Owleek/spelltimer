@@ -20,8 +20,8 @@ body {
   font-family: 'Balsamiq Sans', sans-serif;
 }
 
-body.textRight {
-  text-align: right !important;
+html[dir="rtl"] {
+  // text-align: right !important;
 }
 
 #root {

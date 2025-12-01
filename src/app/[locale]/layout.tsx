@@ -8,6 +8,7 @@ import {routing} from '../../i18n/routing';
 import StoreProvider from '../_internal/providers/StoreProvider';
 import Header from '../../widgets/Header/Header';
 import Footer from '../../widgets/Footer/Footer';
+
 import './global.scss';
 
 export const viewport: Viewport = {
@@ -58,13 +59,14 @@ type Props = {
 export default async function RootLayout({ children, params }: Props) {
 
   const {locale} = await params;
+  const dir = locale === 'ar' ? 'rtl' : 'ltr';
   
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   return (
-    <html lang="ru">
+    <html lang={locale} dir={dir}>
       <head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

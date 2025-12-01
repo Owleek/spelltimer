@@ -2,8 +2,6 @@
 import React, {useState} from 'react';
 import cn from 'classnames';
 import QrComponent from './QrComponent/QrComponent';
-import {useSelector} from 'react-redux';
-import {TStoreState} from '../../../shared/store/store';
 import ImageCover from '../../../shared/ui/ImageCover/ImageCover';
 
 enum EQRItem {
@@ -17,8 +15,6 @@ const Donation = () => {
     const [copied, setCopied] = useState<string | null>(null);
     const [qrItem, setQrItem] = useState<EQRItem | null>(null);
     const [donated, setDonated] = useState<boolean>(false);
-
-    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
     const wallets = [
         {

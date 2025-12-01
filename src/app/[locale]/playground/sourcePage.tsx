@@ -16,7 +16,6 @@ import SpellReducer from '../../../widgets/TimerPanel/SpellReducer/SpellReducer'
 import BindingOverlay from '../../../shared/ui/BindingOverlay/BindingOverlay';
 import CountdownEditor from '../../../widgets/TimerPanel/CountdownEditor/CountdownEditor';
 import Notification from '../../../widgets/Notification/Notification';
-import { translateText } from '../../../shared/lib/utils';
 import { playSound, SOUND } from '../../../shared/lib/sound';
 import ImageCover from '../../../shared/ui/ImageCover/ImageCover';
 import './Playground.scss';
@@ -49,8 +48,6 @@ const Playground = (): JSX.Element => {
 
     const [animatedSlot, setAnimatedSlot] = useState<number>(1);
     const animatedSlotRef = useRef<number>(1);
-
-    const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
     useEffect(() => {
         currentStageRef.current = currentStage;
