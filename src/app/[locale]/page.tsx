@@ -3,12 +3,12 @@ import cn from 'classnames'
 import VideoPresentation from '../../widgets/VideoPresentation/VideoPresentation'
 import ImageCover from '../../shared/ui/ImageCover/ImageCover'
 import Link from 'next/link'
-import {useTranslations} from 'next-intl'
+import { useTranslations } from 'next-intl'
 import '../_internal/styles/root-page.scss'
 
 
 export default function () {
-    const translate = useTranslations('HomePage');
+    const translate = useTranslations('HomePage')
 
     return (
         <div className="Welcome">
@@ -21,7 +21,7 @@ export default function () {
 
                 <Link href="/playground" className="Welcome__button"><Button title={translate('button')}/></Link>
 
-                <VideoPresentation />
+                <VideoPresentation label={ translate('howToUse') }/>
             </div>
         </div>
     )
