@@ -1,6 +1,27 @@
 {
+  "AboutPage": {
+    "text_1": "👀 SpellTimer is a free utility application for tracking the cooldowns of abilities and items in Dota 2.",
+    "text_2": "✨ SpellTimer fully complies with the principles of fair play established by Valve, as it does not receive data directly from the Dota 2 client. The application features an intuitive interface where all actions are performed by the player themselves — no more need to record timings in the game chat.",
+    "text_3": "🚀 The application does not require installation or account creation — it is available directly in the browser.",
+    "text_4": "⚡ Currently, SpellTimer implements basic functions and minimal conveniences sufficient to assess its demand among players. As soon as it becomes clear that the application is indeed in demand, we will address the shortcomings, optimize, and improve the user experience in the next update.",
+    "text_5": "🎨 The current version of SpellTimer is focused solely on Dota 2 players; however, if there is demand, the application may be expanded to other gaming disciplines with similar mechanics.",
+    "text_6": "📌 SpellTimer is an unofficial project and is not affiliated with Valve Corporation. All mentioned names, logos, and trademarks are the property of their respective owners and are used for informational and non-commercial purposes only.",
+    "text_7": "Sound effect provided by ZapSplat.com",
+    "last_update": "Last update: 11.08.2025 (v.1.0.3)",
+    "title": "About the application"
+  },
+  "Footer": {
+    "about": "About",
+    "contact": "Contacts",
+    "policy": "Policy",
+    "right": "All rights reserved"
+  },
+  "Header": {
+    "button": "Continue"
+  },
   "HomePage": {
     "button": "Get Started",
+    "howToUse": "How to use?",
     "title": "Control the game by mastering time"
   }
 }

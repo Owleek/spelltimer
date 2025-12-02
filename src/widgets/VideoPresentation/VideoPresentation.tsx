@@ -1,14 +1,14 @@
-'use client';
-import React from 'react';
-import { useState } from 'react';
-import './VideoPresentaion.scss';
+'use client'
+import React from 'react'
+import { useState } from 'react'
+import './VideoPresentaion.scss'
 
-const VideoPresentation = () => {
-  const [videoShown, setVideoShown] = useState<boolean>(false);
+const VideoPresentation = ({ label }: { label: string }) => {
+  const [videoShown, setVideoShown] = useState<boolean>(false)
 
   return (
     <React.Fragment>
-        <div className="VideoPresentation__guideText" onClick={() => setVideoShown(true)}>Как пользоваться ?</div>
+        <div className="VideoPresentation__guideText" onClick={() => setVideoShown(true)}>{ label }</div>
         {
             videoShown &&
                 <div className="VideoPresentation__videoContainer">
@@ -28,4 +28,4 @@ const VideoPresentation = () => {
   );
 };
 
-export default VideoPresentation;
+export default VideoPresentation

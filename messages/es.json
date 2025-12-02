@@ -1,6 +1,27 @@
 {
+  "AboutPage": {
+    "text_1": "👀 SpellTimer — es una aplicación auxiliar gratuita para rastrear la recarga de habilidades y objetos en Dota 2.",
+    "text_2": "✨ SpellTimer cumple completamente con los principios de juego limpio establecidos por Valve, ya que no obtiene datos directamente del cliente de Dota 2. La aplicación presenta una interfaz intuitiva en la que todas las acciones son realizadas por el propio jugador: ya no es necesario anotar los tiempos en el chat del juego.",
+    "text_3": "🚀 La aplicación no requiere instalación ni creación de cuenta: está disponible directamente en el navegador.",
+    "text_4": "⚡ En este momento, SpellTimer implementa funciones básicas y comodidades mínimas, suficientes para evaluar su demanda entre los jugadores. Tan pronto como quede claro que la aplicación es realmente demandada, en la próxima actualización abordaremos los errores, realizaremos optimizaciones y mejoraremos la experiencia del usuario.",
+    "text_5": "🎨 La versión actual de SpellTimer está orientada solo a los jugadores de Dota 2, sin embargo, si hay demanda, la aplicación puede expandirse a otras disciplinas de juego con mecánicas similares.",
+    "text_6": "📌 SpellTimer es un proyecto no oficial y no está afiliado a Valve Corporation. Todos los nombres, logotipos y marcas mencionados son propiedad de sus respectivos dueños y se usan solo con fines informativos y no comerciales.",
+    "text_7": "Efecto de sonido proporcionado por ZapSplat.com",
+    "last_update": "Última actualización: 11.08.2025 (v.1.0.3)",
+    "title": "Acerca de la aplicación"
+  },
+  "Footer": {
+    "about": "Acerca de la aplicación",
+    "contact": "Contactos",
+    "policy": "Política",
+    "right": "Todos los derechos reservados"
+  },
+  "Header": {
+    "button": "Continuar"
+  },
   "HomePage": {
     "button": "Comenzar",
+    "howToUse": "¿Cómo usarlo?",
     "title": "Controla el juego, dominando el tiempo"
   }
 }
