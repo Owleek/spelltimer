@@ -23,5 +23,12 @@
     "button": "Comenzar",
     "howToUse": "¿Cómo usarlo?",
     "title": "Controla el juego, dominando el tiempo"
+  },
+  "ContactPage": {
+    "title": "Contacto",
+    "text_1": "Siempre estamos abiertos a recibir comentarios y procuramos tener en cuenta las sugerencias de los jugadores. Si tienes ideas, preguntas o propuestas, no dudes en contactarnos por correo electrónico o redes sociales:",
+    "text_2": "Mi nombre es Artemiy. Soy el desarrollador y creador de SpellTimer, una solución de interfaz para jugadores de Dota 2. Este proyecto es una iniciativa personal en la que he volcado mi experiencia, atención al detalle y amor por el juego. Estoy abierto a colaborar profesionalmente en desarrollo web y proyectos emergentes.",
+    "text_3": "Para consultas de colaboración, no dudes en contactarme por correo electrónico:",
+    "author": "Autor"
   }
 }
