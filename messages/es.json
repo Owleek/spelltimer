@@ -30,5 +30,25 @@
     "text_2": "Mi nombre es Artemiy. Soy el desarrollador y creador de SpellTimer, una solución de interfaz para jugadores de Dota 2. Este proyecto es una iniciativa personal en la que he volcado mi experiencia, atención al detalle y amor por el juego. Estoy abierto a colaborar profesionalmente en desarrollo web y proyectos emergentes.",
     "text_3": "Para consultas de colaboración, no dudes en contactarme por correo electrónico:",
     "author": "Autor"
+  },
+  "PolicyPage": {
+    "title": "Política de privacidad de la aplicación SpellTimer",
+    "text_2": "Fecha de actualización:",
+    "text_3": "Tu confianza es importante para nosotros. En esta política explicamos qué datos recopilamos, cómo los usamos y cómo los protegemos.",
+    "text_4": "1. Qué datos recopilamos",
+    "text_5": "1.1 Localmente en el dispositivo",
+    "text_6": "Solo almacenamos los datos que introduces manualmente: teclas rápidas asignadas, preferencias de interfaz y temporizadores. Estos datos se guardan únicamente en tu navegador mediante localStorage. No se envían a ningún servidor.",
+    "text_7": "1.2 Estadísticas anónimas mediante Yandex Metrica",
+    "text_8": "Utilizamos Yandex Metrica para recopilar estadísticas anónimas de uso. Esto incluye: número de visitas, ubicación geográfica (país/ciudad según la IP), tipo de dispositivo y navegador, páginas visitadas y errores técnicos (si los hay). Estos datos no permiten identificarte personalmente.",
+    "text_9": "2. Donaciones",
+    "text_10": "Si decides apoyar el proyecto con una donación, serás redirigido a plataformas de pago externas (como DonationAlerts, etc.). No procesamos ni almacenamos tus datos de pago — todas las transacciones se realizan a través de los sistemas seguros de los servicios de pago.",
+    "text_11": "3. Servicios de terceros",
+    "text_12": "La aplicación utiliza solo un servicio de terceros: Yandex Metrica, para recopilar análisis anónimos.",
+    "text_13": "4. Seguridad",
+    "text_14": "No almacenamos ni transmitimos datos personales. Todos los ajustes del usuario permanecen solo en tu navegador. La analítica es completamente anónima y se utiliza únicamente para mejorar la calidad de la aplicación.",
+    "text_15": "5. Contacto",
+    "text_16": "Si tienes preguntas o sugerencias, puedes escribirnos por correo: spelltimer@gmail.com",
+    "text_17": "6. Actualizaciones de la política",
+    "text_18": "Podemos hacer cambios a esta política periódicamente. La versión actual siempre estará disponible mediante un enlace dentro de la aplicación."
   }
 }
