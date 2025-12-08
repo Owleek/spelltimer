@@ -30,5 +30,25 @@
     "text_2": "My name is Artemiy. I’m the developer and creator of SpellTimer, an interface solution for Dota 2 players. This is a personal initiative into which I’ve poured my experience, attention to detail, and love for the game. I’m open to professional collaboration in web development and startup projects.",
     "text_3": "For collaboration inquiries, feel free to contact me via email:",
     "author": "Author"
+  },
+  "PolicyPage": {
+    "title": "Privacy Policy for the SpellTimer app",
+    "text_2": "Last updated:",
+    "text_3": "Your trust is important to us. This policy explains what data we collect, how we use it, and how we protect it.",
+    "text_4": "1. What data we collect",
+    "text_5": "1.1 Locally on the device",
+    "text_6": "We only store data that you enter manually, such as: assigned hotkeys, interface and timer preferences. This data is stored only in your browser via localStorage. We do not send it to any servers.",
+    "text_7": "1.2 Anonymous statistics via Yandex Metrica",
+    "text_8": "We use Yandex Metrica to collect anonymous usage statistics. This includes: number of visits and sessions, user geography (country/city, based on IP address), device and browser type, visited pages, and technical errors (if any). All of this data does not allow us to identify you personally.",
+    "text_9": "2. Donations",
+    "text_10": "If you choose to support the project with a donation, you will be redirected to third-party payment platforms (such as DonationAlerts, etc.). We do not process or store your payment data — all transactions are handled through the secure systems of the payment services themselves.",
+    "text_11": "3. Third-party services",
+    "text_12": "The app uses only one third-party service: Yandex Metrica — for collecting anonymized analytics.",
+    "text_13": "4. Security",
+    "text_14": "We do not store or transmit personal data. All user settings remain only in your browser. Analytics is completely anonymous and used solely to improve the application's performance.",
+    "text_15": "5. Contact",
+    "text_16": "If you have any questions or suggestions, you can contact us via email: spelltimer@gmail.com",
+    "text_17": "6. Policy updates",
+    "text_18": "We may periodically make changes to this policy. The current version will always be available via the link in the app."
   }
 }
