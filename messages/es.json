@@ -50,5 +50,15 @@
     "text_16": "Si tienes preguntas o sugerencias, puedes escribirnos por correo: spelltimer@gmail.com",
     "text_17": "6. Actualizaciones de la política",
     "text_18": "Podemos hacer cambios a esta política periódicamente. La versión actual siempre estará disponible mediante un enlace dentro de la aplicación."
+  },
+  "DonationPage": {
+    "title": "Apoyar el proyecto",
+    "text_1": "Nos encantaría que SpellTimer fuera útil para ti — porque está hecho con amor y entusiasmo.",
+    "text_2": "El mantenimiento de los servidores y el desarrollo adicional de la aplicación requieren tiempo y recursos. Incluso un pequeño apoyo es muy importante para nosotros!",
+    "text_3": "Si te gusta la aplicación y tienes la oportunidad de apoyar el proyecto, puedes hacerlo a través de los enlaces a continuación. ¡Gracias por tu apoyo!",
+    "button": "Apoyé el proyecto",
+    "thnx_1": "🎉 ¡Gracias por tu apoyo!",
+    "thnx_2": "🚀 ¡Gracias a ti, el proyecto puede seguir funcionando y mejorando!",
+    "copied": "Copiado"
   }
 }

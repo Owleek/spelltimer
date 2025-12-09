@@ -1,8 +1,9 @@
 'use client'
-import React, {useState} from 'react';
-import cn from 'classnames';
-import QrComponent from './QrComponent/QrComponent';
-import ImageCover from '../../../shared/ui/ImageCover/ImageCover';
+import React, {useState} from 'react'
+import cn from 'classnames'
+import QrComponent from './QrComponent/QrComponent'
+import ImageCover from '../../../shared/ui/ImageCover/ImageCover'
+import { useTranslations } from 'next-intl'
 
 enum EQRItem {
     dna = '/assets/qrcodes/dna.webp',
@@ -12,9 +13,21 @@ enum EQRItem {
 }
 
 const Donation = () => {
-    const [copied, setCopied] = useState<string | null>(null);
-    const [qrItem, setQrItem] = useState<EQRItem | null>(null);
-    const [donated, setDonated] = useState<boolean>(false);
+    const translate = useTranslations('DonationPage')
+    const [copied, setCopied] = useState<string | null>(null)
+    const [qrItem, setQrItem] = useState<EQRItem | null>(null)
+    const [donated, setDonated] = useState<boolean>(false)
+
+    const dictionary = {
+        title: translate('title'),
+        text_1: translate('text_1'),
+        text_2: translate('text_2'),
+        text_3: translate('text_3'),
+        button: translate('button'),
+        thnx_1: translate('thnx_1'),
+        thnx_2: translate('thnx_2'),
+        copied: translate('copied'),
+    }
 
     const wallets = [
         {
@@ -73,7 +86,7 @@ const Donation = () => {
     return <div className="Article">
         <ImageCover image="article.webp" />
         
-       { !!qrItem &&  <QrComponent img={qrItem} onClose={handleClose} onDonate={handleDonate} btnText="thnx_btn"/> }
+       { !!qrItem &&  <QrComponent img={qrItem} onClose={handleClose} onDonate={handleDonate} btnText={dictionary.button}/> }
         
         <div className="Article__body">
             <div className="adjustCenter">
@@ -81,14 +94,14 @@ const Donation = () => {
                     donated ?
                     <div className="Article__thanksContainer">
                         <div className="Article__thanksText">
-                            <p>thnx_1</p>
-                            <p>thnx_2</p>
+                            <p>{dictionary.thnx_1}</p>
+                            <p>{dictionary.thnx_2}</p>
                         </div>
                     </div> :
                     <div className="Article__bodyInner">
                         <div className='Article__contentHeader'>
                             <h2 className='Article__title'>
-                                support
+                                {dictionary.title}
                                 <span className="Article__titleIcon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
                                     <path d="M17.2744 19.965C17.0956 19.8901 16.9038 19.8516 16.71 19.8516C16.5162 19.8516 16.3244 19.8901 16.1456 19.965L12.475 21.2775C12.4803 21.0861 12.4472 20.8957 12.3777 20.7173C12.3082 20.5389 12.2037 20.3762 12.0704 20.2388C11.9371 20.1014 11.7776 19.9921 11.6014 19.9173C11.4252 19.8425 11.2358 19.8037 11.0444 19.8031H10.0425C8.11313 19.8731 6.595 18.3288 4.64375 18.4644H3.25688V18.1275C3.25688 18.0115 3.21078 17.9002 3.12874 17.8181C3.04669 17.7361 2.93541 17.69 2.81938 17.69H0.75C0.633966 17.69 0.522688 17.7361 0.440639 17.8181C0.358595 17.9002 0.3125 18.0115 0.3125 18.1275V24.6419C0.3125 24.7579 0.358595 24.8692 0.440639 24.9512C0.522688 25.0333 0.633966 25.0794 0.75 25.0794H2.81938C2.93541 25.0794 3.04669 25.0333 3.12874 24.9512C3.21078 24.8692 3.25688 24.7579 3.25688 24.6419V24.4013C3.74184 24.4401 4.21977 24.5416 4.67875 24.7031C6.04813 25.2063 7.62313 25.8013 9.0975 25.6788C10.0242 25.6434 10.9364 25.4373 11.7881 25.0706L17.375 22.6775C17.6262 22.5455 17.8349 22.3451 17.9771 22.0995C18.1193 21.8539 18.1892 21.5732 18.1786 21.2896C18.1681 21.006 18.0777 20.7312 17.9176 20.4968C17.7576 20.2624 17.5346 20.0781 17.2744 19.965ZM2.39938 24.2044H1.1875V18.5475H2.38188L2.39938 24.2044ZM17.0381 21.8856L11.4425 24.27C10.688 24.5917 9.88189 24.7755 9.0625 24.8125C7.71063 24.9263 6.22313 24.3356 4.9675 23.8806C4.41551 23.688 3.84015 23.5703 3.25688 23.5306V19.3219H4.64375C6.57313 19.2519 8.09563 20.8006 10.0425 20.6606H11.0444C11.153 20.6625 11.2588 20.6957 11.349 20.7562C11.4392 20.8167 11.5101 20.9019 11.553 21.0017C11.5959 21.1015 11.6092 21.2116 11.5912 21.3187C11.5731 21.4258 11.5245 21.5254 11.4513 21.6056C10.6725 21.8594 9.42125 21.7763 8.6075 21.7894C8.49148 21.7894 8.38018 21.8355 8.29814 21.9175C8.21611 21.9995 8.17 22.1109 8.17 22.2269C8.17 22.3429 8.21611 22.4542 8.29814 22.5362C8.38018 22.6183 8.49148 22.6644 8.6075 22.6644H10.1125C11.53 22.7694 15.1088 21.1812 16.4694 20.7787C16.6135 20.7238 16.7729 20.7245 16.9166 20.7806C17.0603 20.8367 17.178 20.9443 17.2467 21.0823C17.3155 21.2204 17.3304 21.3791 17.2886 21.5276C17.2469 21.6761 17.1513 21.8037 17.0206 21.8856H17.0381Z"/>
@@ -101,9 +114,9 @@ const Donation = () => {
                         
                         <div className="Article__contentWrapper appStyledScroll">
                             <div className="Article__content">
-                                <p>donation_1</p>
-                                <p>donation_2</p>
-                                <p>donation_3</p>
+                                <p>{dictionary.text_1}</p>
+                                <p>{dictionary.text_2}</p>
+                                <p>{dictionary.text_3}</p>
                                 <div className="Article__donationContainer appStyledScroll">
                                     <div className="Article__donationList">
                                         <div className="Article__donation">
@@ -177,7 +190,7 @@ const Donation = () => {
                                                 <span className="Article__walletIcon">{wlt.icon}</span>
                                                 <div className="Article__walletPayTools">
                                                     <span className="Article__walletCopy" onClick={() => handleCopy(wlt.address)} title="copy">
-                                                        <span className={cn('Article__walletCopyText', {show: copied === wlt.address})}>"copied"</span>
+                                                        <span className={cn('Article__walletCopyText', {show: copied === wlt.address})}>{dictionary.copied}</span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
                                                             <path d="M4.375 15.625H3.25C2.65326 15.625 2.08097 15.3879 1.65901 14.966C1.23705 14.544 1 13.9717 1 13.375V3.25C1 2.65326 1.23705 2.08097 1.65901 1.65901C2.08097 1.23705 2.65326 1 3.25 1H13.375C13.9717 1 14.544 1.23705 14.966 1.65901C15.3879 2.08097 15.625 2.65326 15.625 3.25V4.375M11.125 8.875H21.25C22.4926 8.875 23.5 9.88236 23.5 11.125V21.25C23.5 22.4926 22.4926 23.5 21.25 23.5H11.125C9.88236 23.5 8.875 22.4926 8.875 21.25V11.125C8.875 9.88236 9.88236 8.875 11.125 8.875Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                                         </svg>
