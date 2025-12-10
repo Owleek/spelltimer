@@ -60,5 +60,32 @@
     "thnx_1": "🎉 感谢您的支持！",
     "thnx_2": "🚀 正因为有您，项目才能不断运行并持续改进！",
     "copied": "被复制了"
+  },
+  "PlaygroundPage": {
+    "TimerPanel": {
+      "clear_slots": "清空槽位",
+      "reset_timers": "重置计时器",
+      "start_mode": "启动模式",
+      "setup_mode": "设置模式",
+      "time_forward": "时间快进",
+      "time_back": "时间回退",
+      "hotkey_start": "启动计时器快捷键",
+      "hotkey_forward": "快进时间快捷键",
+      "hotkey_back": "回退时间快捷键",
+      "close": "关闭",
+      "cancel": "取消",
+      "delete": "删除",
+      "reset_timer": "重置计时器",
+      "manual_cd": "手动输入冷却时间",
+      "save": "保存",
+      "cancel_manual_cd": "取消手动冷却",
+      "start": "开始",
+      "pause": "暂停",
+      "add_tracked_item": "添加跟踪的技能/物品/功能",
+      "press_to_bind": "按任意键进行绑定",
+      "hotkey_toggle_timer": "启动/暂停计时器的快捷键",
+      "with_sound": "带声音",
+      "without_sound": "无声音"
+    }
   }
 }
