@@ -60,5 +60,32 @@
     "thnx_1": "🎉 Thank you for your support!",
     "thnx_2": "🚀 Thanks to you, the project can continue to work and improve!",
     "copied": "Copied"
+  },
+  "PlaygroundPage": {
+    "TimerPanel": {
+      "clear_slots": "Clear slots",
+      "reset_timers": "Reset timers",
+      "start_mode": "Start mode",
+      "setup_mode": "Setup mode",
+      "time_forward": "Fast-forward time",
+      "time_back": "Rewind time",
+      "hotkey_start": "Timer start hotkey",
+      "hotkey_forward": "Fast-forward hotkey",
+      "hotkey_back": "Rewind hotkey",
+      "close": "Close",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "reset_timer": "Reset timer",
+      "manual_cd": "Enter cooldown manually",
+      "save": "Save",
+      "cancel_manual_cd": "Cancel manual cooldown",
+      "start": "Start",
+      "pause": "Pause",
+      "add_tracked_item": "Add tracked ability/item/function",
+      "press_to_bind": "Press any key to bind it",
+      "hotkey_toggle_timer": "Hotkey to start/pause timer",
+      "with_sound": "With sound",
+      "without_sound": "Without sound"
+    }
   }
 }
