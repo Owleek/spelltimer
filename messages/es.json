@@ -85,7 +85,19 @@
       "press_to_bind": "Presiona cualquier tecla para asignarla",
       "hotkey_toggle_timer": "Tecla rápida para iniciar/pausar el temporizador",
       "with_sound": "Con sonido",
-      "without_sound": "Sin sonido"
+      "without_sound": "Sin sonido",
+      "sec": "seg"
+    },
+    "TimerNotification": {
+      "notification": "Iniciar o pausar uno de los temporizadores aplica automáticamente la misma acción a todos los temporizadores previamente activados, ya que los tiempos de reutilización en Dota 2 están sincronizados para todas las habilidades y objetos.",
+      "checkbox": "No volver a mostrar esta notificación",
+      "ok": "Ok"
+    },
+    "TimerConstructor": {
+      "all": "Todos",
+      "spells": "Hechizos",
+      "items": "Artefactos",
+      "other": "Otros"
     }
   }
 }

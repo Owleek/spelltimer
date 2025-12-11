@@ -85,7 +85,19 @@
       "press_to_bind": "Press any key to bind it",
       "hotkey_toggle_timer": "Hotkey to start/pause timer",
       "with_sound": "With sound",
-      "without_sound": "Without sound"
+      "without_sound": "Without sound",
+      "sec": "sec"
+    },
+    "TimerNotification": {
+      "notification": "Starting or pausing one of the timers automatically applies the same action to all previously activated timers, since cooldown timing in Dota 2 is synchronized across all abilities and items.",
+      "checkbox": "Don’t show this notification again",
+      "ok": "Ok"
+    },
+    "TimerConstructor": {
+      "all": "All",
+      "spells": "Spells",
+      "items": "Artifacts",
+      "other": "Other"
     }
   }
 }

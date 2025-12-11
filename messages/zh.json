@@ -85,7 +85,19 @@
       "press_to_bind": "按任意键进行绑定",
       "hotkey_toggle_timer": "启动/暂停计时器的快捷键",
       "with_sound": "带声音",
-      "without_sound": "无声音"
+      "without_sound": "无声音",
+      "sec": "秒"
+    },
+    "TimerNotification": {
+      "notification": "启动或暂停其中一个计时器时，此操作会自动应用于之前激活的所有计时器，因为 Dota 2 中的技能和物品冷却时间是同步的。",
+      "checkbox": "不再显示此通知",
+      "ok": "好的"
+    },
+    "TimerConstructor": {
+      "all": "全部",
+      "spells": "法术",
+      "items": "物品",
+      "other": "其他"
     }
   }
 }
