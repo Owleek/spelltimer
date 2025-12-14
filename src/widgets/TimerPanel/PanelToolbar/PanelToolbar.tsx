@@ -13,19 +13,19 @@ export default function PanelToolbar() {
 
     return (
         <div className="PanelToolbar">
-            <div className={cn('Playground__leftBtnContainer')}>
-                <ClearIcon className={cn('Playground__button')} title={translate('clear_slots')} onClick={() => {}}/>
+            <div className={cn('PanelToolbar__leftSide')}>
+                <ClearIcon className={cn('PanelToolbar__button')} title={translate('clear_slots')} onClick={() => {}}/>
 
-                <ResetIcon className={cn('Playground__button refreshButton')} title={translate( 'reset_timers')} onClick={() => {}}/>
+                <ResetIcon className={cn('PanelToolbar__button refreshButton')} title={translate( 'reset_timers')} onClick={() => {}}/>
 
-                <SoundIcon className={cn('Playground__button')} title={translate('without_sound')} onClick={() => {}}/>
+                <SoundIcon className={cn('PanelToolbar__button')} title={translate('without_sound')} onClick={() => {}}/>
             </div>
 
             <CountdownEditor />
 
-            <PlayIcon className={cn('Playground__button play')} onClick={() => {}} title={translate('start_mode')}/>
+            <PlayIcon className={cn('PanelToolbar__button play')} onClick={() => {}} title={translate('start_mode')}/>
 
-            <SettingsIcon className={cn('Playground__button')} onClick={() => {}} title={translate('setup_mode')} />
+            <SettingsIcon className={cn('PanelToolbar__button')} onClick={() => {}} title={translate('setup_mode')} />
         </div>
     )
 }
