@@ -1,13 +1,13 @@
 import PanelToolbar from './PanelToolbar/PanelToolbar'
-import PanelCore from './PanelCore/PanelCore'
+import TimerBoard from './TimerBoard/TimerBoard'
 import './TimerPanel.scss'
 
 export default function TimerPanel() {
 
     return (
         <div className="TimerPanel">    
+            <TimerBoard />
             <PanelToolbar />
-            <PanelCore />
         </div>
     );
 }

@@ -137,4 +137,3 @@ const CountdownEditor = (props: IProps): JSX.Element => {
 }
 
 export default CountdownEditor;
-

@@ -5,8 +5,8 @@ import './Playground.scss'
 const Playground = () => {
     return (
         <div className="Playground">
+            <ImageCover image="playground.webp" />
             <div className="Playground__inner">
-                <ImageCover image="playground.webp" />
                 <TimerPanel />
             </div>
         </div>

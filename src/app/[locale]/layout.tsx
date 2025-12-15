@@ -77,7 +77,7 @@ export default async function RootLayout({ children, params }: Props) {
               <NextIntlClientProvider>
                 <Header />
                   {children}
-                <Footer />
+                {/* <Footer /> */}
               </NextIntlClientProvider>
             </StoreProvider>
           </div>

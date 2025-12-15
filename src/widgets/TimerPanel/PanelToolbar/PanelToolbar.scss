@@ -1,14 +1,27 @@
-@use '../../../shared/styles/variables.scss' as vars;
+@use '../../../shared/styles/variables.scss';
 @use '../../../shared/styles/mixin.scss' as *;
 
+$disabledToolColor: #6e6e6e; 
+
 .PanelToolbar {
-    width: 100%;
+    min-width: 200px;
+    align-self: center;
     height: 80px;
-    padding: 0 14px;
+    padding: 0 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    flex-shrink: 0;
+    margin-bottom: 30px;
+    margin-top: auto;
+
+    background: rgba(55, 58, 61, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+
+    @media (max-width: #{variables.$MEDIUMDEVICEWIDTH}px) {
+        backdrop-filter: blur(10px);
+        margin-bottom: 20px;
+    }
 
     @media (max-width: 629px) {
         padding: 0;
@@ -34,12 +47,14 @@
     justify-content: center;
     align-items: center;
   
-    width: 28px;
-    height: 28px;
+    // width: 28px;
+    // height: 28px;
+    width: 35px;
+    height: 35px;
     fill: #778899;
     position: relative;
     cursor: pointer;
-    transition: all ease-in-out vars.$transitionTime;
+    transition: all ease-in-out variables.$transitionTime;
     transform: scale(1);
   
     &:hover {
@@ -55,18 +70,6 @@
       max-height: 100%;
     }
 
-    &.play {
-        fill: vars.$success1;
-    
-        &:hover {
-            filter: drop-shadow(0 0 5px vars.$success1);
-    
-            @media (pointer: coarse) {
-                filter: none;
-            }
-        }
-    }
-
     &.refreshButton {
         position: absolute;
         top: 50%;
@@ -80,9 +83,103 @@
         }
     }
 
+    &.visible {
+        display: flex;
+    }
+
     &.disabled {
-        fill: #4a4a4a !important;
+        fill: $disabledToolColor !important;
+        stroke: $disabledToolColor !important;
+        color: $disabledToolColor !important;
+
         cursor: default;
         pointer-events: none;
+    }
+}
+
+.PanelToolbar__button.forwardButton {
+    color: variables.$success1;
+    opacity: 0;
+    pointer-events: none;
+
+    & #forwardsEmptyArrow {
+        stroke: variables.$success1;
+        color: transparent;
+        transition: color ease 0.4s;
+    }
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &.disabled {
+        color: $disabledToolColor !important;
+        pointer-events: none;
+        cursor: default;
+        
+        & #forwardsEmptyArrow {
+            stroke: $disabledToolColor !important;
+            color: transparent !important;
+        }
+    }
+
+    &:hover {
+        & #forwardsEmptyArrow {
+            color: variables.$success1;
+        }
+    }
+}
+
+.PanelToolbar__button.runButton {
+    opacity: 0;
+    pointer-events: none;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.PanelToolbar__button.pauseButton {
+    opacity: 0;
+    pointer-events: none;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.PanelToolbar__button.clearButton {
+    opacity: 0;
+    pointer-events: none;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.PanelToolbar__button.backwardButton {
+    opacity: 0;
+    pointer-events: none;
+    color: variables.$success1;
+
+    & #backwardsEmptyArrow {
+        stroke: variables.$success1;
+        color: transparent;
+        transition: color ease 0.4s;
+    }
+
+    &.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &:hover {
+        & #backwardsEmptyArrow {
+            color: variables.$success1;
+        }
     }
 }

@@ -1,6 +1,17 @@
 @use '../../../shared/styles/variables.scss' as vars;
 @use '../../../shared/styles/mixin.scss' as *;
 
+
+.TimerBoard {
+    padding: 10px;
+    background: rgba(55, 58, 61, 0.7);
+    backdrop-filter: blur(15px);
+
+    @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+        backdrop-filter: blur(10px);
+    }
+}
+
 .TimerGear {
     width: 100%;
     max-width: 925px;
