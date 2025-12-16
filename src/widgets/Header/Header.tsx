@@ -5,6 +5,7 @@ import cn from 'classnames'
 import Link from 'next/link'
 import LocaleSwicher from './subwidgets/LocaleSwitcher/LocaleSwitcher'
 import './Header.scss'
+import MenuIcon from '../../shared/ui/IconComponents/MenuIcon'
 
 interface IProps {
     className?: string
@@ -16,6 +17,7 @@ const Header = ({className}: IProps) => {
             <div className="header__logo"><Link href="/"><Logo /></Link></div>
             {/* <Link href="/playground" className="header__button"><SmallButton /></Link> */}
             <LocaleSwicher className='Header__LocaleSwicher'/>
+            {/* <MenuIcon className="Header__menuToggler"/> */}
         </div>
     );
 }
