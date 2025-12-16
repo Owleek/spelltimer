@@ -1,13 +1,14 @@
-import type { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from 'next'
 
 
-import {NextIntlClientProvider, hasLocale} from 'next-intl';
-import {notFound} from 'next/navigation';
-import {routing} from '../../i18n/routing';
+import {NextIntlClientProvider, hasLocale} from 'next-intl'
+import {notFound} from 'next/navigation'
+import {routing} from '../../i18n/routing'
 
-import StoreProvider from '../_internal/providers/StoreProvider';
-import Header from '../../widgets/Header/Header';
-import Footer from '../../widgets/Footer/Footer';
+import StoreProvider from '../_internal/providers/StoreProvider'
+import Header from '../../widgets/Header/Header'
+import Footer from '../../widgets/Footer/Footer'
+import AppMenu from '../../widgets/AppMenu/AppMenu'
 
 import './global.scss';
 
@@ -18,7 +19,7 @@ export const viewport: Viewport = {
   userScalable: false,
   viewportFit: 'cover',
   themeColor: '#000000',
-};
+}
 
 export const metadata: Metadata = {
   title: 'SpellTimer — контроль кулдаунов',
@@ -76,6 +77,7 @@ export default async function RootLayout({ children, params }: Props) {
             <StoreProvider>
               <NextIntlClientProvider>
                 <Header />
+                {/* <AppMenu /> */}
                   {children}
                 {/* <Footer /> */}
               </NextIntlClientProvider>

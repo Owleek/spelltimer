@@ -1,0 +1,13 @@
+.AppMenu {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100%;
+    transform: translateX(-110%);
+    transition: transform ease 0.4s;
+}
+
+.AppMenu.visible {
+    transform: translateX(0);
+}
