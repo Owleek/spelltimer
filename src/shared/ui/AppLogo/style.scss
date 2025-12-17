@@ -1,0 +1,9 @@
+@use '../../styles/variables.scss' as var;
+
+.AppLogo {
+    display: block;
+    width: 100px;
+    height: 44px;
+    fill: var.$frontlineColor;
+    text-decoration: none !important;
+}

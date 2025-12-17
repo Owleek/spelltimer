@@ -1,7 +1,16 @@
 @use '../../shared/styles/variables.scss' as vars;
 @use '../../shared/styles/mixin.scss' as *;
 
-.header {
+// --- > clear styles
+
+.Header__Logo {
+    margin-right: 1rem;
+}
+
+// < --- clear styles
+
+
+.Header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -9,19 +18,12 @@
     padding: 40px 40px;
     
     position: absolute;
+    z-index: 1;
     width: 100%;
     left: 0;
     top: 0;
-    z-index: 999;
 
     transition: transform ease vars.$transitionTime;
-
-
-    &.hideLogoOnMobile .header__logo {
-        @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
-            display: none;
-        }
-    }
 
     @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
       padding: 30px 20px;
@@ -52,7 +54,7 @@
     }
 }
 
-.header.headerBottomOnMobile {
+.Header.HeaderBottomOnMobile {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     transform: translateY(0);
@@ -62,7 +64,7 @@
     }
 }
 
-.header__logo {
+.Header__logo {
     position: relative;
     width: 146px;
     min-width: 90px;
@@ -80,7 +82,7 @@
     }
 }
 
-.header__logoPatch {
+.Header__logoPatch {
     position: absolute;
     left: 100%;
     top: -18px;
@@ -88,7 +90,7 @@
     color: #818992;
 }
 
-.header__button {
+.Header__button {
     margin-left: auto;
     margin-right: 0.5rem;
 
@@ -107,7 +109,7 @@
     }
 }
 
-.header.PlaygroundHeader {
+.Header.PlaygroundHeader {
     @include responsiveBlockForPlayground {
         height: 43vh;
         height: 43dvh;
@@ -132,21 +134,12 @@
     }
 }
 
-.header.PlaygroundHeader.headerBottomOnMobile {
+.Header.PlaygroundHeader.HeaderBottomOnMobile {
     @include responsiveBlockForPlayground {
         transform: translateY(0);
     }
 }
 
-.header__button {
+.Header__button {
     text-decoration: none;
-}
-
-
-.Header__menuToggler {
-    width: 22px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
 }

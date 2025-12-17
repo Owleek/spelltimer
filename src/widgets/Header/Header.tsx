@@ -1,11 +1,9 @@
-
-import Logo from '../../shared/ui/IconComponents/Logo'
 import SmallButton from '../../shared/ui/Button/SmallButton'
 import cn from 'classnames'
-import Link from 'next/link'
+import MenuToggler from './subwidgets/MenuToggler/MenuToggler'
 import LocaleSwicher from './subwidgets/LocaleSwitcher/LocaleSwitcher'
+import { AppLogo } from '../../shared/ui/AppLogo'
 import './Header.scss'
-import MenuIcon from '../../shared/ui/IconComponents/MenuIcon'
 
 interface IProps {
     className?: string
@@ -13,12 +11,12 @@ interface IProps {
 
 const Header = ({className}: IProps) => {
     return (
-        <div className={cn('header', className)}>
-            <div className="header__logo"><Link href="/"><Logo /></Link></div>
+        <header className={cn('Header', className)}>
             {/* <Link href="/playground" className="header__button"><SmallButton /></Link> */}
-            <LocaleSwicher className='Header__LocaleSwicher'/>
-            {/* <MenuIcon className="Header__menuToggler"/> */}
-        </div>
+            {/* <LocaleSwicher className='Header__LocaleSwicher'/> */}
+           <AppLogo className="Header__Logo"/>
+            <MenuToggler />
+        </header>
     );
 }
 
