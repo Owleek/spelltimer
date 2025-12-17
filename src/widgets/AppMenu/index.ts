@@ -1,5 +1,4 @@
-export { AppMenuStore } from './store/store'
-export type { IState as AppMenuType } from './store/type'
-export { selectors as AppMenuSelectors } from './store/selectors'
+export { useStore as useAppMenuStore } from './store/store'
+export type { IStore as IAppMenuStore } from './store/type'
 import AppMenu from './AppMenu'
 export default AppMenu
