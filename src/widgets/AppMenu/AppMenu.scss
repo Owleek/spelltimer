@@ -5,14 +5,35 @@ $bgMenuHeader: #343442;
 $textColor: #dadada;
 $textHoverColor: #ffdfa2;
 
+$menuWidth: 280px;
+$layerZindex: 10;
+
+.AppMenuClickCatcher {
+    z-index: $layerZindex;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: calc(100% - $menuWidth);
+    height: 100%;
+    transform: translateX(100%);
+}
+
+.AppMenuClickCatcher.visible {
+    transform: translate(0);
+}
+
+
 .AppMenu {
-    z-index: 10;
+    z-index: $layerZindex;
     position: absolute;
     left: 0;
     top: 0;
-    width: 280px;
+
+    width: $menuWidth;
     height: 100%;
     transform: translateX(-110%);
+    
     transition: transform ease 0.4s;
     background: $bgAppMenu;
 
