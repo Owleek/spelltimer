@@ -4,6 +4,7 @@ $bgAppMenu: #202029;
 $bgMenuHeader: #343442;
 $textColor: #dadada;
 $textHoverColor: #ffdfa2;
+$faded: #4f4f4f;
 
 $menuWidth: 280px;
 $layerZindex: 10;
@@ -47,6 +48,7 @@ $layerZindex: 10;
 
 .AppMenu__body {
     flex-grow: 1;
+    padding: 16px 0;
 }
 
 .AppMenu__header {
@@ -55,6 +57,27 @@ $layerZindex: 10;
     justify-content: center;
 
     background: $bgMenuHeader;
+}
+
+$titleSideGap: 20px;
+
+.AppMenu__title {
+    padding: 10px $titleSideGap;
+    color: $faded;
+}
+
+.AppMenu__title.divider {
+    position: relative;
+
+    &::after {
+        content: '';
+        width: calc(100% - 2*$titleSideGap);
+        height: 1px;
+        background: $faded;
+        position: absolute;
+        left: $titleSideGap;
+        top: 100%;
+    }
 }
 
 .AppMenu__footer {

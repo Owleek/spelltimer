@@ -1,0 +1,41 @@
+@use '../../../shared/styles/variables.scss' as var;
+
+$textColor: #dadada;
+
+.AppMenu__navList {
+    padding: 5px 0;
+}
+
+.AppMenu__navLink {
+    display: block;
+    margin: 26px 0;
+    padding: 0 20px;
+    text-decoration: none !important;
+    color: $textColor;
+}
+
+.AppMenu__navItem {
+    display: flex;
+    align-items: center;
+}
+
+.AppMenu__navIcon {
+    flex-shrink: 0;
+
+    width: 34px;
+    height: 34px;
+    margin-right: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+
+    border-radius: 4px;
+    background: #3869dd;
+    fill: white;
+}
+
+.AppMenu__navText {
+
+}
