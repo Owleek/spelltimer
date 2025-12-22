@@ -13,6 +13,7 @@ import PolicyIcon from '../../shared/ui/IconComponents/PolicyIcon'
 
 import './AppMenu.scss'
 import NavList from './subwidgets/NavList'
+// import Switcher from '../../shared/ui/Switcher/Switcher'
 
 
 export default function AppMenu() {
@@ -44,6 +45,9 @@ export default function AppMenu() {
                     <NavList />
                     {/* <div className="AppMenu__title divider">
                         Настройки
+                    </div>
+                    <div>
+                        <Switcher checked={true} onChange={() => null} />
                     </div> */}
                 </div>
                 <div className="AppMenu__footer">

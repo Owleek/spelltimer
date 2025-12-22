@@ -1,0 +1,62 @@
+@use '../../../shared/styles/variables.scss' as var;
+
+$bgBlue: #3869dd;
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; /* For mobile */
+}
+
+.toggle-switch input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-switch .slider {
+  position: absolute;
+  background-color: #ccc; /* Default off background */
+  transition: .4s;
+  box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
+}
+
+.toggle-switch .slider::before {
+  position: absolute;
+  content: "";
+  background-color: white;
+  transition: .4s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.ts-rounded {
+  width: 60px;
+  height: 34px;
+}
+.ts-rounded .slider {
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 34px;
+}
+.ts-rounded .slider::before {
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  border-radius: 50%;
+}
+.ts-rounded input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+.ts-blue input:checked + .slider { background-color: $bgBlue; }
+.ts-text.ts-blue input:not(:checked) + .slider { background-color: #7bbcf0; } /* Lighter blue for OFF text */
+
+.toggle-switch input:focus-visible + .slider {
+  outline: 2px solid #007bff; /* Default focus outline color */
+  outline-offset: 2px;
+}
+
+.ts-blue input:focus-visible + .slider { outline-color: #64b5f6; }

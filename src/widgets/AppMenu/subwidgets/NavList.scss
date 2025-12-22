@@ -1,9 +1,11 @@
 @use '../../../shared/styles/variables.scss' as var;
 
 $textColor: #dadada;
+$bgBlue: #3869dd;
 
 .AppMenu__navList {
     padding: 5px 0;
+    margin-bottom: 1rem;
 }
 
 .AppMenu__navLink {
@@ -32,7 +34,7 @@ $textColor: #dadada;
     padding: 6px;
 
     border-radius: 4px;
-    background: #3869dd;
+    background: $bgBlue;
     fill: white;
 }
 
