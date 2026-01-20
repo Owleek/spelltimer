@@ -1,0 +1,23 @@
+frameRate = 60
+
+formatNumber(number) => Math.floor(number.toFixed(4) * 1000) / 1000
+
+msFrame = formatNumber(1000 / frameRate)
+
+totalTimeMS
+totalLength
+
+countOfFrames = totalTimeMS / msFrame
+stepValue = totalLength / countOfFrames
+stepInOnePartOfmSframe = stepValue / msFrame;
+
+startTimerTimeStamp
+lastRenderTimeStamp
+currentRenderTimeStamp
+
+deltaTimeBetweenLastRenderTimeStampANDcurrentRenderTimeStamp = currentRenderTimeStamp - lastRenderTimeStamp
+stepValueForRender = (deltaTimeBetweenLastRenderTimeStampANDcurrentRenderTimeStamp / msFrame) * stepValue
+
+timeLeft = Math.floor(totalTimeMS - (currentRenderTimeStamp - startTimerTimeStamp))
+
+// если целочисленное значение оставшегося времени не менятся во время герцовки, его не рисуем, рисуем только если целочисленное значение изменилось
