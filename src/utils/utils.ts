@@ -41,3 +41,8 @@ export const detectLocale = (): string => {
 export function translateText(dictionary: Record<string, string>, text: string) {
   return dictionary[text] || text;
 }
+
+// TODO: эксперимент переписать в чистый вид
+export function formatNumberToThreePoints(number: any) {
+    return Math.floor(number.toFixed(4) * 1000) / 1000
+} 
