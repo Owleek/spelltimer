@@ -1,4 +1,4 @@
-import React, { JSX, useState } from 'react';
+import React, { JSX, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { YMInitializer } from 'react-yandex-metrika';
 import Welcome from './pages/WelcomePage/Welcome';
@@ -12,9 +12,45 @@ import Donation from './pages/DonationPage/Donation';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import cn from 'classnames';
+import { formatNumberToThreePoints } from './utils/utils'
 
 const App = () => {
     const [currentPage, setCurrentPage] = useState<EPage>(EPage.WELCOME);
+    
+    useEffect(() => {
+
+        // TODO: эксперимент переписать в чистый вид
+
+        let rafId: any = null;
+        let lastTime = 0;
+        let frames = 0;
+
+        function tick(time: any) {
+            if (!lastTime) lastTime = time;
+
+            frames++;
+
+            const delta = time - lastTime;
+
+            if (delta >= 1000) {
+                const fps = frames * 1000 / delta;
+                console.log('FPS:', fps.toFixed(1));
+                (globalThis as any).fps = Math.floor(+fps.toFixed(1));
+                (globalThis as any).frameRate = formatNumberToThreePoints(1000 / (globalThis as any).fps);
+
+                frames = 0;
+                lastTime = time;
+
+                cancelAnimationFrame(rafId);
+                return;
+            }
+
+            rafId = requestAnimationFrame(tick);
+        }
+
+        rafId = requestAnimationFrame(tick);
+
+    }, []);
     
     const navigate = (page: EPage) => {
         setLoading(true);

@@ -1,9 +1,8 @@
-import React, { JSX, useEffect, useRef, useState, useContext, useCallback } from 'react';
+import React, { JSX, useEffect, useRef, useState, useContext, useCallback, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {TStoreState} from '../../store/store';
 import {createPortal} from 'react-dom';
 import cn from 'classnames';
-import TickNotifier, {COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND} from '../../utils/TickNotifier';
 import {addRunning, removeRunning} from '../../store/runningSlice';
 import {removeShift, EDirection, IShift} from '../../store/shiftSlice';
 import {EStages} from '../../store/StageContext';
@@ -58,12 +57,6 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
     const [currentCountdown, setCurrentCountdown] = useState<number>(initialTime);
     const currentCountdownRef = useRef<number>(initialTime);
 
-    const countMSRef = useRef<number>(0);
-
-    const step = LENGTH / (COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * initialCountdownRef.current);
-    const nextStepRef = useRef<number>(step);
-    const stepRef = useRef<number>(step);
-
     const circleRef = useRef<SVGCircleElement | null>(null);
     const strokeDashoffsetRef = useRef<number>(0);
 
@@ -86,18 +79,28 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
     const refreshRef = useRef<IRefresh>(refreshSlice); 
     const withSoundRef = useRef<boolean>(withSound);
 
+    // Dangerous >>>
+    const pixelStepRef = useRef<number>(0);
+    const startIdRef = useRef<number | null>(null);
+    const lastRenderRafRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        if (!ability) return;
+        let _T = ability.customCooldown ? ability.customCooldown : ability.cooldown[ability.cooldownIndex];
+        _T = 1000 * _T;
+        const raf = (globalThis as any).frameRate;
+        const _Nraf = _T / raf;
+        const _l = LENGTH / _Nraf;
+        pixelStepRef.current = _l;
+    }, [ability]);
+    // Dangerous <<<
+
     useEffect(() => {
         if (timerRef.current?.parentNode) setOuterContainer(timerRef.current?.parentNode as Element); // чтобы renderControls корректно отрисовал содержимое
-
-        const instance = TickNotifier.getInstance();
-        instance.subscribe(onTickNotify);
-        document.addEventListener('visibilitychange', onVisibilityChange);
         document.addEventListener('keydown', handleKeyDown);
         document.addEventListener('keyup', handleKeyUp);
 
         return () => {
-            instance.unsubscribe(onTickNotify);
-            document.removeEventListener('visibilitychange', onVisibilityChange);
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('keyup', handleKeyUp);
         };
@@ -110,9 +113,9 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
         if (nextInitialCountdown === initialCountdownRef.current) return;
         
         initialCountdownRef.current = nextInitialCountdown;
-        nextStepRef.current = LENGTH / (COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * nextInitialCountdown);
+        // nextStepRef.current = LENGTH / (COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * nextInitialCountdown);
 
-        if (timerStatusRef.current === ETimerStatus.READY) refreshTimer();
+        // if (timerStatusRef.current === ETimerStatus.READY) refreshTimer();
     }, [ability]);
 
     useEffect(() => {
@@ -139,13 +142,13 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
 
     useEffect(() => {
         shiftRef.current = shiftSlice;
-        if (timerStatusRef.current === ETimerStatus.PAUSED) shiftTimer();
+        // if (timerStatusRef.current === ETimerStatus.PAUSED) shiftTimer();
         if (timerStatusRef.current === ETimerStatus.READY) dispatch(removeShift({position: ability.position}));
     }, [shiftSlice]);
 
     useEffect(() => {
         refreshRef.current = refreshSlice;
-        if (refreshRef.current.value) refreshTimer();
+        // if (refreshRef.current.value) refreshTimer();
     }, [refreshSlice]);
 
     useEffect(() => {
@@ -171,124 +174,156 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
         handleClickTimer();
     }, []);
 
-    const onTickNotify = useCallback(() => {
-        if (timerStatusRef.current !== ETimerStatus.RUNNING || !circleRef.current) return;
+    // const shiftTimer = useCallback(() => {
 
-        const _strokeDashoffset = strokeDashoffsetRef.current;
+    //     if (!shiftRef.current?.value || !circleRef.current || !initialCountdownRef.current) return;
 
-        if (shiftRef.current?.value) return shiftTimer();
+    //     const {direction, value} = shiftRef.current;
+    //     const _strokeDashoffset = strokeDashoffsetRef.current;
 
-        if (countMSRef.current === COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND) {
-            countMSRef.current = 0;
-            currentCountdownRef.current -= 1;
-            return currentCountdownRef.current === 0 ? refreshTimer(AUTOEND) : setCurrentCountdown(currentCountdownRef.current);
+    //     if (direction === EDirection.FORWARD) {
+    //         if (value >= currentCountdownRef.current) return refreshTimer();
+
+    //         currentCountdownRef.current = currentCountdownRef.current - value;
+
+    //         const nextStrokeDashoffset = _strokeDashoffset + (stepRef.current * COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * value);
+
+    //         strokeDashoffsetRef.current = nextStrokeDashoffset < LENGTH ? nextStrokeDashoffset : (LENGTH - nextStrokeDashoffset);
+
+    //         circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
+
+    //         setCurrentCountdown(currentCountdownRef.current);
+    //         return dispatch(removeShift({position: ability.position}));
+    //     } 
+
+    //     if (currentCountdownRef.current + value >= initialCountdownRef.current) {
+
+    //         currentCountdownRef.current = initialCountdownRef.current;
+    //         strokeDashoffsetRef.current = 0;
+    //         circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
+    //         setCurrentCountdown(currentCountdownRef.current);
+    //         return dispatch(removeShift({position: ability.position}));
+    //     }
+
+    //     currentCountdownRef.current = currentCountdownRef.current + value;
+    //     const nextStrokeDashoffset = _strokeDashoffset - (stepRef.current * COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * value);
+    //     strokeDashoffsetRef.current = nextStrokeDashoffset <= 0 ? 0 : nextStrokeDashoffset;
+    //     circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
+    //     setCurrentCountdown(currentCountdownRef.current);
+    //     return dispatch(removeShift({position: ability.position}));
+
+    // }, []);
+
+    // const refreshTimer = useCallback((autoend?: any) => {
+    //     if (!circleRef.current) return;
+
+    //     timerStatusRef.current = ETimerStatus.READY;
+    //     currentCountdownRef.current = initialCountdownRef.current;
+    //     stepRef.current = nextStepRef.current;
+
+    //     if (autoend === AUTOEND) playSoundDecorator(END_SOUND);
+
+    //     setTimerStatus(timerStatusRef.current);
+    //     setCurrentCountdown(currentCountdownRef.current);
+
+    //     const timeOutId = setTimeout(() => {
+    //         if (!circleRef.current) return;
+
+    //         circleRef.current.style.display = 'none';
+    //         strokeDashoffsetRef.current = 0;
+    //         circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
+    //         clearTimeout(timeOutId);
+    //     }, 10);
+
+    //     setAnimateIndicator(true);
+    //     dispatch(removeRunning({value: ability.position}));
+    //     dispatch(removeShift({position: ability.position}));
+    //     dispatch(removeRefresh({position: ability.position}));
+    // }, []);
+
+
+    const moveRaf = () => {
+        if (!circleRef.current) return
+        const currentTime = Date.now();
+        let possibleOffset = strokeDashoffsetRef.current + pixelStepRef.current;
+
+        if (lastRenderRafRef.current) {
+            const timeDiff = currentTime - (lastRenderRafRef.current as number);    
+            const lostNraf = timeDiff / (globalThis as any).frameRate;
+            const lostPixels = lostNraf * pixelStepRef.current;
+            console.log('lostPixel: ', lostPixels);
+            console.log('pixelStepRef.current: ', pixelStepRef.current);
+            possibleOffset = lostPixels + strokeDashoffsetRef.current;
         }
 
-        countMSRef.current += 1;
-        strokeDashoffsetRef.current += _strokeDashoffset + stepRef.current < LENGTH ? stepRef.current : LENGTH - _strokeDashoffset;
+        lastRenderRafRef.current = currentTime;
+
+
+        if (possibleOffset >= LENGTH) {
+            strokeDashoffsetRef.current = LENGTH;
+            circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
+            timerStatusRef.current = ETimerStatus.READY;
+            cancelAnimationFrame(startIdRef.current as number);
+            startIdRef.current = null;
+
+            return requestAnimationFrame(() => {
+                if (!circleRef.current) return
+                circleRef.current.style.display = 'none';
+                strokeDashoffsetRef.current = 0;
+                lastRenderRafRef.current = null;
+            })
+        } 
+        
+        strokeDashoffsetRef.current = possibleOffset;
         circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
-    }, []);
-
-    const onVisibilityChange = () => {
-        if (!circleRef.current) return;
-
-        if (document.hidden) {
-            return circleRef.current.classList.remove('transition');
-        }
-
-        const timeoutID = setTimeout(() => {
-            if (!circleRef.current) return;
-            circleRef.current.classList.add('transition');
-            clearTimeout(timeoutID);
-        }, 10);
+        startIdRef.current = requestAnimationFrame(moveRaf);
     }
 
-    const shiftTimer = useCallback(() => {
-
-        if (!shiftRef.current?.value || !circleRef.current || !initialCountdownRef.current) return;
-
-        const {direction, value} = shiftRef.current;
-        const _strokeDashoffset = strokeDashoffsetRef.current;
-
-        if (direction === EDirection.FORWARD) {
-            if (value >= currentCountdownRef.current) return refreshTimer();
-
-            currentCountdownRef.current = currentCountdownRef.current - value;
-
-            const nextStrokeDashoffset = _strokeDashoffset + (stepRef.current * COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * value);
-
-            strokeDashoffsetRef.current = nextStrokeDashoffset < LENGTH ? nextStrokeDashoffset : (LENGTH - nextStrokeDashoffset);
-
-            circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
-
-            setCurrentCountdown(currentCountdownRef.current);
-            return dispatch(removeShift({position: ability.position}));
-        } 
-
-        if (currentCountdownRef.current + value >= initialCountdownRef.current) {
-
-            currentCountdownRef.current = initialCountdownRef.current;
-            strokeDashoffsetRef.current = 0;
-            circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
-            setCurrentCountdown(currentCountdownRef.current);
-            return dispatch(removeShift({position: ability.position}));
-        }
-
-        currentCountdownRef.current = currentCountdownRef.current + value;
-        const nextStrokeDashoffset = _strokeDashoffset - (stepRef.current * COUNT_OF_BLINKS_EQUIVALENT_TO_ONE_SECOND * value);
-        strokeDashoffsetRef.current = nextStrokeDashoffset <= 0 ? 0 : nextStrokeDashoffset;
-        circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
-        setCurrentCountdown(currentCountdownRef.current);
-        return dispatch(removeShift({position: ability.position}));
-
-    }, []);
-
-    const refreshTimer = useCallback((autoend?: any) => {
+    const handleClickTimer = () => {
         if (!circleRef.current) return;
 
-        timerStatusRef.current = ETimerStatus.READY;
-        currentCountdownRef.current = initialCountdownRef.current;
-        stepRef.current = nextStepRef.current;
-
-        if (autoend === AUTOEND) playSoundDecorator(END_SOUND);
-
-        setTimerStatus(timerStatusRef.current);
-        setCurrentCountdown(currentCountdownRef.current);
-
-        const timeOutId = setTimeout(() => {
-            if (!circleRef.current) return;
-
-            circleRef.current.style.display = 'none';
-            strokeDashoffsetRef.current = 0;
-            circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
-            clearTimeout(timeOutId);
-        }, 10);
-
-        setAnimateIndicator(true);
-        dispatch(removeRunning({value: ability.position}));
-        dispatch(removeShift({position: ability.position}));
-        dispatch(removeRefresh({position: ability.position}));
-    }, []);
-
-    const handleClickTimer = () => {
         // Разблокируем аудио контекст на первое действие пользователя
-        unlockAudio();
-        if ((timerStatusRef.current === ETimerStatus.READY) && circleRef.current) {
-            circleRef.current.style.display = 'block';
+        // unlockAudio();
+
+
+
+
+
+
+
+
+        if (timerStatusRef.current === ETimerStatus.READY) {
+            timerStatusRef.current = ETimerStatus.RUNNING;
+
+            return requestAnimationFrame(() => {
+                if (!circleRef.current) return
+                circleRef.current.style.display = 'block';
+                lastRenderRafRef.current = Date.now();
+
+                startIdRef.current = requestAnimationFrame(moveRaf);
+            })
         }
 
         if (timerStatusRef.current === ETimerStatus.RUNNING) {
             timerStatusRef.current = ETimerStatus.PAUSED;
-            pauseApp();
-            return setTimerStatus(timerStatusRef.current);
+            cancelAnimationFrame(startIdRef.current as number);
+            // pauseApp();
+            // return setTimerStatus(timerStatusRef.current);
+            return;
         }
 
-        timerStatusRef.current = ETimerStatus.RUNNING;
-        setAnimateIndicator(false);
-        setTimerStatus(timerStatusRef.current);
-        playSoundDecorator(RUN_SOUND);
-        runApp();
-        dispatch(addRunning({value: ability.position}));
+        if (timerStatusRef.current === ETimerStatus.PAUSED) {
+            timerStatusRef.current = ETimerStatus.RUNNING;
+            startIdRef.current = requestAnimationFrame(moveRaf);
+            return 
+        }
+
+        // timerStatusRef.current = ETimerStatus.RUNNING;
+        // setAnimateIndicator(false);
+        // setTimerStatus(timerStatusRef.current);
+        // playSoundDecorator(RUN_SOUND);
+        // runApp();
+        // dispatch(addRunning({value: ability.position}));
     }
 
     const getKey = useCallback((event: KeyboardEvent) => {
@@ -376,7 +411,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
                                 </div>
 
                                 <div className="Timer__controls">
-                                    <div className={cn('Timer__controlButton refresh', {hidden: timerStatus === ETimerStatus.READY})} onClick={refreshTimer} title={translateText(dictionary, 'reset_timer')}>
+                                    <div className={cn('Timer__controlButton refresh', {hidden: timerStatus === ETimerStatus.READY})} onClick={() => {}} title={translateText(dictionary, 'reset_timer')}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
                                             <path d="M16.5 9C15.7381 9 15.3769 9.53688 15.25 10.1038C14.7931 12.1438 12.8544 15.25 9 15.25C5.54813 15.25 2.75 12.4512 2.75 9C2.75 5.54875 5.54813 2.75 9 2.75C10.4 2.75 11.6844 3.22063 12.725 4H11.5C10.81 4 10.25 4.56 10.25 5.25C10.25 5.94 10.81 6.5 11.5 6.5H15.25C15.94 6.5 16.5 5.94 16.5 5.25V1.5C16.5 0.81 15.94 0.25 15.25 0.25C14.56 0.25 14 0.81 14 1.5V1.82375C12.5831 0.8325 10.8606 0.25 9 0.25C4.1675 0.25 0.25 4.1675 0.25 9C0.25 13.8325 4.1675 17.75 9 17.75C15.2369 17.75 17.75 11.8125 17.75 10.3281C17.75 9.42 17.0863 9 16.5 9Z"/>
                                         </svg>
