@@ -251,8 +251,6 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
             const timeDiff = currentTime - (lastRenderRafRef.current as number);    
             const lostNraf = timeDiff / (globalThis as any).frameRate;
             const lostPixels = lostNraf * pixelStepRef.current;
-            console.log('lostPixel: ', lostPixels);
-            console.log('pixelStepRef.current: ', pixelStepRef.current);
             possibleOffset = lostPixels + strokeDashoffsetRef.current;
         }
 
@@ -345,6 +343,19 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
 
     const playSoundDecorator = useCallback((str: string) => playSound(str, withSoundRef.current), []);
 
+
+    const dirtyShiftFunction = (value: number) => {
+        // value - должно быть задано в секундах.
+
+        requestAnimationFrame(() => {
+            if (!circleRef.current) return
+            const piece = LENGTH / initialCountdownRef.current;
+            const _shiftValue = value * piece;
+            strokeDashoffsetRef.current = strokeDashoffsetRef.current + _shiftValue;
+            circleRef.current.style.strokeDashoffset = `${strokeDashoffsetRef.current}`;
+        })
+    }
+
     return <div className="Timer" style={{backgroundImage: `url("${ability.img}")`}} ref={timerRef}>
                 {        
                     currentHero &&
@@ -377,6 +388,9 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
 
                     <div className="Timer__countdown">{currentCountdown}</div>
                     
+                    <div className='superBox left' onClick={() => dirtyShiftFunction(-12)}></div>
+                    <div className='superBox right' onClick={() => dirtyShiftFunction(12)}></div>
+
                     {
                         currentStage === EStages.PLAY &&
                         <div className="Timer__cover" onClick={handleClickTimer} title={translateText(dictionary, timerStatus === ETimerStatus.RUNNING ? 'pause' : 'start')}>
