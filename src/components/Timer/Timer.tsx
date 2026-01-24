@@ -83,6 +83,7 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
     const pixelStepRef = useRef<number>(0);
     const startIdRef = useRef<number | null>(null);
     const lastRenderRafRef = useRef<number | null>(null);
+    const timeLeftRef = useRef<number>(initialCountdownRef.current);
 
     useEffect(() => {
         if (!ability) return;
@@ -283,21 +284,17 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
         // Разблокируем аудио контекст на первое действие пользователя
         // unlockAudio();
 
-
-
-
-
-
-
-
         if (timerStatusRef.current === ETimerStatus.READY) {
             timerStatusRef.current = ETimerStatus.RUNNING;
+
+            setAnimateIndicator(false); //TODO как работает обновление состояния относительно CRP ?
+                                         //TODO как работает обновление состояния относительно CRP ?
+                                            //TODO как работает обновление состояния относительно CRP ?
 
             return requestAnimationFrame(() => {
                 if (!circleRef.current) return
                 circleRef.current.style.display = 'block';
                 lastRenderRafRef.current = Date.now();
-
                 startIdRef.current = requestAnimationFrame(moveRaf);
             })
         }
@@ -356,6 +353,14 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
         })
     }
 
+
+    const dirtyShiftCountdown = () => {
+        const totalTimeMS = initialCountdownRef.current;
+        const currentRenderTimeStamp = Date.now();
+        const startTimerTimeStamp = timeLeftRef.current;
+        const timeLeft =  Math.floor(totalTimeMS - (currentRenderTimeStamp - startTimerTimeStamp));
+    }
+
     return <div className="Timer" style={{backgroundImage: `url("${ability.img}")`}} ref={timerRef}>
                 {        
                     currentHero &&
@@ -387,9 +392,6 @@ const Timer = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer,
                     </svg>
 
                     <div className="Timer__countdown">{currentCountdown}</div>
-                    
-                    <div className='superBox left' onClick={() => dirtyShiftFunction(-12)}></div>
-                    <div className='superBox right' onClick={() => dirtyShiftFunction(12)}></div>
 
                     {
                         currentStage === EStages.PLAY &&

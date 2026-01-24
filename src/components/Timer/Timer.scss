@@ -463,23 +463,3 @@ $fourthDelay: calc(($buttonHeight + $buttonWidth + $buttonHeight) / $speed);
         right: #{$length}px;
     }
 }
-
-.superBox { 
-    position: absolute;
-    z-index: 100000000;
-    width: 60px;
-    height: 70px;
-    border-radius: 4px;
-
-    top: 15px;
-
-    &.left {
-        left: 15px;
-        background-color: cornflowerblue;
-    }
-
-    &.right {
-        left: 90px;
-        background-color: rgb(143, 237, 100);
-    }
-}
