@@ -1,28 +1,26 @@
-import React, { JSX, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { JSX, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {EStages} from '../../../store/StageContext';
 import { ITimerData } from '../../../data/data';
 import { EAppStatus } from '../../../pages/PlaygroundPage/SettingsStage/SettingsStage';
 import '../Timer.scss';
 
 interface IProps {
-
-    outerRunTrigger: string
-    outerStopTrigger: string
-    outerResetTrigger: string
+    // если не любая true строка, значит это тот частый маунт при котором не нужно тригерить
+    outerRunTrigger: string | false
+    outerStopTrigger: string | false
+    outerResetTrigger: string | false
 
     onRun: () => void
     onStop: () => void
     onReset: () => void
 
-    countDown: number
+    countDownProp: number
     circleRef: any
 
     strokeWidth: number
     radius: number
-    circleLength: number
     strokeDashoffset: number
 }
-
 
 const TimerCircle = (props: IProps): JSX.Element => {
     
@@ -35,25 +33,63 @@ const TimerCircle = (props: IProps): JSX.Element => {
         onStop,
         onReset,
 
-        countDown,
+        countDownProp,
         circleRef,
 
         strokeWidth,
         radius,
-        circleLength,
         strokeDashoffset
     } = props
 
-    useLayoutEffect(() => run(), [outerRunTrigger])
-    useLayoutEffect(() => stop(), [outerStopTrigger])
-    useLayoutEffect(() => reset(), [outerResetTrigger])
+    const circleLength = 2 * Math.PI * radius
+    const strokeDashoffsetRef = useRef<number>(strokeDashoffset)
+    const shiftValue = useMemo(() => calculateShiftValue(countDownProp, circleLength), [countDownProp, radius])
+    const lastShiftTimeStampRef = useRef<number>(0)
+    const rafRef = useRef<number>(0)
 
-    const changeOffset = () => {
+    useLayoutEffect(() => { 
+        // у нас нет прямого вызовы функции, мы можем лишь передать новую любую true строку отличную от старой чтобы затриггерить функцию
+        (outerRunTrigger !== false) && resolveRun()
+    }, [outerRunTrigger])
+
+    useLayoutEffect(() => {
+        (outerStopTrigger !== false) && stop()
+    }, [outerStopTrigger])
+
+    useLayoutEffect(() => {
+        (outerResetTrigger !== false) && reset()
+    }, [outerResetTrigger])
+
+    const resolveRun = () => {
+        strokeDashoffsetRef.current === 0 ? firstPlay() : playAfterStop()
+        setTimeout(() => onRun(), 0) // планирование а не прямой вызов функции, чтобы не попасть в цепочку последовательных вызовов в дебрях и чтобы не зациклиться.
+    }
+
+    const firstPlay = () => {
+        requestAnimationFrame((startTimestamp) => {
+            circleRef.current.style.visibility = 'visible'
+            lastShiftTimeStampRef.current = startTimestamp // ?
+
+            rafRef.current = requestAnimationFrame((currentTimestamp) => {
+                const offset = strokeDashoffsetRef.current + shiftValue
+                applyChanges(offset, currentTimestamp)
+                rafRef.current = requestAnimationFrame(proceed)
+            })
+        })
+    }
+
+    const playAfterStop = () => {
 
     }
 
-    const run = () => {
-        onRun()
+    const proceed = () => {
+        
+    }
+
+    const applyChanges = (newOffset: number, renderTimestamp: number) => {
+        strokeDashoffsetRef.current = newOffset
+        lastShiftTimeStampRef.current = renderTimestamp
+        circleRef.current.style.strokeDashoffset = `${newOffset}`
     }
 
     const stop = () => {
@@ -84,6 +120,14 @@ const TimerCircle = (props: IProps): JSX.Element => {
             </svg>
             <div className="Timer__countdown">00</div>
     </React.Fragment>
+}
+
+const calculateShiftValue = (cooldown: number, circleLength: number): number => {
+    let _T = cooldown * 1000; // перевод в миллисекунды
+    const raf = (globalThis as any).frameRate;
+    const _Nraf = _T / raf;
+    const _l = circleLength / _Nraf;
+    return _l;
 }
 
 export default TimerCircle;
