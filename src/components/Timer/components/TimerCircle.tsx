@@ -5,10 +5,10 @@ import { EAppStatus } from '../../../pages/PlaygroundPage/SettingsStage/Settings
 import '../Timer.scss';
 
 interface IProps {
-
-    outerRunTrigger: string
-    outerStopTrigger: string
-    outerResetTrigger: string
+    // если не любая true строка, значит это тот частый маунт при котором не нужно тригерить
+    outerRunTrigger: string | false
+    outerStopTrigger: string | false
+    outerResetTrigger: string | false
 
     onRun: () => void
     onStop: () => void
@@ -44,9 +44,19 @@ const TimerCircle = (props: IProps): JSX.Element => {
         strokeDashoffset
     } = props
 
-    useLayoutEffect(() => run(), [outerRunTrigger])
-    useLayoutEffect(() => stop(), [outerStopTrigger])
-    useLayoutEffect(() => reset(), [outerResetTrigger])
+
+    useLayoutEffect(() => { 
+        // у нас нет прямого вызовы функции, мы можем лишь передать новую любую true строку отличную от старой чтобы затриггерить функцию
+        (outerRunTrigger !== false) && run()
+    }, [outerRunTrigger])
+
+    useLayoutEffect(() => {
+        (outerStopTrigger !== false) && stop()
+    }, [outerStopTrigger])
+
+    useLayoutEffect(() => {
+        (outerResetTrigger !== false) && reset()
+    }, [outerResetTrigger])
 
     const changeOffset = () => {
 
