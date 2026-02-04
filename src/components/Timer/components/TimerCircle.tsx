@@ -61,14 +61,14 @@ const TimerCircle = (props: IProps): JSX.Element => {
     }, [outerResetTrigger])
 
     const resolveRun = () => {
-        strokeDashoffsetRef.current === 0 ? firstPlay() : playAfterStop()
+        strokeDashoffsetRef.current === 0 ? firstRun() : runAfterStop()
         setTimeout(() => onRun(), 0) // планирование а не прямой вызов функции, чтобы не попасть в цепочку последовательных вызовов в дебрях и чтобы не зациклиться.
     }
 
-    const firstPlay = () => {
+    const firstRun = () => {
         requestAnimationFrame((startTimestamp) => {
             circleRef.current.style.visibility = 'visible'
-            lastShiftTimeStampRef.current = startTimestamp // ?
+            lastShiftTimeStampRef.current = startTimestamp
 
             rafRef.current = requestAnimationFrame((currentTimestamp) => {
                 const offset = strokeDashoffsetRef.current + shiftValue
@@ -78,12 +78,21 @@ const TimerCircle = (props: IProps): JSX.Element => {
         })
     }
 
-    const playAfterStop = () => {
-
+    const runAfterStop = () => {
+         requestAnimationFrame((startTimestamp) => {
+            lastShiftTimeStampRef.current = startTimestamp
+            rafRef.current = requestAnimationFrame(proceed)
+        })
     }
 
     const proceed = () => {
-        
+        // calculating
+        // calculating
+        // calculating
+        // calculating
+        // calculating
+        // applyChanges()
+        // requestAnimationFrame(proceed)
     }
 
     const applyChanges = (newOffset: number, renderTimestamp: number) => {
