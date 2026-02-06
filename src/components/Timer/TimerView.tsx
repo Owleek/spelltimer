@@ -255,7 +255,7 @@ const TimerView = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
         let possibleOffset = strokeDashoffsetRef.current + pixelStepRef.current;
 
         if (lastRenderRafRef.current) {
-            const timeDiff = currentTime - (lastRenderRafRef.current as number);    
+            const timeDiff = currentTime - (lastRenderRafRef.current as number);
             const lostNraf = timeDiff / (globalThis as any).frameRate;
             const lostPixels = lostNraf * pixelStepRef.current;
             possibleOffset = lostPixels + strokeDashoffsetRef.current;
@@ -273,7 +273,7 @@ const TimerView = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
 
             return requestAnimationFrame(() => {
                 if (!circleRef.current) return
-                circleRef.current.style.display = 'none';
+                circleRef.current.style.visibility = 'hidden';
                 strokeDashoffsetRef.current = 0;
                 lastRenderRafRef.current = null;
             })

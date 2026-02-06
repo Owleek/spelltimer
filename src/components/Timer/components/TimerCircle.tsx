@@ -9,6 +9,7 @@ interface IProps {
     outerRunTrigger: string | false
     outerStopTrigger: string | false
     outerResetTrigger: string | false
+    correctiveShift: number
 
     onRun: () => void
     onStop: () => void
@@ -28,6 +29,7 @@ const TimerCircle = (props: IProps): JSX.Element => {
         outerRunTrigger,
         outerStopTrigger,
         outerResetTrigger,
+        correctiveShift,
 
         onRun,
         onStop,
@@ -43,7 +45,7 @@ const TimerCircle = (props: IProps): JSX.Element => {
 
     const circleLength = 2 * Math.PI * radius
     const strokeDashoffsetRef = useRef<number>(strokeDashoffset)
-    const shiftValue = useMemo(() => calculateShiftValue(countDownProp, circleLength), [countDownProp, radius])
+    const defaultShiftValue = useMemo(() => calculateDefaultShiftValue(countDownProp, circleLength), [countDownProp, radius])
     const lastShiftTimeStampRef = useRef<number>(0)
     const rafRef = useRef<number>(0)
 
@@ -61,35 +63,80 @@ const TimerCircle = (props: IProps): JSX.Element => {
     }, [outerResetTrigger])
 
     const resolveRun = () => {
-        strokeDashoffsetRef.current === 0 ? firstPlay() : playAfterStop()
+        strokeDashoffsetRef.current === 0 ? firstRun() : runAfterStop()
         setTimeout(() => onRun(), 0) // планирование а не прямой вызов функции, чтобы не попасть в цепочку последовательных вызовов в дебрях и чтобы не зациклиться.
     }
 
-    const firstPlay = () => {
-        requestAnimationFrame((startTimestamp) => {
+    const firstRun = () => {
+        requestAnimationFrame((startTimestamp) => { // таймер не запускается при первом raf намеренно, 
+                                                    // чтобы точно посчитать разницу со следующим кадром, 
+                                                    // сначала показываем таймер, выдерживаем время до следующего кадра и на нем сдвигаем offset
             circleRef.current.style.visibility = 'visible'
-            lastShiftTimeStampRef.current = startTimestamp // ?
+            lastShiftTimeStampRef.current = startTimestamp
 
-            rafRef.current = requestAnimationFrame((currentTimestamp) => {
-                const offset = strokeDashoffsetRef.current + shiftValue
-                applyChanges(offset, currentTimestamp)
-                rafRef.current = requestAnimationFrame(proceed)
+            rafRef.current = requestAnimationFrame(() => {
+                const newStrokeDashoffset = getNewstrokeDashoffset(defaultShiftValue)
+                resolveRender(newStrokeDashoffset)
             })
         })
     }
 
-    const playAfterStop = () => {
+    const resolveRender = (newStrokeDashoffset: number) => {
+        const isLastRender = newStrokeDashoffset >= circleLength
 
+        if (isLastRender) return shutDown()
+
+
+        rafRef.current = requestAnimationFrame(() => {})
     }
 
-    const proceed = () => {
-        
+    const runAfterStop = () => {
+         requestAnimationFrame((startTimestamp) => {
+            lastShiftTimeStampRef.current = startTimestamp
+            rafRef.current = requestAnimationFrame(proceed)
+        })
     }
 
-    const applyChanges = (newOffset: number, renderTimestamp: number) => {
+    const proceed = (currentTimestamp: number) => {
+        const shiftValue = calculateLostShiftValue(currentTimestamp, lastShiftTimeStampRef.current, defaultShiftValue)
+        let strokeDashoffset = getNewstrokeDashoffset(shiftValue)
+
+        if (strokeDashoffset >= circleLength) {
+            
+        }
+
+        // calculating
+        // calculating
+        // calculating
+        // calculating
+        // calculating
+        // applyChanges()
+        // rafRef.current = requestAnimationFrame(proceed)
+    }
+
+    const getNewstrokeDashoffset = (shiftValue: number): number => strokeDashoffsetRef.current + shiftValue
+
+    const applyChanges = (newStrokeDashoffset: number, currentTimestamp: number) => {
+        changeStrokeDashoffset(newStrokeDashoffset)
+        saveLastRenderTimestamp(currentTimestamp)
+    }
+
+    const changeStrokeDashoffset = (newOffset: number) => {
         strokeDashoffsetRef.current = newOffset
-        lastShiftTimeStampRef.current = renderTimestamp
         circleRef.current.style.strokeDashoffset = `${newOffset}`
+    }
+
+    const saveLastRenderTimestamp = (renderTimestamp: number) => {
+        lastShiftTimeStampRef.current = renderTimestamp
+    }
+
+    const shutDown = () => {
+        requestAnimationFrame(() => {
+            changeStrokeDashoffset(circleLength)
+            saveLastRenderTimestamp(0)
+            circleRef.current.style.visibility = 'hidden'
+            rafRef.current = 0
+        })
     }
 
     const stop = () => {
@@ -97,6 +144,10 @@ const TimerCircle = (props: IProps): JSX.Element => {
     }
 
     const reset = () => {
+        requestAnimationFrame(() => {
+
+        })
+
         onReset()
     }
 
@@ -122,12 +173,19 @@ const TimerCircle = (props: IProps): JSX.Element => {
     </React.Fragment>
 }
 
-const calculateShiftValue = (cooldown: number, circleLength: number): number => {
+const calculateDefaultShiftValue = (cooldown: number, circleLength: number): number => {
     let _T = cooldown * 1000; // перевод в миллисекунды
     const raf = (globalThis as any).frameRate;
     const _Nraf = _T / raf;
     const _l = circleLength / _Nraf;
     return _l;
+}
+
+const calculateLostShiftValue = (currentTimestamp: number, lastRendeTimestamp: number, defaultShiftValue: number): number => {
+    const timeDiff = currentTimestamp - lastRendeTimestamp
+    const lostNraf = timeDiff / (globalThis as any).frameRate
+    const lostShiftValue = lostNraf * defaultShiftValue
+    return lostShiftValue
 }
 
 export default TimerCircle;
