@@ -9,7 +9,7 @@ interface IProps {
     outerRunTrigger: string | false
     outerStopTrigger: string | false
     outerResetTrigger: string | false
-    correctiveShift: number
+    correctiveShift: number | false
 
     onRun: () => void
     onStop: () => void
@@ -61,6 +61,10 @@ const TimerCircle = (props: IProps): JSX.Element => {
         (outerResetTrigger !== false) && reset()
     }, [outerResetTrigger])
 
+    useLayoutEffect(() => {
+        (correctiveShift !== false) && editRunWithCorrectiveShift(correctiveShift)
+    }, [correctiveShift])
+
     const run = () => {    // raf намеренно, чтобы точно посчитать разницу со следующим кадром, сначала показываем таймер, выдерживаем время до следующего кадра и на нем сдвигаем offset
         rafRef.current = requestAnimationFrame(currentTimestamp => {
             strokeDashoffsetRef.current === 0 ? firstRun(currentTimestamp) : renderFrame(currentTimestamp, defaultShiftValue)
@@ -95,11 +99,18 @@ const TimerCircle = (props: IProps): JSX.Element => {
     const renderFrame = (currentTimestamp: number, shiftvalue: number) => {
         const newStrokeDashoffset = getNewstrokeDashoffset(shiftvalue)
         const isLastRender = newStrokeDashoffset >= circleLength
-        if (isLastRender) return shutDown()
+        if (isLastRender) return resetWithoutRaf()
 
         saveRenderTimestamp(currentTimestamp)
         applyStrokeDashoffset(newStrokeDashoffset)
         goToNextFrame()
+    }
+
+    const editRunWithCorrectiveShift = (correctiveShift: number) => {
+        rafRef.current = requestAnimationFrame((currentTimestamp) => {
+            const calculatedShiftValue = calculateLostShiftValue(currentTimestamp) + (defaultShiftValue * correctiveShift)
+            renderFrame(currentTimestamp, calculatedShiftValue)
+        })
     }
 
     const saveRenderTimestamp = (renderTimestamp: number) => {
@@ -121,19 +132,34 @@ const TimerCircle = (props: IProps): JSX.Element => {
         circleRef.current.style.visibility = 'hidden'
     }
 
-    const shutDown = () => {
+    const clearRaf = () => {
+        rafRef.current = 0
+    }
+
+    const resetWithoutRaf = () => {
         saveRenderTimestamp(0)
         applyStrokeDashoffset(circleLength)
 
         requestAnimationFrame( () => {
             hideCircle()
-            rafRef.current = 0
+            clearRaf()
         })
+
+        setTimeout(() =>  onReset(), 0);
     }
 
-    const stop = () => onStop()
-    const reset = () => onReset()
-    const handleClick = () => {}
+    const reset = () => {
+        requestAnimationFrame(resetWithoutRaf)
+    }
+
+    const stop = () => {
+        clearRaf()
+        setTimeout(() => onStop(), 0)
+    }
+
+    const handleClick = () => {
+        !!rafRef.current ? stop() : goToNextFrame()
+    }
 
     return <React.Fragment>
             <svg className="Timer__svg" viewBox="0 0 120 120" onClick={handleClick}>
