@@ -9,7 +9,7 @@ interface IProps {
     outerRunTrigger: string | false
     outerStopTrigger: string | false
     outerResetTrigger: string | false
-    correctiveShift: number | false
+    correctiveShift: string | false
 
     onRun: () => void
     onStop: () => void
@@ -62,12 +62,13 @@ const TimerCircle = (props: IProps): JSX.Element => {
     }, [outerResetTrigger])
 
     useLayoutEffect(() => {
-        (correctiveShift !== false) && editRunWithCorrectiveShift(correctiveShift)
+        (correctiveShift !== false) && editRunWithCorrectiveShift(+correctiveShift[0])
     }, [correctiveShift])
 
     const run = () => {    // raf намеренно, чтобы точно посчитать разницу со следующим кадром, сначала показываем таймер, выдерживаем время до следующего кадра и на нем сдвигаем offset
         rafRef.current = requestAnimationFrame(currentTimestamp => {
-            strokeDashoffsetRef.current === 0 ? firstRun(currentTimestamp) : renderFrame(currentTimestamp, defaultShiftValue)
+            if (strokeDashoffsetRef.current === 0) return firstRun(currentTimestamp)
+            renderFrame(currentTimestamp, defaultShiftValue) // defaultShiftValue чтобы после паузы не учитывалось время пройденное с момента паузы
         })
         setTimeout(() => onRun(), 0) // планирование а не прямой вызов функции, чтобы не попасть в цепочку последовательных вызовов в дебрях и чтобы не зациклиться.
     }
@@ -108,9 +109,15 @@ const TimerCircle = (props: IProps): JSX.Element => {
 
     const editRunWithCorrectiveShift = (correctiveShift: number) => {
         rafRef.current = requestAnimationFrame((currentTimestamp) => {
-            const calculatedShiftValue = calculateLostShiftValue(currentTimestamp) + (defaultShiftValue * correctiveShift)
-            renderFrame(currentTimestamp, calculatedShiftValue)
+            const correctiveShiftValue = calculateCorrectiveShiftValue(currentTimestamp, correctiveShift)
+            renderFrame(currentTimestamp, correctiveShiftValue)
         })
+    }
+
+    const calculateCorrectiveShiftValue = (currentTimestamp: number, correctiveShift: number) => {
+        const deltaValue = circleLength / countDownProp
+        const shift = calculateLostShiftValue(currentTimestamp) + (deltaValue * correctiveShift)
+        return shift
     }
 
     const saveRenderTimestamp = (renderTimestamp: number) => {
@@ -133,7 +140,8 @@ const TimerCircle = (props: IProps): JSX.Element => {
     }
 
     const clearRaf = () => {
-        rafRef.current = 0
+        cancelAnimationFrame(rafRef.current)
+        rafRef.current = 0        //TODO  почему ref без обнуления не обнуляется
     }
 
     const resetWithoutRaf = () => {
@@ -141,6 +149,7 @@ const TimerCircle = (props: IProps): JSX.Element => {
         applyStrokeDashoffset(circleLength)
 
         requestAnimationFrame( () => {
+            applyStrokeDashoffset(0)
             hideCircle()
             clearRaf()
         })
@@ -157,25 +166,26 @@ const TimerCircle = (props: IProps): JSX.Element => {
         setTimeout(() => onStop(), 0)
     }
 
-    const handleClick = () => {
-        !!rafRef.current ? stop() : goToNextFrame()
-    }
+    // const handleClick = () => {
+    //     !!rafRef.current ? stop() : run()
+    // }
 
     return <React.Fragment>
-            <svg className="Timer__svg" viewBox="0 0 120 120" onClick={handleClick}>
-                <circle
-                    ref={circleRef}
-                    strokeWidth={strokeWidth}
-                    r={radius}
-                    strokeDasharray={circleLength}
-                    strokeDashoffset={strokeDashoffset}
-                    className="Timer__circle"
-                    cx="60"
-                    cy="60"
-                    transform="rotate(-90 60 60)"
-                    fill="transparent" />
-            </svg>
-            <div className="Timer__countdown">00</div>
+                <svg className="Timer__svg" viewBox="0 0 120 120" >
+                    <circle
+                        ref={circleRef}
+                        strokeWidth={strokeWidth}
+                        r={radius}
+                        strokeDasharray={circleLength}
+                        strokeDashoffset="0"
+                        className="Timer__circle"
+                        cx="60"
+                        cy="60"
+                        transform="rotate(-90 60 60)"
+                        fill="transparent" />
+                </svg>
+
+            {/* <div className="Timer__countdown">{countDownProp}</div> */}
     </React.Fragment>
 }
 
