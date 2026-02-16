@@ -39,9 +39,9 @@ export enum ETimerStatus {
     PAUSED = 'paused'
 }
 
-const STROKEWIDTH = 70;
-const RADIUS = 35;
-const LENGTH = 2 * Math.PI * RADIUS;
+const STROKEWIDTH = 70
+const RADIUS = 35
+const LENGTH = 2 * Math.PI * RADIUS
 
 const TimerView = ({ability, appStatus, runApp, pauseApp, currentStage, removeTimer, withSound = true}: IProps): JSX.Element => {
     if (!ability) throw new Error('ability not found [Timer]');
@@ -375,16 +375,42 @@ const TimerView = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
     const isTimerToShowSpellTools = currentStage === EStages.EDIT && !!outerContainer;
     // <-- 02.02.26
 
+    const [run, setRun] = useState<string | false>(false)
+    const [shift, setShift] = useState<string | false>(false)
+
+    const setRunTrigger = () => {
+        if (!run) return setRun('run')
+        debugger
+        if (!shift) return setShift('3')
+        setShift(shift + '.')
+        debugger
+    }
+
     return <div className="Timer" style={{backgroundImage: `url("${ability.img}")`}} ref={timerRef}>
         
                 { currentHero && <ArtifactsOwner name={currentHero.name} img={currentHero.img}/> }
                 { isTimeToShowHotkeyHint && <HotkeyHint hotkey={hotkey} isKeyPressed={keyPressed} /> }
 
                 <div className="Timer__innerWrapper">
-                    
-                    <TimerCircle circleRef={circleRef}/>
+                    <TimerCircle
+                        outerRunTrigger={ run }
+                        outerStopTrigger={ false }
+                        outerResetTrigger={ false }
+                        correctiveShift={ shift }
 
-                    { isTimerToShowPlayButton && <PlayButton onClick={handleClickTimer} timerStatus={timerStatus}/> }
+                        onRun={ () => { console.log('runned') } }
+                        onStop={ () => { console.log('stoped') } }
+                        onReset={ () => { console.log('reseted') } }
+
+                        countDownProp={initialTime}
+                        circleRef={circleRef}
+
+                        strokeWidth={STROKEWIDTH}
+                        radius={RADIUS}
+                        strokeDashoffset={0}
+                    />
+
+                    { isTimerToShowPlayButton && <PlayButton onClick={setRunTrigger} timerStatus={timerStatus}/> }
 
                     {
                         isTimerToShowSpellTools &&
