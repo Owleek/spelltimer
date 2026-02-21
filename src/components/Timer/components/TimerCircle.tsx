@@ -9,7 +9,7 @@ interface IProps {
     outerRunTrigger: string | false
     outerStopTrigger: string | false
     outerResetTrigger: string | false
-    correctiveShift: string | false
+    correctiveShift: string | number | false
 
     onRun: () => void
     onStop: () => void
@@ -62,7 +62,8 @@ const TimerCircle = (props: IProps): JSX.Element => {
     }, [outerResetTrigger])
 
     useLayoutEffect(() => {
-        (correctiveShift !== false) && editRunWithCorrectiveShift(+correctiveShift[0])
+        // почему в пропс я передаю то строку то число, чтобы при передаче одного и того же значения пропс менялся и тригерил этот эффект
+        (correctiveShift !== false) && editRunWithCorrectiveShift(+correctiveShift)
     }, [correctiveShift])
 
     const run = () => {    // raf намеренно, чтобы точно посчитать разницу со следующим кадром, сначала показываем таймер, выдерживаем время до следующего кадра и на нем сдвигаем offset
@@ -124,7 +125,11 @@ const TimerCircle = (props: IProps): JSX.Element => {
         lastShiftTimeStampRef.current = renderTimestamp
     }
 
-    const getNewstrokeDashoffset = (shiftValue: number): number => strokeDashoffsetRef.current + shiftValue
+    const getNewstrokeDashoffset = (shiftValue: number): number => {
+        const newstrokeDashoffset = strokeDashoffsetRef.current + shiftValue
+        if (newstrokeDashoffset <= 0) return 0
+        return newstrokeDashoffset
+    }
 
     const applyStrokeDashoffset = (newOffset: number) => {
         strokeDashoffsetRef.current = newOffset
@@ -141,7 +146,7 @@ const TimerCircle = (props: IProps): JSX.Element => {
 
     const clearRaf = () => {
         cancelAnimationFrame(rafRef.current)
-        rafRef.current = 0        //TODO  почему ref без обнуления не обнуляется
+        rafRef.current = 0
     }
 
     const resetWithoutRaf = () => {
@@ -171,7 +176,7 @@ const TimerCircle = (props: IProps): JSX.Element => {
     // }
 
     return <React.Fragment>
-                <svg className="Timer__svg" viewBox="0 0 120 120" >
+                <svg className="Timer__svg" viewBox="0 0 120 120">
                     <circle
                         ref={circleRef}
                         strokeWidth={strokeWidth}
