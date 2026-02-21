@@ -376,14 +376,20 @@ const TimerView = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
     // <-- 02.02.26
 
     const [run, setRun] = useState<string | false>(false)
-    const [shift, setShift] = useState<string | false>(false)
+    const [shiftPropForCircle, setShift] = useState<string | number | false>(false)
+
+    // const getShiftFromTimeController = () => {
+
+    // }
 
     const setRunTrigger = () => {
+        // полагаю нужно в самом TimerCircle слушать из контекста изменение shiftPropForCircle, а не менять пропс тут, но это дело стейта - это завтра все
+        // false нужен чтобы при первом получении shift - не сработал ненужный скачок
         if (!run) return setRun('run')
-        debugger
-        if (!shift) return setShift('3')
-        setShift(shift + '.')
-        debugger
+        if (!shiftPropForCircle) return setShift(3)
+        // const shiftPropForCircle = getShiftFromTimeController()
+        if (typeof shiftPropForCircle === 'string') return setShift(-3)
+        return setShift('-3')
     }
 
     return <div className="Timer" style={{backgroundImage: `url("${ability.img}")`}} ref={timerRef}>
@@ -396,7 +402,7 @@ const TimerView = ({ability, appStatus, runApp, pauseApp, currentStage, removeTi
                         outerRunTrigger={ run }
                         outerStopTrigger={ false }
                         outerResetTrigger={ false }
-                        correctiveShift={ shift }
+                        correctiveShift={ shiftPropForCircle }
 
                         onRun={ () => { console.log('runned') } }
                         onStop={ () => { console.log('stoped') } }
