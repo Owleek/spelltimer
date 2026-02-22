@@ -52,7 +52,7 @@ const Box = ({isBinding, keyPressed, handleBindKey, hotkey, timerStatus, removeT
 
 const SpellTools = (props: IProps) => {
      createPortal(<Box {...props}/>, props.outerContainer)
-     return null
+    return null
 }
 
 export default SpellTools

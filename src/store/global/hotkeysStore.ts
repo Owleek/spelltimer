@@ -4,6 +4,8 @@ import { defaultSlotHotkeys, defaultTimerControlsHotkeys } from './constant'
 
 export interface IHotkeysStore {
     hotkeys: Record<string, string>
+    assignHotkey: (id: number, keyBoardKey: string) => any
+    getHotkey: (id: number | string) => any
 }
 
 const useHotkeyStore = create<IHotkeysStore>()(
@@ -15,6 +17,7 @@ const useHotkeyStore = create<IHotkeysStore>()(
             },
             assignHotkey: (id: number | string, keyBoardKey: string) => {
                 const _id = String(id) // преобразую к строке число
+                debugger
                 
                 set((state) => {
                     const hotkeys = { ...state.hotkeys }
