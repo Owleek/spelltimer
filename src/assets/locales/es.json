@@ -9,11 +9,11 @@
     "about_1": "👀 SpellTimer es una aplicación gratuita de asistencia para hacer seguimiento de los tiempos de reutilización de habilidades y objetos en Dota 2.",
     "about_2": "✨ SpellTimer cumple completamente con los principios de juego limpio establecidos por Valve, ya que no accede a datos directamente desde el cliente de Dota 2. La aplicación ofrece una interfaz intuitiva donde todas las acciones las realiza el propio jugador—ya no es necesario escribir los tiempos en el chat del juego.",
     "about_3": "🚀 La aplicación no requiere instalación ni creación de cuenta—está disponible directamente en el navegador.",
-    "about_4": "⚡ Actualmente, SpellTimer ofrece funciones básicas y comodidad mínima, suficientes para evaluar su utilidad entre los jugadores. Una vez se confirme su demanda, la siguiente actualización solucionará errores, optimizará el rendimiento y mejorará la experiencia del usuario.",
-    "about_5": "🎨 La versión actual de SpellTimer está orientada exclusivamente a los jugadores de Dota 2, pero si hay suficiente interés, la aplicación podría expandirse a otros juegos con mecánicas similares.",
+    "about_4": "⚡ Actualmente se están realizando trabajos de optimización de la aplicación y de corrección de deficiencias detectadas en la versión de demostración actual.",
+    "about_5": "🎨 Por el momento, SpellTimer está orientada únicamente a jugadores de Dota 2, pero pronto la aplicación podría ampliarse a otras disciplinas de juego con mecánicas similares.",
     "about_6": "📌 SpellTimer es un proyecto no oficial y no está afiliado a Valve Corporation. Todos los nombres, logotipos y marcas mencionados son propiedad de sus respectivos dueños y se usan solo con fines informativos y no comerciales.",
     "about_7": "Efecto de sonido proporcionado por ZapSplat.com",
-    "contact_1": "Siempre estamos abiertos a recibir comentarios y procuramos tener en cuenta las sugerencias de los jugadores. Si tienes ideas, preguntas o propuestas, no dudes en contactarnos por correo electrónico o redes sociales:",
+    "contact_1": "Envía tus comentarios, ideas para el desarrollo y sugerencias al siguiente correo electrónico: ",
     "contact_2": "Mi nombre es Artemiy. Soy el desarrollador y creador de SpellTimer, una solución de interfaz para jugadores de Dota 2. Este proyecto es una iniciativa personal en la que he volcado mi experiencia, atención al detalle y amor por el juego. Estoy abierto a colaborar profesionalmente en desarrollo web y proyectos emergentes.",
     "contact_3": "Para consultas de colaboración, no dudes en contactarme por correo electrónico:",
     "author": "Autor",
@@ -74,7 +74,7 @@
     "show_qr": "Mostrar código QR",
     "press_to_bind": "Presiona cualquier tecla para asignarla",
     "hotkey_toggle_timer": "Tecla rápida para iniciar/pausar el temporizador",
-    "last_update": "Última actualización: 11.08.2025 (v.1.0.3)",
+    "last_update": "Última actualización: 23.02.2026 (v.1.0.4)",
     "with_sound": "Con sonido",
     "without_sound": "Sin sonido"
 }

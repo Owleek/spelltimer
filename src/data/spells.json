@@ -12,7 +12,7 @@
     {   
         "hero": "Centaur Warruner",
         "name": "Work Horse",
-        "cooldown": [24]
+        "cooldown": [35]
     },
     {   
         "hero": "Chaos Knight",
@@ -107,7 +107,7 @@
     {   
         "hero": "Omniknight",
         "name": "Repel",
-        "cooldown": [55, 50, 45, 40]
+        "cooldown": [50, 45, 40, 35]
     },
     {   
         "hero": "Omniknight",
@@ -238,12 +238,12 @@
     {   
         "hero": "Lone Druid",
         "name": "True Form",
-        "cooldown": [100]
+        "cooldown": [60, 55, 50]
     },
     {   
         "hero": "Lone Druid",
         "name": "Summon Spirit Bear",
-        "cooldown": [150, 140, 130, 120]
+        "cooldown": [120]
     },
     {   
         "hero": "Luna",
@@ -258,7 +258,12 @@
     {   
         "hero": "Mirana",
         "name": "Moonlight shadow",
-        "cooldown": [140, 120, 100]
+        "cooldown": [120, 110, 100]
+    },
+    {
+        "hero": "Monkey King",
+        "name": "Wukong's Command",
+        "cooldown": [100, 90, 80]
     },
     {   
         "hero": "Morphling",
@@ -273,7 +278,7 @@
     {   
         "hero": "Razor",
         "name": "Eye of the Storm",
-        "cooldown": [70, 70, 60]
+        "cooldown": [80, 70, 60]
     },
     {   
         "hero": "Shadow Fiend",
@@ -294,12 +299,12 @@
     {   
         "hero": "Terrorblade",
         "name": "Metamorphosis",
-        "cooldown": [155, 150, 145, 140]
+        "cooldown": [145, 140, 135, 130]
     },
     {   
         "hero": "Terrorblade",
         "name": "Sunder",
-        "cooldown": [120, 80, 40]
+        "cooldown": [110, 75, 40]
     },
     {   
         "hero": "Terrorblade",
@@ -314,7 +319,7 @@
     {   
         "hero": "Ursa",
         "name": "Enrage",
-        "cooldown": [70, 50, 30],
+        "cooldown": [60, 45, 30],
         "upgradeByScepter": [30, 24, 18]
     },
     {   
@@ -325,7 +330,8 @@
     {   
         "hero": "Weaver",
         "name": "Time Lapse",
-        "cooldown": [70, 55, 40]
+        "cooldown": [70, 55, 40],
+        "upgradeByScepter": [60, 45, 30]
     },
     {   
         "hero": "Ancient Apparition",
@@ -361,7 +367,7 @@
     {   
         "hero": "Disruptor",
         "name": "Static Storm",
-        "cooldown": [90, 80, 70]
+        "cooldown": [100, 85, 70]
     },
     {   
         "hero": "Grimstroke",
@@ -411,7 +417,7 @@
     {   
         "hero": "Lion",
         "name": "Finger of Death",
-        "cooldown": [130, 85, 40],
+        "cooldown": [120, 80, 40],
         "upgradeByScepter": [90, 60, 30]
     },
     {   
@@ -467,7 +473,7 @@
     {   
         "hero": "Shadow Shaman",
         "name": "Mass Serpent Ward",
-        "cooldown": [110]
+        "cooldown": [110, 105, 100]
     },
     {   
         "hero": "Silencer",
@@ -482,7 +488,7 @@
     {   
         "hero": "Warlock",
         "name": "Chaotic Offering",
-        "cooldown": [160]
+        "cooldown": [165]
     },
     {   
         "hero": "Winter Wyvern",
@@ -512,7 +518,7 @@
     {   
         "hero": "Abbadon",
         "name": "Borrowed Time",
-        "cooldown": [90, 80, 70]
+        "cooldown": [90, 85, 80]
     },
     {   
         "hero": "Arc Warden",
@@ -563,13 +569,13 @@
     {   
         "hero": "Magnus",
         "name": "Reverse Polarity",
-        "cooldown": [120]
+        "cooldown": [115]
     },
     {   
         "hero": "Marci",
         "name": "Unleash",
-        "cooldown": [90, 75, 60],
-        "upgradeByScepter": [80, 65, 50]
+        "cooldown": [80, 70, 60],
+        "upgradeByScepter": [70, 60, 50]
     },
     {   
         "hero": "Natures's Prophet",
@@ -599,12 +605,12 @@
     {   
         "hero": "Spectre",
         "name": "Shadow Step",
-        "cooldown": [60, 55, 50]
+        "cooldown": [30, 26, 22, 18]
     },
     {   
         "hero": "Spectre",
         "name": "Haunt",
-        "cooldown": [160]
+        "cooldown": [180, 160, 140]
     },
     {   
         "hero": "Venomancer",
