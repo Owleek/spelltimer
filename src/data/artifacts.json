@@ -92,10 +92,6 @@
         "cooldown": [19]
     },
     {   
-        "name": "Gale Guard",
-        "cooldown": [19]
-    },
-    {   
         "name": "Ghost Scepter",
         "cooldown": [22]
     },
@@ -113,15 +109,15 @@
     },
     {   
         "name": "Hand of Midas",
-        "cooldown": [110]
+        "cooldown": [90]
     },
     {   
         "name": "Harpoon",
-        "cooldown": [14]
+        "cooldown": [19]
     },
     {   
         "name": "Heaven's Halberd",
-        "cooldown": [18]
+        "cooldown": [20]
     },
     {   
         "name": "Helm of the Dominator",
@@ -160,15 +156,7 @@
         "cooldown": [40]
     },
     {   
-        "name": "Ninja Gear",
-        "cooldown": [45]
-    },
-    {   
         "name": "Nullifier",
-        "cooldown": [10]
-    },
-    {   
-        "name": "Ogre Seal Totem",
         "cooldown": [10]
     },
     {   
@@ -181,15 +169,11 @@
     },
     {   
         "name": "Pavise",
-        "cooldown": [15]
+        "cooldown": [16]
     },
     {   
         "name": "Pipe of Insight",
         "cooldown": [60]
-    },
-    {   
-        "name": "Pyrrhic Cloak",
-        "cooldown": [40]
     },
     {   
         "name": "Refresher Orb",
@@ -229,7 +213,7 @@
     },
     {   
         "name": "Tumbler's Toy",
-        "cooldown": [30]
+        "cooldown": [15]
     },
     {   
         "name": "Veil of Discord",
@@ -237,6 +221,6 @@
     },
     {   
         "name": "Wind Waker",
-        "cooldown": [16]
+        "cooldown": [19]
     }
 ]

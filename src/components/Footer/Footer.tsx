@@ -25,7 +25,7 @@ const Footer = ({className}: {className: string}) => {
                 </ul>
             </div>
             <div className="footer__column rights">
-                <p className="footer__item">© 2025 spelltimer.com</p>
+                <p className="footer__item">© 2026 spelltimer.com</p>
                 <p className="footer__item">{translateText(dictionary, 'rights')}</p>
             </div>
             <div className={cn('footer__donationButton', {active: activeArticle === EPage.DONATION})} onClick={() => onSelectArticle(EPage.DONATION)} title={translateText(dictionary, 'support')}>
