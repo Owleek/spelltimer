@@ -7,7 +7,7 @@ export const COUNT_OF_SLOTS = 6
 // ---> Дефолтные значения горячих клавиш слотов для предопределенного количечества
 export const presetSlotHotkeys = ['KeyQ', 'KeyW', 'KeyE', 'KeyZ', 'KeyX', 'KeyC']
 
-export type ISlotIdsRecord = Record<`${number}`, string>
+export type ISlotIdsRecord = Record<string, string>
 export const defaultSlotHotkeys: ISlotIdsRecord = {} as ISlotIdsRecord
 
 Array.from({length: COUNT_OF_SLOTS}).forEach((_, index) => {
@@ -33,7 +33,8 @@ export const defaultTimerControlsHotkeys: ITimerControlHotkeys = {
 // ---------> СЛОТЫ
 
 export interface IEmptySlot {
-    position: number
+    position: string
+    hotkey: string
 }
 
 export type ISlot = ITimerData | IEmptySlot
