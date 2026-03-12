@@ -19,6 +19,7 @@ export interface IBaseFields {
     key: string
     name: string
     img: string
+    compressedImg: string
     type: EAbility
 }
 
@@ -73,6 +74,7 @@ const setBaseFields = <T>(arr: any, type: EAbility): Array<IBaseFields> => {
             key: key,
             name: item.name,
             img: `/assets/${type}/${key}.webp`,
+            compressedImg: `/assets/${type}/compressed/${key}.webp`,
             type: type
         }
     })

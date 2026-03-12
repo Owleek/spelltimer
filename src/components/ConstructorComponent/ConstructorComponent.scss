@@ -148,22 +148,32 @@ $paddingtopForCloseButton: 50px;
 
     font-size: 16px;
     text-transform: uppercase;
-    color: #a0a0a0;
+    color: white;
     font-weight: bold;
-
     opacity: 0.3;
 
     transition: opacity vars.$transitionTime ease;
+    background-color: rgba(119, 136, 153, 0.3);
     cursor: pointer;
 
+    height: 60px;
+    border-radius: 7px;
+    overflow: hidden;
+
     &:hover {
-        opacity: 1;
+        opacity: 0.7;
     }
 
     &.active {
-        color: vars.$darkGreen;
         opacity: 1;
         cursor: default;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
     }
 }
 
@@ -174,31 +184,6 @@ $paddingtopForCloseButton: 50px;
     left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    cursor: default;
-}
-
-.Menu__picbox {
-    height: 60px;
-    width: 100%;
-    border-radius: 7px;
-    overflow: hidden;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-}
-
-.Menu__picbox.all {
-    background-image: url('../../../public/assets/other/mixedAbilities.webp');
-}
-.Menu__picbox.spells {
-    background-image: url('../../../public/assets/other/spells.webp');
-}
-.Menu__picbox.items {
-    background-image: url('../../../public/assets/other/items.webp');
-}
-.Menu__picbox.other {
-    background-image: url('../../../public/assets/other/other.webp');
 }
 
 .Sidebar__button {
@@ -220,7 +205,6 @@ $paddingtopForCloseButton: 50px;
 .Sidebar__gridWrapper {
     flex-grow: 1;
     overflow: hidden;
-
     padding: 1rem 4px 1rem 4px;
     border-radius: 4px;
     background: #c6c6c624;
@@ -240,6 +224,7 @@ $paddingtopForCloseButton: 50px;
     border-radius: 6px;
     overflow: hidden;
     transition: transform ease-in-out vars.$transitionTime;
+    background-color: rgba(0, 0, 0, 0.231);
 
     img {
         width: 100%;
@@ -316,10 +301,15 @@ $paddingtopForCloseButton: 50px;
     }
 
     .Menu__item {
-        padding: 1rem;
+        padding: 0 1rem;
         margin-bottom: 0;
-        background-color: rgba(119, 136, 153, 0.3);
         overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    .Menu__item img {
+        display: none;
     }
 
     .Menu__text {
@@ -336,10 +326,6 @@ $paddingtopForCloseButton: 50px;
         bottom: auto;
         top: auto;
         transform: none;
-    }
-
-    .Menu__picbox {
-        display: none;
     }
 
     .Sidebar__searchWrapper {
