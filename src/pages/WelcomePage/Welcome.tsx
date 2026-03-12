@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import PageContext, {EPage} from '../../store/PageContext';
 import { translateText } from '../../utils/utils';
 import { useSelector } from 'react-redux';
@@ -22,6 +22,10 @@ const Welcome = () => {
 
     const { imageLoaded: heroPlaceholderLoaded, onLoadImage: onLoadHeroPlaceholder } = useImageLoaded();
     const { imageLoaded: heroLoaded, onLoadImage: onLoadHero } = useImageLoaded();
+
+    useEffect(() => {
+        
+    }, [])
 
     return <React.Fragment>
         <div className="Welcome">

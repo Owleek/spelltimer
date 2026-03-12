@@ -8,6 +8,7 @@ import { addTyping, removeTyping} from '../../store/typingSlice';
 import { translateText } from '../../utils/utils';
 import { ISlot } from '../../store/slotSlice';
 import {TStoreState} from '../../store/store';
+import ProgressiveImage from './ProgressiveImage/ProgressiveImage';
 import './ConstructorComponent.scss';
 
 enum TabKey {
@@ -32,7 +33,9 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
 
   const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
-  const tabList: TabList = Object.keys(TabKey).map(key => ({key: key as TabKey, label: translateText(dictionary, key)}));
+  const tabList: TabList = Object.keys(TabKey).map(key => (
+    { key: key as TabKey, label: translateText(dictionary, key) })
+  );
 
   const dispatch = useDispatch();
 
@@ -45,27 +48,6 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
   const [mainSearchValue, setMainSearchValue] = useState<string>('');
   const [sideSearchValue, setSideSearchValue] = useState<string>('');
   const [itemOwnership, setItemOwnership] = useState<ITimerData | null>(null);
-
-
-  const [sidebarLoading, setSidebarLoading] = useState<boolean>(true);
-  const sidebarImagesLoadedRef = useRef<string[] | []>([]);
-
-  const onSidebarImageLoad = (key: string) => {
-    const newArr = [...sidebarImagesLoadedRef.current, key];
-    sidebarImagesLoadedRef.current = newArr;
-    if (sidebarImagesLoadedRef.current.length === heroList.length) setSidebarLoading(false);
-  }
-
-
-  const [abilitiesLoading, setAbilitiesLoading] = useState<boolean>(true);
-  const abilitiesLoadedRef = useRef<string[] | []>([]);
-
-  const onAbilitiesImageLoad = (key: string) => {
-    const newArr = [...abilitiesLoadedRef.current, key];
-    abilitiesLoadedRef.current = newArr;
-    if (abilitiesLoadedRef.current.length === tabContent.length) setAbilitiesLoading(false);
-  }
-
 
   const handleEscape = useCallback((event: KeyboardEvent) => {
     if (event.code !== 'Escape') return;
@@ -176,11 +158,9 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
                   handleFocus={handleFocusMainSearch}
                   handleBlur={handleBlurMainSearch}/>
         </div>
-
         <div className="Constructor__body">
           <div className="Constructor__scrollContainer appStyledScroll">
-            { abilitiesLoading && <div className='loaderContainer'><div className="loader"></div></div> }
-            <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership} onLoad={onAbilitiesImageLoad}/>
+            <ImageGrid abilities={tabContent} onClick={handleSelectItem} disableItemsExceptCurrent={itemOwnership}/>
           </div>
         </div>
       </div>
@@ -218,14 +198,15 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
           itemOwnership ?
             <div className="Sidebar__gridWrapper">
               <div className="Sidebar__scrollContainer appStyledScroll">
-                {
-                  sidebarLoading && <div className='loaderContainer'><div className="loader"></div></div>
-                }
-                { 
                   <ul className="Sidebar__grid">
-                    { heroList.map(hero => <li key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}><img src={hero.img} alt="" title={hero.name} onLoad={() => onSidebarImageLoad(hero.id)}/></li>) }
+                    { 
+                      heroList.map(hero =>
+                        <li key={hero.id} className="Sidebar__gridItem" onClick={() => handleClickHero(hero)}>
+                          <ProgressiveImage img={hero.img} compressedImg={hero.compressedImg} altName={hero.name}/>
+                        </li>
+                      )
+                    }
                   </ul>
-                }
               </div>
             </div>
           : 
@@ -236,7 +217,6 @@ const Constructor = ({onSelectAbility, onCancel, currentSlot}: IProps) => {
                   tabList.map(el => 
                   <li key={el.key} className={cn('Menu__item', {active: el.key === activeTab}, {[el.key]: el.key})} onClick={() => onSelectMenuItem(el.key)} title={el.label}>
                     <div className="Menu__text">{el.label}</div>
-                    <div className={cn('Menu__picbox', {[el.key]: el.key})}></div>
                   </li>)
                 }
               </ul>
