@@ -10,8 +10,6 @@ interface IProps {
 }
 
 const ProgressiveImage = ({img, compressedImg, altName}: IProps): JSX.Element => {
-    console.log('progressive img')
-
     const { imageLoaded: placeholderLoaded, onLoadImage: onLoadPlaceholder } = useImageLoaded();
     const { imageLoaded, onLoadImage } = useImageLoaded();
 
