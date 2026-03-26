@@ -1,0 +1,27 @@
+@use '../../shared/styles/variables.scss' as vars;
+@use '../../shared/styles/mixin.scss' as *;
+
+.TimerPanel {
+    max-width: 925px;
+    max-height: 100%;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        max-width: 630px;
+    }
+
+    @media (max-width: #{vars.$MEDIUMDEVICEWIDTH}px) {
+        max-width: 100%;
+    }
+
+    @media (max-height: 579px) {
+        max-width: 1810px;
+    }
+}

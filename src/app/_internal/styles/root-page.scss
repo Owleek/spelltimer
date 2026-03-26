@@ -1,0 +1,96 @@
+@use '../../../shared/styles/variables.scss' as vars;
+@use '../../../shared/styles/mixin' as *;
+
+.Welcome {
+    height: 100vh;
+    height: 100dvh;
+
+    overflow: hidden;
+    position: relative;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.Welcome__heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    will-change: opacity;
+
+    &.visible {
+        opacity: 1;
+    }
+}
+
+.Welcome__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+    position: relative;
+}
+
+.Welcome__titleStripe {
+    height: 180px;
+    max-height: 180px;
+    min-height: 90px;
+    width: 100%;
+    margin-top: 25vh;
+    margin-top: 25dvh;
+    padding: 0 1rem;
+
+    margin-bottom: vars.pxToVH(130);
+    margin-bottom: vars.pxToDVH(130);
+
+    font-size: clamp(20px, vars.pxToVW(44), 44px);
+
+    font-weight: bold;
+    font-style: italic;
+    color: vars.$welcomeFontColor;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    @media (max-width: #{vars.$DEVICEMAXWIDTH}px) {
+        height: vars.pxToVH(180);
+        margin-bottom: vars.pxToVH(90);
+
+        height: vars.pxToDVH(180);
+        margin-bottom: vars.pxToDVH(90);
+
+        max-height: 140px;
+    }
+
+    @include responsiveBlock {
+        margin-top: 21vh;
+        margin-top: 21dvh;
+    }
+}
+
+.Welcome__title {
+    &.fontStyleNormal {
+        font-style: normal;
+    }
+}
+
+.Welcome__button {
+   text-decoration: none;
+}

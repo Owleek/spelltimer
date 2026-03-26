@@ -1,0 +1,103 @@
+{
+  "AboutPage": {
+    "text_1": "👀 SpellTimer is a free utility application for tracking the cooldowns of abilities and items in Dota 2.",
+    "text_2": "✨ SpellTimer fully complies with the principles of fair play established by Valve, as it does not receive data directly from the Dota 2 client. The application features an intuitive interface where all actions are performed by the player themselves — no more need to record timings in the game chat.",
+    "text_3": "🚀 The application does not require installation or account creation — it is available directly in the browser.",
+    "text_4": "⚡ Work is currently underway to optimize the application and fix shortcomings identified in the current demonstration version.",
+    "text_5": "🎨 The current version of SpellTimer is focused solely on Dota 2 players; however, if there is demand, the application may be expanded to other gaming disciplines with similar mechanics.",
+    "text_6": "📌 SpellTimer is an unofficial project and is not affiliated with Valve Corporation. All mentioned names, logos, and trademarks are the property of their respective owners and are used for informational and non-commercial purposes only.",
+    "text_7": "Sound effect provided by ZapSplat.com",
+    "last_update": "Last update: 12.03.2026 (v.1.0.5)",
+    "title": "About the application"
+  },
+  "Footer": {
+    "about": "About",
+    "contact": "Contacts",
+    "policy": "Policy",
+    "right": "All rights reserved"
+  },
+  "Header": {
+    "button": "Continue"
+  },
+  "HomePage": {
+    "button": "Get Started",
+    "howToUse": "How to use?",
+    "title": "Control the game by mastering time"
+  },
+  "ContactPage": {
+    "title": "Contacts",
+    "text_1": "Please send your feedback, ideas for further development, and suggestions to the following email address:",
+    "text_2": "My name is Artemiy. I’m the developer and creator of SpellTimer, an interface solution for Dota 2 players. This is a personal initiative into which I’ve poured my experience, attention to detail, and love for the game. I’m open to professional collaboration in web development and startup projects.",
+    "text_3": "For collaboration inquiries, feel free to contact me via email:",
+    "author": "Author"
+  },
+  "PolicyPage": {
+    "title": "Privacy Policy for the SpellTimer app",
+    "text_2": "Last updated:",
+    "text_3": "Your trust is important to us. This policy explains what data we collect, how we use it, and how we protect it.",
+    "text_4": "1. What data we collect",
+    "text_5": "1.1 Locally on the device",
+    "text_6": "We only store data that you enter manually, such as: assigned hotkeys, interface and timer preferences. This data is stored only in your browser via localStorage. We do not send it to any servers.",
+    "text_7": "1.2 Anonymous statistics via Yandex Metrica",
+    "text_8": "We use Yandex Metrica to collect anonymous usage statistics. This includes: number of visits and sessions, user geography (country/city, based on IP address), device and browser type, visited pages, and technical errors (if any). All of this data does not allow us to identify you personally.",
+    "text_9": "2. Donations",
+    "text_10": "If you choose to support the project with a donation, you will be redirected to third-party payment platforms (such as DonationAlerts, etc.). We do not process or store your payment data — all transactions are handled through the secure systems of the payment services themselves.",
+    "text_11": "3. Third-party services",
+    "text_12": "The app uses only one third-party service: Yandex Metrica — for collecting anonymized analytics.",
+    "text_13": "4. Security",
+    "text_14": "We do not store or transmit personal data. All user settings remain only in your browser. Analytics is completely anonymous and used solely to improve the application's performance.",
+    "text_15": "5. Contact",
+    "text_16": "If you have any questions or suggestions, you can contact us via email: spelltimer@gmail.com",
+    "text_17": "6. Policy updates",
+    "text_18": "We may periodically make changes to this policy. The current version will always be available via the link in the app."
+  },
+  "DonationPage": {
+    "title": "Support the project",
+    "text_1": "We sincerely hope that SpellTimer is useful to you — it was created with love and enthusiasm.",
+    "text_2": "Maintaining servers and continuing development takes time and resources. Even the smallest contribution means a lot to us!",
+    "text_3": "If you enjoy the app and would like to support the project, you can do so using the links below. Thank you for your support!",
+    "button": "I supported the project",
+    "thnx_1": "🎉 Thank you for your support!",
+    "thnx_2": "🚀 Thanks to you, the project keeps growing and improving!",
+    "copied": "Copied"
+  },
+  "PlaygroundPage": {
+    "TimerPanel": {
+      "clear_slots": "Clear slots",
+      "reset_timers": "Reset timers",
+      "start_mode": "Start mode",
+      "setup_mode": "Setup mode",
+      "time_forward": "Fast-forward time",
+      "time_back": "Rewind time",
+      "hotkey_start": "Timer start hotkey",
+      "hotkey_forward": "Fast-forward hotkey",
+      "hotkey_back": "Rewind hotkey",
+      "close": "Close",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "reset_timer": "Reset timer",
+      "manual_cd": "Enter cooldown manually",
+      "save": "Save",
+      "cancel_manual_cd": "Cancel manual cooldown",
+      "start": "Start",
+      "pause": "Pause",
+      "add_tracked_item": "Add tracked ability/item/function",
+      "press_to_bind": "Press any key to bind it",
+      "hotkey_toggle_timer": "Hotkey to start/pause timer",
+      "with_sound": "With sound",
+      "without_sound": "Without sound",
+      "sec": "sec"
+    },
+    "TimerNotification": {
+      "notification": "Starting or pausing one of the timers automatically applies the same action to all previously activated timers, since cooldown timing in Dota 2 is synchronized across all abilities and items.",
+      "checkbox": "Don’t show this notification again",
+      "ok": "Ok"
+    },
+    "TimerConstructor": {
+      "all": "All",
+      "spells": "Spells",
+      "items": "Artifacts",
+      "other": "Other"
+    }
+  }
+}
