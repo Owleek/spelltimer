@@ -1,0 +1,136 @@
+@use '../../shared/styles/variables.scss' as var;
+
+$bgAppMenu: #202029;
+$bgMenuHeader: #343442;
+$textColor: #dadada;
+$textHoverColor: #ffdfa2;
+$faded: #4f4f4f;
+
+$menuWidth: 280px;
+$layerZindex: 10;
+
+.AppMenuClickCatcher {
+    z-index: $layerZindex;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: calc(100% - $menuWidth);
+    height: 100%;
+    transform: translateX(100%);
+}
+
+.AppMenuClickCatcher.visible {
+    transform: translate(0);
+}
+
+
+.AppMenu {
+    z-index: $layerZindex;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: $menuWidth;
+    height: 100%;
+    transform: translateX(-110%);
+    
+    transition: transform ease 0.4s;
+    background: $bgAppMenu;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.AppMenu.visible {
+    transform: translateX(0);
+}
+
+.AppMenu__body {
+    flex-grow: 1;
+    padding: 16px 0;
+}
+
+.AppMenu__header {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+
+    background: $bgMenuHeader;
+}
+
+$titleSideGap: 20px;
+
+.AppMenu__title {
+    padding: 10px $titleSideGap;
+    color: $faded;
+}
+
+.AppMenu__title.divider {
+    position: relative;
+
+    &::after {
+        content: '';
+        width: calc(100% - 2*$titleSideGap);
+        height: 1px;
+        background: $faded;
+        position: absolute;
+        left: $titleSideGap;
+        top: 100%;
+    }
+}
+
+.AppMenu__footer {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 1rem;
+    padding-bottom: 40px;
+}
+
+.AppMenu__link,
+.AppMenu__text,
+.AppMenu__donateLink {
+    color: $textColor;
+}
+
+.AppMenu__link,
+.AppMenu__text {
+    text-align: center;
+    padding: 4px 0;
+}
+
+.AppMenu__link,
+.AppMenu__donateLink {
+    transition: color ease var.$transitionTime;
+    text-decoration: none !important;
+
+
+    &:hover {
+        color: $textHoverColor;
+
+        @media (pointer: coarse) {
+            color: $textColor;
+        }
+    }
+
+    &.active {
+        color: var.$success;
+        pointer-events: none;
+    }
+}
+
+.AppMenu__text {
+    cursor: default;
+}
+
+.AppMenu__donateIcon {
+    width: 50px;
+    height: 50px;
+}
+
+.AppMenu__donateLink {
+    align-self: center;
+    margin: 0 1rem 0.5rem;
+}

@@ -1,0 +1,103 @@
+{
+  "AboutPage": {
+    "text_1": "👀 SpellTimer — es una aplicación auxiliar gratuita para rastrear la recarga de habilidades y objetos en Dota 2.",
+    "text_2": "✨ SpellTimer cumple completamente con los principios de juego limpio establecidos por Valve, ya que no obtiene datos directamente del cliente de Dota 2. La aplicación presenta una interfaz intuitiva en la que todas las acciones son realizadas por el propio jugador: ya no es necesario anotar los tiempos en el chat del juego.",
+    "text_3": "🚀 La aplicación no requiere instalación ni creación de cuenta: está disponible directamente en el navegador.",
+    "text_4": "⚡ Actualmente se están realizando trabajos de optimización de la aplicación y de corrección de deficiencias detectadas en la versión de demostración actual.",
+    "text_5": "🎨 La versión actual de SpellTimer está orientada solo a los jugadores de Dota 2, sin embargo, si hay demanda, la aplicación puede expandirse a otras disciplinas de juego con mecánicas similares.",
+    "text_6": "📌 SpellTimer es un proyecto no oficial y no está afiliado a Valve Corporation. Todos los nombres, logotipos y marcas mencionados son propiedad de sus respectivos dueños y se usan solo con fines informativos y no comerciales.",
+    "text_7": "Efecto de sonido proporcionado por ZapSplat.com",
+    "last_update": "Última actualización: 12.03.2026 (v.1.0.5)",
+    "title": "Acerca de la aplicación"
+  },
+  "Footer": {
+    "about": "Acerca de la aplicación",
+    "contact": "Contactos",
+    "policy": "Política",
+    "right": "Todos los derechos reservados"
+  },
+  "Header": {
+    "button": "Continuar"
+  },
+  "HomePage": {
+    "button": "Comenzar",
+    "howToUse": "¿Cómo usarlo?",
+    "title": "Controla el juego, dominando el tiempo"
+  },
+  "ContactPage": {
+    "title": "Contacto",
+    "text_1": "Envía tus comentarios, ideas para el desarrollo y sugerencias al siguiente correo electrónico: ",
+    "text_2": "Mi nombre es Artemiy. Soy el desarrollador y creador de SpellTimer, una solución de interfaz para jugadores de Dota 2. Este proyecto es una iniciativa personal en la que he volcado mi experiencia, atención al detalle y amor por el juego. Estoy abierto a colaborar profesionalmente en desarrollo web y proyectos emergentes.",
+    "text_3": "Para consultas de colaboración, no dudes en contactarme por correo electrónico:",
+    "author": "Autor"
+  },
+  "PolicyPage": {
+    "title": "Política de privacidad de la aplicación SpellTimer",
+    "text_2": "Fecha de actualización:",
+    "text_3": "Tu confianza es importante para nosotros. En esta política explicamos qué datos recopilamos, cómo los usamos y cómo los protegemos.",
+    "text_4": "1. Qué datos recopilamos",
+    "text_5": "1.1 Localmente en el dispositivo",
+    "text_6": "Solo almacenamos los datos que introduces manualmente: teclas rápidas asignadas, preferencias de interfaz y temporizadores. Estos datos se guardan únicamente en tu navegador mediante localStorage. No se envían a ningún servidor.",
+    "text_7": "1.2 Estadísticas anónimas mediante Yandex Metrica",
+    "text_8": "Utilizamos Yandex Metrica para recopilar estadísticas anónimas de uso. Esto incluye: número de visitas, ubicación geográfica (país/ciudad según la IP), tipo de dispositivo y navegador, páginas visitadas y errores técnicos (si los hay). Estos datos no permiten identificarte personalmente.",
+    "text_9": "2. Donaciones",
+    "text_10": "Si decides apoyar el proyecto con una donación, serás redirigido a plataformas de pago externas (como DonationAlerts, etc.). No procesamos ni almacenamos tus datos de pago — todas las transacciones se realizan a través de los sistemas seguros de los servicios de pago.",
+    "text_11": "3. Servicios de terceros",
+    "text_12": "La aplicación utiliza solo un servicio de terceros: Yandex Metrica, para recopilar análisis anónimos.",
+    "text_13": "4. Seguridad",
+    "text_14": "No almacenamos ni transmitimos datos personales. Todos los ajustes del usuario permanecen solo en tu navegador. La analítica es completamente anónima y se utiliza únicamente para mejorar la calidad de la aplicación.",
+    "text_15": "5. Contacto",
+    "text_16": "Si tienes preguntas o sugerencias, puedes escribirnos por correo: spelltimer@gmail.com",
+    "text_17": "6. Actualizaciones de la política",
+    "text_18": "Podemos hacer cambios a esta política periódicamente. La versión actual siempre estará disponible mediante un enlace dentro de la aplicación."
+  },
+  "DonationPage": {
+    "title": "Apoyar el proyecto",
+    "text_1": "Esperamos sinceramente que SpellTimer te sea útil — fue creado con cariño y entusiasmo.",
+    "text_2": "Mantener los servidores y continuar con el desarrollo requiere tiempo y recursos. ¡Incluso la contribución más pequeña es muy valiosa para nosotros!",
+    "text_3": "Si te gusta la aplicación y deseas apoyar el proyecto, puedes hacerlo a través de los enlaces que encontrarás abajo. ¡Gracias por tu apoyo!",
+    "button": "Apoyé el proyecto",
+    "thnx_1": "🎉 ¡Gracias por tu apoyo!",
+    "thnx_2": "🚀 ¡Gracias a ti, el proyecto sigue creciendo y mejorando!",
+    "copied": "Copiado"
+  },
+  "PlaygroundPage": {
+    "TimerPanel": {
+      "clear_slots": "Limpiar ranuras",
+      "reset_timers": "Restablecer temporizadores",
+      "start_mode": "Modo de inicio",
+      "setup_mode": "Modo de configuración",
+      "time_forward": "Avanzar el tiempo",
+      "time_back": "Retroceder el tiempo",
+      "hotkey_start": "Tecla de inicio del temporizador",
+      "hotkey_forward": "Tecla de avance rápido",
+      "hotkey_back": "Tecla de retroceso",
+      "close": "Cerrar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "reset_timer": "Restablecer temporizador",
+      "manual_cd": "Ingresar enfriamiento manual",
+      "save": "Guardar",
+      "cancel_manual_cd": "Cancelar enfriamiento manual",
+      "start": "Iniciar",
+      "pause": "Pausar",
+      "add_tracked_item": "Agregar habilidad/artefacto/función a rastrear",
+      "press_to_bind": "Presiona cualquier tecla para asignarla",
+      "hotkey_toggle_timer": "Tecla rápida para iniciar/pausar el temporizador",
+      "with_sound": "Con sonido",
+      "without_sound": "Sin sonido",
+      "sec": "seg"
+    },
+    "TimerNotification": {
+      "notification": "Iniciar o pausar uno de los temporizadores aplica automáticamente la misma acción a todos los temporizadores previamente activados, ya que los tiempos de reutilización en Dota 2 están sincronizados para todas las habilidades y objetos.",
+      "checkbox": "No volver a mostrar esta notificación",
+      "ok": "Ok"
+    },
+    "TimerConstructor": {
+      "all": "Todos",
+      "spells": "Hechizos",
+      "items": "Artefactos",
+      "other": "Otros"
+    }
+  }
+}
