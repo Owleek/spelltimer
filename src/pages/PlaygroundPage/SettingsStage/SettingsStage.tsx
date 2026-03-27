@@ -7,7 +7,7 @@ import ConstructorComponent from '../../../components/ConstructorComponent/Const
 import {EAbility, ITimerData} from '../../../data/data';
 import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../store/slotSlice';
 import { addRefresh } from '../../../store/refreshSlice';
-import StageContext, {EStages} from '../../../store/StageContext';
+import StageContext, {EStages} from '../../../widgets/playground/model/stage-context';
 import Timer from '../../../components/Timer/Timer';
 import LevelController from '../../../components/LevelController/LevelController';
 import LevelControllerView from '../../../components/LevelController/LevelControllerView';
@@ -18,13 +18,8 @@ import Notification from '../../../components/Notification/Notification';
 import { translateText } from '../../../utils/utils';
 import { playSound, SOUND } from '../../../utils/sound';
 import ImageCover from '../../../components/ImageCover/ImageCover';
+import { EAppStatus } from '../../../widgets/playground/model/app-status';
 import './SettingsStage.scss';
-
-export enum EAppStatus {
-    RUNNING = 'runnig',
-    PAUSED = 'paused',
-    INITIAL = 'initial'
-}
 
 const SettingsStage = (): JSX.Element => {
     // TODO - нужно сделать нормальную функцию сравнения или по другому использовать стейт

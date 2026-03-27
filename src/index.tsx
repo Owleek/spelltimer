@@ -7,7 +7,7 @@
 
 import ReactDom from 'react-dom/client';
 import {StrictMode} from 'react';
-import App from './App';
+import App from '@app/App';
 import './app.scss';
 
 const rootElement = document.getElementById('root');

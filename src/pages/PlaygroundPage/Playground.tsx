@@ -4,7 +4,7 @@
 // 4. Стили и ассеты.
 import React, { useState } from 'react';
 import SettingsStage from './SettingsStage/SettingsStage';
-import StageContext, {EStages} from '../../store/StageContext';
+import StageContext, {EStages} from '../../widgets/playground/model/stage-context';
 import './Playground.scss';
 
 const Playground = () => {
