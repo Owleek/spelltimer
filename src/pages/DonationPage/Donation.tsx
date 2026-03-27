@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import cn from 'classnames';
-import QrComponent from '../../components/QrComponent/QrComponent';
+import QrComponent from '../donation/ui/qr-component';
 import {useSelector} from 'react-redux';
 import {TStoreState} from '../../store/store';
 import { translateText } from '../../utils/utils';
