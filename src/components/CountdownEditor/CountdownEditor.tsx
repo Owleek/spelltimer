@@ -12,6 +12,7 @@ import StageContext, {EStages} from '../../store/StageContext';
 import {toSafeInteger} from '../../utils/utils';
 import HotkeyCell from '../HotkeyCell/HotkeyCell';
 import './CountdownEditor.scss';
+import SpriteIcon from '@shared/ui/SpriteIcon';
 
 interface IProps {
 
@@ -107,11 +108,7 @@ const CountdownEditor = (props: IProps): JSX.Element => {
             <HotkeyCell className={'CountdownEditor__leftHotkey'} position={1} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} hidden={hotKeyHidden}/>
 
             <div className={cn('CountdownEditor__iconBox', {highlight: keyPressed === 1})} onPointerDown={() => handleMouseDown(1)} onPointerUp={() => handleMouseUp(1)} title={translateText(dictionary, 'time_back')}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-                    <path d="M28.0225 14.2139C28.8609 13.6698 29.9999 14.2256 30 15.1836V24.8115C29.9997 25.7693 28.8483 26.3371 28.0225 25.7812L20.8018 20.9678C20.0884 20.4947 20.0884 19.5004 20.8018 19.0273L28.0225 14.2139Z" />
-                    <path d="M16.7471 14.2139C17.5855 13.6701 18.7235 14.2257 18.7236 15.1836V24.8115C18.7234 25.7692 17.5854 26.3249 16.7471 25.7695L9.52539 20.9551C8.82491 20.4937 8.82471 19.5004 9.52539 19.0273L16.7471 14.2139Z" />
-                    <path fillRule="evenodd" clipRule="evenodd" d="M20 0C31.0457 0 40 8.9543 40 20C40 31.0457 31.0457 40 20 40C8.9543 40 0 31.0457 0 20C0 8.9543 8.9543 0 20 0ZM20 4C11.1634 4 4 11.1634 4 20C4 28.8366 11.1634 36 20 36C28.8366 36 36 28.8366 36 20C36 11.1634 28.8366 4 20 4Z" />
-                </svg>
+                <SpriteIcon id="components-countdowneditor-countdowneditor-1" />
                 <div className={cn('CountdownEditor__hint left', {visible: hintsVisible})}>{getKeyFromCode(backwardHint.key)}</div>
             </div>
             
@@ -123,11 +120,7 @@ const CountdownEditor = (props: IProps): JSX.Element => {
             </div>
 
             <div className={cn('CountdownEditor__iconBox', {highlight: keyPressed === 2})} onPointerDown={() => handleMouseDown(2)} onPointerUp={() => handleMouseUp(2)} title={translateText(dictionary, 'time_forward')}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
-                    <path d="M11.9775 25.7861C11.1391 26.3302 10.0001 25.7744 10 24.8164V15.1885C10.0003 14.2307 11.1517 13.6629 11.9775 14.2188L19.1982 19.0322C19.9116 19.5053 19.9116 20.4996 19.1982 20.9727L11.9775 25.7861Z" />
-                    <path d="M23.2529 25.7861C22.4145 26.3299 21.2765 25.7743 21.2764 24.8164V15.1885C21.2766 14.2308 22.4146 13.6751 23.2529 14.2305L30.4746 19.0449C31.1751 19.5063 31.1753 20.4996 30.4746 20.9727L23.2529 25.7861Z" />
-                    <path fillRule="evenodd" clipRule="evenodd" d="M20 40C8.9543 40 0 31.0457 0 20C0 8.9543 8.9543 0 20 0C31.0457 0 40 8.9543 40 20C40 31.0457 31.0457 40 20 40ZM20 36C28.8366 36 36 28.8366 36 20C36 11.1634 28.8366 4 20 4C11.1634 4 4 11.1634 4 20C4 28.8366 11.1634 36 20 36Z" />
-                </svg>
+                <SpriteIcon id="components-countdowneditor-countdowneditor-2" />
                 <div className={cn('CountdownEditor__hint right', {visible: hintsVisible})}>{getKeyFromCode(forwardHint.key)}</div>
             </div>
             

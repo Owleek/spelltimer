@@ -7,6 +7,7 @@ import ContactPage from '@pages/contact';
 import PoliticsPage from '@pages/politics';
 import DonationPage from '@pages/donation';
 import PageContext, { EPage, TPage } from '@pages/navigation/model/page-context';
+import { SvgSpriteDefinitions } from '@shared/ui/SpriteIcon';
 import StoreProvider from './providers/store-provider';
 import AppShell from './layout/app-shell';
 
@@ -56,6 +57,7 @@ const App = (): JSX.Element => {
     return (
         <StoreProvider>
             <PageContext.Provider value={{currentPage, navigate, activeArticle, onSelectArticle, headerBottomOnMobile, loading, setLoading}}>
+                <SvgSpriteDefinitions />
                 <YMInitializer
                     accounts={[102442825]}
                     options={{webvisor: true, clickmap: true, trackLinks: true}}
