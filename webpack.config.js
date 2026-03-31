@@ -60,7 +60,7 @@ module.exports = {
             ]
           }),
         new webpack.BannerPlugin({
-            banner: `SpellTimer v1.0.5\nAuthor: ARTEMII KHAFIZOV\nContact: spelltimer@gmail.com\nLicense: 2026 spelltimer.com. All rights reserved.`,
+            banner: `SpellTimer v1.0.6\nAuthor: ARTEMII KHAFIZOV\nContact: spelltimer@gmail.com\nLicense: 2026 spelltimer.com. All rights reserved.`,
             raw: false,
             entryOnly: true,
         })
