@@ -1,1 +1,1 @@
-export { default } from '@widgets/playground';
+export { default } from './PlaygroundPage/PlaygroundPage';

@@ -1,1 +1,1 @@
-export { default } from '../DonationPage/Donation';
+export { default } from './DonationPage/DonationPage';

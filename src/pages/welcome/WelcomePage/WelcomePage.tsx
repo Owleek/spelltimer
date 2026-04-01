@@ -1,17 +1,16 @@
 import React, {useContext, useEffect} from 'react';
-import PageContext, {EPage} from '../../store/PageContext';
-import { translateText } from '../../utils/utils';
+import PageContext from '../../../store/PageContext';
+import { translateText } from '../../../utils/utils';
 import { useSelector } from 'react-redux';
-import {TStoreState} from '../../store/store';
-import PlayButton from '../../components/PlayButton/PlayButton';
+import {TStoreState} from '../../../store/store';
+import PlayButton from '../../../components/PlayButton/PlayButton';
 import cn from 'classnames';
 import { useState } from 'react';
-import useImageLoaded from '../../utils/useImageLoaded';
+import useImageLoaded from '../../../utils/useImageLoaded';
 import './welcome.scss';
 import SpriteIcon from '@shared/ui/SpriteIcon';
 
-
-const Welcome = () => {
+const WelcomePage = () => {
     const context = useContext(PageContext);
     if (!context) throw new Error('Context not found on Welcome page');
 
@@ -57,5 +56,4 @@ const Welcome = () => {
     </React.Fragment> 
 } ;
 
-export default Welcome;
-
+export default WelcomePage;

@@ -1,29 +1,28 @@
 import React, { JSX, useState, useCallback, useEffect, useRef, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
-import {TStoreState} from '../../../store/store';
-import EmptySlot from '../../../components/GridSlot/EmptySlot';
-import ConstructorComponent from '../../../components/ConstructorComponent/ConstructorComponent';
-import {EAbility, ITimerData} from '../../../data/data';
-import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../store/slotSlice';
-import { addRefresh } from '../../../store/refreshSlice';
-import StageContext, {EStages} from '../../../widgets/playground/model/stage-context';
-import Timer from '../../../components/Timer/Timer';
-import LevelController from '../../../components/LevelController/LevelController';
-import LevelControllerView from '../../../components/LevelController/LevelControllerView';
-import SpellReducer from '../../../components/SpellReducer/SpellReducer';
-import BindingOverlay from '../../../components/BindingOverlay/BindingOverlay';
-import CountdownEditor from '../../../components/CountdownEditor/CountdownEditor';
-import Notification from '../../../components/Notification/Notification';
-import { translateText } from '../../../utils/utils';
-import { playSound, SOUND } from '../../../utils/sound';
-import ImageCover from '../../../components/ImageCover/ImageCover';
-import { EAppStatus } from '../../../widgets/playground/model/app-status';
+import {TStoreState} from '../../../../store/store';
+import EmptySlot from '../../../../components/GridSlot/EmptySlot';
+import ConstructorComponent from '../../../../components/ConstructorComponent/ConstructorComponent';
+import {EAbility, ITimerData} from '../../../../data/data';
+import {removeTimerFromSlot, mapSpellToSlot, mapItemToSlot, mapFeatureToSlot, resetState, ISlot} from '../../../../store/slotSlice';
+import { addRefresh } from '../../../../store/refreshSlice';
+import StageContext, {EStages} from '../../../../widgets/playground/model/stage-context';
+import Timer from '../../../../components/Timer/Timer';
+import LevelController from '../../../../components/LevelController/LevelController';
+import LevelControllerView from '../../../../components/LevelController/LevelControllerView';
+import SpellReducer from '../../../../components/SpellReducer/SpellReducer';
+import BindingOverlay from '../../../../components/BindingOverlay/BindingOverlay';
+import CountdownEditor from '../../../../components/CountdownEditor/CountdownEditor';
+import Notification from '../../../../components/Notification/Notification';
+import { translateText } from '../../../../utils/utils';
+import { playSound, SOUND } from '../../../../utils/sound';
+import ImageCover from '../../../../components/ImageCover/ImageCover';
+import { EAppStatus } from '../../../../widgets/playground/model/app-status';
 import './SettingsStage.scss';
 import SpriteIcon from '@shared/ui/SpriteIcon';
 
 const SettingsStage = (): JSX.Element => {
-    // TODO - нужно сделать нормальную функцию сравнения или по другому использовать стейт
     const slotList = useSelector((state: TStoreState) => state.slotList, (prev, next) => JSON.stringify(prev) === JSON.stringify(next));
     const runningSlots = useSelector((state: TStoreState) => state.runningSlice);
     const someOneIsBinding = useSelector((state: TStoreState) => state.bindingSlice.value);
@@ -256,4 +255,3 @@ const SettingsStage = (): JSX.Element => {
 }
 
 export default SettingsStage;
-

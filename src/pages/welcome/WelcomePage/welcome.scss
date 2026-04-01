@@ -1,5 +1,5 @@
-@use '../../variables.scss' as vars;
-@use '../../mixin' as *;
+@use '../../../variables.scss' as vars;
+@use '../../../mixin' as *;
 
 .Welcome {
     height: 100vh;
@@ -167,4 +167,3 @@
         border: none;
     }
 }
-
