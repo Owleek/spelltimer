@@ -1,13 +1,12 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../store/store';
-import { translateText } from '../../utils/utils';
-import cn from 'classnames';
-import '../../article.scss';
-import ImageCover from '../../components/ImageCover/ImageCover';
+import {TStoreState} from '../../../store/store';
+import { translateText } from '../../../utils/utils';
+import '../../../article.scss';
+import ImageCover from '../../../components/ImageCover/ImageCover';
 import SpriteIcon from '@shared/ui/SpriteIcon';
 
-const Politics = () => {
+const PoliticsPage = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
 
     return <div className="Article">
@@ -50,5 +49,4 @@ const Politics = () => {
     </div>
 }
 
-export default Politics;
-
+export default PoliticsPage;

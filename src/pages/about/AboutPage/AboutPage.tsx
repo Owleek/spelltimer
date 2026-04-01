@@ -1,20 +1,17 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../store/store';
-import { translateText } from '../../utils/utils';
-import cn from 'classnames';
-import useImageLoaded from '../../utils/useImageLoaded';
-import '../../article.scss';
-import ImageCover from '../../components/ImageCover/ImageCover';
+import {TStoreState} from '../../../store/store';
+import { translateText } from '../../../utils/utils';
+import '../../../article.scss';
+import ImageCover from '../../../components/ImageCover/ImageCover';
 import SpriteIcon from '@shared/ui/SpriteIcon';
 
-const About = () => {
+const AboutPage = () => {
     const {dictionary} = useSelector((state: TStoreState) => state.localeSlice);
-    
 
     return <div className="Article">
         <ImageCover image="article.webp" />
-        
+
         <div className="Article__body">
             <div className="adjustCenter">
                 <div className="Article__bodyInner">
@@ -44,5 +41,4 @@ const About = () => {
     </div>
 }
 
-export default About;
-
+export default AboutPage;

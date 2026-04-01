@@ -1,13 +1,9 @@
-// 1. Внешние зависимости.
-// 2. Компоненты вашего проекта.
-// 3. Утилиты и бизнес-логика.
-// 4. Стили и ассеты.
 import React, { useState } from 'react';
 import SettingsStage from './SettingsStage/SettingsStage';
-import StageContext, {EStages} from '../../widgets/playground/model/stage-context';
+import StageContext, {EStages} from '../../../widgets/playground/model/stage-context';
 import './Playground.scss';
 
-const Playground = () => {
+const PlaygroundPage = () => {
   const [currentStage, setCurrentStage] = useState<EStages>(EStages.INITIAL);
   const changeStage = (stage: EStages) => setCurrentStage(stage);
   const payload = { currentStage, changeStage };
@@ -21,5 +17,4 @@ const Playground = () => {
   );
 }
 
-export default Playground;
-
+export default PlaygroundPage;

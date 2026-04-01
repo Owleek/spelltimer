@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import cn from 'classnames';
-import QrComponent from '../donation/ui/qr-component';
+import QrComponent from '../../ui/qr-component';
 import {useSelector} from 'react-redux';
-import {TStoreState} from '../../store/store';
-import { translateText } from '../../utils/utils';
-import '../../article.scss';
-import ImageCover from '../../components/ImageCover/ImageCover';
+import {TStoreState} from '../../../store/store';
+import { translateText } from '../../../utils/utils';
+import '../../../article.scss';
+import ImageCover from '../../../components/ImageCover/ImageCover';
 import SpriteIcon from '@shared/ui/SpriteIcon';
 
 enum EQRItem {
@@ -15,7 +15,7 @@ enum EQRItem {
     usdtTRON = '/assets/qrcodes/tron.webp'
 }
 
-const Donation = () => {
+const DonationPage = () => {
     const [copied, setCopied] = useState<string | null>(null);
     const [qrItem, setQrItem] = useState<EQRItem | null>(null);
     const [donated, setDonated] = useState<boolean>(false);
@@ -113,18 +113,6 @@ const Donation = () => {
                                                 </span>
                                             </div>
                                         </div>
-
-                                        {/* <div className="Article__donation">
-                                            <span className="Article__donationIcon bmc">
-                                                <SpriteIcon id="pages-donationpage-donation-6" width="884" height="1279" fill="none" />
-                                            </span>
-                                            <a  className="Article__donationLink" 
-                                                href="https://www.buymeacoffee.com/spelltimer" 
-                                                target="_blank" 
-                                                rel="noopener noreferrer">
-                                                Buy me a Coffee
-                                            </a>
-                                        </div> */}
                                     </div>
 
                                     <div className="Article__walletList">
@@ -157,5 +145,4 @@ const Donation = () => {
     </div>
 }
 
-export default Donation;
-
+export default DonationPage;

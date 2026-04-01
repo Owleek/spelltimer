@@ -1,1 +1,1 @@
-export { default } from '../PoliticsPage/Politics';
+export { default } from './PoliticsPage/PoliticsPage';
