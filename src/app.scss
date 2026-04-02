@@ -1,7 +1,7 @@
-@use './variables.scss' as vars;
-@use './mixin' as *;
+@use './styles/variables.scss' as vars;
+@use './styles/mixin' as *;
 @import url('./assets/fonts/fontStyle.scss');
-@import url('./reset.scss');
+@import url('./styles/reset.scss');
 
 * {
   -webkit-tap-highlight-color: transparent;

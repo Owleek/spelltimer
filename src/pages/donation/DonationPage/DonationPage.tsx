@@ -4,7 +4,7 @@ import QrComponent from '../../ui/qr-component';
 import {useSelector} from 'react-redux';
 import {TStoreState} from '../../../store/store';
 import { translateText } from '../../../utils/utils';
-import '../../../article.scss';
+import '../../../styles/article.scss';
 import ImageCover from '../../../components/ImageCover/ImageCover';
 import SpriteIcon from '@shared/ui/SpriteIcon';
 
