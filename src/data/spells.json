@@ -17,7 +17,7 @@
     {   
         "hero": "Chaos Knight",
         "name": "Phantasm",
-        "cooldown": [75]
+        "cooldown": [85, 80, 75]
     },
     {   
         "hero": "Clockwerk",
@@ -87,12 +87,12 @@
     {   
         "hero": "Lycan",
         "name": "Shapeshift",
-        "cooldown": [110, 100, 90]
+        "cooldown": [105, 95, 85]
     },
     {   
         "hero": "Lycan",
         "name": "Wolf Bite",
-        "cooldown": [110, 100, 90]
+        "cooldown": [105, 95, 85]
     },
     {   
         "hero": "Mars",
@@ -122,7 +122,7 @@
     {   
         "hero": "Primal Beast",
         "name": "Pulverize",
-        "cooldown": [40, 35, 30]
+        "cooldown": [45, 40, 35]
     },
     {   
         "hero": "Pudge",
@@ -201,7 +201,7 @@
     {   
         "hero": "Gyrocopter",
         "name": "Call Down",
-        "cooldown": [90, 75, 60]
+        "cooldown": [75, 65, 55]
     },
     {   
         "hero": "Hoodwink",
@@ -630,7 +630,7 @@
     {   
         "hero": "Windranger",
         "name": "Gale Force",
-        "cooldown": [30]
+        "cooldown": [25]
     },
     {   
         "hero": "Windranger",
